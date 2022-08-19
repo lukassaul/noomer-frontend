@@ -1,25 +1,51 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Suspense } from 'react'
+//import ReactGA from 'react-ga4';
+import GlobalStyle from './globalStyles';
+import GlobalFonts from './fonts/fonts';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+//import { useSelector } from "react-redux";
+import lazyWithRetry from "./lazyWithRetry";
+//import { RootState } from "./app/store";
+import Spinner from './components/Spinner'
+
+const ScrollToTop = lazyWithRetry(() => import("./ScrollToTop"))
+
+const NavBar  = lazyWithRetry(() => import("./components/NavBar"))
+const TickerSlider  = lazyWithRetry(() => import("./components/TickerSlider"))
+const Home  = lazyWithRetry(() => import("./pages/Home"))
+
+
+/*
+  Initialize React-GA
+  TRACKING_ID is the tracking id from google analytics
+*/
+// const TRACKING_ID = process.env.REACT_APP_GA_KEY;
+// if (TRACKING_ID) {
+//   ReactGA.initialize(TRACKING_ID);
+//   ReactGA.send("pageview");
+// }
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Suspense fallback={<Spinner />}>
+      <Router>
+        <ScrollToTop>
+          <GlobalFonts />
+          <GlobalStyle />
+          <NavBar />
+          <TickerSlider />
+          <Routes>
+            <Route path="/" element={<Home />} />
+          </Routes>
+        </ScrollToTop>
+      </Router>
+    </Suspense>
   );
 }
 
