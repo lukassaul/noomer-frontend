@@ -73,8 +73,74 @@ export const BodyContainer = styled.div`
   width: 100%;
   padding: 0 3rem;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+`;
+
+export const TitleTwo = styled.p`
+  font-size: 24px;
+  font-weight: 600;
+  padding: 2rem 0;
+`;
+
+export const TitleThree = styled.p`
+  font-size: 20px;
+  font-weight: 600;
+  padding: 2rem 0;
+`;
+
+export const HomeFLowImage = styled.img`
+  width: 100%;
+  height: auto;
+  @media screen and (max-width: 1020px) {
+      align-self:flex-end;
+  }
+  @media screen and (max-width: 480px) {
+      align-self:center;
+  }
+`;
+
+export const FlexContainer = styled.div`
+  display: flex;
+`;
+
+export const MainFlexContainer = styled.div`
+  width: 100%;
+`;
+
+export const MainFlexContainerRow = styled.div`
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 0 4px;
+`;
+
+export const MainFlexContainerColumn = styled.div`
+  flex: 30%;
+  max-width: 30%;
+  padding: 0 4px;
+  @media screen and (max-width: 800px) {
+    flex: 50%;
+    max-width: 50%;
+  }
+  @media screen and (max-width: 600px) {
+    flex: 100%;
+    max-width: 100%;
+  }
+`;
+
+export const MainFlexChildrenContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  //justify-content: center;
+  //align-items: center;
+  padding: 2em;
+`;
+
+export const JustifyText = styled.p`
+	margin: 1em 0;
+  text-align: justify;
 `;
 
 export const TwoColumnContainer = styled.div`

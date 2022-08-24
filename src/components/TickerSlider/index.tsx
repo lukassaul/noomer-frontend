@@ -28,15 +28,20 @@ function TickerSlider() {
     }
   ]
 
+  const tickerColorArray = ["#F8FD01", "#F127E9", "#F46C1F", "#EFAEEC", "#2196F3", "#B23B3B"]
+  const getRandomColor = () => {
+    return Math.floor(Math.random() * 5) - 1
+  }
+
   return (
     <>
       <TickerContainer>
         <Marquee gradient={false}>
           {tickerArray.map((product) => (
-            <p>
-              <span>{product.product}</span>
+            <p className="marquee-component">
+              <span style={{color: tickerColorArray[getRandomColor()]}}>{product.product}</span>
               <span className="white-font">{product.price}</span>
-              <span className={product.type === "RETAIL" ? "red-font" : "green-font"}>
+              <span className={product.type === "RETAIL" ? "red-font" : "green-font"} style={{fontSize: "10px"}}>
                 {product.type === "RETAIL" ? "(R)" : "(S)"}
               </span>
             </p>

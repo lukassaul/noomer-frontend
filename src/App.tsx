@@ -18,6 +18,7 @@ const ScrollToTop = lazyWithRetry(() => import("./ScrollToTop"))
 const NavBar  = lazyWithRetry(() => import("./components/NavBar"))
 const TickerSlider  = lazyWithRetry(() => import("./components/TickerSlider"))
 const Home  = lazyWithRetry(() => import("./pages/Home"))
+const Listing  = lazyWithRetry(() => import("./pages/Listing"))
 
 
 /*
@@ -42,6 +43,7 @@ function App() {
           <TickerSlider />
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/listing" element={<Listing />} />
           </Routes>
         </ScrollToTop>
       </Router>
