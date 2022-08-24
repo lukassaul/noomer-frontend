@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { BsFillArrowRightCircleFill } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
 import { useSelector } from 'react-redux';
 import { t } from '../../i18n';
 import { RootState } from "../../app/store";
@@ -17,6 +18,7 @@ import { TitleTwo } from '../../globalStyles'
 function Timeline() {
 
   const { language } = useSelector((state: RootState) => state.language)
+  const navigate = useNavigate()
 
   const timelineArray = [
     {
@@ -124,7 +126,7 @@ function Timeline() {
 
       </TimelineRow>
       <TimelineLinkContainer>
-        <PriceListingLink>Price Listing</PriceListingLink> <BsFillArrowRightCircleFill size="1.5em" style={{marginLeft: "1em"}}/>
+        <PriceListingLink onClick={() => navigate('/listing')}>Price Listing</PriceListingLink> <BsFillArrowRightCircleFill size="1.5em" style={{marginLeft: "1em"}}/>
       </TimelineLinkContainer>
     </MainTimelineContainer>
   )
