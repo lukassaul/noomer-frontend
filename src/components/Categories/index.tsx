@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react'
+import { useDispatch } from 'react-redux';
+import { useNavigate } from "react-router-dom";
 import Marquee from "react-fast-marquee";
+import { setCategory } from '../../features/categorySlice'
 import { CategoriesContainer,
   CategoriesRow,
   CategoriesColumn,
@@ -10,7 +13,8 @@ import { CategoriesContainer,
 import { TitleTwo } from '../../globalStyles'
 
 function Categories() {
-
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
   const categoriesArray = [
     {
       link: "https://res.cloudinary.com/dba8ifej6/image/upload/v1661036995/category-currency_ss2avi.png",
@@ -39,6 +43,12 @@ function Categories() {
     }
   ]
 
+  const handleCategoryClick = (cat:any) => {
+    console.log("category clock cat: ", cat)
+      dispatch(setCategory(cat))
+      navigate('/listing')
+  }
+
   return (
     <CategoriesContainer>
       <TitleTwo>Categories</TitleTwo>
@@ -46,7 +56,7 @@ function Categories() {
 
           {categoriesArray.map((cat) => (
             <CategoriesColumn>
-              <CategoryContainer>
+              <CategoryContainer onClick={() => handleCategoryClick(cat.label)}>
                 <CategoryImage src={cat.link}/>
                 <CategoryLabel>{cat.label}</CategoryLabel>
               </CategoryContainer>

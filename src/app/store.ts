@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
 import languageReducer from './../features/languageSlice'
+import categoryReducer from './../features/categorySlice'
 
 export const store = configureStore({
     reducer: {
         language: languageReducer,
+        category: categoryReducer,
     }
 })
 
