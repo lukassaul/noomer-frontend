@@ -69,16 +69,11 @@ function NavBar() {
                         </NavLinks>
                     </NavItem>
                     <NavItem>
-                        <NavLinks to='/blog/list' onClick={closeMobileMenu}>
-                            Blogs
-                        </NavLinks>
-                    </NavItem>
-                    <NavItem>
                         <NavLinks to='/about' onClick={closeMobileMenu}>
                             About us
                         </NavLinks>
                     </NavItem>
-                  
+
                     {!isToken ? <>
                         <NavItemBtn>
                             {button ? (

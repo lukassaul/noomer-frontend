@@ -12,6 +12,10 @@ code {
     monospace;
 }
 
+.padding2em {
+  padding: 2em;
+}
+
 .bg-beige {
   background-color: #F7F7F7;
 }
@@ -51,5 +55,50 @@ code {
 }
 
 .marquee > *:not(:last-child) {
-  margin-right: 30px;
+  margin-right: 45px;
+}
+
+.marquee-component > *:not(:last-child) {
+  margin-right: 8px;
+  font-size: 10px;
+}
+
+/*
+  Homepage search input
+*/
+
+.search_wrapper {
+  position:relative;
+  margin-bottom: 0;
+}
+
+.search_icon {
+  height: 1.5rem;
+  width: 1.5rem;
+  padding: 4px 4px 4px 8px;
+  position: absolute;
+  box-sizing:border-box;
+  top:50%;
+  left:2px;
+  transform: translateY(-50%);
+}
+
+.search_input {
+  height: 50px;
+  width: 100%;
+  color: #fff;
+  padding-left: 2.5rem;
+  //border-radius: 16px;
+  background-color: transparent;
+  //border: 1px solid #fff;
+}
+
+@media (max-width: 1024px) {
+    .search_wrapper {
+      margin-bottom: 1em;
+    }
+    .search_input {
+      height: 40px;
+      width: 100%;
+    }
 }
