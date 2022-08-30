@@ -73,6 +73,7 @@ type Result = {
   product_image: null|string;
   receipt_image: null|string;
   description: null|string;
+  createdAt: null|Date;
 };
 
 function PostServiceList() {
@@ -84,7 +85,9 @@ function PostServiceList() {
     const [click, setClick] = useState(false);
     const [totalResult, setTotalResult] = useState(50);
     const [selectedProduct, setSelectedProduct] = useState("");
-    const [selectedLocation, setSelectedLocation] = useState("");
+    const [selectedLocation, setSelectedLocation] = useState("WORLDWIDE");
+    const [startingDate, setStartingDate] = useState<Date>();
+    const [bufferDate, setBufferDate] = useState<Date>();
     const [highestPrice, setHighestPrice] = useState<string>();
     const [lowestPrice, setLowestPrice] = useState<string>();
     const [mean, setMean] = useState<string>();
@@ -127,38 +130,55 @@ function PostServiceList() {
       setSelectedProduct(value)
     }
 
-    const showStatistics = async(records:any) => {
+    const setLocation = async(value:any) => {
+      console.log("set location: ", value)
+      setSelectedLocation(value)
+    }
+
+    useEffect(() => {
+      console.log("useEffect selectedProduct: ", selectedProduct)
+      console.log("useEffect selectedLocation: ", selectedLocation)
+      showStatistics()
+    }, [selectedProduct, selectedLocation])
+
+    const showStatistics = async() => {
 
       /**
         If user filter the results by product,
         filter the response to get the records one month ago
         from the last creation date
       **/
+      console.log("records[0] ", fileData[0])
+      if(fileData.length > 0 && fileData[0].createdAt) {
+        let dToday = fileData[0].createdAt
+        //console.log("dToday: ", dToday)
+        let monthAgo = await getBufferDate(dToday)
+        //console.log("month ago: ", monthAgo)
 
-      let dToday = records[0].createdAt
-      console.log("dToday: ", dToday)
-      let monthAgo = await getBufferDate(dToday)
-      console.log("month ago: ", monthAgo)
+        let bufferedRecords = await fileData.filter(
+          function(item:any) {
+            return new Date(item.createdAt).valueOf() > new Date(monthAgo).valueOf();
+          }
+        )
+        //console.log("bufferedRecords: ", bufferedRecords)
 
-      let bufferedRecords = await records.filter(
-        function(item:any) {
-          return new Date(item.createdAt).valueOf() > new Date(monthAgo).valueOf();
-        }
-      )
-      console.log("bufferedRecords: ", bufferedRecords)
+        let pricesArray:number[] = []
+        await bufferedRecords.map((item:any) => {
+          if(item.price)pricesArray.push(item.price)
+        })
+        //console.log("prices array: ", pricesArray)
+        console.log("selected location: ", selectedLocation)
 
-      let pricesArray:number[] = []
-      await bufferedRecords.map((item:any) => {
-        if(item.price)pricesArray.push(item.price)
-      })
-      console.log("prices array: ", pricesArray)
+        let stats = await getStatistics(pricesArray)
 
-     let stats = await getStatistics(pricesArray)
-      setHighestPrice(stats.highest.toFixed(2))
-      setLowestPrice(stats.lowest.toFixed(2))
-      setMean(stats.mean.toFixed(2))
-      setVariance(stats.variance.toFixed(2))
-      setStandardDeviation(stats.standardDeviation.toFixed(2))
+        setStartingDate(dToday)
+        setBufferDate(monthAgo)
+        setHighestPrice(stats.highest.toFixed(2))
+        setLowestPrice(stats.lowest.toFixed(2))
+        setMean(stats.mean.toFixed(2))
+        setVariance(stats.variance.toFixed(2))
+        setStandardDeviation(stats.standardDeviation.toFixed(2))
+      }
     }
 
     return (
@@ -183,14 +203,14 @@ function PostServiceList() {
                     url="http://localhost:9200"
                     //enableAppbase
                     transformResponse={async(elasticsearchResponse, componentId) => {
-                        console.log("componentId: ", componentId)
+                        //console.log("componentId: ", componentId)
                         let arr: Result[] = [];
                         await elasticsearchResponse.hits.hits.map((item:any) => {
                           arr.push(item._source)
                         })
                         setTotalResult(elasticsearchResponse.hits.total.value)
                         setFileData(arr)
-                        showStatistics(arr)
+                        //showStatistics(arr)
                         return { ...elasticsearchResponse }
 
 
@@ -230,7 +250,7 @@ function PostServiceList() {
                                 <span style={{fontSize: '18px'}}>X</span>
                             </MobileIconProfile>
                             <SingleDropdownList
-                              componentId="Product"
+                              componentId="ProductMobile"
                               dataField="product.product_name.keyword"
                               title="Product Name"
                               placeholder="Filter by product name"
@@ -245,7 +265,7 @@ function PostServiceList() {
                               }
                             />
                             <SingleDropdownList
-                                componentId="Ticker"
+                                componentId="TickerMobile"
                                 dataField="ticker.keyword"
                                 title="Product Ticker"
                                 placeholder="Filter by product ticker"
@@ -256,7 +276,7 @@ function PostServiceList() {
                                 }}
                             />
                             <SingleDataList
-                                componentId="Type"
+                                componentId="TypeMobile"
                                 dataField="type.keyword"
                                 title="Product type"
                                 data={[{
@@ -270,7 +290,7 @@ function PostServiceList() {
                                 showSearch={false}
                             />
                             <DataSearch
-                                title="Location"
+                                title="LocationMobile"
                                 dataField={['location_city', 'location_city.search', 'location_state', 'location_state.search', 'location_country', 'location_country.search']}
                                 componentId="Location"
                                 URLParams
@@ -280,6 +300,10 @@ function PostServiceList() {
                                     marginBottom: 15,
                                     maxWidth: 300
                                 }}
+                                onChange={async(value, triggerQuery, event) => {
+                              		await setLocation(value)
+                                  triggerQuery()
+                              	}}
                             />
 
                             <SelectedFilters
@@ -297,7 +321,7 @@ function PostServiceList() {
                         <FilterWrapper>
 
                         <SingleDropdownList
-                            componentId="Product"
+                            componentId="ProductWeb"
                             dataField="product.product_name.keyword"
                             title="Product Name"
                             placeholder="Filter by product name"
@@ -312,7 +336,7 @@ function PostServiceList() {
                             }
                         />
                         <SingleDropdownList
-                            componentId="Ticker"
+                            componentId="TickerWeb"
                             dataField="ticker.keyword"
                             title="Product Ticker"
                             placeholder="Filter by product ticker"
@@ -323,7 +347,7 @@ function PostServiceList() {
                             }}
                         />
                         <SingleDataList
-                            componentId="Type"
+                            componentId="TypeWeb"
                             dataField="type.keyword"
                             title="Product type"
                             data={[{
@@ -337,7 +361,7 @@ function PostServiceList() {
                             showSearch={false}
                         />
                         <DataSearch
-                            title="Location"
+                            title="LocationWeb"
                             dataField={['location_city', 'location_city.search', 'location_state', 'location_state.search', 'location_country', 'location_country.search']}
                             componentId="Location"
                             URLParams
@@ -346,6 +370,10 @@ function PostServiceList() {
                             style={{
                                 marginBottom: 15,
                                 maxWidth: 300
+                            }}
+                            onChange={async(value, triggerQuery, event) => {
+                              await setLocation(value)
+                              triggerQuery()
                             }}
                         />
 

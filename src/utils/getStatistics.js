@@ -2,7 +2,6 @@
   computation for the statistics
 **/
 export default function getStatistics(pricesArray:any){
-
   // get highest number
   const highest = Math.max(...pricesArray);
 
