@@ -9,12 +9,15 @@ import {
     SelectedFilters
 } from '@appbaseio/reactivesearch'
 import moment from 'moment'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import Button from '../../components/Button'
 import Footer from '../../components/Footer'
+import ListingHeader from '../../components/ListingHeader'
 import { RootState } from '../../app/store'
+import getBufferDate from '../../utils/getBufferDate'
+import getStatistics from '../../utils/getStatistics'
 import {
     ListWrapper,
     FilterWrapper,
@@ -31,59 +34,65 @@ import {
     ItemContent,
     FilterWrapperMobile,
     ArrowSmall,
-    MobileIconProfile
+    MobileIconProfile,
 } from './styles'
-import { CommonContainer } from "../../globalStyles"
+import { CommonContainer, HeaderContainer, TitleThree } from "../../globalStyles"
 import { CSVLink } from 'react-csv';
 
 interface PostServiceData {
     _id: React.Key | null | undefined;
-    content: string;
-    title: string;
-    created_date: Date | null;
-    date_departure: Date | null;
-    user_profile: string;
-    expired: boolean;
+    uploader: string;
+    classification: string;
+    product: string;
+    type: string;
+    ticker: string;
+    currency: string;
+    location_city: string;
+    location_state: string | null;
+    location_country: string;
+    price: number;
+    rating: number | null;
 }
 
 type Result = {
-  accept_crypto: boolean;
-  available_seats: null|number;
-  content: null|string;
-  created_date: string;
+  product: any;
+  classification: null|string;
+  quantity: null|number;
+  unit: null|string;
+  uploader: null|string;
+  price: null|number;
+  type: null|string;
+  ticker: null|string;
   currency: null|string;
-  date_departure: null|string;
-  destination_city: null|string;
-  destination_country: null|string;
-  destination_state: null|string;
-  expired: boolean;
-  from_city: null|string;
-  from_country: null|string;
-  from_state: null|string;
-  package_image: null|string;
-  package_size_dimension: null|string;
-  phone_calls: null|boolean
-  post_type: null|string;
-  price_max: null|number;
-  price_min: null|number;
-  show_phone_number: null|boolean;
-  show_price: null|boolean;
-  status: null|string;
-  text_sms: null|boolean;
-  title: null|string;
-  user_profile: null|string;
-  vehicle_image: null|string;
-  vehicle_type: null|string;
+  store: null|string;
+  location_city: null|string;
+  location_state: null|string;
+  location_country: null|string;
+  longitude: null|string;
+  latitude: null|string;
+  product_image: null|string;
+  receipt_image: null|string;
+  description: null|string;
 };
 
 function PostServiceList() {
     const dispatch = useDispatch()
     let navigate = useNavigate()
+
+    const { selectedCategory } = useSelector((state: RootState) => state.category)
+
     const [click, setClick] = useState(false);
+    const [totalResult, setTotalResult] = useState(50);
+    const [selectedProduct, setSelectedProduct] = useState("");
+    const [selectedLocation, setSelectedLocation] = useState("");
+    const [highestPrice, setHighestPrice] = useState<string>();
+    const [lowestPrice, setLowestPrice] = useState<string>();
+    const [mean, setMean] = useState<string>();
+    const [variance, setVariance] = useState<string>();
+    const [standardDeviation, setStandardDeviation] = useState<string>();
 
     let profileUserId = localStorage.getItem('user')
     let token = localStorage.getItem('token')
-    //const { value, searchAllPost } = useSelector((state: RootState) => state.home)
     const cont = (item: object) => {
         console.log("cont function")
     }
@@ -92,73 +101,127 @@ function PostServiceList() {
 
     const [ fileData, setFileData ] = useState<Result[]>([]);
 
-  //   const [fileHeaders] = useState[{
-  //     {label: 'Status', key: 'post_type'},
-  //     {label: 'Status', key: 'title'},
-  //     {label: 'Accept Crypto', key: 'accept_crypto'},
-  //     {label: 'Available Seats', key: 'available_seats'},
-  //     {label: 'Content', key: 'content'},
-  //     {label: 'Created Date', key: 'created_date'},
-  //     {label: 'Currency', key: 'currency'},
-  //     {label: 'Date Departure', key: 'date_departure'},
-  //     {label: 'Destination City', key: 'destination_city'},
-  //     {label: 'Destination Country', key: 'destination_country'},
-  //     {label: 'Destination State', key: 'destination_state'},
-  //     {label: 'Expired', key: 'expired'},
-  //     {label: 'From City', key: 'from_city'},
-  //     {label: 'From Country', key: 'from_country'},
-  //     {label: 'From State', key: 'from_state'},
-  //     {label: 'Max Price', key: 'price_max'},
-  //     {label: 'Min Price', key: 'price_min'},
-  //   }]
-  // }
+    const fileHeaders = [
+      {label: 'Type', key: 'type'},
+      {label: 'Product', key: 'product.product_name'},
+      {label: 'Classification', key: 'classification'},
+      {label: 'Quantity', key: 'quantity'},
+      {label: 'Unit', key: 'unit'},
+      {label: 'Uploader Id', key: 'uploader'},
+      {label: 'Price', key: 'price'},
+      {label: 'currency', key: 'currency'},
+      {label: 'Ticker', key: 'ticker'},
+      {label: 'Store / Shop', key: 'store'},
+      {label: 'City', key: 'location_city'},
+      {label: 'State', key: 'location_state'},
+      {label: 'Country', key: 'location_country'},
+      {label: 'Longitude', key: 'longitude'},
+      {label: 'Latitude', key: 'latitude'},
+      {label: 'Product image', key: 'product_image'},
+      {label: 'Receipt image', key: 'receipt_image'},
+      {label: 'Description', key: 'description'},
+      {label: 'Date', key: 'createdAt'},
+    ]
 
+    const setProduct = async(value:any) => {
+      setSelectedProduct(value)
+    }
+
+    const showStatistics = async(records:any) => {
+
+      /**
+        If user filter the results by product,
+        filter the response to get the records one month ago
+        from the last creation date
+      **/
+
+      let dToday = records[0].createdAt
+      console.log("dToday: ", dToday)
+      let monthAgo = await getBufferDate(dToday)
+      console.log("month ago: ", monthAgo)
+
+      let bufferedRecords = await records.filter(
+        function(item:any) {
+          return new Date(item.createdAt).valueOf() > new Date(monthAgo).valueOf();
+        }
+      )
+      console.log("bufferedRecords: ", bufferedRecords)
+
+      let pricesArray:number[] = []
+      await bufferedRecords.map((item:any) => {
+        if(item.price)pricesArray.push(item.price)
+      })
+      console.log("prices array: ", pricesArray)
+
+     let stats = await getStatistics(pricesArray)
+      setHighestPrice(stats.highest.toFixed(2))
+      setLowestPrice(stats.lowest.toFixed(2))
+      setMean(stats.mean.toFixed(2))
+      setVariance(stats.variance.toFixed(2))
+      setStandardDeviation(stats.standardDeviation.toFixed(2))
+    }
 
     return (
         <>
             <CommonContainer>
+              <ListingHeader />
+
                 <div style={{ padding: "1em 0" }}>
-                    <h3>Export to CSV</h3>
                     {fileData?.length &&
                       <CSVLink
-                        //headers={fileHeaders}
+                        headers={fileHeaders}
                         data={fileData}
                         filename="results.csv"
                         target="_blank"
                       >
-                        Export
+                        Dowload csv file
                       </CSVLink>
                     }
                 </div>
                 <ReactiveBase
-                    app="postservices"
-                    url="http://elastic:dnyEZysd2Kif0sjCtm8N@154.12.225.132:9200"
+                    app="prices"
+                    url="http://localhost:9200"
                     //enableAppbase
                     transformResponse={async(elasticsearchResponse, componentId) => {
-                        //console.log("elasticsearchResponse ", elasticsearchResponse)
-
+                        console.log("componentId: ", componentId)
                         let arr: Result[] = [];
-                        const hits = await elasticsearchResponse.hits.hits.filter(
-                          function(item:any) {
-                            if (item._source.expired === true) arr.push(item._source)
-                            return item._source.expired === true;
-                          }
-                        );
-                        console.log("elresponse", hits)
-                        console.log("results", arr)
+                        await elasticsearchResponse.hits.hits.map((item:any) => {
+                          arr.push(item._source)
+                        })
+                        setTotalResult(elasticsearchResponse.hits.total.value)
                         setFileData(arr)
+                        showStatistics(arr)
+                        return { ...elasticsearchResponse }
 
-                        return {
-                           ...elasticsearchResponse,
-                           hits: {
-                               hits,
-                               total: {value: hits.length},
-                               status: elasticsearchResponse.status,
-                               timed_out: elasticsearchResponse.timed_out,
-                               took: elasticsearchResponse.took
-                           },
 
-                       }
+                        // const hits = elasticsearchResponse.hits.hits
+                        // let sortedHits = await hits.sort((a:any,b:any)=>{
+                        //   return new Date(b._source.createdAt).valueOf() - new Date(a._source.createdAt).valueOf();
+                        // })
+                        //
+                        // let dToday = sortedHits[0]._source.createdAt
+                        // //console.log("dToday: ", dToday)
+                        // let monthAgo = await getBufferDate(dToday)
+                        // //console.log("month ago: ", monthAgo)
+                        //
+                        // ///console.log("sortedHits: ", sortedHits)
+                        // await sortedHits.map((item:any) => {
+                        //   arr.push(item._source)
+                        // })
+                        // setTotalResult(elasticsearchResponse.hits.total.value)
+                        // setFileData(arr)
+                        //
+                        // return { ...elasticsearchResponse }
+                       //  return {
+                       //     ...elasticsearchResponse,
+                       //     hits: {
+                       //        hits: sortedHits,
+                       //        total: {value: sortedHits.length},
+                       //        status: elasticsearchResponse.status,
+                       //        timed_out: elasticsearchResponse.timed_out,
+                       //        took: elasticsearchResponse.took
+                       //    },
+                       // }
                     }}
                 >
                     <ListWrapper>
@@ -166,42 +229,51 @@ function PostServiceList() {
                             <MobileIconProfile onClick={handleClick}>
                                 <span style={{fontSize: '18px'}}>X</span>
                             </MobileIconProfile>
+                            <SingleDropdownList
+                              componentId="Product"
+                              dataField="product.product_name.keyword"
+                              title="Product Name"
+                              placeholder="Filter by product name"
+                              react={{ and: ['Ticker', 'Location', 'mainSearch', 'Type'], }}
+                              style={{
+                                  marginBottom: 15,
+                                  maxWidth: 300
+                              }}
+                              onValueChange={(value) => {
+                                  setProduct(value)
+                                }
+                              }
+                            />
+                            <SingleDropdownList
+                                componentId="Ticker"
+                                dataField="ticker.keyword"
+                                title="Product Ticker"
+                                placeholder="Filter by product ticker"
+                                react={{ and: ['Location', 'Product', 'Ticker', 'mainSearch', 'Type'], }}
+                                style={{
+                                    marginBottom: 15,
+                                    maxWidth: 300
+                                }}
+                            />
                             <SingleDataList
-                                componentId="PostType"
-                                dataField="post_type.keyword"
-                                title="Type of post"
+                                componentId="Type"
+                                dataField="type.keyword"
+                                title="Product type"
                                 data={[{
-                                    label: "OFFER",
-                                    value: "OFFER"
+                                    label: "RETAIL",
+                                    value: "RETAIL"
                                 }, {
-                                    label: "REQUEST",
-                                    value: "REQUEST"
+                                    label: "SERVICE",
+                                    value: "SERVICE"
                                 }]}
                                 showRadio={true}
                                 showSearch={false}
-                                //defaultValue={value}
                             />
-
                             <DataSearch
-                                title="Origin"
-                                dataField={['from_city', 'from_city.search', 'from_state', 'from_state.search', 'from_country', 'from_country.search']}
+                                title="Location"
+                                dataField={['location_city', 'location_city.search', 'location_state', 'location_state.search', 'location_country', 'location_country.search']}
                                 componentId="Location"
                                 URLParams
-                                //enableRecentSearches
-                                enablePopularSuggestions
-                                //value={location}
-                                size={5}
-                                style={{
-                                    marginBottom: 15,
-                                    maxWidth: 300
-                                }}
-                            />
-                            <DataSearch
-                                title="Destination"
-                                dataField={['destination_city', 'destination_city.search']}
-                                componentId="Post"
-                                URLParams
-                                //enableRecentSearches
                                 enablePopularSuggestions
                                 size={5}
                                 style={{
@@ -209,26 +281,7 @@ function PostServiceList() {
                                     maxWidth: 300
                                 }}
                             />
-                            <DateRange
-                                title="Pick a Date"
-                                componentId="DateSensor"
-                                dataField="date_departure"
-                                style={{
-                                    marginBottom: 15,
-                                    maxWidth: 300
-                                }}
-                            />
-                            <SingleDropdownList
-                                componentId="Vehicle"
-                                dataField="vehicle_type.keyword"
-                                title="Type of vehicle"
-                                placeholder="Choose vehicle type"
-                                react={{ and: ['Location', 'Post', 'DateSensor', 'PostType'], }}
-                                style={{
-                                    marginBottom: 15,
-                                    maxWidth: 300
-                                }}
-                            />
+
                             <SelectedFilters
                                 render={({ clearValues }) => (
                                     <button type="button" onClick={clearValues} style={{
@@ -243,155 +296,149 @@ function PostServiceList() {
                         </FilterWrapperMobile>
                         <FilterWrapper>
 
-                            <SingleDataList
-                                componentId="PostType"
-                                dataField="post_type.keyword"
-                                title="Type of post"
-                                data={[{
-                                    label: "OFFER",
-                                    value: "OFFER"
-                                }, {
-                                    label: "REQUEST",
-                                    value: "REQUEST"
-                                }]}
-                                showRadio={true}
-                                showSearch={false}
-                                //defaultValue={value}
-                            />
+                        <SingleDropdownList
+                            componentId="Product"
+                            dataField="product.product_name.keyword"
+                            title="Product Name"
+                            placeholder="Filter by product name"
+                            react={{ and: ['Ticker', 'Location', 'mainSearch', 'Type'], }}
+                            style={{
+                                marginBottom: 15,
+                                maxWidth: 300
+                            }}
+                            onValueChange={(value) => {
+                                setProduct(value)
+                              }
+                            }
+                        />
+                        <SingleDropdownList
+                            componentId="Ticker"
+                            dataField="ticker.keyword"
+                            title="Product Ticker"
+                            placeholder="Filter by product ticker"
+                            react={{ and: ['Location', 'Product', 'Ticker', 'mainSearch', 'Type'], }}
+                            style={{
+                                marginBottom: 15,
+                                maxWidth: 300
+                            }}
+                        />
+                        <SingleDataList
+                            componentId="Type"
+                            dataField="type.keyword"
+                            title="Product type"
+                            data={[{
+                                label: "RETAIL",
+                                value: "RETAIL"
+                            }, {
+                                label: "SERVICE",
+                                value: "SERVICE"
+                            }]}
+                            showRadio={true}
+                            showSearch={false}
+                        />
+                        <DataSearch
+                            title="Location"
+                            dataField={['location_city', 'location_city.search', 'location_state', 'location_state.search', 'location_country', 'location_country.search']}
+                            componentId="Location"
+                            URLParams
+                            enablePopularSuggestions
+                            size={5}
+                            style={{
+                                marginBottom: 15,
+                                maxWidth: 300
+                            }}
+                        />
 
-                            <DataSearch
-                                title="Origin"
-                                dataField={['from_city', 'from_city.search', 'from_state', 'from_state.search', 'from_country', 'from_country.search']}
-                                componentId="Location"
-                                URLParams
-                                //enableRecentSearches
-                                enablePopularSuggestions
-                                //value={location}
-                                size={5}
-                                style={{
-                                    marginBottom: 15,
-                                    maxWidth: 300
-                                }}
-                                // onChange={(value) => {
-                                //     dispatch(updateCity(value))
-                                //     localStorage.setItem('city', value)
-                                // }}
-                            />
-                            <DataSearch
-                                title="Destination"
-                                dataField={['destination_city', 'destination_city.search']}
-                                componentId="Post"
-                                URLParams
-                                //enableRecentSearches
-                                enablePopularSuggestions
-                                size={5}
-                                style={{
-                                    marginBottom: 15,
-                                    maxWidth: 300
-                                }}
-                            />
-                            <DateRange
-                                title="Pick a Date"
-                                componentId="DateSensor"
-                                dataField="date_departure"
-                                style={{
-                                    marginBottom: 15,
-                                    maxWidth: 300
-                                }}
-                            />
-                            <SingleDropdownList
-                                componentId="Vehicle"
-                                dataField="vehicle_type.keyword"
-                                title="Type of vehicle"
-                                placeholder="Choose vehicle type"
-                                react={{ and: ['Location', 'Post', 'DateSensor', 'PostType'], }}
-                                style={{
-                                    marginBottom: 15,
-                                    maxWidth: 300
-                                }}
-                            />
-                            <SelectedFilters
-                                render={({ clearValues }) => (
-                                    <button type="button" onClick={clearValues} style={{
-                                       padding: '5px',
-                                        maxWidth: 300,
-                                        marginBottom: 10
-                                    }}>
-                                        {"Reset Filters"}
-                                    </button>
-                                )}
-                            />
+                        <SelectedFilters
+                            render={({ clearValues }) => (
+                                <button type="button" onClick={clearValues} style={{
+                                   padding: '5px',
+                                    maxWidth: 300,
+                                    marginBottom: 10
+                                }}>
+                                    {"Reset Filters"}
+                                </button>
+                            )}
+                        />
                         </FilterWrapper>
                         <DataWrapper style={{margin: '0', width: '80%', flexDirection: 'column', }}>
 
                             <DataSearch
-                                title="Search Posts"
+                                title="Search Price Listing"
                                 componentId="mainSearch"
                                 style={{"paddingBottom": "2.5em", "width": "50%", "borderRadius": "5px"}}
                                 autosuggest={false}
                                 //defaultValue={searchAllPost}
                                 dataField={[
-                                  'from_city',
-                                  'from_city.search',
-                                  'from_state',
-                                  'from_state.search',
-                                  'from_country',
-                                  'from_country.search',
-                                  'title',
-                                  'title.search',
-                                  'content',
-                                  'content.search',
-                                  'post_type',
-                                  'post_type.search',
-                                  'vehicle_type',
-                                  'vehicle_type.search',
+                                  'location_city',
+                                  'location_city.search',
+                                  'location_state',
+                                  'location_state.search',
+                                  'location_country',
+                                  'location_country.search',
+                                  'product.product_name',
+                                  'classification.search',
+                                  'description',
+                                  'type',
                                 ]}
                             />
+
+                            {selectedProduct ?
+                              <div>
+                                <TitleThree>Statistics for {selectedProduct}</TitleThree>
+                                <p>Highest Price: {highestPrice}</p>
+                                <p>Lowest Price: {lowestPrice}</p>
+                                <p>Mean: {mean}</p>
+                                <p>Variance: {variance}</p>
+                                <p>Standard Deviation: {standardDeviation}</p>
+                              </div>
+                              : null
+                            }
 
                             <ReactiveList
                                 componentId="SearchResult"
                                 dataField="title"
-                                size={50}
+                                size={totalResult}
+                                infiniteScroll={true}
                                 className="result-list-container"
-                                showResultStats={true}
+                                showResultStats={false}
+                                // showExport={true}
+                                // pagination
+                                // paginationAt="both"
                                 react={{
-                                    and: ['mainSearch', 'Location', 'Post', 'DateSensor', 'Vehicle', 'PostType', 'PostOrigin'],
+                                    and: ['mainSearch', 'Location', 'Product', 'Ticker', 'Type'],
                                 }}
+                                defaultQuery={() => ({ track_total_hits: true })}
+                                sortOptions={[{dataField: "createdAt", sortBy: "desc", label: "Sort by Date"}]}
                                 render={({ data }) => (
                                     <ReactiveList.ResultListWrapper>
-                                        {data.map((item: PostServiceData) => {
-                                            return <div style={{ borderTop: '1px solid #c4c4c4', padding: "1em", cursor: 'pointer', justifyContent: 'flex-start'}} key={item._id}>
-                                                <ResultList id={item._id!}>
-                                                    <ResultList.Content>
-                                                        <ListTitleWrapper>
-                                                            <ListTitle onClick={() => navigate(`/post/${item._id}`, { replace: true })}>{item.title}</ListTitle>
-                                                            {token && item.user_profile === profileUserId ? <div style={{ width: "20%" }}>
-                                                                <Button color="sixth" onClick={() => cont(item)}>Edit</Button>
-                                                            </div> : null}
-                                                        </ListTitleWrapper>
-                                                        <CreateDateWrapper>
-                                                            <CreateDateTitle>Date Created:</CreateDateTitle>
-                                                            <CreateDate>{moment(item.created_date).format('LL')}</CreateDate>
-                                                        </CreateDateWrapper>
-                                                        <ResultList.Description>
-                                                            <ItemContentWrapper>
-                                                                <ItemContent>{item.content}</ItemContent>
-                                                            </ItemContentWrapper>
-                                                        </ResultList.Description>
-                                                        <ResultList.Description>
-                                                            <ExpirationWrapper>
-                                                                <ExpirationTitle>Expiration:</ExpirationTitle>
-                                                                {item.date_departure ?
-                                                                  <Expiration>{moment(item.date_departure).format('LL')}</Expiration>
-                                                                  :
-                                                                  <Expiration>Not set</Expiration>
-                                                                }
-                                                            </ExpirationWrapper>
-                                                        </ResultList.Description>
-                                                    </ResultList.Content>
-                                                </ResultList>
-                                            </div>
-                                        })}
+                                      <table className="table table-bordered" style={{fontSize: '10px'}}>
+                                        <thead>
+                                          <tr>
+                                            <th>TICKER</th>
+                                            <th>PRODUCT NAME</th>
+                                            <th>LOCATION</th>
+                                            <th>TYPE</th>
+                                            <th>PRICE</th>
+                                            <th>DATE</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                          {data.map((item: any) => {
+                                            if (item.product && item.product.product_name) {
+                                              let productName = item.product.product_name
+                                              return <tr key={item._id!}>
+                                                    <td>{item.ticker}</td>
+                                                    <td>{item.classification}</td>
+                                                    <td>{item.location_state ? `${item.location_city}, ${item.location_state}, ${item.location_country}` : `${item.location_city}, ${item.location_country}`}</td>
+                                                    <td>{item.type}</td>
+                                                    <td>{item.price} {item.currency}</td>
+                                                    <td>{moment(item.createdAt).format('LL')}</td>
+                                                  </tr>
+                                            }
+                                          })}
+                                        </tbody>
+                                      </table>
                                     </ReactiveList.ResultListWrapper>
                                 )}
                             />

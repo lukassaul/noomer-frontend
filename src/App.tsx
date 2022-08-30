@@ -44,7 +44,7 @@ function App() {
           <TickerSlider />
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/listing" element={<Listing />} />
+            <Route path="/listing" element={<ListingTest />} />
             <Route path="/listingTest" element={<ListingTest />} />
           </Routes>
         </ScrollToTop>
