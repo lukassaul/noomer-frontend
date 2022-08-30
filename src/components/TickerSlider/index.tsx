@@ -38,7 +38,7 @@ function TickerSlider() {
       <TickerContainer>
         <Marquee gradient={false}>
           {tickerArray.map((product) => (
-            <p className="marquee-component">
+            <p className="marquee-component" key={product.product}>
               <span style={{color: tickerColorArray[getRandomColor()]}}>{product.product}</span>
               <span className="white-font">{product.price}</span>
               <span className={product.type === "RETAIL" ? "red-font" : "green-font"} style={{fontSize: "10px"}}>
