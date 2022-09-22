@@ -9,11 +9,9 @@ import { MainTimelineContainer,
   TimelineColumn,
   TimelineContainer,
   TimelineImage,
-  TimelineLabel,
-  TimelineLinkContainer,
-  PriceListingLink
+  TimelineLabel
 } from './styles';
-import { TitleTwo } from '../../globalStyles'
+import { TitleTwo, RightLinkContainer, LinkParagraph } from '../../globalStyles'
 
 function Timeline() {
 
@@ -22,6 +20,7 @@ function Timeline() {
 
   const timelineArray = [
     {
+      _id: 1,
       product: {
         category: {
           category: "Food",
@@ -50,6 +49,7 @@ function Timeline() {
         location_country: "United States",
       }
     },{
+      _id: 2,
       product: {
         category: {
           category: "Rentals",
@@ -78,6 +78,7 @@ function Timeline() {
         location_country: "United States",
       }
     },{
+      _id: 3,
       product: {
         category: {
           category: "Food",
@@ -114,7 +115,7 @@ function Timeline() {
       <TimelineRow>
 
           {timelineArray.map((price) => (
-            <TimelineColumn className="bg-beige">
+            <TimelineColumn className="bg-beige" key="price._id">
               <TimelineContainer>
                 <span>Product: {price.product.product_name}</span>
                 <span>Price: {price.price} {price.currency}</span>
@@ -125,9 +126,9 @@ function Timeline() {
           ))}
 
       </TimelineRow>
-      <TimelineLinkContainer>
-        <PriceListingLink onClick={() => navigate('/listing')}>Price Listing</PriceListingLink> <BsFillArrowRightCircleFill size="1.5em" style={{marginLeft: "1em"}}/>
-      </TimelineLinkContainer>
+      <RightLinkContainer>
+        <LinkParagraph onClick={() => navigate('/listing')}>Price Listing</LinkParagraph> <BsFillArrowRightCircleFill size="1.5em" style={{marginLeft: "1em"}}/>
+      </RightLinkContainer>
     </MainTimelineContainer>
   )
 }

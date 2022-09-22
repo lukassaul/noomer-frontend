@@ -33,7 +33,7 @@ function Features() {
     <MainFlexContainer>
       <MainFlexContainerRow>
           {faeturesArray.map((feature) => (
-            <MainFlexContainerColumn>
+            <MainFlexContainerColumn key={feature.title}>
               <MainFlexChildrenContainer style={{ "textAlign": "center"}}>
                 <TitleThree>{feature.title}</TitleThree>
                 <JustifyText>{feature.description}</JustifyText>

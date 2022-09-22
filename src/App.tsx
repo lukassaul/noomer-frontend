@@ -16,10 +16,12 @@ import Spinner from './components/Spinner'
 const ScrollToTop = lazyWithRetry(() => import("./ScrollToTop"))
 
 const NavBar  = lazyWithRetry(() => import("./components/NavBar"))
-const TickerSlider  = lazyWithRetry(() => import("./components/TickerSlider"))
+const Login  = lazyWithRetry(() => import("./pages/Login"))
+const ForgotPassword  = lazyWithRetry(() => import("./pages/ForgotPassword"))
 const Home  = lazyWithRetry(() => import("./pages/Home"))
-const Listing  = lazyWithRetry(() => import("./pages/Listing"))
-const ListingTest  = lazyWithRetry(() => import("./pages/PostServiceList"))
+const Listing  = lazyWithRetry(() => import("./pages/PriceListing"))
+const PriceDetails  = lazyWithRetry(() => import("./pages/PriceDetails"))
+const CreatePriceRecord  = lazyWithRetry(() => import("./pages/CreatePriceRecord"))
 
 
 /*
@@ -41,11 +43,13 @@ function App() {
           <GlobalFonts />
           <GlobalStyle />
           <NavBar />
-          <TickerSlider />
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/listing" element={<ListingTest />} />
-            <Route path="/listingTest" element={<ListingTest />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/forgot" element={<ForgotPassword />} />
+            <Route path="/listing" element={<Listing />} />
+            <Route path="/priceRecord/:id" element={<PriceDetails />} />
+            <Route path="/priceRecord/create" element={<CreatePriceRecord />} />
           </Routes>
         </ScrollToTop>
       </Router>

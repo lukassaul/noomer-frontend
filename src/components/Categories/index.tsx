@@ -55,7 +55,7 @@ function Categories() {
       <CategoriesRow>
 
           {categoriesArray.map((cat) => (
-            <CategoriesColumn>
+            <CategoriesColumn key={cat.label}>
               <CategoryContainer onClick={() => handleCategoryClick(cat.label)}>
                 <CategoryImage src={cat.link}/>
                 <CategoryLabel>{cat.label}</CategoryLabel>

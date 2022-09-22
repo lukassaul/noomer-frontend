@@ -26,6 +26,10 @@ function ListingHeader() {
       title: "FOOD",
       imageUrl: "https://res.cloudinary.com/dba8ifej6/image/upload/v1661492906/header-category-food_hzid87.png",
     },
+    Beverages: {
+      title: "BEVERAGES",
+      imageUrl: "https://res.cloudinary.com/dba8ifej6/image/upload/v1661492906/header-category-all_teuus9.jpg",
+    },
     Livestock: {
       title: "LIVESTOCK",
       imageUrl: "https://res.cloudinary.com/dba8ifej6/image/upload/v1661492906/header-category-livestock_zdf9ek.png",

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useLocation } from "react-router-dom";
+import { RootState } from "../../app/store";
 import Button from '../Button';
 import {
     Nav,
@@ -17,14 +18,27 @@ import {
     ProfileName
 } from './styles';
 import { DailaiLogo, IconComp } from "../../globalStyles"
+
+import { logoutAPI } from '../../api/auth'
+import { clearLogState } from '../../features/loginSlice'
 //import { SuspenseImg } from '../../SuspenseImage'
 
 
 
 function NavBar() {
+
+    const dispatch = useDispatch()
     const [click, setClick] = useState(false);
     const [button, setButton] = useState(true);
-    const isToken = true;
+
+    const [isToken, setIsToken] = useState<string | null>('')
+    const [userEmail, setUserEmail] = useState<string | null>('')
+    const [userFirstName, setUserFirstName] = useState<string | null>('')
+    const [userLastName, setUserLastName] = useState<string | null>('')
+
+    const { isLogSuccess } = useSelector((state: RootState) => state.login)
+
+
 
     const handleClick = () => setClick(!click);
     const closeMobileMenu = () => setClick(false);
@@ -39,12 +53,44 @@ function NavBar() {
 
     useEffect(() => {
         showButton();
+
+        let token = localStorage.getItem('token')
+        let email = localStorage.getItem('userEmail')
+        let first_name = localStorage.getItem('userFirstname')
+        let last_name = localStorage.getItem('userLastname')
+
+        setIsToken(token)
+        setUserEmail(email)
+        setUserFirstName(first_name)
+        setUserLastName(last_name)
     }, []);
+
+    useEffect(() => {
+      let token = localStorage.getItem('token')
+      let email = localStorage.getItem('userEmail')
+      let first_name = localStorage.getItem('userFirstname')
+      let last_name = localStorage.getItem('userLastname')
+
+      setIsToken(token)
+      setUserEmail(email)
+      setUserFirstName(first_name)
+      setUserLastName(last_name)
+    }, [isLogSuccess]);
 
     window.addEventListener('resize', showButton);
 
     const handleLogout = () => {
-        console.log("logging out")
+      console.log("logging out")
+      localStorage.clear()
+      //dispatch(clearRegState())
+      dispatch(clearLogState())
+      //dispatch(clearAddState())
+      //dispatch(clearDashboard())
+      setIsToken(null)
+      setUserEmail(null)
+      setUserFirstName(null)
+      setUserLastName(null)
+      logoutAPI()
     }
 
 
@@ -93,14 +139,21 @@ function NavBar() {
                                 Login
                             </NavLinks>
                         </NavItem>
-                    </> : <><NavItem>
+                    </> :
+                    <>
+                      <NavItem>
+                        <NavLinks to='/priceRecord/create'>
+                            Submit Price Record
+                        </NavLinks>
+                      </NavItem>
+                      <NavItem>
                         <NavLinks to='/login' onClick={() => handleLogout()}>
                             logout
                         </NavLinks>
-                    </NavItem>
-                        <ProfileName onClick={() => console.log("go to profile")} style={{ cursor: 'pointer' }}>
-                            Jonathan Gludo
-                        </ProfileName>
+                      </NavItem>
+                      <ProfileName onClick={() => console.log("go to profile")} style={{ cursor: 'pointer' }}>
+                          {userFirstName} {userLastName}
+                      </ProfileName>
                     </>
                     }
                 </NavMenu>

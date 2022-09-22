@@ -16,6 +16,7 @@ import Button from '../../components/Button'
 import Footer from '../../components/Footer'
 import ListingHeader from '../../components/ListingHeader'
 import { RootState } from '../../app/store'
+import { setCategory } from '../../features/categorySlice'
 import getBufferDate from '../../utils/getBufferDate'
 import getStatistics from '../../utils/getStatistics'
 import {
@@ -36,7 +37,14 @@ import {
     ArrowSmall,
     MobileIconProfile,
 } from './styles'
-import { CommonContainer, HeaderContainer, TitleThree } from "../../globalStyles"
+import {
+  CommonContainer,
+  HeaderContainer,
+  TitleThree,
+  TitleFour,
+  FlexBetweenRowContainer,
+  FlexCenterColContainer
+} from "../../globalStyles"
 import { CSVLink } from 'react-csv';
 
 interface PostServiceData {
@@ -76,23 +84,41 @@ type Result = {
   createdAt: null|Date;
 };
 
-function PostServiceList() {
+type Range = {
+  range: null|string;
+  members: null|Number;
+}
+
+function PriceListing() {
     const dispatch = useDispatch()
     let navigate = useNavigate()
 
     const { selectedCategory } = useSelector((state: RootState) => state.category)
+    const { searchProduct } = useSelector((state: RootState) => state.search)
+
+    // Should set the reactivesearch single dropdown value
+    const [selectedOption, setSelectedOption] = useState("")
 
     const [click, setClick] = useState(false);
     const [totalResult, setTotalResult] = useState(50);
+
+    /**
+      Variables that controls when to perform stat computations
+    **/
     const [selectedProduct, setSelectedProduct] = useState("");
     const [selectedLocation, setSelectedLocation] = useState("WORLDWIDE");
-    const [startingDate, setStartingDate] = useState<Date>();
-    const [bufferDate, setBufferDate] = useState<Date>();
+    const [selectedTicker, setSelectedTicker] = useState("")
+    const [performStat, setPerformStat] = useState(false);
+
+    const [startingDate, setStartingDate] = useState<Date|null>();
+    const [bufferDate, setBufferDate] = useState<Date|null>();
+    const [currency, setCurrency] = useState<string|null>();
     const [highestPrice, setHighestPrice] = useState<string>();
     const [lowestPrice, setLowestPrice] = useState<string>();
     const [mean, setMean] = useState<string>();
     const [variance, setVariance] = useState<string>();
     const [standardDeviation, setStandardDeviation] = useState<string>();
+    const [priceGroup, setPriceGroup] = useState<Range[]>([]);
 
     let profileUserId = localStorage.getItem('user')
     let token = localStorage.getItem('token')
@@ -131,53 +157,83 @@ function PostServiceList() {
     }
 
     const setLocation = async(value:any) => {
-      console.log("set location: ", value)
       setSelectedLocation(value)
     }
 
+    const setTicker = async(value:any) => {
+      setSelectedTicker(value)
+    }
+
+
     useEffect(() => {
-      console.log("useEffect selectedProduct: ", selectedProduct)
-      console.log("useEffect selectedLocation: ", selectedLocation)
-      showStatistics()
-    }, [selectedProduct, selectedLocation])
+      setSelectedProduct("");
+      setSelectedTicker("")
+    }, [])
+
+    useEffect(() => {
+      console.log("searchProduct: ", searchProduct)
+      setSelectedProduct(searchProduct)
+    }, [searchProduct])
+
+    useEffect(() => {
+      console.log("perform stat computation")
+      console.log("selected ticker: ", selectedTicker)
+      if (selectedProduct != "" && selectedLocation !== "WORLDWIDE") showStatistics()
+      else if (selectedTicker != "") showStatistics()
+    }, [fileData])
 
     const showStatistics = async() => {
 
       /**
-        If user filter the results by product,
+        If user filter the results by produc and location
         filter the response to get the records one month ago
         from the last creation date
       **/
-      console.log("records[0] ", fileData[0])
-      if(fileData.length > 0 && fileData[0].createdAt) {
+      if(fileData.length > 0) {
+
+        let currency = fileData[0].currency
         let dToday = fileData[0].createdAt
-        //console.log("dToday: ", dToday)
         let monthAgo = await getBufferDate(dToday)
-        //console.log("month ago: ", monthAgo)
 
         let bufferedRecords = await fileData.filter(
           function(item:any) {
             return new Date(item.createdAt).valueOf() > new Date(monthAgo).valueOf();
           }
         )
-        //console.log("bufferedRecords: ", bufferedRecords)
 
         let pricesArray:number[] = []
-        await bufferedRecords.map((item:any) => {
-          if(item.price)pricesArray.push(item.price)
-        })
-        //console.log("prices array: ", pricesArray)
-        console.log("selected location: ", selectedLocation)
 
-        let stats = await getStatistics(pricesArray)
+        if (selectedTicker && selectedLocation === "WORLDWIDE") {
+          let product = fileData[0].product.product_name
+          let city = fileData[0].location_city
+          let state = fileData[0].location_state
+          let country = fileData[0].location_country
 
-        setStartingDate(dToday)
-        setBufferDate(monthAgo)
-        setHighestPrice(stats.highest.toFixed(2))
-        setLowestPrice(stats.lowest.toFixed(2))
-        setMean(stats.mean.toFixed(2))
-        setVariance(stats.variance.toFixed(2))
-        setStandardDeviation(stats.standardDeviation.toFixed(2))
+          let location = ""
+          if (state) location = city + ", " + state + ", " + country
+          else location = city + ", " + country
+
+          setSelectedProduct(product)
+          setSelectedLocation(location)
+        }
+
+        if ((selectedProduct && selectedLocation !== "WORLDWIDE") || (selectedTicker)) {
+
+          await bufferedRecords.map((item:any) => {
+            if(item.price)pricesArray.push(item.price)
+          })
+
+          let stats = await getStatistics(pricesArray)
+          setCurrency(currency)
+          setStartingDate(dToday)
+          setBufferDate(monthAgo)
+          setHighestPrice(stats.highest.toFixed(2))
+          setLowestPrice(stats.lowest.toFixed(2))
+          setMean(stats.mean.toFixed(2))
+          setVariance(stats.variance.toFixed(2))
+          setStandardDeviation(stats.standardDeviation.toFixed(2))
+          setPriceGroup(stats.priceGroup)
+        }
       }
     }
 
@@ -203,45 +259,16 @@ function PostServiceList() {
                     url="http://localhost:9200"
                     //enableAppbase
                     transformResponse={async(elasticsearchResponse, componentId) => {
-                        //console.log("componentId: ", componentId)
+
                         let arr: Result[] = [];
                         await elasticsearchResponse.hits.hits.map((item:any) => {
                           arr.push(item._source)
                         })
                         setTotalResult(elasticsearchResponse.hits.total.value)
                         setFileData(arr)
-                        //showStatistics(arr)
+                        setPerformStat(true)
                         return { ...elasticsearchResponse }
 
-
-                        // const hits = elasticsearchResponse.hits.hits
-                        // let sortedHits = await hits.sort((a:any,b:any)=>{
-                        //   return new Date(b._source.createdAt).valueOf() - new Date(a._source.createdAt).valueOf();
-                        // })
-                        //
-                        // let dToday = sortedHits[0]._source.createdAt
-                        // //console.log("dToday: ", dToday)
-                        // let monthAgo = await getBufferDate(dToday)
-                        // //console.log("month ago: ", monthAgo)
-                        //
-                        // ///console.log("sortedHits: ", sortedHits)
-                        // await sortedHits.map((item:any) => {
-                        //   arr.push(item._source)
-                        // })
-                        // setTotalResult(elasticsearchResponse.hits.total.value)
-                        // setFileData(arr)
-                        //
-                        // return { ...elasticsearchResponse }
-                       //  return {
-                       //     ...elasticsearchResponse,
-                       //     hits: {
-                       //        hits: sortedHits,
-                       //        total: {value: sortedHits.length},
-                       //        status: elasticsearchResponse.status,
-                       //        timed_out: elasticsearchResponse.timed_out,
-                       //        took: elasticsearchResponse.took
-                       //    },
-                       // }
                     }}
                 >
                     <ListWrapper>
@@ -250,35 +277,75 @@ function PostServiceList() {
                                 <span style={{fontSize: '18px'}}>X</span>
                             </MobileIconProfile>
                             <SingleDropdownList
-                              componentId="ProductMobile"
-                              dataField="product.product_name.keyword"
-                              title="Product Name"
-                              placeholder="Filter by product name"
-                              react={{ and: ['Ticker', 'Location', 'mainSearch', 'Type'], }}
+                              componentId="CategoryMobile"
+                              dataField="product.category.category.keyword"
+                              title="Category"
+                              placeholder="Filter by Category"
+                              react={{ and: ['ProductMobile', 'TickerMobile', 'LocationMobile', 'mainSearch', 'TypeMobile'], }}
                               style={{
                                   marginBottom: 15,
                                   maxWidth: 300
                               }}
                               onValueChange={(value) => {
-                                  setProduct(value)
+                                  dispatch(setCategory(value))
                                 }
                               }
                             />
+                            {selectedOption ?
+                              <SingleDropdownList
+                                  componentId="Product"
+                                  dataField="product.product_name.keyword"
+                                  title="Product Name"
+                                  placeholder="Filter by product name"
+                                  react={{ and: ['Category', 'Ticker', 'Location', 'mainSearch', 'Type'], }}
+                                  style={{
+                                      marginBottom: 15,
+                                      maxWidth: 300
+                                  }}
+                                  onValueChange={(value) => {
+                                      setProduct(value)
+                                    }
+                                  }
+                                  //defaultSelected={selectedOption}
+                              />
+                              :
+                              <SingleDropdownList
+                                  componentId="Product"
+                                  dataField="product.product_name.keyword"
+                                  title="Product Name"
+                                  placeholder="Filter by product name"
+                                  react={{ and: ['Category', 'Ticker', 'Location', 'mainSearch', 'Type'], }}
+                                  style={{
+                                      marginBottom: 15,
+                                      maxWidth: 300
+                                  }}
+                                  onValueChange={(value) => {
+                                      setProduct(value)
+                                    }
+                                  }
+                              />
+                            }
+
                             <SingleDropdownList
                                 componentId="TickerMobile"
                                 dataField="ticker.keyword"
                                 title="Product Ticker"
                                 placeholder="Filter by product ticker"
-                                react={{ and: ['Location', 'Product', 'Ticker', 'mainSearch', 'Type'], }}
+                                react={{ and: ['CategoryMobile', 'ProductMobile', 'LocationMobile', 'mainSearch', 'TypeMobile'], }}
                                 style={{
                                     marginBottom: 15,
                                     maxWidth: 300
                                 }}
+                                onValueChange={(value) => {
+                                    setTicker(value)
+                                  }
+                                }
                             />
                             <SingleDataList
                                 componentId="TypeMobile"
                                 dataField="type.keyword"
                                 title="Product type"
+                                react={{ and: ['CategoryMobile', 'ProductMobile', 'LocationMobile', 'mainSearch', 'TickerMobile'], }}
                                 data={[{
                                     label: "RETAIL",
                                     value: "RETAIL"
@@ -290,25 +357,35 @@ function PostServiceList() {
                                 showSearch={false}
                             />
                             <DataSearch
-                                title="LocationMobile"
+                                title="Location"
                                 dataField={['location_city', 'location_city.search', 'location_state', 'location_state.search', 'location_country', 'location_country.search']}
-                                componentId="Location"
-                                URLParams
+                                componentId="LocationMobile"
+                                //URLParams
                                 enablePopularSuggestions
                                 size={5}
                                 style={{
                                     marginBottom: 15,
                                     maxWidth: 300
                                 }}
-                                onChange={async(value, triggerQuery, event) => {
-                              		await setLocation(value)
-                                  triggerQuery()
+                                react={{ and: ['CategoryMobile', 'ProductMobile', 'TickerMobile', 'mainSearch', 'TypeMobile'], }}
+                                strictSelection={true}
+                                onValueSelected={async(value, triggerQuery, event) => {
+                                  if (value) {
+                                		setLocation(value)
+                                  }
                               	}}
                             />
 
                             <SelectedFilters
                                 render={({ clearValues }) => (
-                                    <button type="button" onClick={clearValues} style={{
+                                    <button
+                                      type="button"
+                                      onClick={() => {
+                                        clearValues();
+                                        setSelectedProduct("");
+                                        setSelectedLocation("");
+                                      }}
+                                      style={{
                                        padding: '5px',
                                         maxWidth: 300,
                                         marginBottom: 10
@@ -321,35 +398,75 @@ function PostServiceList() {
                         <FilterWrapper>
 
                         <SingleDropdownList
-                            componentId="ProductWeb"
-                            dataField="product.product_name.keyword"
-                            title="Product Name"
-                            placeholder="Filter by product name"
-                            react={{ and: ['Ticker', 'Location', 'mainSearch', 'Type'], }}
+                            componentId="Category"
+                            dataField="product.category.category.keyword"
+                            title="Category"
+                            placeholder="Filter by category"
+                            react={{ and: ['Product', 'Ticker', 'Location', 'mainSearch', 'Type'], }}
                             style={{
                                 marginBottom: 15,
                                 maxWidth: 300
                             }}
                             onValueChange={(value) => {
-                                setProduct(value)
+                                dispatch(setCategory(value))
                               }
                             }
                         />
+                        {selectedOption ?
+                          <SingleDropdownList
+                              componentId="Product"
+                              dataField="product.product_name.keyword"
+                              title="Product Name"
+                              placeholder="Filter by product name"
+                              react={{ and: ['Category', 'Ticker', 'Location', 'mainSearch', 'Type'], }}
+                              style={{
+                                  marginBottom: 15,
+                                  maxWidth: 300
+                              }}
+                              onValueChange={(value) => {
+                                  setProduct(value)
+                                }
+                              }
+                              //defaultSelected={selectedOption}
+                          />
+                          :
+                          <SingleDropdownList
+                              componentId="Product"
+                              dataField="product.product_name.keyword"
+                              title="Product Name"
+                              placeholder="Filter by product name"
+                              react={{ and: ['Category', 'Ticker', 'Location', 'mainSearch', 'Type'], }}
+                              style={{
+                                  marginBottom: 15,
+                                  maxWidth: 300
+                              }}
+                              onValueChange={(value) => {
+                                  setProduct(value)
+                                }
+                              }
+                          />
+                        }
+
                         <SingleDropdownList
-                            componentId="TickerWeb"
+                            componentId="Ticker"
                             dataField="ticker.keyword"
                             title="Product Ticker"
                             placeholder="Filter by product ticker"
-                            react={{ and: ['Location', 'Product', 'Ticker', 'mainSearch', 'Type'], }}
+                            react={{ and: ['Category', 'Product', 'Location', 'mainSearch', 'Type'], }}
                             style={{
                                 marginBottom: 15,
                                 maxWidth: 300
                             }}
+                            onValueChange={(value) => {
+                                setTicker(value)
+                              }
+                            }
                         />
                         <SingleDataList
-                            componentId="TypeWeb"
+                            componentId="Type"
                             dataField="type.keyword"
                             title="Product type"
+                            react={{ and: ['Category', 'Product', 'Location', 'mainSearch', 'Ticker'], }}
                             data={[{
                                 label: "RETAIL",
                                 value: "RETAIL"
@@ -361,25 +478,35 @@ function PostServiceList() {
                             showSearch={false}
                         />
                         <DataSearch
-                            title="LocationWeb"
+                            title="Location"
                             dataField={['location_city', 'location_city.search', 'location_state', 'location_state.search', 'location_country', 'location_country.search']}
                             componentId="Location"
                             URLParams
                             enablePopularSuggestions
+                            react={{ and: ['Category', 'Product', 'Type', 'mainSearch', 'Ticker'], }}
                             size={5}
                             style={{
                                 marginBottom: 15,
                                 maxWidth: 300
                             }}
-                            onChange={async(value, triggerQuery, event) => {
-                              await setLocation(value)
-                              triggerQuery()
+                            strictSelection={true}
+                            onValueSelected={(value, triggerQuery, event) => {
+                              if (value) {
+                                setLocation(value)
+                              }
                             }}
                         />
 
                         <SelectedFilters
                             render={({ clearValues }) => (
-                                <button type="button" onClick={clearValues} style={{
+                                <button
+                                  type="button"
+                                  onClick={() => {
+                                    clearValues();
+                                    setSelectedProduct("");
+                                    setSelectedLocation("");
+                                  }}
+                                  style={{
                                    padding: '5px',
                                     maxWidth: 300,
                                     marginBottom: 10
@@ -406,20 +533,46 @@ function PostServiceList() {
                                   'location_country.search',
                                   'product.product_name',
                                   'classification.search',
+                                  'classification',
                                   'description',
+                                  'description.search',
                                   'type',
                                 ]}
                             />
 
-                            {selectedProduct ?
-                              <div>
-                                <TitleThree>Statistics for {selectedProduct}</TitleThree>
-                                <p>Highest Price: {highestPrice}</p>
-                                <p>Lowest Price: {lowestPrice}</p>
-                                <p>Mean: {mean}</p>
-                                <p>Variance: {variance}</p>
-                                <p>Standard Deviation: {standardDeviation}</p>
-                              </div>
+                            {(selectedProduct && selectedLocation !== "WORLDWIDE") || (selectedTicker) ?
+                              <FlexCenterColContainer>
+                                <TitleThree>Statistics for {selectedProduct} in {selectedLocation}</TitleThree>
+                                <TitleFour>Sample data ranging from {moment(bufferDate).format('LL')} - {moment(startingDate).format('LL')}</TitleFour>
+                                <FlexBetweenRowContainer>
+                                  <table className="table fontSize12 width40">
+                                    <tr><td style={{fontWeight: 600}}>Highest Price:</td><td>{highestPrice} {currency}</td></tr>
+                                    <tr><td style={{fontWeight: 600}}>Lowest Price:</td><td>{lowestPrice} {currency}</td></tr>
+                                    <tr><td style={{fontWeight: 600}}>Mean:</td><td>{mean}</td></tr>
+                                    <tr><td style={{fontWeight: 600}}>Variance:</td><td>{variance}</td></tr>
+                                    <tr><td style={{fontWeight: 600}}>Standard Deviation:</td><td>{standardDeviation}</td></tr>
+                                  </table>
+
+                                  <table className="table fontSize12 width40">
+                                    <thead>
+                                      <tr>
+                                        <th>Price range</th>
+                                        <th>Number of records</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      {priceGroup ? priceGroup.map((group:any) => {
+                                        return (
+                                          <tr>
+                                            <td style={{textAlign: "center"}}>{group.range}</td>
+                                            <td style={{textAlign: "center"}}>{group.members}</td>
+                                          </tr>
+                                        )
+                                      }) : null}
+                                    </tbody>
+                                  </table>
+                                </FlexBetweenRowContainer>
+                              </FlexCenterColContainer>
                               : null
                             }
 
@@ -437,10 +590,13 @@ function PostServiceList() {
                                     and: ['mainSearch', 'Location', 'Product', 'Ticker', 'Type'],
                                 }}
                                 defaultQuery={() => ({ track_total_hits: true })}
-                                sortOptions={[{dataField: "createdAt", sortBy: "desc", label: "Sort by Date"}]}
+                                sortOptions={[
+                                  {dataField: "createdAt", sortBy: "desc", label: "Sort by Date"},
+                                  {dataField: "price", sortBy: "desc", label: "Sort by Price"}
+                                ]}
                                 render={({ data }) => (
                                     <ReactiveList.ResultListWrapper>
-                                      <table className="table table-bordered" style={{fontSize: '10px'}}>
+                                      <table className="table table-bordered table-hover" style={{fontSize: '10px'}}>
                                         <thead>
                                           <tr>
                                             <th>TICKER</th>
@@ -455,7 +611,11 @@ function PostServiceList() {
                                           {data.map((item: any) => {
                                             if (item.product && item.product.product_name) {
                                               let productName = item.product.product_name
-                                              return <tr key={item._id!}>
+                                              return <tr
+                                                      key={item._id}
+                                                      onClick={() => navigate(`/priceRecord/${item._id}`)}
+                                                      style={{cursor: 'pointer'}}
+                                                    >
                                                     <td>{item.ticker}</td>
                                                     <td>{item.classification}</td>
                                                     <td>{item.location_state ? `${item.location_city}, ${item.location_state}, ${item.location_country}` : `${item.location_city}, ${item.location_country}`}</td>
@@ -480,4 +640,4 @@ function PostServiceList() {
     )
 }
 
-export default PostServiceList
+export default PriceListing

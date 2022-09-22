@@ -1,8 +1,24 @@
 import React, { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootState, AppDispatch } from '../../app/store'
+import { getTickers } from '../../features/configSlice'
+
 import Marquee from "react-fast-marquee";
 import { TickerContainer } from '../../globalStyles'
 
 function TickerSlider() {
+
+  const dispatch = useDispatch<AppDispatch>()
+  const { tickers } = useSelector((state: RootState) => state.config)
+
+  /**
+    Fetching tickers to display
+  **/
+
+  useEffect(() => {
+    dispatch(getTickers('tickers'));
+  }, [dispatch]);
+  /***/
 
   const tickerArray = [
     {
@@ -37,10 +53,10 @@ function TickerSlider() {
     <>
       <TickerContainer>
         <Marquee gradient={false}>
-          {tickerArray.map((product) => (
-            <p className="marquee-component" key={product.product}>
-              <span style={{color: tickerColorArray[getRandomColor()]}}>{product.product}</span>
-              <span className="white-font">{product.price}</span>
+          {tickers && tickers.map((product:any) => (
+            <p className="marquee-component" key={product.ticker}>
+              <span style={{color: tickerColorArray[getRandomColor()]}}>{product.ticker}</span>
+              <span className="white-font">{product.price} {product.currency}</span>
               <span className={product.type === "RETAIL" ? "red-font" : "green-font"} style={{fontSize: "10px"}}>
                 {product.type === "RETAIL" ? "(R)" : "(S)"}
               </span>
