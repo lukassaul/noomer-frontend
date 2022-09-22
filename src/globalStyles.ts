@@ -90,6 +90,28 @@ export const TitleThree = styled.p`
   padding: 2rem 0;
 `;
 
+export const TitleThreeTopPad = styled.p`
+  font-size: 20px;
+  font-weight: 600;
+  padding-top: 2rem;
+`;
+
+export const TitleThreeNoPad = styled.p`
+  font-size: 20px;
+  font-weight: 600;
+`;
+
+export const TitleFour = styled.p`
+  font-size: 14px;
+  font-weight: 600;
+  padding: .5rem 0;
+`;
+
+export const TitleFourNoPad = styled.p`
+  font-size: 14px;
+  font-weight: 600;
+`;
+
 export const HomeFLowImage = styled.img`
   width: 100%;
   height: auto;
@@ -103,6 +125,24 @@ export const HomeFLowImage = styled.img`
 
 export const FlexContainer = styled.div`
   display: flex;
+`;
+
+export const FlexCenterColContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+`;
+
+export const FlexCenterRowContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+`;
+
+export const FlexBetweenRowContainer = styled.div`
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
 `;
 
 export const MainFlexContainer = styled.div`
@@ -141,6 +181,67 @@ export const MainFlexChildrenContainer = styled.div`
 export const JustifyText = styled.p`
 	margin: 1em 0;
   text-align: justify;
+`;
+
+export const RightLinkContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 2em;
+`;
+
+export const LeftLinkContainer = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 2em 0;
+`;
+
+export const LinkParagraph = styled.p`
+  cursor: pointer;
+  &:hover {
+    color: #302D2D;
+  }
+`;
+
+export const Upvote = styled.p`
+  font-size: 60px;
+  font-weight: 600;
+  color: #638E67;
+`;
+
+export const Downvote = styled.p`
+  font-size: 60px;
+  font-weight: 600;
+  color: #B23B3B;
+`;
+
+export const VoteIcon = styled.img`
+    width: 63px;
+    height: 63px;
+`;
+
+export const VoteIconSmall = styled.img`
+    width: 32px;
+    height: 32px;
+`;
+
+export const ProductImageLarge = styled.img`
+    width: 275px;
+    height: 275px;
+`;
+
+export const ProductImageSmal = styled.img`
+    width: 120px;
+    height: 120px;
+`;
+
+
+export const FormWraper = styled.div`
+  display:flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 2em;
 `;
 
 export const TwoColumnContainer = styled.div`
@@ -303,6 +404,168 @@ export const TextWrapperMargin12 = styled.div`
   margin: 2em 0;
 `;
 
+export const DetailsLabel = styled.span`
+  font-weight: 600;
+  color: #1E1E1E;
+`;
+
+export const DetailsValue = styled.span`
+  color: #1E1E1E;
+`;
+
+
+/**
+  Form styled components
+**/
+export const FormSeparatorGray = styled.hr`
+  border-top: 1px solid #DADADA;
+  margin: 2em 0;
+`;
+
+export const FormInput = styled.input`
+    display: flex;
+    padding: 12px;
+    border-radius: 5px;
+    width: 80%;
+    border: 1px solid #c4c4c4;
+    font-size: 14px;
+    margin: 10px 0;
+    height: 32px;
+`;
+
+export const FormTextArea = styled.textarea`
+    display: flex;
+    padding: 5px 5px 5px 5px;
+    width: 100%;
+    margin: 10px 0;
+    height: 150px;
+`;
+
+export const FormTextArea80 = styled.textarea`
+    display: flex;
+    padding: 5px 5px 5px 5px;
+    width: 80%;
+    margin: 10px 0;
+    height: 150px;
+`;
+
+export const FormRequired = styled.p `
+  color: red;
+  margin-right: 8px;
+`;
+
+export const FormLabelContainer = styled.div `
+  display: flex;
+  align-items: baseline;
+`;
+
+export const FormLabel = styled.p `
+  font-weight: bold;
+`;
+
+export const SelectContainer = styled.div`
+    margin: 10px 0;
+    display: "flex";
+    flexDirection: "column";
+    alignItems: "center";
+`;
+
+export const FormSingleInputContainer = styled.div `
+  padding: 0;
+  @media screen and (max-width: 480px) {
+    margin-bottom: initial;
+    padding: 0 12px;
+  }
+`;
+
+export const FormThreeInputContainer = styled.div `
+  display: flex;
+  flex-wrap: wrap;
+  margin: 1em 0;
+  @media screen and (max-width: 480px) {
+    margin-bottom: initial;
+    padding: 0 12px;
+  }
+`;
+
+export const FormInput40Width = styled.div `
+  width: 40%;
+  @media screen and (max-width: 991px) {
+    width: 30%;
+  }
+  @media screen and (max-width: 768px) {
+    width: 50%;
+  }
+  @media screen and (max-width: 480px) {
+    width: 100%;
+  }
+`;
+
+export const FormInput30Width = styled.div `
+  width: 33%;
+  @media screen and (max-width: 991px) {
+    width: 30%;
+  }
+  @media screen and (max-width: 768px) {
+    width: 50%;
+  }
+  @media screen and (max-width: 480px) {
+    width: 100%;
+  }
+`;
+
+export const FormInput20Width = styled.div `
+  width: 20%;
+  @media screen and (max-width: 991px) {
+    width: 30%;
+  }
+  @media screen and (max-width: 768px) {
+    width: 50%;
+  }
+  @media screen and (max-width: 480px) {
+    width: 100%;
+  }
+`;
+
+export const FormInput25Width = styled.div `
+  width: 25%;
+  padding: 0 12px;
+  @media screen and (max-width: 991px) {
+    width: 25%;
+    padding: 0 12px;
+  }
+  @media screen and (max-width: 768px) {
+    width: 50%;
+    padding: 0;
+  }
+  @media screen and (max-width: 480px) {
+    width: 100%;
+    padding: 0;
+  }
+`;
+
+export const FormInput25WidthMin = styled.div `
+  width: 25%;
+  padding: 0 12px;
+  @media screen and (max-width: 991px) {
+    width: 25%;
+    padding: 0 12px;
+  }
+  @media screen and (max-width: 768px) {
+    width: 50%;
+    padding: 0;
+  }
+  @media screen and (max-width: 480px) {
+    width: 100%;
+    padding: 0;
+    margin-bottom: 10px;
+  }
+`;
+
+/**
+  end of form styled components
+**/
+
 export const NoDataLogo = styled.img`
     width: 200px;
     height: 200px;
@@ -310,7 +573,7 @@ export const NoDataLogo = styled.img`
 `;
 
 export const ImagePreview = styled.img`
-    width: 500px;
+    width: 200px;
     height: auto;
     @media screen and (max-width: 480px) {
       width: 420px;
@@ -373,7 +636,7 @@ export const SeventyThreeThumbnail = styled.img`
 
 export const CommonContainer = styled.div`
   max-width: 1280px;
-  min-height: calc(100vh - 320px);
+  min-height: calc(100vh - 327px);
   margin-right: auto;
   margin-left: auto;
   @media screen and (max-width: 1276px) {
@@ -388,7 +651,7 @@ export const CommonContainer = styled.div`
 
 export const CommonContentContainer = styled.div`
   max-width: 1280px;
-  min-height: calc(100vh - 352px);
+  min-height: calc(100vh - 327px);
   margin-right: auto;
   margin-left: auto;
   /* @media screen and (max-width: 480px) {
@@ -434,6 +697,19 @@ export const HorizontalLine = styled.hr`
 export const FlexColumnDiv = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-contents: center;
+  margin: 3em 0;
+
+  @media screen and (max-width: 991px) {
+    width: 100%;
+  }
+
+`;
+
+export const FlexRowDiv = styled.div`
+  display: flex;
+  flex-direction: row;
   justify-content: center;
   align-contents: center;
   margin: 3em 0;

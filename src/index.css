@@ -49,6 +49,50 @@ code {
   color: #5DD662;
 }
 
+.flat-red-font {
+  color: #B23B3B;
+}
+
+.flat-green-font {
+  color: #638E67;
+}
+
+.disabled-font {
+  color: #d4d4d4;
+}
+
+.centerText {
+  text-align: center;
+}
+
+.fontSize10 {
+  font-size: 10px;
+}
+
+.fontSize12 {
+  font-size: 12px;
+}
+
+.width25 {
+  width: 25% !important;
+}
+
+.width40 {
+  width: 40% !important;
+}
+
+.width50 {
+  width: 50% !important;
+}
+
+.width75 {
+  width: 75% !important;
+}
+
+.width100 {
+  width: 100% !important;
+}
+
 .section-content-container:first-child {
   padding-bottom: 2rem;
   background-color: red;
@@ -86,7 +130,6 @@ code {
 .search_input {
   height: 50px;
   width: 100%;
-  color: #fff;
   padding-left: 2.5rem;
   //border-radius: 16px;
   background-color: transparent;

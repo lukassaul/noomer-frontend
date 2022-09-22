@@ -98,7 +98,7 @@ sixth: css`
     color: #FFF;
     background: #302D2D;
     border: 1px solid #302D2D;
-    padding: 12px 25px;
+    padding: 12px 42px;
     border-radius: 50px;
     font-size: 18px;
     font-weight: 700;

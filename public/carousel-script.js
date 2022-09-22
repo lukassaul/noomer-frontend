@@ -12,14 +12,14 @@ const throttleProgressBar = throttle(() => {
   document.querySelectorAll(".progress-bar").forEach(calculateProgressBar)
 }, 250)
 
-window.onload = function() {console.log("window on load"); throttleProgressBar()};
+window.onload = function() {throttleProgressBar()};
 window.addEventListener("DOMContentLoaded", throttleProgressBar);
 window.addEventListener("resize", throttleProgressBar)
 
 document.querySelectorAll(".progress-bar").forEach(calculateProgressBar)
 
 function calculateProgressBar(progressBar) {
-  console.log("calculate progress bar: ", progressBar)
+  //console.log("calculate progress bar: ", progressBar)
   progressBar.innerHTML = ""
   const slider = progressBar.closest(".row").querySelector(".slider")
   const itemCount = slider.children.length
@@ -47,7 +47,7 @@ function calculateProgressBar(progressBar) {
 }
 
 function onHandleClick(handle) {
-  console.log("HANDLE: " , document.querySelector(".slider"))
+  //console.log("HANDLE: " , document.querySelector(".slider"))
   const progressBar = handle.closest(".row").querySelector(".progress-bar")
   //const slider = handle.closest(".container").querySelector(".slider")
   const slider = document.querySelector(".slider");
