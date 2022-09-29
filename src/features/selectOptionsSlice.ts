@@ -4,6 +4,7 @@ import {
   GetCurrenciesAPI,
   GetProductsAPI
 } from '../api/selectOptions';
+import { GetComparisonAutosuggestAPI } from '../api/productAutosuggest'
 
 interface selectOptionsState {
     isGetProductsSuccess: boolean,
@@ -12,9 +13,12 @@ interface selectOptionsState {
     isGetCurrenciesFetching: boolean,
     isGetLocationsSuccess: boolean,
     isGetLocationsFetching: boolean,
+    isGetComparisonSuccess: boolean,
+    isGetComparisonFetching: boolean,
     errorProductsLogMessage: string | null,
     errorCurrenciesLogMessage: string | null,
     errorLocationsLogMessage: string | null,
+    errorComparisonLogMessage: string | null,
     locationSelectOption: [] | [
       {
         value: '',
@@ -32,6 +36,18 @@ interface selectOptionsState {
         value: '',
         label: '',
       }
+    ],
+    comparisonLocationSelectOption: [] | [
+      {
+        value: '',
+        label: '',
+      }
+    ],
+    comparisonProductSelectOption: [] | [
+      {
+        value: '',
+        label: '',
+      }
     ]
 }
 
@@ -42,12 +58,17 @@ const initialState: selectOptionsState = {
     isGetCurrenciesFetching: false,
     isGetProductsSuccess: false,
     isGetProductsFetching: false,
+    isGetComparisonSuccess: false,
+    isGetComparisonFetching: false,
     errorProductsLogMessage: "",
     errorCurrenciesLogMessage: "",
     errorLocationsLogMessage: "",
+    errorComparisonLogMessage: "",
     productSelectOption: [],
     currencySelectOption: [],
-    locationSelectOption: []
+    locationSelectOption: [],
+    comparisonLocationSelectOption: [],
+    comparisonProductSelectOption: []
 }
 
 
@@ -87,6 +108,18 @@ export const getAllProducts = createAsyncThunk(
     }
 )
 
+export const getComparisonOptions = createAsyncThunk(
+    'selectOptions/comparison',
+    async (products: string, thunkAPI) => {
+        const response = await GetComparisonAutosuggestAPI()
+        if (response.status !== 200) {
+          if (response.data.hasOwnProperty('message')) return thunkAPI.rejectWithValue(await response.data.message)
+          else return thunkAPI.rejectWithValue(await response.data)
+        }
+        return await response.data
+    }
+)
+
 export const selectOptionsSlice = createSlice({
     name: 'selectOptions',
     initialState,
@@ -98,12 +131,17 @@ export const selectOptionsSlice = createSlice({
             state.isGetCurrenciesFetching = false;
             state.isGetProductsSuccess = false;
             state.isGetProductsFetching = false;
+            state.isGetComparisonSuccess = false;
+            state.isGetComparisonFetching = false;
             state.errorLocationsLogMessage = "";
             state.errorCurrenciesLogMessage = "";
             state.errorProductsLogMessage = "";
+            state.errorComparisonLogMessage = "";
             state.locationSelectOption = [];
             state.currencySelectOption = [];
             state.productSelectOption = [];
+            state.comparisonProductSelectOption = [];
+            state.comparisonLocationSelectOption = [];
           },
     },
     extraReducers: (builder) => {
@@ -154,6 +192,23 @@ export const selectOptionsSlice = createSlice({
         })
         builder.addCase(getAllProducts.pending, (state) => {
             state.isGetProductsFetching = true
+        })
+        builder.addCase(getComparisonOptions.fulfilled, (state, {payload}) => {
+            state.isGetComparisonFetching = false
+            state.isGetComparisonSuccess = true
+            state.comparisonProductSelectOption = payload.productsSuggestions
+            state.comparisonLocationSelectOption = payload.locationSuggestions
+        })
+        builder.addCase(getComparisonOptions.rejected, (state, action) => {
+
+            if (action.payload) {
+                state.errorComparisonLogMessage = action.payload as unknown as string
+              } else {
+                state.errorComparisonLogMessage = action.error.message!
+              }
+        })
+        builder.addCase(getComparisonOptions.pending, (state) => {
+            state.isGetComparisonFetching = true
         })
     },
 })

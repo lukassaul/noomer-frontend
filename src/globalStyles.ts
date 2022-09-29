@@ -36,7 +36,7 @@ export const TickerContainer = styled.div`
   margin-right: auto;
   margin-left: auto;
   padding: 8px;
-  background-color: #4C5055;
+  background-color: #000000;
   display: flex;
   justify-content: space-around;
   @media screen and (max-width: 991px) {
@@ -366,6 +366,17 @@ export const CenteredContainer = styled.div`
   align-items: center;
 `;
 
+export const CenteredContainerColBordered = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 2em 0;
+  border: 1px solid #B0B0B0;
+  border-radius: 5px;
+  padding: 1em 0;
+`;
+
 export const CenteredContainerDash = styled.div`
   display: flex;
   justify-content: center;
@@ -427,6 +438,17 @@ export const FormInput = styled.input`
     padding: 12px;
     border-radius: 5px;
     width: 80%;
+    border: 1px solid #c4c4c4;
+    font-size: 14px;
+    margin: 10px 0;
+    height: 32px;
+`;
+
+export const FormInput30 = styled.input`
+    display: flex;
+    padding: 12px;
+    border-radius: 5px;
+    width: 30%;
     border: 1px solid #c4c4c4;
     font-size: 14px;
     margin: 10px 0;
@@ -602,6 +624,10 @@ export const FooterIcon = styled.img`
     width: 22px;
     height: 22px;
     margin: 12px 12px 0 0;
+`;
+
+export const NoomerEqualityLogo = styled.img`
+    margin: 0;
 `;
 
 export const DailaiLogo = styled.img`

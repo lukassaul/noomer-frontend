@@ -9,12 +9,28 @@ document.addEventListener("click", e => {
 })
 
 const throttleProgressBar = throttle(() => {
+  console.log("throttleProgressBar")
   document.querySelectorAll(".progress-bar").forEach(calculateProgressBar)
 }, 250)
 
-window.onload = function() {throttleProgressBar()};
-window.addEventListener("DOMContentLoaded", throttleProgressBar);
-window.addEventListener("resize", throttleProgressBar)
+//throttleProgressBar()
+//window.onpageshow = function() {throttleProgressBar()};
+//window.addEventListener("pageshow", throttleProgressBar);
+// document.addEventListener('pageshow', (event) => {
+//   console.log("pageshow event")
+//   if (event.persisted) {
+//     // page was restored from the bfcach
+//     // Do your reload or re-render page with data
+//     console.log("pageshow event persisted")
+//     throttleProgressBar()
+//   }
+// });
+window.addEventListener("DOMContentLoaded", throttleProgressBar());
+window.addEventListener("load", throttleProgressBar());
+
+// window.addEventListener('readystate', (event) => {
+//   console.log("readystate event")
+// });
 
 document.querySelectorAll(".progress-bar").forEach(calculateProgressBar)
 

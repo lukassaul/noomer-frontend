@@ -15,8 +15,9 @@ import { useNavigate } from 'react-router-dom'
 import Button from '../../components/Button'
 import Footer from '../../components/Footer'
 import ListingHeader from '../../components/ListingHeader'
-import { RootState } from '../../app/store'
+import { RootState, AppDispatch } from '../../app/store'
 import { setCategory } from '../../features/categorySlice'
+import { setTicker } from '../../features/tickerSlice'
 import getBufferDate from '../../utils/getBufferDate'
 import getStatistics from '../../utils/getStatistics'
 import {
@@ -90,11 +91,14 @@ type Range = {
 }
 
 function PriceListing() {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
     let navigate = useNavigate()
 
     const { selectedCategory } = useSelector((state: RootState) => state.category)
+    const { selectedTickerState } = useSelector((state: RootState) => state.ticker)
     const { searchProduct } = useSelector((state: RootState) => state.search)
+
+    console.log("selectedTickerState: ", selectedTickerState)
 
     // Should set the reactivesearch single dropdown value
     const [selectedOption, setSelectedOption] = useState("")
@@ -160,14 +164,14 @@ function PriceListing() {
       setSelectedLocation(value)
     }
 
-    const setTicker = async(value:any) => {
+    const setProductTicker = async(value:any) => {
       setSelectedTicker(value)
     }
 
 
     useEffect(() => {
       setSelectedProduct("");
-      setSelectedTicker("")
+      setSelectedTicker("");
     }, [])
 
     useEffect(() => {
@@ -237,13 +241,14 @@ function PriceListing() {
       }
     }
 
+    console.log("selectedLocation: ", selectedLocation)
     return (
         <>
             <CommonContainer>
               <ListingHeader />
 
                 <div style={{ padding: "1em 0" }}>
-                    {fileData?.length &&
+                    {fileData?.length > 0 &&
                       <CSVLink
                         headers={fileHeaders}
                         data={fileData}
@@ -256,7 +261,7 @@ function PriceListing() {
                 </div>
                 <ReactiveBase
                     app="prices"
-                    url="http://localhost:9200"
+                    url={process.env.REACT_APP_ELASTIC_URL}
                     //enableAppbase
                     transformResponse={async(elasticsearchResponse, componentId) => {
 
@@ -277,11 +282,11 @@ function PriceListing() {
                                 <span style={{fontSize: '18px'}}>X</span>
                             </MobileIconProfile>
                             <SingleDropdownList
-                              componentId="CategoryMobile"
+                              componentId="Category"
                               dataField="product.category.category.keyword"
                               title="Category"
                               placeholder="Filter by Category"
-                              react={{ and: ['ProductMobile', 'TickerMobile', 'LocationMobile', 'mainSearch', 'TypeMobile'], }}
+                              react={{ and: ['Product', 'Ticker', 'Location', 'mainSearch', 'Type'], }}
                               style={{
                                   marginBottom: 15,
                                   maxWidth: 300
@@ -290,6 +295,11 @@ function PriceListing() {
                                   dispatch(setCategory(value))
                                 }
                               }
+                              onChange={(value) => {
+                                  dispatch(setCategory(value))
+                                }
+                              }
+                              value={selectedCategory}
                             />
                             {selectedOption ?
                               <SingleDropdownList
@@ -337,9 +347,10 @@ function PriceListing() {
                                     maxWidth: 300
                                 }}
                                 onValueChange={(value) => {
-                                    setTicker(value)
+                                    setProductTicker(value)
                                   }
                                 }
+
                             />
                             <SingleDataList
                                 componentId="TypeMobile"
@@ -383,7 +394,8 @@ function PriceListing() {
                                       onClick={() => {
                                         clearValues();
                                         setSelectedProduct("");
-                                        setSelectedLocation("");
+                                        setSelectedLocation("WORLDWIDE");
+                                        dispatch(setCategory(""))
                                       }}
                                       style={{
                                        padding: '5px',
@@ -402,6 +414,7 @@ function PriceListing() {
                             dataField="product.category.category.keyword"
                             title="Category"
                             placeholder="Filter by category"
+                            //defaultSelected="Beverages"
                             react={{ and: ['Product', 'Ticker', 'Location', 'mainSearch', 'Type'], }}
                             style={{
                                 marginBottom: 15,
@@ -411,6 +424,11 @@ function PriceListing() {
                                 dispatch(setCategory(value))
                               }
                             }
+                            onChange={(value) => {
+                                dispatch(setCategory(value))
+                              }
+                            }
+                            value={selectedCategory}
                         />
                         {selectedOption ?
                           <SingleDropdownList
@@ -458,9 +476,16 @@ function PriceListing() {
                                 maxWidth: 300
                             }}
                             onValueChange={(value) => {
-                                setTicker(value)
+                                setProductTicker(value)
+                                dispatch(setTicker(value))
                               }
                             }
+                            onChange={(value) => {
+                                setProductTicker(value)
+                                dispatch(setTicker(value))
+                              }
+                            }
+                            value={selectedTickerState}
                         />
                         <SingleDataList
                             componentId="Type"
@@ -504,7 +529,8 @@ function PriceListing() {
                                   onClick={() => {
                                     clearValues();
                                     setSelectedProduct("");
-                                    setSelectedLocation("");
+                                    setSelectedLocation("WORLDWIDE");
+                                    dispatch(setCategory(""))
                                   }}
                                   style={{
                                    padding: '5px',
@@ -523,7 +549,7 @@ function PriceListing() {
                                 componentId="mainSearch"
                                 style={{"paddingBottom": "2.5em", "width": "50%", "borderRadius": "5px"}}
                                 autosuggest={false}
-                                //defaultValue={searchAllPost}
+                                defaultValue={searchProduct}
                                 dataField={[
                                   'location_city',
                                   'location_city.search',
@@ -532,6 +558,7 @@ function PriceListing() {
                                   'location_country',
                                   'location_country.search',
                                   'product.product_name',
+                                  'product.category.category',
                                   'classification.search',
                                   'classification',
                                   'description',
@@ -587,7 +614,7 @@ function PriceListing() {
                                 // pagination
                                 // paginationAt="both"
                                 react={{
-                                    and: ['mainSearch', 'Location', 'Product', 'Ticker', 'Type'],
+                                    and: ['mainSearch', 'Location', 'Product', 'Category', 'Ticker', 'Type'],
                                 }}
                                 defaultQuery={() => ({ track_total_hits: true })}
                                 sortOptions={[
@@ -618,7 +645,7 @@ function PriceListing() {
                                                     >
                                                     <td>{item.ticker}</td>
                                                     <td>{item.classification}</td>
-                                                    <td>{item.location_state ? `${item.location_city}, ${item.location_state}, ${item.location_country}` : `${item.location_city}, ${item.location_country}`}</td>
+                                                    <td>{item.location_state !== "undefined" && item.location_state != null ? `${item.location_city}, ${item.location_state}, ${item.location_country}` : `${item.location_city}, ${item.location_country}`}</td>
                                                     <td>{item.type}</td>
                                                     <td>{item.price} {item.currency}</td>
                                                     <td>{moment(item.createdAt).format('LL')}</td>

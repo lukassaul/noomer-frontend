@@ -5,7 +5,7 @@ interface categoryState {
 }
 
 const initialState: categoryState = {
-    selectedCategory: 'All'
+    selectedCategory: ''
 }
 
 export const categorySlice = createSlice({

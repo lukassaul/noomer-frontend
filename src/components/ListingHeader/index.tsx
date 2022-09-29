@@ -6,7 +6,7 @@ import { HeaderContainer } from './styles'
 
 function ListingHeader() {
 
-  const { selectedCategory } = useSelector((state: RootState) => state.category)
+  let { selectedCategory } = useSelector((state: RootState) => state.category)
 
 //   Currencies
 // Services
@@ -28,7 +28,7 @@ function ListingHeader() {
     },
     Beverages: {
       title: "BEVERAGES",
-      imageUrl: "https://res.cloudinary.com/dba8ifej6/image/upload/v1661492906/header-category-all_teuus9.jpg",
+      imageUrl: "https://res.cloudinary.com/dba8ifej6/image/upload/v1664348910/header-category-beverages_tqu3hh.jpg",
     },
     Livestock: {
       title: "LIVESTOCK",
@@ -36,14 +36,14 @@ function ListingHeader() {
     },
     Tobacco: {
       title: "TOBACCO",
-      imageUrl: "https://res.cloudinary.com/dba8ifej6/image/upload/v1661492906/header-category-tobacco_p0oynn.png",
+      imageUrl: "https://res.cloudinary.com/dba8ifej6/image/upload/v1664348910/header-category-tobacco_m4ctgn.jpg",
     },
     Metals: {
       title: "METALS",
       imageUrl: "https://res.cloudinary.com/dba8ifej6/image/upload/v1661492906/header-category-all_teuus9.jpg",
     },
-    Currencies: {
-      title: "CURRENCIES",
+    Currency: {
+      title: "CURRENCY",
       imageUrl: "https://res.cloudinary.com/dba8ifej6/image/upload/v1661492906/header-category-all_teuus9.jpg",
     },
     Services: {
@@ -59,7 +59,9 @@ function ListingHeader() {
       imageUrl: "https://res.cloudinary.com/dba8ifej6/image/upload/v1661492906/header-category-all_teuus9.jpg",
     }
   }
+  console.log("selectedCategory: ", selectedCategory)
 
+  if (selectedCategory === "") selectedCategory = "All"
   let bgImage = categoriesArray[selectedCategory]
   let backgroundImage = bgImage.imageUrl
   let headerTitle = bgImage.title

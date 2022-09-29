@@ -37,5 +37,12 @@
   "SERVICE": "SERVICE",
   "Submit new price record": "Submit new price record",
   "Description": "Description",
-  "Upload product image": "Upload product image"
+  "Upload product image": "Upload product image",
+  "__EMAIL SENT PAGE__" : "Email sent page texts",
+  "Verify your email": "Verify your email",
+  "Read_More": "read more",
+  "Check your email and click the link to activate your account": "Check your email and click the link to activate your account",
+  "We have sent a confirmation email": "We have sent a confirmation email",
+  "Didn't get the email?": "Didn't get the email?",
+  "Resend": "Resend"
 }

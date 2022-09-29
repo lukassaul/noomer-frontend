@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import { RootState, AppDispatch } from '../../app/store'
 import { getTickers } from '../../features/configSlice'
+import { setTicker } from '../../features/tickerSlice'
 
 import Marquee from "react-fast-marquee";
 import { TickerContainer } from '../../globalStyles'
@@ -9,6 +11,7 @@ import { TickerContainer } from '../../globalStyles'
 function TickerSlider() {
 
   const dispatch = useDispatch<AppDispatch>()
+  const navigate = useNavigate()
   const { tickers } = useSelector((state: RootState) => state.config)
 
   /**
@@ -44,20 +47,26 @@ function TickerSlider() {
     }
   ]
 
-  const tickerColorArray = ["#F8FD01", "#F127E9", "#F46C1F", "#EFAEEC", "#2196F3", "#B23B3B"]
+  const tickerColorArray = ["#F8FD01", "#00E0FF", "#F127E9", "#FF0000", "#5DD662", "#000000"]
   const getRandomColor = () => {
     return Math.floor(Math.random() * 5) - 1
+  }
+
+  const handleTickerClick = (ticker:string) => {
+    console.log("must navigate to price listing with filter ticker")
+    dispatch(setTicker(ticker))
+    navigate('/listing')
   }
 
   return (
     <>
       <TickerContainer>
-        <Marquee gradient={false}>
+        <Marquee gradient={false} style={{backgroundColor: 'black'}}>
           {tickers && tickers.map((product:any) => (
-            <p className="marquee-component" key={product.ticker}>
+            <p className="marquee-component" key={product.ticker} style={{cursor: 'pointer'}} onClick={() => handleTickerClick(product.ticker)}>
               <span style={{color: tickerColorArray[getRandomColor()]}}>{product.ticker}</span>
               <span className="white-font">{product.price} {product.currency}</span>
-              <span className={product.type === "RETAIL" ? "red-font" : "green-font"} style={{fontSize: "10px"}}>
+              <span className={product.type === "RETAIL" ? "red-font" : "green-font"} style={{fontSize: "14px"}}>
                 {product.type === "RETAIL" ? "(R)" : "(S)"}
               </span>
             </p>

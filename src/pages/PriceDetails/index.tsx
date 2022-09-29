@@ -31,7 +31,9 @@ import {
   FlexContainer,
   FlexCenterColContainer,
   FlexCenterRowContainer,
+  FlexBetweenRowContainer,
   VoteIconSmall,
+  TitleThree,
   TitleThreeNoPad,
   TitleFour,
   ProductImageLarge
@@ -213,6 +215,40 @@ function PriceDetails() {
     </FlexContainer>
 
 
+  const ProductStats = () =>
+    <FlexCenterColContainer>
+      <TitleThree>Statistics for {priceRecord.product.product_name} in {priceRecord.price.location_city}, {priceRecord.price.location_state && priceRecord.price.location_state !== 'undefined' ? `${priceRecord.price.location_state}, `: null}{priceRecord.price.location_country}</TitleThree>
+      <FlexBetweenRowContainer>
+        <table className="table fontSize12 width40">
+          <tr><td style={{fontWeight: 600}}>Highest Price:</td><td>{priceRecord.stats.highest} {priceRecord.price.currency}</td></tr>
+          <tr><td style={{fontWeight: 600}}>Lowest Price:</td><td>{priceRecord.stats.lowest} {priceRecord.price.currency}</td></tr>
+          <tr><td style={{fontWeight: 600}}>Mean:</td><td>{priceRecord.stats.mean}</td></tr>
+          <tr><td style={{fontWeight: 600}}>Variance:</td><td>{priceRecord.stats.variance}</td></tr>
+          <tr><td style={{fontWeight: 600}}>Standard Deviation:</td><td>{priceRecord.stats.standardDeviation}</td></tr>
+        </table>
+
+        <table className="table fontSize12 width40">
+          <thead>
+            <tr>
+              <th>Price range</th>
+              <th>Number of records</th>
+            </tr>
+          </thead>
+          <tbody>
+            {priceRecord.stats.priceGroup ? priceRecord.stats.priceGroup.map((group:any) => {
+              return (
+                <tr>
+                  <td style={{textAlign: "center"}}>{group.range}</td>
+                  <td style={{textAlign: "center"}}>{group.members}</td>
+                </tr>
+              )
+            }) : null}
+          </tbody>
+        </table>
+      </FlexBetweenRowContainer>
+    </FlexCenterColContainer>
+
+
   const DisplayRatings = () =>
     <FlexColumnDiv>
       {priceRecord.ratings.map((rating:any) => {
@@ -280,7 +316,9 @@ function PriceDetails() {
               <FlexContainer>
                 {VotesDisplay()}
                 {priceRecord ? Details() : null}
+
               </FlexContainer>
+              {priceRecord ? ProductStats() : null}
               <FormSeparatorGray/>
               {isToken ? DisplayForm() : "Please login to vote"}
               <FormSeparatorGray/>
