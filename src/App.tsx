@@ -16,12 +16,15 @@ import Spinner from './components/Spinner'
 const ScrollToTop = lazyWithRetry(() => import("./ScrollToTop"))
 
 const NavBar  = lazyWithRetry(() => import("./components/NavBar"))
+const Register  = lazyWithRetry(() => import("./pages/Register"))
 const Login  = lazyWithRetry(() => import("./pages/Login"))
+const EmailSent  = lazyWithRetry(() => import("./pages/EmailSent"))
 const ForgotPassword  = lazyWithRetry(() => import("./pages/ForgotPassword"))
 const Home  = lazyWithRetry(() => import("./pages/Home"))
 const Listing  = lazyWithRetry(() => import("./pages/PriceListing"))
 const PriceDetails  = lazyWithRetry(() => import("./pages/PriceDetails"))
 const CreatePriceRecord  = lazyWithRetry(() => import("./pages/CreatePriceRecord"))
+const NoomerResult  = lazyWithRetry(() => import("./pages/NoomerResult"))
 
 
 /*
@@ -45,11 +48,14 @@ function App() {
           <NavBar />
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/signup" element={<Register />} />
+            <Route path="/emailsent" element={<EmailSent />} />
             <Route path="/login" element={<Login />} />
             <Route path="/forgot" element={<ForgotPassword />} />
             <Route path="/listing" element={<Listing />} />
             <Route path="/priceRecord/:id" element={<PriceDetails />} />
             <Route path="/priceRecord/create" element={<CreatePriceRecord />} />
+            <Route path="/noomer" element={<NoomerResult />} />
           </Routes>
         </ScrollToTop>
       </Router>

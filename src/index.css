@@ -37,12 +37,17 @@ code {
   padding: 3rem;
 }
 
+.noomerLogo {
+  width: 140px;
+  height: auto;
+}
+
 .white-font {
   color: #FFF;
 }
 
 .red-font {
-  color: #EE1D52;
+  color: #FF0000;
 }
 
 .green-font {
@@ -104,7 +109,7 @@ code {
 
 .marquee-component > *:not(:last-child) {
   margin-right: 8px;
-  font-size: 10px;
+  font-size: 14px;
 }
 
 /*
@@ -131,9 +136,9 @@ code {
   height: 50px;
   width: 100%;
   padding-left: 2.5rem;
-  //border-radius: 16px;
+  border-radius: 16px;
   background-color: transparent;
-  //border: 1px solid #fff;
+  border: 1px solid #c4c4c4;
 }
 
 @media (max-width: 1024px) {

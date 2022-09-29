@@ -28,6 +28,7 @@
     "react-csv": "^2.2.2",
     "react-dom": "^18.2.0",
     "react-fast-marquee": "^1.3.5",
+    "react-focus-lock": "^2.9.1",
     "react-ga4": "^1.4.1",
     "react-hook-form": "^7.35.0",
     "react-icons": "^4.4.0",
@@ -44,6 +45,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "build:staging": "env-cmd -f .env.staging craco build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -67,6 +69,7 @@
   },
   "devDependencies": {
     "@craco/craco": "^6.4.5",
+    "env-cmd": "^10.1.0",
     "webpack-bundle-analyzer": "^4.5.0"
   }
 }

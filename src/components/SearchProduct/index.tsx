@@ -7,6 +7,7 @@ import { RootState, AppDispatch } from "../../app/store";
 import { setSearchProduct, getProductAutosuggest } from "../../features/searchSlice";
 import { SuspenseImg } from "../../SuspenseImage";
 import {
+  FormInput,
   JustifyText,
   TitleTwo,
   MainFlexContainer,

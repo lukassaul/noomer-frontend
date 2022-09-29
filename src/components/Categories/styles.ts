@@ -14,6 +14,7 @@ export const CategoriesColumn = styled.div`
   flex: 25%;
   max-width: 25%;
   padding: 0 4px;
+  cursor: pointer;
   @media screen and (max-width: 800px) {
     flex: 50%;
     max-width: 50%;

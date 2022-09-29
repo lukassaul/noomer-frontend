@@ -18,7 +18,7 @@ function Categories() {
   const categoriesArray = [
     {
       link: "https://res.cloudinary.com/dba8ifej6/image/upload/v1661036995/category-currency_ss2avi.png",
-      label: "Currencies",
+      label: "Currency",
     },{
       link: "https://res.cloudinary.com/dba8ifej6/image/upload/v1661036995/category-services_wgiz3r.png",
       label: "Services",

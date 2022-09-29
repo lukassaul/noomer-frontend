@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useLocation } from "react-router-dom";
-import { RootState } from "../../app/store";
+import { RootState, AppDispatch } from "../../app/store";
 import Button from '../Button';
 import {
     Nav,
@@ -17,20 +17,23 @@ import {
     NavItemIput,
     ProfileName
 } from './styles';
-import { DailaiLogo, IconComp } from "../../globalStyles"
+import { FormInput, CenteredContainer } from "../../globalStyles"
 
 import { logoutAPI } from '../../api/auth'
 import { clearLogState } from '../../features/loginSlice'
-//import { SuspenseImg } from '../../SuspenseImage'
+import { setSearchProduct, getProductAutosuggest } from "../../features/searchSlice";
+import { SuspenseImg } from '../../SuspenseImage'
 
 
 
 function NavBar() {
 
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
+    const navigate = useNavigate()
     const [click, setClick] = useState(false);
     const [button, setButton] = useState(true);
 
+    const [searchQuery, setSearchQuery] = useState<string | null>('')
     const [isToken, setIsToken] = useState<string | null>('')
     const [userEmail, setUserEmail] = useState<string | null>('')
     const [userFirstName, setUserFirstName] = useState<string | null>('')
@@ -93,16 +96,38 @@ function NavBar() {
       logoutAPI()
     }
 
+    const handleSearchProduct = (e: any) => {
+      console.log("search product")
+      e.preventDefault()
+      dispatch(setSearchProduct(searchQuery))
+      navigate('/listing')
+    }
+
 
     return (
         <Nav>
             <NavbarContainer>
                 <NavLogo to='/'>
-                    Noomer
+                    <SuspenseImg src="https://res.cloudinary.com/dba8ifej6/image/upload/v1664179407/noomer-icon_vpr30i.png"  alt="Noomer logo" className="noomerLogo"/>
                 </NavLogo>
+                <CenteredContainer style={{width: '30%'}}>
+                  <FormInput
+                    type="text"
+                    placeholder="Search for commodity"
+                    onChange={(event) => {
+                      setSearchQuery(event.currentTarget.value)
+                    }}
+                    onKeyPress={(e) => {
+                      if (e.key === 'Enter') {
+                        handleSearchProduct(e);
+                      }
+                    }}
+                  />
+                </CenteredContainer>
                 <MobileIcon onClick={handleClick}>
                     {click ? <span style={{fontSize: '18px'}}>X</span> : <img src="https://res.cloudinary.com/dba8ifej6/image/upload/v1653547266/bars_icon_eqdxv5.png" alt="Menu icon" style={{width: '18px'}}/>}
                 </MobileIcon>
+
                 <NavMenu onClick={handleClick} click={click}>
                     <NavItem>
                         <NavLinks to='/faqs' onClick={closeMobileMenu}>
