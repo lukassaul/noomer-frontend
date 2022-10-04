@@ -181,6 +181,9 @@ export const MainFlexChildrenContainer = styled.div`
 export const JustifyText = styled.p`
 	margin: 1em 0;
   text-align: justify;
+  word-spacing: -0.05em;
+  hyphens: auto;
+  webkit-hyphens: auto;
 `;
 
 export const RightLinkContainer = styled.div`
@@ -431,6 +434,17 @@ export const DetailsValue = styled.span`
 export const FormSeparatorGray = styled.hr`
   border-top: 1px solid #DADADA;
   margin: 2em 0;
+`;
+
+export const FormInputWhole = styled.input`
+    display: flex;
+    padding: 12px;
+    border-radius: 5px;
+    width: 100%;
+    border: 1px solid #c4c4c4;
+    font-size: 14px;
+    margin: 10px 0;
+    height: 32px;
 `;
 
 export const FormInput = styled.input`

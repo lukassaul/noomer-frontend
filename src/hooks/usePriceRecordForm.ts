@@ -43,7 +43,7 @@ function usePriceRecordForm(){
       currency: yup.string().required('Currency is required.'),
       location_city: yup.string().required('Location is required.'),
       location_country: yup.string().required('Location is required.'),
-      unit: yup.string().required('Unit is required.'),
+      //unit: yup.string().required('Unit is required.'),
       quantity: yup.number().required('Quantity is required.').moreThan(0, 'Please product quantity.'),
     })
   ), [])

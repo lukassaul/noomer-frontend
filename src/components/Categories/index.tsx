@@ -36,7 +36,7 @@ function Categories() {
       label: "Livestock",
     },{
       link: "https://res.cloudinary.com/dba8ifej6/image/upload/v1661036995/category-rentals_zgt6jf.png",
-      label: "Rentals",
+      label: "Real Estate",
     },{
       link: "https://res.cloudinary.com/dba8ifej6/image/upload/v1661036995/category-food_asumip.png",
       label: "Food",
@@ -45,8 +45,9 @@ function Categories() {
 
   const handleCategoryClick = (cat:any) => {
     console.log("category clock cat: ", cat)
-      dispatch(setCategory(cat))
-      navigate('/listing')
+    if (cat==="Real Estate") dispatch(setCategory('Real_Estate'))
+    else dispatch(setCategory(cat))
+    navigate('/listing')
   }
 
   return (

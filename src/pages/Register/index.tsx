@@ -8,17 +8,19 @@ import {
     RegisterContainer,
     RegistrationLogoWrapper
 } from './styles'
-import { DailaiLogo, CommonContainer, CommonContentContainer } from '../../globalStyles';
+import { DailaiLogo, CommonContainer, CommonContentContainer, TitleTwo } from '../../globalStyles';
 import { useNavigate } from "react-router-dom";
 import RegistrationForm from '../../components/RegistrationForm'
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../app/store';
+import { t } from '../../i18n'
 import Footer from '../../components/Footer';
 import Alert from '../../components/AlertMessage'
 import { clearRegState } from '../../features/registrationSlice'
 
 function Register() {
 
+    const { language } = useSelector((state: RootState) => state.language)
     const { isRegFetching, isRegSuccess, errorRegMessage } = useSelector((state: RootState) => state.register)
     const [progress, setProgress] = useState<number>(0)
     let navigate = useNavigate()
@@ -71,7 +73,7 @@ function Register() {
                                 /> : null
                             }
                             <RegistrationLogoWrapper>
-                                <DailaiLogo src="https://res.cloudinary.com/dba8ifej6/image/upload/v1644372534/dailai_auth_logo_ikt3gm.png" />
+                                <TitleTwo style={{textAlign: 'center'}}>{t("Create Account", language)}</TitleTwo>
                             </RegistrationLogoWrapper>
                             <FormWraper>
                                 <RegistrationForm />

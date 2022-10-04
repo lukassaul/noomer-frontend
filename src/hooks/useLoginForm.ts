@@ -17,8 +17,14 @@ function useLoginForm(){
   const dispatch = useDispatch<AppDispatch>()
   const validationSchema = useMemo(() => (
     yup.object().shape({
-      email: yup.string().email().required('Email is required'),
-      password: yup.string().required('Password is required'),
+      email: yup.string()
+        .email()
+        .required('Email is required'),
+        //.max(70, 'Email should not be more than 70 characters'),
+      password: yup.string()
+        .required('Password is required')
+        //.min(6, 'Password should be 6 or more characters')
+        //.max(20, 'Password should not be more than 20 characters'),
     })
   ), [])
   const { register, handleSubmit, formState: { errors }} = useForm<LoginFormData>({

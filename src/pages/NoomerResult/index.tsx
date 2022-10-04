@@ -29,7 +29,7 @@ function NoomerResult() {
   const navigate = useNavigate()
 
   const { noomer } = useSelector((state: RootState) => state.comparison)
-
+  console.log("noomer: ", noomer)
   let isToken = localStorage.getItem('token')
   let userEmail = localStorage.getItem('userEmail')
   let user = localStorage.getItem('user')
@@ -42,9 +42,9 @@ function NoomerResult() {
           <tbody>
             <tr><td width="25%"><DetailsLabel>Classification: </DetailsLabel></td><td width="75%"><DetailsValue>{noomer.productA}</DetailsValue></td></tr>
             <tr><td style={{marginRight:"1em"}}><DetailsLabel>Location: </DetailsLabel></td><td><DetailsValue>{noomer.locationA}</DetailsValue></td></tr>
-            <tr><td style={{marginRight:"1em"}}><DetailsLabel>Highest: </DetailsLabel></td><td><DetailsValue>{noomer.statsA.highest}</DetailsValue></td></tr>
-            <tr><td style={{marginRight:"1em"}}><DetailsLabel>Lowest: </DetailsLabel></td><td><DetailsValue>{noomer.statsA.lowest}</DetailsValue></td></tr>
-            <tr><td style={{marginRight:"1em"}}><DetailsLabel>Average: </DetailsLabel></td><td><DetailsValue>{noomer.statsA.mean}</DetailsValue></td></tr>
+            <tr><td style={{marginRight:"1em"}}><DetailsLabel>Highest: </DetailsLabel></td><td><DetailsValue>{noomer.statsA && noomer.statsA.highest ? noomer.statsA.highest : "No record"}</DetailsValue></td></tr>
+            <tr><td style={{marginRight:"1em"}}><DetailsLabel>Lowest: </DetailsLabel></td><td><DetailsValue>{noomer.statsA && noomer.statsA.lowest ? noomer.statsA.lowest : "No record"}</DetailsValue></td></tr>
+            <tr><td style={{marginRight:"1em"}}><DetailsLabel>Average: </DetailsLabel></td><td><DetailsValue>{noomer.statsA && noomer.statsA.mean ? noomer.statsA.mean : "No record"}</DetailsValue></td></tr>
           </tbody>
         </table>
       </div>
@@ -55,9 +55,9 @@ function NoomerResult() {
           <tbody>
             <tr><td width="25%"><DetailsLabel>Classification: </DetailsLabel></td><td width="75%"><DetailsValue>{noomer.productB}</DetailsValue></td></tr>
             <tr><td style={{marginRight:"1em"}}><DetailsLabel>Location: </DetailsLabel></td><td><DetailsValue>{noomer.locationB}</DetailsValue></td></tr>
-            <tr><td style={{marginRight:"1em"}}><DetailsLabel>Highest: </DetailsLabel></td><td><DetailsValue>{noomer.statsB.highest}</DetailsValue></td></tr>
-            <tr><td style={{marginRight:"1em"}}><DetailsLabel>Lowest: </DetailsLabel></td><td><DetailsValue>{noomer.statsB.lowest}</DetailsValue></td></tr>
-            <tr><td style={{marginRight:"1em"}}><DetailsLabel>Average: </DetailsLabel></td><td><DetailsValue>{noomer.statsB.mean}</DetailsValue></td></tr>
+            <tr><td style={{marginRight:"1em"}}><DetailsLabel>Highest: </DetailsLabel></td><td><DetailsValue>{noomer.statsB && noomer.statsB.highest ? noomer.statsB.highest : "No record"}</DetailsValue></td></tr>
+            <tr><td style={{marginRight:"1em"}}><DetailsLabel>Lowest: </DetailsLabel></td><td><DetailsValue>{noomer.statsB && noomer.statsB.lowest ? noomer.statsB.lowest : "No record"}</DetailsValue></td></tr>
+            <tr><td style={{marginRight:"1em"}}><DetailsLabel>Average: </DetailsLabel></td><td><DetailsValue>{noomer.statsB && noomer.statsB.mean ? noomer.statsB.mean : "No record"}</DetailsValue></td></tr>
           </tbody>
         </table>
       </div>
@@ -83,7 +83,7 @@ function NoomerResult() {
                 <BsFillArrowLeftCircleFill size="1.5em" style={{cursor: "pointer", marginRight: "1em"}}/> <LinkParagraph >Back to list</LinkParagraph>
               </LeftLinkContainer>
 
-              {noomer ? Noomer() : null}
+              {noomer && noomer.noomer ? Noomer() : null}
               <FormSeparatorGray/>
               {noomer ? Stats() : "Please login to vote"}
 

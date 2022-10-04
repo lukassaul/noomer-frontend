@@ -2,7 +2,8 @@ import styled from 'styled-components';
 
 
 export const FooterContainer = styled.div`
-  max-width: 1280px;
+  //max-width: 1280px;
+  width: 100%;
   min-height: 270px;
   margin-right: auto;
   margin-left: auto;
@@ -12,7 +13,8 @@ export const FooterContainer = styled.div`
 `;
 
 export const LinksContainer = styled.div`
-  max-width: 1280px;
+  //max-width: 1280px;
+  width: 100%;
   min-height: 225px;
   margin-right: auto;
   margin-left: auto;
@@ -28,7 +30,8 @@ export const LinksContainer = styled.div`
 `;
 
 export const CopyrightContainer = styled.div`
-  max-width: 1280px;
+  //max-width: 1280px;
+  width: 100%;
   min-height: 45px;
   margin-right: auto;
   margin-left: auto;

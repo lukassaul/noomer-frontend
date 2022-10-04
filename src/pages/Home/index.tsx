@@ -4,7 +4,7 @@ import { RootState, AppDispatch } from '../../app/store'
 import { getDisplay } from '../../features/configSlice'
 
 import TickerSlider from '../../components/TickerSlider';
-import Carousel from '../../components/Carousel';
+import {HeaderCarousel} from '../../components/Carousel';
 import Timeline from '../../components/Timeline';
 import Features from '../../components/Features';
 import Categories from '../../components/Categories';
@@ -56,7 +56,7 @@ function Home() {
           <TickerSlider />
           {featuresCarousel === "SHOW" ?
             <HeaderContainer>
-              <Carousel />
+              <HeaderCarousel />
             </HeaderContainer>
             : null
           }

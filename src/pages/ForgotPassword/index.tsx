@@ -17,6 +17,7 @@ function ForgotPassword() {
     const { language } = useSelector((state: RootState) => state.language)
 
     console.log("errorRequestMessage: ", errorRequestMessage)
+    console.log("isRequestSuccess: ", isRequestSuccess)
     return (
       <>
         <CommonContainer>

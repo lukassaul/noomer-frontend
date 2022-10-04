@@ -47,9 +47,9 @@ function TickerSlider() {
     }
   ]
 
-  const tickerColorArray = ["#F8FD01", "#00E0FF", "#F127E9", "#FF0000", "#5DD662", "#000000"]
+  const tickerColorArray = ["#F8FD01", "#00E0FF", "#F127E9", "#FF0000", "#5DD662", "#FFFFFF"]
   const getRandomColor = () => {
-    return Math.floor(Math.random() * 5) - 1
+    return Math.floor(Math.random() * 5)
   }
 
   const handleTickerClick = (ticker:string) => {
