@@ -429,22 +429,6 @@ function CreatePriceRecordForm() {
                 </FormInput30Width>
 
                 <FormInput30Width>
-
-                    <FormLabelContainer>
-                      <FormRequired>*</FormRequired>
-                      <FormLabel>{t('Unit', language)}</FormLabel>
-                    </FormLabelContainer>
-                    <FormInput
-                        {...register("unit")}
-                        name="unit"
-                        type="text"
-                        placeholder='Enter unit'
-                        aria-label='unit' />
-                    <FormError>{errors.unit?.message}</FormError>
-
-                </FormInput30Width>
-
-                <FormInput30Width>
                     <FormLabelContainer>
                       <FormRequired>*</FormRequired>
                       <FormLabel>{t('Quantity', language)}</FormLabel>
@@ -456,6 +440,21 @@ function CreatePriceRecordForm() {
                         placeholder='Enter quantity'
                         aria-label='quantity' />
                     <FormError>{errors.quantity?.message}</FormError>
+                </FormInput30Width>
+
+                <FormInput30Width>
+
+                    <FormLabelContainer>
+                      <FormLabel>{t('Unit', language)}</FormLabel>
+                    </FormLabelContainer>
+                    <FormInput
+                        {...register("unit")}
+                        name="unit"
+                        type="text"
+                        placeholder='Enter unit'
+                        aria-label='unit' />
+                    <FormError>{errors.unit?.message}</FormError>
+
                 </FormInput30Width>
               </FormThreeInputContainer>
 

@@ -66,7 +66,7 @@ export const RegistrationTitle = styled.h3`
 export const RegisterTermWrapper = styled.div`
     display: flex;
     flex-direction: row;
-    max-width: 380px;
+    //max-width: 380px;
     margin:auto;
 `;
 

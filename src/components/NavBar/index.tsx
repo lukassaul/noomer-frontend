@@ -176,7 +176,7 @@ function NavBar() {
                             logout
                         </NavLinks>
                       </NavItem>
-                      <ProfileName onClick={() => console.log("go to profile")} style={{ cursor: 'pointer' }}>
+                      <ProfileName onClick={() => navigate("/dashboard")} style={{ cursor: 'pointer' }}>
                           {userFirstName} {userLastName}
                       </ProfileName>
                     </>

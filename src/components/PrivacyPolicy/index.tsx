@@ -123,7 +123,7 @@ function PrivacyPolicy(){
 
           <TermTitle style={{marginTop: '1em'}}>{t("Terms and Conditions 8 title", language)}</TermTitle>
           <TermText><BoldText>{t("Terms and Conditions 8 text 1block", language)}</BoldText>{t("Terms and Conditions 8 text 1plain", language)}</TermText>
-          <TermText>{t("Terms and Conditions 8 text 2", language)} <ButtonMailto label="info@dailai.io" mailto="mailto:info@dailai.io" /></TermText>
+          <TermText>{t("Terms and Conditions 8 text 2", language)} <ButtonMailto label="info@noomer.io" mailto="mailto:info@noomer.io" /></TermText>
 
           <TermTitle style={{marginTop: '1em'}}>{t("Terms and Conditions 9 title", language)}</TermTitle>
           <TermText><BoldText>{t("Terms and Conditions 9 text 1block", language)}</BoldText>{t("Terms and Conditions 9 text 1plain", language)}</TermText>
@@ -135,7 +135,7 @@ function PrivacyPolicy(){
           <TermText>{t("Terms and Conditions 9 text 3", language)}</TermText>
           <TermText>{t("Terms and Conditions 9 text 4", language)} <a href="https://ec.europa.eu/justice/data-protection/bodies/authorities/index_en.html" target="blank">https://ec.europa.eu/justice/data-protection/bodies/authorities/index_en.html</a></TermText>
           <TermText>{t("Terms and Conditions 9 text 5", language)} <a href="https://www.edoeb.admin.ch/edoeb/en/home.html" target="blank">https://www.edoeb.admin.ch/edoeb/en/home.html</a></TermText>
-          <TermText>{t("Terms and Conditions 9 text 6", language)} <ButtonMailto label="info@dailai.io" mailto="mailto:info@dailai.io" /></TermText>
+          <TermText>{t("Terms and Conditions 9 text 6", language)} <ButtonMailto label="info@noomer.io" mailto="mailto:info@noomer.io" /></TermText>
           <PrivacySubtitle>{t("Terms and Conditions 9 text 7", language)}</PrivacySubtitle>
           <TermText>{t("Terms and Conditions 9 text 8", language)}</TermText>
           <ul style={{padding: '0 1em'}}>
@@ -276,12 +276,12 @@ function PrivacyPolicy(){
           <TermText>{t("Terms and Conditions 12 text 2", language)}</TermText>
 
           <TermTitle style={{marginTop: '1em'}}>{t("Terms and Conditions 13 title", language)}</TermTitle>
-          <TermText>{t("Terms and Conditions 13 text 1a", language)}<ButtonMailto label="info@dailai.io" mailto="mailto:info@dailai.io" /> <span>{t("Terms and Conditions 13 text 1b", language)}</span></TermText>
+          <TermText>{t("Terms and Conditions 13 text 1a", language)}<ButtonMailto label="info@noomer.io" mailto="mailto:info@noomer.io" /> <span>{t("Terms and Conditions 13 text 1b", language)}</span></TermText>
           <TermText>{t("Terms and Conditions 13 text 2", language)}</TermText>
           <TermText>{t("Terms and Conditions 13 text 3", language)}</TermText>
 
           <TermTitle style={{marginTop: '1em'}}>{t("Terms and Conditions 14 title", language)}</TermTitle>
-          <TermText>{t("Terms and Conditions 14 text 1", language)}<ButtonMailto label="here" mailto="mailto:info@dailai.io" /></TermText>
+          <TermText>{t("Terms and Conditions 14 text 1", language)}<ButtonMailto label="here" mailto="mailto:info@noomer.io" /></TermText>
         </>
     )
 }

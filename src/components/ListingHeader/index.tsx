@@ -54,7 +54,7 @@ function ListingHeader() {
       title: "TRANSPORTATION",
       imageUrl: "https://res.cloudinary.com/dba8ifej6/image/upload/v1661492906/header-category-all_teuus9.jpg",
     },
-    Rentals: {
+    Real_Estate: {
       title: "RENTALS",
       imageUrl: "https://res.cloudinary.com/dba8ifej6/image/upload/v1661492906/header-category-all_teuus9.jpg",
     }

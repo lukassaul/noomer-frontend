@@ -6,12 +6,15 @@ import configReducer from './../features/configSlice'
 import searchReducer from './../features/searchSlice'
 import loginReducer from './../features/loginSlice'
 import registrationReducer from './../features/registrationSlice'
+import addPasswordReducer from './../features/addPasswordSlice'
 import resetPasswordReducer from './../features/resetPasswordSlice'
 import requestPasswordReducer from './../features/requestPasswordSlice'
+import changePasswordReducer from './../features/changePasswordSlice'
 import ratingReducer from './../features/ratingSlice'
 import priceRecordReducer from './../features/priceRecordSlice'
 import selectOptionsReducer from './../features/selectOptionsSlice'
 import comparisonReducer from './../features/comparisonSlice'
+import dashboardReducer from './../features/dashboardSlice'
 
 export const store = configureStore({
     reducer: {
@@ -22,12 +25,15 @@ export const store = configureStore({
         search: searchReducer,
         register: registrationReducer,
         login: loginReducer,
+        addPassword: addPasswordReducer,
         resetPassword: resetPasswordReducer,
         resetPasswordRequest: requestPasswordReducer,
+        changePassword: changePasswordReducer,
         rating: ratingReducer,
         selectOptions: selectOptionsReducer,
         priceRecord: priceRecordReducer,
-        comparison: comparisonReducer
+        comparison: comparisonReducer,
+        dashboard: dashboardReducer
     }
 })
 

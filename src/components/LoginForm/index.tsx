@@ -12,7 +12,7 @@ import {
     SignupLink,
     SignupWrapper
 } from './styles'
-import { FormError, TitleTwo } from '../../globalStyles'
+import { FormError, FormInputWhole, TitleTwo } from '../../globalStyles'
 import Button from '../Button'
 
 
@@ -25,14 +25,14 @@ function LoginForm() {
         <form onSubmit={onSubmit} aria-label="form">
             <WholeWrapper>
                 <TitleTwo style={{textAlign: 'center'}}>{t("Welcome Back", language)}</TitleTwo>
-                <LoginInputFirst
+                <FormInputWhole
                     {...register("email")}
                     name="email"
                     type="email"
                     placeholder='Enter email'
                     aria-label='Email' />
                 <FormError>{errors.email?.message}</FormError>
-                <LoginInput
+                <FormInputWhole
                     {...register("password")}
                     name="password"
                     type="password"

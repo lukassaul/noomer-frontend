@@ -19,7 +19,10 @@ const NavBar  = lazyWithRetry(() => import("./components/NavBar"))
 const Register  = lazyWithRetry(() => import("./pages/Register"))
 const Login  = lazyWithRetry(() => import("./pages/Login"))
 const EmailSent  = lazyWithRetry(() => import("./pages/EmailSent"))
+const Verification  = lazyWithRetry(() => import("./pages/Verification"))
 const ForgotPassword  = lazyWithRetry(() => import("./pages/ForgotPassword"))
+const PasswordReset  = lazyWithRetry(() => import("./pages/PasswordReset"))
+const Dashboard  = lazyWithRetry(() => import("./pages/UserDashboard"))
 const Home  = lazyWithRetry(() => import("./pages/Home"))
 const Listing  = lazyWithRetry(() => import("./pages/PriceListing"))
 const PriceDetails  = lazyWithRetry(() => import("./pages/PriceDetails"))
@@ -50,8 +53,11 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/signup" element={<Register />} />
             <Route path="/emailsent" element={<EmailSent />} />
+            <Route path="/setpassword" element={<Verification />} />
+            <Route path="/passwordReset" element={<PasswordReset />} />
             <Route path="/login" element={<Login />} />
             <Route path="/forgot" element={<ForgotPassword />} />
+            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/listing" element={<Listing />} />
             <Route path="/priceRecord/:id" element={<PriceDetails />} />
             <Route path="/priceRecord/create" element={<CreatePriceRecord />} />
