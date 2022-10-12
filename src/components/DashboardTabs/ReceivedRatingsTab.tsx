@@ -73,9 +73,15 @@ const ReceivedRatingsTab: FC<{}> = () => {
                       <div style={{display: 'flex', alignItems: 'baseline'}}>
                         <p style={{marginLeft: '12px'}}>{rating.rating}</p>
                       </div>
-                      <p style={{fontWeight: 'bold'}}>{rating.priceId.product.category.category} : {rating.priceId.product.product_name}</p>
-                      <p>{rating.priceId.classification}</p>
-                      <p>{rating.priceId.price} {rating.priceId.currency} for {rating.priceId.quantity} {rating.priceId.unit}</p>
+                      {rating && rating.priceId && rating.priceId.hasOwnProperty('product') ?
+                        <>
+                          <p style={{fontWeight: 'bold'}}>{rating.priceId.product.category.category} : {rating.priceId.product.product_name}</p>
+                          <p>{rating.priceId.classification}</p>
+                          <p>{rating.priceId.price} {rating.priceId.currency} for {rating.priceId.quantity} {rating.priceId.unit}</p>
+                        </>
+                        :
+                        <p>Price record has been deleted</p>
+                      }
                       <p>{rating.reviewerId.first_name} {rating.reviewerId.last_name}</p>
                       <p>{rating.vote}</p>
                     </div>

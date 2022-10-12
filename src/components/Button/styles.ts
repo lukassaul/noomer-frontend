@@ -2,6 +2,30 @@ import styled, { css } from "styled-components";
 import { ButtonProps } from ".";
 
 const COLOR = {
+  noomerRed: css`
+      color: #fff;
+      background: #EE1D52;
+      padding: 6px 10px;
+      border-radius: 5px;
+    `,
+  secondaryRed: css`
+      color: #fff;
+      background: #EE1D52;
+      padding: 20px 50px;
+      border-radius: 10px;
+    `,
+  fifthRed: css`
+    color: #fff;
+    background: #EE1D52;
+    border: 1px solid #302D2D;
+    width: 100%;
+    border-radius: 15px;
+    padding-top: 18px;
+    padding-bottom: 18px;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 40px;
+  `,
   primary: css`
       color: #fff;
       background: #302D2D;

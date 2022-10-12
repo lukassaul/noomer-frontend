@@ -8,7 +8,7 @@ export const FooterContainer = styled.div`
   margin-right: auto;
   margin-left: auto;
   border-top: 2px solid;
-  background-color: #4C5055;
+  background-color: #263238;
   color: #FFFFFF;
 `;
 
@@ -35,8 +35,8 @@ export const CopyrightContainer = styled.div`
   min-height: 45px;
   margin-right: auto;
   margin-left: auto;
-  background-color: #DADADA;
-  color: #53585F;
+  background-color: #313D3F;
+  color: #FFF;
   display: flex;
   justify-content: center;
   align-items: center;

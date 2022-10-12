@@ -13,7 +13,7 @@ export const CategoriesRow = styled.div`
 export const CategoriesColumn = styled.div`
   flex: 25%;
   max-width: 25%;
-  padding: 0 4px;
+  padding: 1em;
   cursor: pointer;
   @media screen and (max-width: 800px) {
     flex: 50%;
@@ -31,12 +31,15 @@ export const CategoryContainer = styled.div`
   justify-content: center;
   align-items: center;
   padding: 2em;
+  background-color: #E8E8E8;
+  border-radius: 16px;
+  box-shadow: 0px 4px 4px #cdcaca;
 `;
 
 export const CategoryImage = styled.img`
   margin-top: 8px;
   vertical-align: middle;
-  width: 100%;
+  width: 90%;
 `;
 
 export const CategoryLabel = styled.p`

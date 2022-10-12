@@ -32,6 +32,7 @@ function useRatingForm(){
     /**
       This function submits a rating for a price record.
     **/
+    console.log("submit rating form formValues: ", formValues)
     dispatch(submitPriceRecordRating(formValues))
   }, [dispatch]);
 

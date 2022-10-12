@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { RootState, AppDispatch } from '../../app/store'
 import Paginator from '../Paginator';
 import { GetDashboardGivenRatingsAPI } from '../../api/dashboard'
-//import { DeleteRatingAPI } from '../../api/rating';
-//import { ratingEdit } from '../../features/ratingSlice';
+import { DeleteRatingAPI } from '../../api/rating';
+import { ratingEdit } from '../../features/ratingSlice';
 import {
   NoDataLogo,
   CenteredContainer,
@@ -34,6 +34,8 @@ const GivenRatingsTab: FC<{}> = () => {
   const [currentPage, setCurrentPage] = useState<number>(1)
   const [selectedRating, setSelectedRating] = useState<string>()
   const [isFetching, setIsFetching] = useState<boolean>(true)
+
+  const [showEditForm, setShowEditForm] = useState<boolean>(false)
 
   const handlePrevPage = (prevPage: number) => {
     setCurrentPage((prevPage) => prevPage - 1);
@@ -71,8 +73,8 @@ const GivenRatingsTab: FC<{}> = () => {
 
   const handleEdit = async (rating: object) => {
     console.log("edit rating")
-    //await dispatch(ratingEdit(rating))
-    //navigate('/rating/edit')
+    await dispatch(ratingEdit(rating))
+    navigate('/rating/edit')
   }
 
 
@@ -83,14 +85,14 @@ const GivenRatingsTab: FC<{}> = () => {
   const onConfirm = async() => {
     toggle();
     console.log("proceed to delete user rating: ", selectedRating)
-    // if(selectedRating) {
-    //   //const result: any = await DeleteRatingAPI(selectedRating)
-    //
-    //   // console.log('delete rating result: ', result.data)
-    //   // if (result && result.status === 200) {
-    //   //   fetchData();
-    //   // }
-    // }
+    if(selectedRating) {
+      const result: any = await DeleteRatingAPI(selectedRating)
+
+      console.log('delete rating result: ', result.data)
+      if (result && result.status === 200) {
+        fetchData();
+      }
+    }
   };
   const onCancel = () => toggle();
 
@@ -119,12 +121,18 @@ const GivenRatingsTab: FC<{}> = () => {
                         <div style={{display: 'flex', alignItems: 'baseline'}}>
                           <p style={{marginLeft: '12px'}}>{rating.rating}</p>
                         </div>
-                        <p style={{fontWeight: 'bold'}}>{rating.priceId.product.category.category} : {rating.priceId.product.product_name}</p>
-                        <p>{rating.priceId.classification}</p>
-                        <p>{rating.priceId.price} {rating.priceId.currency} for {rating.priceId.quantity} {rating.priceId.unit}</p>
+                        {rating && rating.priceId && rating.priceId.hasOwnProperty('product') ?
+                          <>
+                            <p style={{fontWeight: 'bold'}}>{rating.priceId.product.category.category} : {rating.priceId.product.product_name}</p>
+                            <p>{rating.priceId.classification ? rating.priceId.classification : null}</p>
+                            <p>{rating.priceId.price} {rating.priceId.currency} for {rating.priceId.quantity} {rating.priceId.unit}</p>
+                          </>
+                          :
+                          <p>Price record has been deleted</p>
+                        }
+
                         <p>{rating.postOwnerId.first_name} {rating.postOwnerId.last_name}</p>
                         <p>{rating.vote}</p>
-
 
                         <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center', marginTop: '12px'}}>
                           <EditButton onClick={() => handleEdit(rating)}>Edit</EditButton>

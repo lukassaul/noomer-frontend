@@ -23,7 +23,7 @@ function ForgetPasswordForm() {
                 placeholder='E-mail' />
             <FormError>{errors.email?.message}</FormError>
             <div style={{margin: '3.5em 0', display: 'flex', justifyContent: 'center'}}>
-              <Button type="submit" color='gray'>{t("Submit", language)}</Button>
+              <Button type="submit" color='secondaryRed'>{t("Submit", language)}</Button>
             </div>
         </form>
       </FormWrapper>

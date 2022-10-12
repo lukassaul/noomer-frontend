@@ -80,7 +80,7 @@ function RegistrationForm() {
                     </RegisterTermWrapper>
 
                     <RegisterButtonWrapper>
-                        <Button type="submit" color='fifth'>{t('Sign up', language)}</Button>
+                        <Button type="submit" color='fifthRed'>{t('Sign up', language)}</Button>
                     </RegisterButtonWrapper>
 
 

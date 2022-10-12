@@ -1,21 +1,53 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { SubmitRatingAPI } from '../api/rating';
+import { SubmitRatingAPI, EditRatingAPI } from '../api/rating';
 
 
-interface SubmitRatingState {
+interface RatingState {
     isSubmitRatingSuccess: boolean,
     isSubmitRatingFetching: boolean,
-    errorSubmitRatingMessage: string | null
+    errorSubmitRatingMessage: string | null,
+    isEditRatingSuccess: boolean,
+    isEditRatingFetching: boolean,
+    errorEditRatingMessage: string | null,
+    editRating: {
+      _id: string,
+      vote: string,
+      reason: string,
+      priceId: any,
+      reviewerId: string,
+      ratingID: string
+    }
 }
 
 interface SubmitValidationErrors {
     errorSubmitRatingMessage: string | null
 }
 
-const initialState: SubmitRatingState = {
+interface EditRatingState {
+    isEditRatingSuccess: boolean,
+    isEditRatingFetching: boolean,
+    errorEditRatingMessage: string | null
+}
+
+interface EditValidationErrors {
+    errorEditRatingMessage: string | null
+}
+
+const initialState: RatingState = {
     isSubmitRatingSuccess: false,
     isSubmitRatingFetching: false,
-    errorSubmitRatingMessage: ""
+    errorSubmitRatingMessage: "",
+    isEditRatingSuccess: false,
+    isEditRatingFetching: false,
+    errorEditRatingMessage: "",
+    editRating: {
+      _id: "",
+      vote: "",
+      reason: "",
+      priceId: {},
+      reviewerId: "",
+      ratingID: ""
+    }
 }
 
 export const submitPriceRecordRating = createAsyncThunk<
@@ -35,15 +67,46 @@ export const submitPriceRecordRating = createAsyncThunk<
     }
 )
 
+export const editPriceRecordRating = createAsyncThunk<
+    void,
+    { ratingID: string, priceID: string, reviewerId: string, reason: string, rating: string},
+    { rejectValue: EditValidationErrors }
+>(
+    'rating/edit',
+    async (formData, thunkAPI) => {
+        const response = await EditRatingAPI(formData)
+        console.log("Response", response.data)
+        if (response.status !== 200) {
+          if (response.data.hasOwnProperty('message')) return thunkAPI.rejectWithValue(await response.data.message)
+          else return thunkAPI.rejectWithValue(await response.data)
+        }
+        return await response.data
+    }
+)
+
 export const RatingSlice = createSlice({
     name: 'rating',
     initialState,
     reducers: {
-        clearSubmitState: (state) => {
-            state.errorSubmitRatingMessage = '';
-            state.isSubmitRatingSuccess = false;
-            state.isSubmitRatingFetching = false;
-          },
+      ratingEdit: (state, {payload}) => {
+          state.editRating = payload
+        },
+      clearRatingState: (state) => {
+          state.errorSubmitRatingMessage = '';
+          state.isSubmitRatingSuccess = false;
+          state.isSubmitRatingFetching = false;
+          state.errorEditRatingMessage = '';
+          state.isEditRatingSuccess = false;
+          state.isEditRatingFetching = false;
+          state.editRating = {
+            _id: "",
+            vote: "",
+            reason: "",
+            priceId: {},
+            reviewerId: "",
+            ratingID: ""
+          }
+        },
     },
     extraReducers: (builder) => {
         builder.addCase(submitPriceRecordRating.fulfilled, (state, {payload}) => {
@@ -64,9 +127,28 @@ export const RatingSlice = createSlice({
         builder.addCase(submitPriceRecordRating.pending, (state) => {
             state.isSubmitRatingFetching = true
         })
+
+        builder.addCase(editPriceRecordRating.fulfilled, (state, {payload}) => {
+            state.isEditRatingFetching = false
+            state.isEditRatingSuccess = true
+            console.log("fulfiled: ", payload)
+        })
+        builder.addCase(editPriceRecordRating.rejected, (state, action) => {
+            console.log("action: ", action)
+            if (action.payload) {
+                console.log("error message payload: ", action.payload)
+                state.errorEditRatingMessage = action.payload as unknown as string
+              } else {
+                console.log("error message error: ", action.error.message)
+                state.errorEditRatingMessage = action.error.message!
+              }
+        })
+        builder.addCase(editPriceRecordRating.pending, (state) => {
+            state.isEditRatingFetching = true
+        })
     },
 })
 
-export const { clearSubmitState } = RatingSlice.actions;
+export const { clearRatingState,ratingEdit } = RatingSlice.actions;
 
 export default RatingSlice.reducer

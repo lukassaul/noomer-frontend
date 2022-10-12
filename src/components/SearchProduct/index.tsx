@@ -9,7 +9,7 @@ import { SuspenseImg } from "../../SuspenseImage";
 import {
   FormInput,
   JustifyText,
-  TitleTwo,
+  CenteredTitle32,
   MainFlexContainer,
   MainFlexContainerRow,
   MainFlexContainerColumn,
@@ -41,8 +41,8 @@ function SearchProduct() {
   }
 
   return (
-    <MainFlexContainer>
-      <TitleTwo>{t('Title_Search_Product', language)}</TitleTwo>
+    <MainFlexContainer className="mb3em">
+      <CenteredTitle32>{t('Title_Search_Product', language)}</CenteredTitle32>
       <MainFlexContainerRow>
         <div style={{width: "100%"}}>
           <div className="search_wrapper">

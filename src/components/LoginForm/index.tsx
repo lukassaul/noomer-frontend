@@ -40,7 +40,7 @@ function LoginForm() {
                     aria-label='Password' />
                 <FormError>{errors.password?.message}</FormError>
                 <LoginButtonWrapper>
-                    <Button type="submit" color='fifth'>{t("Login", language)}</Button>
+                    <Button type="submit" color='fifthRed'>{t("Login", language)}</Button>
                 </LoginButtonWrapper>
                 <LoginLink to={'/forgot'}>{t("Forget Password", language)}?</LoginLink>
                 <SignupWrapper>
