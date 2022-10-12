@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { t } from '../../i18n';
 import { RootState, AppDispatch } from "../../app/store";
 import { getDashboard } from '../../features/dashboardSlice';
+import { clearRatingState } from '../../features/ratingSlice';
 import { getAllCities, getAllCurrencies } from '../../features/selectOptionsSlice';
 import Button from '../../components/Button'
 import {
@@ -13,9 +14,11 @@ import {
   ProfileButtonContainer
 } from './styles'
 import {
+  CommonContainer,
+  CommonContentContainer,
   CenteredContainer,
   TwoColumnFlexContainer,
-  LeftColumnFlexChildrenNegativeMargin,
+  LeftColumnFlexChildren,
   RightColumnFlexDashNPChildren
 } from '../../globalStyles'
 
@@ -93,16 +96,20 @@ function UserDashboard() {
     if(dashboard) setUserDashboard();
   }, [dashboard, setUserDashboard]);
 
+  useEffect(() => {
+    dispatch(clearRatingState())
+  }, [])
+
   const handleEditProfile = () => {
     navigate('/profile/edit')
   }
 
   return (
     <>
-    <DashContainer>
-      <DashHeader></DashHeader>
+    <CommonContainer>
+      <CommonContentContainer>
       <TwoColumnFlexContainer>
-        <LeftColumnFlexChildrenNegativeMargin>
+        <LeftColumnFlexChildren>
           {profile ?
             <CenteredContainer style={{flexDirection: 'column'}}>
 
@@ -114,13 +121,13 @@ function UserDashboard() {
                 <p style={{fontSize: '20px', fontWeight: 'bold'}}>{profile.first_name} {profile.last_name}</p>
 
                 {profile.reputation ? <p style={{marginLeft: '12px'}}>Reputation: {profile.reputation}</p> : null}
-                
+
                 <br />
 
                 <br />
                 <ProfileButtonContainer>
                   <p style={{cursor: 'pointer'}} onClick={() => handleEditProfile()}>Edit Profile</p>
-                  <Button onClick={() => navigate('/createpost')}>{t("Create Post", language)}</Button>
+                  <Button onClick={() => navigate('/priceRecord/create')}>{t("Submit Price Record", language)}</Button>
                 </ProfileButtonContainer>
 
             </CenteredContainer>
@@ -130,14 +137,14 @@ function UserDashboard() {
               <p>....fetching user dashboard </p>
             </div>
           }
-        </LeftColumnFlexChildrenNegativeMargin>
+        </LeftColumnFlexChildren>
         <RightColumnFlexDashNPChildren>
           <Tabs selectedTab={selectedTab} onClick={setSelectedTab} tabs={tabs} />
         </RightColumnFlexDashNPChildren>
       </TwoColumnFlexContainer>
 
-
-    </DashContainer>
+      </CommonContentContainer>
+    </CommonContainer>
     <Footer />
     </>
   )

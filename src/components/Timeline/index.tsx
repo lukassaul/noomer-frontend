@@ -115,7 +115,7 @@ function Timeline() {
       <TimelineRow>
 
           {timelineArray.map((price) => (
-            <TimelineColumn className="bg-beige" key="price._id">
+            <TimelineColumn className="bg-darkblue white-font" key="price._id">
               <TimelineContainer>
                 <span>Product: {price.product.product_name}</span>
                 <span>Price: {price.price} {price.currency}</span>
@@ -126,8 +126,9 @@ function Timeline() {
           ))}
 
       </TimelineRow>
-      <RightLinkContainer>
-        <LinkParagraph onClick={() => navigate('/listing')}>Price Listing</LinkParagraph> <BsFillArrowRightCircleFill size="1.5em" style={{marginLeft: "1em"}}/>
+      <RightLinkContainer >
+        <LinkParagraph onClick={() => navigate('/listing')}>Price Listing</LinkParagraph>
+        <BsFillArrowRightCircleFill size="1.5em" style={{marginLeft: "1em", cursor: "pointer", color: '#E8505B'}} onClick={() => navigate('/listing')}/>
       </RightLinkContainer>
     </MainTimelineContainer>
   )

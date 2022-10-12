@@ -8,7 +8,7 @@ interface HeaderProps {
 export const HeaderContainer = styled.div<HeaderProps>`
     display: flex;
     align-items: center;
-    height: 265px;
+    height: 200px;
     background-image: ${(props) =>
     `url(${props.backgroundImage})`};
     color: #FFF;

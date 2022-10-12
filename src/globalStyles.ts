@@ -53,6 +53,14 @@ export const TickerContainer = styled.div`
   }
 `;
 
+export const CarouselContainer = styled.div`
+  z-index: 1;
+  width: 100%;
+  display: flex;
+  align-items: end;
+  justify-content: flex-end;
+  padding-bottom: 2em;
+`;
 
 export const HeaderContainer = styled.div`
   z-index: 1;
@@ -76,6 +84,13 @@ export const BodyContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+`;
+
+export const CenteredTitle32 = styled.p`
+  text-align: center;
+  font-size: 32px;
+  font-weight: 600;
+  padding: 2rem 0;
 `;
 
 export const TitleTwo = styled.p`
@@ -113,8 +128,9 @@ export const TitleFourNoPad = styled.p`
 `;
 
 export const HomeFLowImage = styled.img`
-  width: 100%;
+  width: 80%;
   height: auto;
+  margin-bottom: 2em;
   @media screen and (max-width: 1020px) {
       align-self:flex-end;
   }
@@ -679,6 +695,7 @@ export const CommonContainer = styled.div`
   min-height: calc(100vh - 327px);
   margin-right: auto;
   margin-left: auto;
+  background-color: #F7F7F7;
   @media screen and (max-width: 1276px) {
     padding-left: 10px;
     padding-right: 10px;
@@ -719,6 +736,32 @@ export const BlackHeader = styled.div`
 `;
 
 export const BlackHeaderText = styled.p`
+    color: #ffffff;
+    font-family: Arial;
+    font-weight: 900;
+    font-size: 28px;
+`;
+
+export const DarkHeader = styled.div`
+  z-index: 1;
+  width: 100%;
+  height: 153px;
+  padding-right: 50px;
+  padding-left: 50px;
+  margin-right: auto;
+  margin-left: auto;
+  background-color: #263238;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @media screen and (max-width: 991px) {
+    padding-right: 30px;
+    padding-left: 30px;
+    text-align: center;
+  }
+`;
+
+export const DarkHeaderText = styled.p`
     color: #ffffff;
     font-family: Arial;
     font-weight: 900;

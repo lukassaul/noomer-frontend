@@ -5,8 +5,8 @@ import { t } from '../../i18n';
 import { RootState, AppDispatch } from "../../app/store";
 import Paginator from '../Paginator';
 import { GetDashboardSubmittedRecordsAPI } from '../../api/dashboard';
-//import { DeletePostAPI } from '../../api/post';
-//import { addSingleItem } from '../../features/postServiceSlice';
+import { DeletePriceRecordAPI } from '../../api/priceRecord';
+import { priceEdit } from '../../features/priceRecordSlice';
 import {
   CreatedPostContainer,
   TableHeaderContainer
@@ -82,10 +82,10 @@ const SubmittedRecordsTab: FC<{}> = () => {
     fetchData()
   }, [currentPage, fetchData]);
 
-  const editPost = async(item: object) => {
-    console.log("edit post")
-    // dispatch(addSingleItem(item))
-    // navigate('/edit/post')
+  const editPriceRecord = async(item: object) => {
+    console.log("edit price record")
+    dispatch(priceEdit(item))
+    navigate('/priceRecord/edit')
   }
 
 
@@ -96,10 +96,12 @@ const SubmittedRecordsTab: FC<{}> = () => {
     toggle();
     if(selectedPost) {
       console.log("onConfirm function")
-      // const result: any = await DeletePostAPI(selectedPost)
-      // if (result && result.status === 200) {
-      //   fetchData();
-      // }
+      const result: any = await DeletePriceRecordAPI(selectedPost)
+      if (result && result.status === 200) {
+        fetchData();
+      } else {
+        console.log("result error: ", result)
+      }
     }
   };
   const onCancel = () => toggle();
@@ -125,17 +127,15 @@ const SubmittedRecordsTab: FC<{}> = () => {
                    return <CenteredContainer key={price._id}>
                     <CreatedPostContainer>
                         <div style={{display: 'flex', justifyContent:'flex-end', flexDirection: 'row', alignItems: 'center', marginBottom: '12px'}}>
-                           <EditButton onClick={() => editPost(price)}>Edit</EditButton>
+                           <EditButton onClick={() => editPriceRecord(price)}>Edit</EditButton>
                            <DeleteButton onClick={() => {toggle(); setSelectedPost(price._id)}} style={{paddingLeft: '12px'}}>Delete</DeleteButton>
                         </div>
-                        <div style={{fontWeight: 'bold', marginBottom: '1em'}}>{price.product ? `${price.product.category.category.toUpperCase()} : ${price.product.product_name}` : null}</div>
+                        <p>{price.product ? `${price.product.category.category.toUpperCase()} : ${price.product.product_name}` : null}</p>
+                        <p>{price.classification ? price.classification.length > 100 ? price.classification.substring(0, 120) + ' ...': price.classification : null}</p>
+                        <p>{price.price ? `${price.price} ${price.currency}` : null}</p>
+                        <p>{price.location_state ? `${price.location_city}, ${price.location_state}, ${price.location_country}` : `${price.location_city}, ${price.location_country}`}</p>
+                        <p style={{color: '#747474'}}>{t("Date",language)}: {price.updatedAt ? moment(price.updatedAt).format('MMMM DD, YYYY') : null}</p>
 
-                        {price.classification ? <div style={{color: '#747474'}}>{price.classification.length > 100 ? price.classification.substring(0, 120) + ' ...': price.classification}</div> : null}
-
-                        <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center', marginTop: '12px'}}>
-                          <div style={{marginRight: '1em'}}><span style={{color: '#747474'}}>{t("Date",language)}:</span> {price.updatedAt ? moment(price.updatedAt).format('MMMM DD, YYYY') : null}</div>
-                          <div><span style={{color: '#747474'}}>{t("Status",language)}:</span> {price.expired ? "Expired" : "Active"}</div>
-                        </div>
                       </CreatedPostContainer>
                     </CenteredContainer>
 
@@ -166,12 +166,12 @@ const SubmittedRecordsTab: FC<{}> = () => {
       <Modal
         isShown={isShown}
         hide={toggle}
-        headerText="Delete post"
+        headerText="Delete price record"
         modalContent={
           <ConfirmationModal
             onConfirm={onConfirm}
             onCancel={onCancel}
-            message="Are you sure you want to delete this post?"
+            message="Are you sure you want to delete this price record?"
           />
         }
       />

@@ -5,6 +5,7 @@ export const WhatIsContainerTitle = styled.div`
     margin-bottom: -10px;
     display: flex;
     justify-content: center;
+    color: #FFF;
 `;
 
 export const WhatIsTitle = styled.p`

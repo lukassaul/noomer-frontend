@@ -8,9 +8,9 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-//import { useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import lazyWithRetry from "./lazyWithRetry";
-//import { RootState } from "./app/store";
+import { RootState } from "./app/store";
 import Spinner from './components/Spinner'
 
 const ScrollToTop = lazyWithRetry(() => import("./ScrollToTop"))
@@ -22,12 +22,18 @@ const EmailSent  = lazyWithRetry(() => import("./pages/EmailSent"))
 const Verification  = lazyWithRetry(() => import("./pages/Verification"))
 const ForgotPassword  = lazyWithRetry(() => import("./pages/ForgotPassword"))
 const PasswordReset  = lazyWithRetry(() => import("./pages/PasswordReset"))
+const ChangePassword  = lazyWithRetry(() => import("./pages/ChangePassword"))
+const DeactivateAccount = lazyWithRetry(() => import("./pages/DeactivateAccount"))
 const Dashboard  = lazyWithRetry(() => import("./pages/UserDashboard"))
+const EditProfile  = lazyWithRetry(() => import("./pages/ProfileEdit"))
 const Home  = lazyWithRetry(() => import("./pages/Home"))
 const Listing  = lazyWithRetry(() => import("./pages/PriceListing"))
 const PriceDetails  = lazyWithRetry(() => import("./pages/PriceDetails"))
 const CreatePriceRecord  = lazyWithRetry(() => import("./pages/CreatePriceRecord"))
 const NoomerResult  = lazyWithRetry(() => import("./pages/NoomerResult"))
+const EditRating  = lazyWithRetry(() => import("./pages/RatingEdit"))
+const EditPriceRecord  = lazyWithRetry(() => import("./pages/EditPriceRecord"))
+const Categories  = lazyWithRetry(() => import("./pages/Categories"))
 
 
 /*
@@ -41,6 +47,9 @@ const NoomerResult  = lazyWithRetry(() => import("./pages/NoomerResult"))
 // }
 
 function App() {
+  const token = localStorage.getItem('token')
+  const { isAddSuccess } = useSelector((state: RootState) => state.addPassword)
+  const { isLogSuccess } = useSelector((state: RootState) => state.login)
 
   return (
     <Suspense fallback={<Spinner />}>
@@ -55,13 +64,19 @@ function App() {
             <Route path="/emailsent" element={<EmailSent />} />
             <Route path="/setpassword" element={<Verification />} />
             <Route path="/passwordReset" element={<PasswordReset />} />
+            <Route path="/change/password" element={token || isAddSuccess || isLogSuccess ? <ChangePassword /> : <Navigate to='/login' />} />
+            <Route path="/account/deactivate" element={token || isAddSuccess || isLogSuccess ? <DeactivateAccount /> : <Navigate to='/login' />} />
             <Route path="/login" element={<Login />} />
             <Route path="/forgot" element={<ForgotPassword />} />
-            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/dashboard" element={token || isLogSuccess ? <Dashboard /> : <Navigate to='/login' />} />
+            <Route path="/profile/edit" element={token || isLogSuccess ? <EditProfile /> : <Navigate to='/login' />} />
             <Route path="/listing" element={<Listing />} />
             <Route path="/priceRecord/:id" element={<PriceDetails />} />
-            <Route path="/priceRecord/create" element={<CreatePriceRecord />} />
+            <Route path="/priceRecord/create" element={token || isLogSuccess ? <CreatePriceRecord /> : <Navigate to='/login' />} />
+            <Route path="/priceRecord/edit" element={token || isLogSuccess ? <EditPriceRecord /> : <Navigate to='/login' />} />
             <Route path="/noomer" element={<NoomerResult />} />
+            <Route path="/rating/edit" element={token || isLogSuccess ? <EditRating /> : <Navigate to='/login' />} />
+            <Route path="/categories" element={<Categories />} />
           </Routes>
         </ScrollToTop>
       </Router>

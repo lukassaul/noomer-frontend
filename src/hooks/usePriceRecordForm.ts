@@ -39,7 +39,7 @@ function usePriceRecordForm(){
       type: yup.string().required('Type is required. Select between RETAIL or SERVICE.'),
       product: yup.string().required('Product category is required.'),
       description: yup.string().max(1500, 'Price record description should not be more than 1500 characters'),
-      price: yup.number().required('Product price is required.').moreThan(0, 'Please set product price.'),
+      price: yup.number().required('Product price is required.').min(0, 'Please enter a valid price.'),
       currency: yup.string().required('Currency is required.'),
       location_city: yup.string().required('Location is required.'),
       location_country: yup.string().required('Location is required.'),
@@ -53,7 +53,7 @@ function usePriceRecordForm(){
     reValidateMode: 'onChange',
     shouldFocusError: true,
     defaultValues: {
-      price: 0,
+      //price: 0,
       quantity: 1
     }
   });

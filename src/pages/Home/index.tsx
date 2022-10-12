@@ -12,7 +12,7 @@ import ProductComparison from '../../components/ProductComparison';
 import SearchProduct from '../../components/SearchProduct';
 import Footer from '../../components/Footer';
 import { WhatIsContainerTitle, WhatIsTitle } from './styles';
-import { CommonContainer, CommonContentContainer, HeaderContainer, BodyContainer, HomeFLowImage} from '../../globalStyles'
+import { CommonContainer, CommonContentContainer, CarouselContainer, BodyContainer, HomeFLowImage} from '../../globalStyles'
 
 function Home() {
 
@@ -55,19 +55,19 @@ function Home() {
         <CommonContentContainer>
           <TickerSlider />
           {featuresCarousel === "SHOW" ?
-            <HeaderContainer>
+            <CarouselContainer>
               <HeaderCarousel />
-            </HeaderContainer>
+            </CarouselContainer>
             : null
           }
 
           <BodyContainer>
             {whatIsNoomer === "SHOW" ?
-              <div>
+              <div className="bg-darkblue">
                 <WhatIsContainerTitle>
                   <WhatIsTitle className="text-underline">WHAT IS NOOMER?</WhatIsTitle>
                 </WhatIsContainerTitle>
-                <div className="section-content-container bg-beige">
+                <div className="section-content-container white-font">
                   <div style={{paddingBottom: '2rem'}}>
                     Noomer is a price comparison website that seeks to offer solutions for prospective buyers/ consumers
                     around the world. Prices for basic commodities tend to vary from city to city and  country to country.

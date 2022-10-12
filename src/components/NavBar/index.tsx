@@ -149,11 +149,11 @@ function NavBar() {
                         <NavItemBtn>
                             {button ? (
                                 <NavBtnLink to='/signup'>
-                                    <Button>Sign up</Button>
+                                    <Button color='noomerRed'>Sign up</Button>
                                 </NavBtnLink>
                             ) : (
                                 <NavBtnLink to='/signup'>
-                                    <Button onClick={closeMobileMenu} color='secondary'>
+                                    <Button onClick={closeMobileMenu} color='noomerRed'>
                                         Sign up
                                     </Button>
                                 </NavBtnLink>

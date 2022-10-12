@@ -5,6 +5,7 @@ import LoadingBar from 'react-top-loading-bar'
 import Alert from '../../components/AlertMessage';
 import { RootState } from "../../app/store";
 import CreatePriceRecordForm from "../../components/CreatePriceRecordForm";
+import { clearSubmitState } from "../../features/priceRecordSlice";
 
 import Footer from '../../components/Footer';
 import {
@@ -30,13 +31,14 @@ function CreatePriceRecord() {
     if (priceRecordID) {
       console.log("priceRecordID: ", priceRecordID)
       navigate(`/priceRecord/${priceRecordID}`, { replace: true })
+      dispatch(clearSubmitState())
     }
   }, [priceRecordID, navigate])
 
 
   return (
     <>
-      <CommonContainer>
+      <CommonContainer style={{backgroundColor: '#F7F7F7'}}>
         <CenteredContainer>
           <Container>
             {isSubmitPriceRecordFetching ? <LoadingBar
