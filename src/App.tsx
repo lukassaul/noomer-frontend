@@ -34,6 +34,8 @@ const NoomerResult  = lazyWithRetry(() => import("./pages/NoomerResult"))
 const EditRating  = lazyWithRetry(() => import("./pages/RatingEdit"))
 const EditPriceRecord  = lazyWithRetry(() => import("./pages/EditPriceRecord"))
 const Categories  = lazyWithRetry(() => import("./pages/Categories"))
+const FAQs  = lazyWithRetry(() => import("./pages/FAQs"))
+const AboutUs  = lazyWithRetry(() => import("./pages/AboutUs"))
 
 
 /*
@@ -77,6 +79,8 @@ function App() {
             <Route path="/noomer" element={<NoomerResult />} />
             <Route path="/rating/edit" element={token || isLogSuccess ? <EditRating /> : <Navigate to='/login' />} />
             <Route path="/categories" element={<Categories />} />
+            <Route path="/faqs" element={<FAQs />} />
+            <Route path="/about" element={<AboutUs />} />
           </Routes>
         </ScrollToTop>
       </Router>
