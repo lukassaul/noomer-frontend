@@ -21,6 +21,10 @@ code {
   background-color: #F7F7F7;
 }
 
+.bg-body {
+  background-color: #666666;
+}
+
 .bg-midgray {
   background-color: #E8E8E8;
 }

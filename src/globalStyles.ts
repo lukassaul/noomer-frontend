@@ -86,6 +86,12 @@ export const BodyContainer = styled.div`
   align-items: center;
 `;
 
+export const Title32 = styled.p`
+  font-size: 32px;
+  font-weight: 600;
+  padding: 2rem 0;
+`;
+
 export const CenteredTitle32 = styled.p`
   text-align: center;
   font-size: 32px;
@@ -176,6 +182,47 @@ export const MainFlexContainerColumn = styled.div`
   flex: 30%;
   max-width: 30%;
   padding: 0 4px;
+  @media screen and (max-width: 800px) {
+    flex: 50%;
+    max-width: 50%;
+  }
+  @media screen and (max-width: 600px) {
+    flex: 100%;
+    max-width: 100%;
+  }
+`;
+
+export const MainFlexContainerColumn50 = styled.div`
+  flex: 50%;
+  max-width: 50%;
+  padding: 0 4em;
+  @media screen and (max-width: 800px) {
+    flex: 50%;
+    max-width: 50%;
+  }
+  @media screen and (max-width: 600px) {
+    flex: 100%;
+    max-width: 100%;
+  }
+`;
+
+export const MainFlexContainerColumn75 = styled.div`
+  flex: 75%;
+  max-width: 75%;
+  padding: 0 4em;
+  @media screen and (max-width: 800px) {
+    flex: 50%;
+    max-width: 50%;
+  }
+  @media screen and (max-width: 600px) {
+    flex: 100%;
+    max-width: 100%;
+  }
+`;
+
+export const MainFlexContainerColumn25 = styled.div`
+  flex: 25%;
+  max-width: 25%;
   @media screen and (max-width: 800px) {
     flex: 50%;
     max-width: 50%;
