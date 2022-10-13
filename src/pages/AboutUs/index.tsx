@@ -44,7 +44,7 @@ function AboutUs() {
 
                 <MainFlexContainerColumn25>
                   <MainFlexChildrenContainer>
-                    <img src="https://res.cloudinary.com/dba8ifej6/image/upload/v1665645076/about-us-1_k0zd8w.png" />
+                    <img src="https://res.cloudinary.com/dba8ifej6/image/upload/v1665655013/about-us-2_hejuwj.png" />
                   </MainFlexChildrenContainer>
                 </MainFlexContainerColumn25>
                 <MainFlexContainerColumn75>
