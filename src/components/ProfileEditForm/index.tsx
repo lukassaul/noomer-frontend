@@ -136,19 +136,21 @@ function ProfileEditForm() {
           setPreviewProfileImage(dashboard.profile.profile_pic)
         }
 
-        let savedLocation = dashboard.profile.state !== "undefined" ? `${dashboard.profile.city}, ${dashboard.profile.state}, ${dashboard.profile.country}` : `${dashboard.profile.city}, ${dashboard.profile.country}`
-        console.log("savedLocation: ", savedLocation)
-        let locationValue = ""
-        if (locationSelectOption) {
-          for(let i=0; i < locationSelectOption.length; i++) {
-            if (locationSelectOption[i].label === savedLocation) {
-              locationValue = locationSelectOption[i].value;
-              console.log("locationValue: ", locationValue)
-              setSavedLocationOptionValue({label: savedLocation, value: locationValue})
-              break
+        if (dashboard.profile.city) {
+          let savedLocation = dashboard.profile.state !== "undefined" ? `${dashboard.profile.city}, ${dashboard.profile.state}, ${dashboard.profile.country}` : `${dashboard.profile.city}, ${dashboard.profile.country}`
+          console.log("savedLocation: ", savedLocation)
+          let locationValue = ""
+          if (locationSelectOption) {
+            for(let i=0; i < locationSelectOption.length; i++) {
+              if (locationSelectOption[i].label === savedLocation) {
+                locationValue = locationSelectOption[i].value;
+                console.log("locationValue: ", locationValue)
+                setSavedLocationOptionValue({label: savedLocation, value: locationValue})
+                break
+              }
             }
-          }
 
+          }
         }
       }
     }
@@ -331,7 +333,7 @@ function ProfileEditForm() {
         aria-label='Enter phone number' />
       <p>{errors.phone_number?.message}</p>
 
-      {savedLocationOptionValue.label !== "" &&
+      {dashboard.profile.city && savedLocationOptionValue.label !== "" &&
         <>
           <FormLabelContainer>
             <FormLabel>{t("Location", language)}</FormLabel>
@@ -340,6 +342,56 @@ function ProfileEditForm() {
             name="location"
             options={slicedOptions}
             defaultValue={savedLocationOptionValue}
+            onInputChange={(value) => setInputValue(value)}
+            filterOption={() => true}
+            styles={customStyles}
+            placeholder='Location'
+            components={{ DropdownIndicator: () => null, IndicatorSeparator: () => null }}
+            onChange={(v) => {
+              if (isSelectOption(v)) {
+                const loc = v.value.split(',')
+
+                if(loc.length === 6) {
+
+                  setValue('city', loc[0])
+                  setValue('state', loc[1])
+                  setValue('country', loc[2])
+                  setValue('latitude', loc[3])
+                  setValue('longitude', loc[4])
+                  setLocationCity(loc[0])
+                  setLocationState(loc[1])
+                  setLocationCountry(loc[2])
+                  setLocationLatitude(loc[3])
+                  setLocationLongitude(loc[4])
+                }
+
+                if(loc.length === 5) {
+
+                  setValue('city', loc[0])
+                  setValue('country', loc[1])
+                  setValue('latitude', loc[2])
+                  setValue('longitude', loc[3])
+                  setLocationCity(loc[0])
+                  setLocationCountry(loc[1])
+                  setLocationLatitude(loc[2])
+                  setLocationLongitude(loc[3])
+                }
+
+
+              }
+            }}
+          />
+        </>
+      }
+
+      {!dashboard.profile.city &&
+        <>
+          <FormLabelContainer>
+            <FormLabel>{t("Location", language)}</FormLabel>
+          </FormLabelContainer>
+          <Select
+            name="location"
+            options={slicedOptions}
             onInputChange={(value) => setInputValue(value)}
             filterOption={() => true}
             styles={customStyles}

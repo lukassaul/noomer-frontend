@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
 import { t } from '../../i18n';
 import Button from '../Button'
-import { FormError } from '../../globalStyles'
+import { FormError, FormInputWhole } from '../../globalStyles'
 
 interface AddPassword {
     vtoken: string | number | readonly string[] | undefined
@@ -16,7 +16,7 @@ function AddPasswordForm({vtoken, userid}: AddPassword) {
 
     return (
         <form onSubmit={onSubmit} aria-label="form">
-            <input
+            <FormInputWhole
             {...register("password")}
             name="password"
             type="password"
@@ -24,26 +24,26 @@ function AddPasswordForm({vtoken, userid}: AddPassword) {
             placeholder='Password'
             aria-label='Password' />
             <FormError>{errors.password?.message}</FormError>
-            <input
+            <FormInputWhole
             {...register("confirmPassword")}
             name="confirmPassword"
             type="password"
             className="formInputVerification"
             placeholder='Confirm password'
             aria-label='ConfirmPassword' />
-            <input
+            <FormInputWhole
             {...register("vtoken")}
             name="vtoken"
             type="hidden"
             defaultValue={vtoken} />
-            <input
+            <FormInputWhole
             {...register("userid")}
             name="userid"
             type="hidden"
             defaultValue={userid} />
             <FormError>{errors.confirmPassword?.message}</FormError>
             <div style={{display: 'flex', justifyContent: 'flex-end'}}>
-              <Button type="submit">{t("Verify", language)}</Button>
+              <Button type="submit" color="noomerRed">{t("Submit", language)}</Button>
             </div>
         </form>
     )

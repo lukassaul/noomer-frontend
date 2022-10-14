@@ -79,6 +79,12 @@ code {
   color: #d4d4d4;
 }
 
+.linkText {
+  font-weight: bold;
+  cursor: pointer;
+  color: #110ED4;
+}
+
 .centerText {
   text-align: center;
 }
