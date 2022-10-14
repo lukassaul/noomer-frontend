@@ -17,10 +17,10 @@ function usePasswordForm(){
   const dispatch = useDispatch<AppDispatch>()
   const validationSchema = useMemo(() => (
     yup.object().shape({
-      password: yup.string().required('Password is required').min(8, 'Password must be at least 8 characters'),
+      password: yup.string().required('Password is required').min(8, 'Password must be at least 8 characters').max(16, 'Password maximum length is 16 characters'),
       confirmPassword: yup.string()
             .required('Confirm Password is required')
-            .oneOf([yup.ref('password')], 'Passwords must match')
+            .oneOf([yup.ref('password')], 'Password does not match')
     })
   ), [])
   const { register, handleSubmit, formState: { errors }} = useForm<AddPasswordFormData>({

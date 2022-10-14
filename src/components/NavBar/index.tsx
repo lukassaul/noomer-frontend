@@ -21,6 +21,10 @@ import { FormInput, CenteredContainer } from "../../globalStyles"
 
 import { logoutAPI } from '../../api/auth'
 import { clearLogState } from '../../features/loginSlice'
+import { clearAddState } from '../../features/addPasswordSlice'
+import { clearRegState } from '../../features/registrationSlice'
+import { clearDashboard } from '../../features/dashboardSlice'
+
 import { setSearchProduct, getProductAutosuggest } from "../../features/searchSlice";
 import { SuspenseImg } from '../../SuspenseImage'
 
@@ -40,8 +44,7 @@ function NavBar() {
     const [userLastName, setUserLastName] = useState<string | null>('')
 
     const { isLogSuccess } = useSelector((state: RootState) => state.login)
-
-
+    const { isAddSuccess, errorAddMessage} = useSelector((state: RootState) => state.addPassword)
 
     const handleClick = () => setClick(!click);
     const closeMobileMenu = () => setClick(false);
@@ -78,17 +81,17 @@ function NavBar() {
       setUserEmail(email)
       setUserFirstName(first_name)
       setUserLastName(last_name)
-    }, [isLogSuccess]);
+    }, [isLogSuccess, isAddSuccess]);
 
     window.addEventListener('resize', showButton);
 
     const handleLogout = () => {
       console.log("logging out")
       localStorage.clear()
-      //dispatch(clearRegState())
+      dispatch(clearRegState())
       dispatch(clearLogState())
-      //dispatch(clearAddState())
-      //dispatch(clearDashboard())
+      dispatch(clearAddState())
+      dispatch(clearDashboard())
       setIsToken(null)
       setUserEmail(null)
       setUserFirstName(null)
