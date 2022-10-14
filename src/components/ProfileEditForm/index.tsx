@@ -97,8 +97,8 @@ function ProfileEditForm() {
   const userEmail = localStorage.getItem('userEmail')
 
   useEffect(() => {
-    dispatch(getAllCities('cities'))
-    dispatch(getAllCurrencies('currencies'))
+    if(locationSelectOption.length === 0)dispatch(getAllCities('cities'))
+    if(currencySelectOption.length === 0)dispatch(getAllCurrencies('currencies'))
   }, []);
 
   useEffect(() => {
@@ -333,7 +333,7 @@ function ProfileEditForm() {
         aria-label='Enter phone number' />
       <p>{errors.phone_number?.message}</p>
 
-      {dashboard.profile.city && savedLocationOptionValue.label !== "" &&
+      {dashboard.profile.city && dashboard.profile.city !== "undefined" && savedLocationOptionValue.label !== "" &&
         <>
           <FormLabelContainer>
             <FormLabel>{t("Location", language)}</FormLabel>
@@ -384,7 +384,7 @@ function ProfileEditForm() {
         </>
       }
 
-      {!dashboard.profile.city &&
+      {!dashboard.profile.hasOwnProperty("city") || !dashboard.profile.city || dashboard.profile.city === "undefined" ?
         <>
           <FormLabelContainer>
             <FormLabel>{t("Location", language)}</FormLabel>
@@ -431,7 +431,7 @@ function ProfileEditForm() {
               }
             }}
           />
-        </>
+        </> : null
       }
       <FormError>{errors.city?.message}</FormError>
 

@@ -274,9 +274,9 @@ function EditPriceRecordForm() {
   }, [profileId]);
 
   useEffect(() => {
-    dispatch(getAllCities('cities'))
-    dispatch(getAllProducts('products'))
-    dispatch(getAllCurrencies('currencies'))
+    if(locationSelectOption.length === 0)dispatch(getAllCities('cities'))
+    if(productSelectOption.length === 0)dispatch(getAllProducts('products'))
+    if(currencySelectOption.length === 0)dispatch(getAllCurrencies('currencies'))
   }, []);
 
   useEffect(() => {
