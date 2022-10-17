@@ -29,14 +29,16 @@ import {
   FormRequired,
   FormThreeInputContainer,
   FormInput40Width,
-  FormInput30Width,
+  FormInput50Width,
   FormInput20Width,
   SelectContainer,
   DarkHeader,
   DarkHeaderText,
   RightLinkContainer,
   LeftLinkContainer,
-  LinkParagraph
+  LinkParagraph,
+  TwoColumnContainer,
+  TwoColumn70Container
 } from '../../globalStyles'
 import Button from '../Button'
 
@@ -99,6 +101,12 @@ function CreatePriceRecordForm() {
   const [selectOptionProductName, setSelectOptionProductName] = useState<string>('')
   const [selectOptionProductCategory, setSelectOptionProductCategory] = useState<string>('')
   const [productNameLabel, setProductNameLabel] = useState<string>('Product Name')
+  const [productNamePlaceholder, setProductNamePlaceholder] = useState<string>('Enter Product Name')
+  const [shopNameLabel, setShopNameLabel] = useState<string>('Shop Name')
+  const [shopNamePlaceholder, setShopNamePlaceholder] = useState<string>('Enter shop name')
+  const [showQuantity, setShowQuantity] = useState<boolean>(true)
+  const [showUnit, setShowUnit] = useState<boolean>(true)
+  const [showType, setShowType] = useState<boolean>(true)
 
 
   const [productType, setProductType] = useState<string>('');
@@ -268,9 +276,9 @@ function CreatePriceRecordForm() {
   }, [profileId]);
 
   useEffect(() => {
-    if(locationSelectOption.length === 0)dispatch(getAllCities('cities'))
-    if(productSelectOption.length === 0)dispatch(getAllProducts('products'))
-    if(currencySelectOption.length === 0)dispatch(getAllCurrencies('currencies'))
+    if(locationSelectOption.length === 0 && !isGetLocationsFetching)dispatch(getAllCities('cities'))
+    if(productSelectOption.length === 0 && !isGetProductsFetching)dispatch(getAllProducts('products'))
+    if(currencySelectOption.length === 0 && !isGetCurrenciesFetching)dispatch(getAllCurrencies('currencies'))
   }, []);
 
 
@@ -317,7 +325,7 @@ function CreatePriceRecordForm() {
     }
   }
 
-  console.log("form errors: ", errors)
+  //console.log("form errors: ", errors)
 
 
   const gotoStepOne = (e: any) => {
@@ -363,8 +371,47 @@ function CreatePriceRecordForm() {
                       setSelectOptionProductName(selectedOption[1])
                       setSelectOptionProductCategory(selectedOption[2])
 
-                      if(selectedOption[2] === "Services") setProductNameLabel("Type of Service")
-                      else setProductNameLabel("Product Name")
+                      if(selectedOption[2] === "Services") {
+                        setProductNameLabel("Type of Service")
+                        setProductNamePlaceholder("Enter type of service")
+                        setShopNameLabel("Company Name")
+                        setShopNamePlaceholder("Enter company name")
+                        setServiceCheckbox(true)
+                        setRetailCheckbox(false)
+                        setShowQuantity(false)
+                        setShowUnit(true)
+                        validateTypeCheckBox("SERVICE")
+                      } else if(selectedOption[2] === "Currency") {
+                        setProductNameLabel("Currency Pair")
+                        setProductNamePlaceholder("Enter currency pair")
+                        setShopNameLabel("Shop Name")
+                        setShopNamePlaceholder("Enter shop name")
+                        setServiceCheckbox(false)
+                        setRetailCheckbox(true)
+                        setShowQuantity(false)
+                        setShowUnit(false)
+                        validateTypeCheckBox("RETAIL")
+                      } else if(selectedOption[2] === "Real Estate") {
+                        setProductNameLabel("Unit Size")
+                        setProductNamePlaceholder("Enter unit size")
+                        setShopNameLabel("Company Name")
+                        setShopNamePlaceholder("Enter company name")
+                        setServiceCheckbox(false)
+                        setRetailCheckbox(true)
+                        setShowQuantity(false)
+                        setShowUnit(false)
+                        validateTypeCheckBox("RETAIL")
+                      }else {
+                        setProductNameLabel("Product Name")
+                        setProductNamePlaceholder("Enter product name")
+                        setShopNameLabel("Company Name")
+                        setShopNameLabel("Shop Name")
+                        setShopNamePlaceholder("Enter shop name")
+                        setServiceCheckbox(false)
+                        setRetailCheckbox(false)
+                        setShowQuantity(true)
+                        setShowUnit(true)
+                      }
                     }
                   }}
                 />
@@ -394,23 +441,25 @@ function CreatePriceRecordForm() {
                 <LinkParagraph onClick={(e) => gotoStepOne(e)}>Back</LinkParagraph>
               </LeftLinkContainer>
 
-              <div style={{padding: '2em'}}>
-                {priceRecordImage ? <CenteredContainer><ImagePreview src={priceRecordImage} /></CenteredContainer> : null}
+              <TwoColumnContainer style={{padding: '2em'}}>
 
-                <FormLabelContainer>
-                  <FormLabel>{t('Upload product image', language)}</FormLabel>
-                </FormLabelContainer>
-                <input
-                  //{...register("product_image")}
-                  type="file"
-                  name='product_image'
-                  accept="image/*"
-                  style={{ marginBottom: '1em', marginTop: '10px' }}
-                  onChange={saveImage}
-                  />
+                <div style={{display: 'flex', flexDirection: 'column'}}>
+                  <FormLabelContainer>
+                    <FormLabel>{t('Upload product image', language)}</FormLabel>
+                  </FormLabelContainer>
+                  {priceRecordImage ? <CenteredContainer><ImagePreview src={priceRecordImage} /></CenteredContainer> : null}
 
-                <FormThreeInputContainer>
-                  <FormInput30Width>
+                  <input
+                    type="file"
+                    name='product_image'
+                    accept="image/*"
+                    style={{ marginBottom: '1em', marginTop: '10px' }}
+                    onChange={saveImage}
+                    />
+                </div>
+
+                <TwoColumn70Container>
+                  <FormInput50Width>
                     {!ed_location_city ? <>
                       <FormLabelContainer>
                         <FormRequired>*</FormRequired>
@@ -423,7 +472,7 @@ function CreatePriceRecordForm() {
                         onInputChange={(value) => setInputValue(value)}
                         filterOption={() => true}
                         styles={customStyles}
-                        placeholder='Location'
+                        placeholder='* Location'
                         components={{ DropdownIndicator: () => null, IndicatorSeparator: () => null }}
                         onChange={(v) => {
                           if (isSelectOption(v)) {
@@ -469,9 +518,9 @@ function CreatePriceRecordForm() {
                         <IconComp src="https://res.cloudinary.com/dba8ifej6/image/upload/v1653547266/edit_icon_cwggty.png" alt="Edit icon" style={{cursor: 'pointer'}} onClick={() => setEditFromCity(false)} />
                       </>
                     }
-                  </FormInput30Width>
+                  </FormInput50Width>
 
-                  <FormInput30Width>
+                  <FormInput50Width>
                       <FormLabelContainer>
                         <FormRequired>*</FormRequired>
                         <FormLabel>{t('Currency', language)}</FormLabel>
@@ -493,11 +542,11 @@ function CreatePriceRecordForm() {
                         }}
                       />
                       <FormError>{errors.currency?.message}</FormError>
-                  </FormInput30Width>
-                </FormThreeInputContainer>
+                  </FormInput50Width>
 
-                <FormThreeInputContainer>
-                  <FormInput30Width>
+
+
+                  <FormInput50Width>
                       <FormLabelContainer>
                         <FormRequired>*</FormRequired>
                         <FormLabel>{t(productNameLabel, language)}</FormLabel>
@@ -506,13 +555,13 @@ function CreatePriceRecordForm() {
                           {...register("classification")}
                           name="classification"
                           type="text"
-                          placeholder='Enter product name'
+                          placeholder={productNamePlaceholder}
                           aria-label='classification' />
                       <FormError>{errors.classification?.message}</FormError>
 
-                  </FormInput30Width>
-                  {selectOptionProductCategory !== "Services" ?
-                    <FormInput30Width>
+                  </FormInput50Width>
+                  {showQuantity ?
+                    <FormInput50Width>
                         <FormLabelContainer>
                           <FormRequired>*</FormRequired>
                           <FormLabel>{t('Quantity', language)}</FormLabel>
@@ -524,59 +573,60 @@ function CreatePriceRecordForm() {
                             placeholder='Enter quantity'
                             aria-label='quantity' />
                         <FormError>{errors.quantity?.message}</FormError>
-                    </FormInput30Width>
+                    </FormInput50Width>
                     : null
                   }
 
-                  <FormInput30Width>
+                  {showUnit ?
+                    <FormInput50Width>
 
-                      <FormLabelContainer>
-                        <FormLabel>{t('Unit', language)}</FormLabel>
-                      </FormLabelContainer>
+                        <FormLabelContainer>
+                          <FormLabel>{t('Unit', language)}</FormLabel>
+                        </FormLabelContainer>
 
-                      {selectOptionProductCategory !== "Services" ?
-                        <FormInput
-                            {...register("unit")}
+                        {selectOptionProductCategory !== "Services" ?
+                          <FormInput
+                              {...register("unit")}
+                              name="unit"
+                              type="text"
+                              placeholder='Enter unit'
+                              aria-label='unit' />
+                          : null
+                        }
+
+                        {selectOptionProductCategory === "Services" ?
+                          <Select
                             name="unit"
-                            type="text"
-                            placeholder='Enter unit'
-                            aria-label='unit' />
-                        : null
-                      }
+                            options={servicesUnitOption}
+                            styles={customStyles}
+                            placeholder='Select unit'
+                            components={{ DropdownIndicator: () => null, IndicatorSeparator: () => null }}
+                            onChange={(v:any) => {
+                              setValue('unit', v.value)
+                            }}
+                          /> : null
+                        }
+                        <FormError>{errors.unit?.message}</FormError>
 
-                      {selectOptionProductCategory === "Services" ?
-                        <Select
-                          name="unit"
-                          options={servicesUnitOption}
-                          styles={customStyles}
-                          placeholder='Select unit'
-                          components={{ DropdownIndicator: () => null, IndicatorSeparator: () => null }}
-                          onChange={(v:any) => {
-                            setValue('unit', v.value)
-                          }}
-                        /> : null
-                      }
-                      <FormError>{errors.unit?.message}</FormError>
+                    </FormInput50Width>
+                    : null
+                  }
 
-                  </FormInput30Width>
-                </FormThreeInputContainer>
-
-                <FormThreeInputContainer>
-                  <FormInput30Width>
+                  <FormInput50Width>
                       <FormLabelContainer>
-                        <FormLabel>{t('Shop Name', language)}</FormLabel>
+                        <FormLabel>{t(shopNameLabel, language)}</FormLabel>
                       </FormLabelContainer>
                       <FormInput
                           {...register("store")}
                           name="store"
                           type="text"
-                          placeholder='Enter shop name'
+                          placeholder={shopNamePlaceholder}
                           aria-label='store' />
                       <FormError>{errors.store?.message}</FormError>
 
-                  </FormInput30Width>
+                  </FormInput50Width>
 
-                  <FormInput30Width>
+                  <FormInput50Width>
 
                       <FormLabelContainer>
                         <FormRequired>*</FormRequired>
@@ -600,9 +650,9 @@ function CreatePriceRecordForm() {
                         />
                       <FormError>{errors.price?.message}</FormError>
 
-                  </FormInput30Width>
+                  </FormInput50Width>
 
-                  <FormInput30Width>
+                  <FormInput50Width>
                       <FormLabelContainer>
                         <FormRequired>*</FormRequired>
                         <FormLabel>{t('Type', language)}</FormLabel>
@@ -637,12 +687,13 @@ function CreatePriceRecordForm() {
                         </div>
                       </div>
                       <FormError>{errors.type?.message}</FormError>
-                  </FormInput30Width>
-                </FormThreeInputContainer>
-
-                <FormLabelContainer>
+                  </FormInput50Width>
+                </TwoColumn70Container>
+              </TwoColumnContainer>
+              <div style={{padding: '2em'}}>
+                <div style={{backgroundColor: '#263238', color: '#FFF', padding: '1em'}}>
                   <FormLabel>{t('Description', language)}</FormLabel>
-                </FormLabelContainer>
+                </div>
                 <FormTextArea
                     {...register("description")}
                     name="description"
@@ -655,6 +706,8 @@ function CreatePriceRecordForm() {
                     <Button type="submit" color='secondaryRed'>{t("Submit", language)}</Button>
                 </LoginButtonWrapper>
               </div>
+
+
             </>
               :
               null

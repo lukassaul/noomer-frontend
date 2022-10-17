@@ -14,6 +14,8 @@ import Footer from '../../components/Footer';
 import { WhatIsContainerTitle, WhatIsTitle } from './styles';
 import { CommonContainer, CommonContentContainer, CarouselContainer, BodyContainer, HomeFLowImage} from '../../globalStyles'
 
+import { getAllCities, getAllCurrencies, getAllProducts } from '../../features/selectOptionsSlice'
+
 function Home() {
 
   const dispatch = useDispatch<AppDispatch>()
@@ -26,6 +28,15 @@ function Home() {
   const [priceComparison, setPriceComparison] = useState('HIDE')
   const [searchCommodity, setSearchCommodity] = useState('HIDE')
   const [categoriesSection, setCategoriesSection] = useState('HIDE')
+
+  const {
+    productSelectOption,
+    locationSelectOption,
+    currencySelectOption,
+    isGetLocationsFetching,
+    isGetCurrenciesFetching,
+    isGetProductsFetching
+  } = useSelector((state: RootState) => state.selectOptions)
 
 
   /**
@@ -48,6 +59,17 @@ function Home() {
     }
   }, [display]);
   /***/
+
+  /**
+    Fetching select options to optimize speed in
+    loading options in the Submit price record form
+  **/
+  useEffect(() => {
+    if(locationSelectOption.length === 0 && !isGetLocationsFetching)dispatch(getAllCities('cities'))
+    if(productSelectOption.length === 0 && !isGetProductsFetching)dispatch(getAllProducts('products'))
+    if(currencySelectOption.length === 0 && !isGetCurrenciesFetching)dispatch(getAllCurrencies('currencies'))
+  }, []);
+  /****/
 
   return (
     <>
