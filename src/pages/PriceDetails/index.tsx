@@ -193,7 +193,7 @@ function PriceDetails() {
     <FlexContainer style={{width: '80%'}}>
 
         <div style={{paddingRight: '2em'}}>
-          {priceRecord && priceRecord.price.product_image ? <ProductImageLarge src={priceRecord.price.product_image} /> : <ProductImageLarge src="https://res.cloudinary.com/dba8ifej6/image/upload/v1665974414/no_image_1_xap5lo.png" /> }
+          {priceRecord && priceRecord.price.product_image && priceRecord.price.product_image !== "No image" ? <ProductImageLarge src={priceRecord.price.product_image} /> : <ProductImageLarge src="https://res.cloudinary.com/dba8ifej6/image/upload/v1665974414/no_image_1_xap5lo.png" /> }
         </div>
         <div>
           <p>{priceRecord && priceRecord.price.description ? priceRecord.price.description : "No description"}</p>

@@ -74,6 +74,7 @@ function CreatePriceRecordForm() {
   const navigate = useNavigate()
 
   const { language } = useSelector((state: RootState) => state.language)
+  const { isSubmitPriceRecordFetching } = useSelector((state: RootState) => state.priceRecord)
   const {
     productSelectOption,
     locationSelectOption,
@@ -703,7 +704,7 @@ function CreatePriceRecordForm() {
                     onChange={(text) => handleDescriptionChange(text)} />
 
                 <LoginButtonWrapper>
-                    <Button type="submit" color='secondaryRed'>{t("Submit", language)}</Button>
+                    <Button type="submit" color='secondaryRed' disabled={isSubmitPriceRecordFetching ? true : false}>{t("Submit", language)}</Button>
                 </LoginButtonWrapper>
               </div>
 

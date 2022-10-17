@@ -76,6 +76,8 @@ function EditPriceRecordForm() {
 
   const { language } = useSelector((state: RootState) => state.language)
   const { recordToEdit } = useSelector((state: RootState) => state.priceRecord)
+  const { isEditPriceRecordFetching } = useSelector((state: RootState) => state.priceRecord)
+
   console.log("recordToEdit: ", recordToEdit)
   const {
     productSelectOption,
@@ -786,7 +788,7 @@ function EditPriceRecordForm() {
                     onChange={(text) => handleDescriptionChange(text)} />
 
                 <LoginButtonWrapper>
-                    <Button type="submit" color='secondaryRed'>{t("Submit", language)}</Button>
+                    <Button type="submit" color='secondaryRed' disabled={isEditPriceRecordFetching ? true : false}>{t("Submit", language)}</Button>
                 </LoginButtonWrapper>
               </div>
             </>

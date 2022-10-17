@@ -433,6 +433,24 @@ export const CenteredTextContainer = styled.div`
   text-align: center;
 `;
 
+export const CenteredContainerNav = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @media screen and (max-width: 480px) {
+    display: none;
+  }
+`;
+
+export const CenteredContainerNavMobile = styled.div`
+  display: none;
+  @media screen and (max-width: 480px) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+`;
+
 export const CenteredContainer = styled.div`
   display: flex;
   justify-content: center;
