@@ -17,7 +17,7 @@ import {
     NavItemIput,
     ProfileName
 } from './styles';
-import { FormInput, CenteredContainer } from "../../globalStyles"
+import { FormInput, CenteredContainerNav, CenteredContainerNavMobile } from "../../globalStyles"
 
 import { logoutAPI } from '../../api/auth'
 import { clearLogState } from '../../features/loginSlice'
@@ -113,7 +113,7 @@ function NavBar() {
                 <NavLogo to='/'>
                     <SuspenseImg src="https://res.cloudinary.com/dba8ifej6/image/upload/v1664179407/noomer-icon_vpr30i.png"  alt="Noomer logo" className="noomerLogo"/>
                 </NavLogo>
-                <CenteredContainer style={{width: '30%'}}>
+                <CenteredContainerNav style={{width: '30%'}}>
                   <FormInput
                     type="text"
                     placeholder="Search for commodity"
@@ -126,7 +126,7 @@ function NavBar() {
                       }
                     }}
                   />
-                </CenteredContainer>
+                </CenteredContainerNav>
                 <MobileIcon onClick={handleClick}>
                     {click ? <span style={{fontSize: '18px'}}>X</span> : <img src="https://res.cloudinary.com/dba8ifej6/image/upload/v1653547266/bars_icon_eqdxv5.png" alt="Menu icon" style={{width: '18px'}}/>}
                 </MobileIcon>

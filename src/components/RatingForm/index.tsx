@@ -48,7 +48,7 @@ const RatingForm: React.FC<Props> = ({
   console.log("recordId: ", recordId)
 
   const { language } = useSelector((state: RootState) => state.language)
-
+  const { isSubmitRatingFetching } = useSelector((state: RootState) => state.rating)
 
   const { register, control, setValue, onSubmit, errors } = useRatingForm();
 
@@ -122,7 +122,7 @@ const RatingForm: React.FC<Props> = ({
               <FormError>{errors.rating?.message}</FormError>
               <FormError>{errors.reason?.message}</FormError>
               <LoginButtonWrapper>
-                  <Button type="submit" color='gray' disabled={isOwner || hasVoted ? true : false}>{t("Submit", language)}</Button>
+                  <Button type="submit" color='gray' disabled={isOwner || hasVoted || isSubmitRatingFetching ? true : false}>{t("Submit", language)}</Button>
               </LoginButtonWrapper>
 
 

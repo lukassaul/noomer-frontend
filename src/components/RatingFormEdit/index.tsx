@@ -33,7 +33,7 @@ const RatingFormEdit = () => {
   //console.log("rating details: ", rating)
 
   const { language } = useSelector((state: RootState) => state.language)
-  const { editRating } = useSelector((state: RootState) => state.rating)
+  const { editRating, isEditRatingFetching } = useSelector((state: RootState) => state.rating)
 
 
   const { register, control, setValue, onSubmit, errors } = useRatingFormEdit();
@@ -104,7 +104,7 @@ const RatingFormEdit = () => {
           <FormError>{errors.rating?.message}</FormError>
           <FormError>{errors.reason?.message}</FormError>
           <LoginButtonWrapper>
-              <Button type="submit" color='gray'>{t("Submit", language)}</Button>
+              <Button type="submit" color='gray' disabled={isEditRatingFetching ? true : false}>{t("Submit", language)}</Button>
           </LoginButtonWrapper>
 
 
