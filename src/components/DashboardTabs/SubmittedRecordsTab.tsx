@@ -127,13 +127,14 @@ const SubmittedRecordsTab: FC<{}> = () => {
                    return <CenteredContainer key={price._id}>
                     <CreatedPostContainer>
                         <div style={{display: 'flex', justifyContent:'flex-end', flexDirection: 'row', alignItems: 'center', marginBottom: '12px'}}>
-                           <EditButton onClick={() => editPriceRecord(price)}>Edit</EditButton>
-                           <DeleteButton onClick={() => {toggle(); setSelectedPost(price._id)}} style={{paddingLeft: '12px'}}>Delete</DeleteButton>
+                          <DeleteButton onClick={() => {navigate(`/priceRecord/${price._id}`)}} style={{paddingRight: '12px'}}>View</DeleteButton>
+                          <EditButton onClick={() => editPriceRecord(price)}>Edit</EditButton>
+                          <DeleteButton onClick={() => {toggle(); setSelectedPost(price._id)}} style={{paddingLeft: '12px'}}>Delete</DeleteButton>
                         </div>
                         <p>{price.product ? `${price.product.category.category.toUpperCase()} : ${price.product.product_name}` : null}</p>
                         <p>{price.classification ? price.classification.length > 100 ? price.classification.substring(0, 120) + ' ...': price.classification : null}</p>
                         <p>{price.price ? `${price.price} ${price.currency}` : null}</p>
-                        <p>{price.location_state ? `${price.location_city}, ${price.location_state}, ${price.location_country}` : `${price.location_city}, ${price.location_country}`}</p>
+                        <p>{price.location_state && price.location_state !== "undefined" ? `${price.location_city}, ${price.location_state}, ${price.location_country}` : `${price.location_city}, ${price.location_country}`}</p>
                         <p style={{color: '#747474'}}>{t("Date",language)}: {price.updatedAt ? moment(price.updatedAt).format('MMMM DD, YYYY') : null}</p>
 
                       </CreatedPostContainer>

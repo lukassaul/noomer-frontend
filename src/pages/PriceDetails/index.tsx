@@ -185,33 +185,38 @@ function PriceDetails() {
 
 
   const VotesDisplay = () =>
-    <FlexContainer style={{fontSize: '60px', width: '20%'}}>
+    <FlexContainer style={{fontSize: '60px', width: '20%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
       <Upvote>{upvoteCount}</Upvote> / <Downvote>{downvoteCount}</Downvote>
     </FlexContainer>
 
+  const ImageAndDescriptionDisplay = () =>
+    <FlexContainer style={{width: '80%'}}>
+
+        <div style={{paddingRight: '2em'}}>
+          {priceRecord && priceRecord.price.product_image !== "No image" ? <ProductImageLarge src={priceRecord.price.product_image} /> : <ProductImageLarge src="https://res.cloudinary.com/dba8ifej6/image/upload/v1665974414/no_image_1_xap5lo.png" /> }
+        </div>
+        <div>
+          <p>{priceRecord && priceRecord.price.description ? priceRecord.price.description : "No description"}</p>
+        </div>
+
+    </FlexContainer>
+
   const Details = () =>
-    <FlexContainer style={{width: '80%', justifyContent: 'space-between'}}>
-      <div style={{ padding: '1em' }}>
-        <table>
+    <FlexContainer style={{width: '100%'}}>
+
+      <table className="table table-striped table-bordered">
+        <tbody>
           <tr><td width="40%"><DetailsLabel>Category: </DetailsLabel></td><td width="60%"><DetailsValue>{priceRecord.product.category.category}</DetailsValue></td></tr>
           <tr><td style={{marginRight:"1em"}}><DetailsLabel>Product: </DetailsLabel></td><td><DetailsValue>{priceRecord.product.product_name}</DetailsValue></td></tr>
           <tr><td style={{marginRight:"1em"}}><DetailsLabel>Classification: </DetailsLabel></td><td><DetailsValue>{priceRecord.price.classification}</DetailsValue></td></tr>
           <tr><td style={{marginRight:"1em"}}><DetailsLabel>Uploader: </DetailsLabel></td><td><DetailsValue>{priceRecord.price.uploader.first_name} {priceRecord.price.uploader.last_name}</DetailsValue></td></tr>
-        </table>
-      </div>
-
-      <div style={{ padding: '1em' }}>
-        <table>
           <tr><td style={{marginRight:"1em"}}><DetailsLabel>Date: </DetailsLabel></td><td><DetailsValue>{moment(priceRecord.price.createdAt).format('LL')}</DetailsValue></td></tr>
           <tr><td style={{marginRight:"1em"}}><DetailsLabel>Location: </DetailsLabel></td><td><DetailsValue>{priceRecord.price.location_city}, {priceRecord.price.location_state && priceRecord.price.location_state !== 'undefined' ? `${priceRecord.price.location_state}, `: null}{priceRecord.price.location_country}</DetailsValue></td></tr>
           <tr><td style={{marginRight:"1em"}}><DetailsLabel>Store Name: </DetailsLabel></td><td><DetailsValue>{priceRecord.price.store}</DetailsValue></td></tr>
-          <tr><td style={{marginRight:"1em"}}><DetailsLabel>Price: </DetailsLabel></td><td><DetailsValue>{priceRecord.price.price} {priceRecord.price.currency}</DetailsValue></td></tr>
-        </table>
-      </div>
+          <tr><td style={{marginRight:"1em"}}><DetailsLabel>Price: </DetailsLabel></td><td><DetailsValue>{priceRecord.price.price} {priceRecord.price.currency} {priceRecord.price.unit ? `/ ${priceRecord.price.unit}` : null}</DetailsValue></td></tr>
+        </tbody>
+      </table>
 
-      <div>
-        {priceRecord && priceRecord.price.product_image !== "No image" ? <ProductImageLarge src={priceRecord.price.product_image} /> : <ProductImageLarge src="/No-image-available.png" /> }
-      </div>
     </FlexContainer>
 
 
@@ -298,7 +303,7 @@ function PriceDetails() {
     <>
       <CommonContainer>
         <CenteredContainer>
-          <Container>
+          <Container style={{padding: '0 2em'}}>
               {isSubmitPriceRecordSuccess ?
                   <Alert
                       text={"Price record successfully created."}
@@ -308,16 +313,17 @@ function PriceDetails() {
               }
 
               <LeftLinkContainer onClick={() => navigate(-1)}>
-                <BsFillArrowLeftCircleFill size="1.5em" style={{cursor: "pointer", marginRight: "1em"}}/> <LinkParagraph >Back to list</LinkParagraph>
+                <BsFillArrowLeftCircleFill size="1.5em" style={{cursor: "pointer", marginRight: "1em", color: '#E8505B',}}/>
+                <LinkParagraph >Back to list</LinkParagraph>
               </LeftLinkContainer>
 
 
 
-              <FlexContainer>
+              <FlexContainer style={{marginBottom: '1em'}}>
                 {VotesDisplay()}
-                {priceRecord ? Details() : null}
-
+                {priceRecord ? ImageAndDescriptionDisplay() : null}
               </FlexContainer>
+              {priceRecord ? Details() : null}
               {priceRecord ? ProductStats() : null}
               <FormSeparatorGray/>
               {isToken ? DisplayForm() : "Please login to vote"}

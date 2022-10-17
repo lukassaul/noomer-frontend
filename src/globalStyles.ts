@@ -324,6 +324,13 @@ export const TwoColumnChildren = styled.div`
   /* height: 100% */
 `;
 
+export const TwoColumn70Container = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  width: 70%;
+  justify-content: space-between;
+`;
+
 export const TwoColumnFlexContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -483,11 +490,11 @@ export const TextWrapperMargin12 = styled.div`
 
 export const DetailsLabel = styled.span`
   font-weight: 600;
-  color: #1E1E1E;
+  //color: #1E1E1E;
 `;
 
 export const DetailsValue = styled.span`
-  color: #1E1E1E;
+  //color: #1E1E1E;
 `;
 
 
@@ -536,7 +543,7 @@ export const FormTextArea = styled.textarea`
     display: flex;
     padding: 5px 5px 5px 5px;
     width: 100%;
-    margin: 10px 0;
+    //margin: 10px 0;
     height: 150px;
 `;
 
@@ -584,6 +591,19 @@ export const FormThreeInputContainer = styled.div `
   @media screen and (max-width: 480px) {
     margin-bottom: initial;
     padding: 0 12px;
+  }
+`;
+
+export const FormInput50Width = styled.div `
+  width: 50%;
+  @media screen and (max-width: 991px) {
+    width: 30%;
+  }
+  @media screen and (max-width: 768px) {
+    width: 50%;
+  }
+  @media screen and (max-width: 480px) {
+    width: 100%;
   }
 `;
 
@@ -934,7 +954,7 @@ export const StartWritingButton = styled.p`
 export const EditButton = styled.p`
   color: #fff;
   font-size: 12px;
-  background-color: #302D2D;
+  background-color: #E8505B;
   padding: 5px 8px;
   border-radius: 5px;
   cursor: pointer;
