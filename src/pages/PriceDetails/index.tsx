@@ -312,7 +312,7 @@ function PriceDetails() {
                   /> : null
               }
 
-              <LeftLinkContainer onClick={() => navigate(-1)}>
+              <LeftLinkContainer onClick={() => navigate('/listing')}>
                 <BsFillArrowLeftCircleFill size="1.5em" style={{cursor: "pointer", marginRight: "1em", color: '#E8505B',}}/>
                 <LinkParagraph >Back to list</LinkParagraph>
               </LeftLinkContainer>
