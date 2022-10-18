@@ -180,7 +180,8 @@ function NavBar() {
                         </NavLinks>
                       </NavItem>
                       <ProfileName onClick={() => navigate("/dashboard")} style={{ cursor: 'pointer' }}>
-                          {userFirstName} {userLastName}
+                          {!userFirstName && !userLastName ? userEmail : null}
+                          {userFirstName ? userFirstName : null} {userLastName ? userLastName : null}
                       </ProfileName>
                     </>
                     }

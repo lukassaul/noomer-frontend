@@ -777,7 +777,7 @@ export const SeventyThreeThumbnail = styled.img`
 
 export const CommonContainer = styled.div`
   max-width: 1280px;
-  min-height: calc(100vh - 327px);
+  min-height: calc(100vh - 320px);
   margin-right: auto;
   margin-left: auto;
   background-color: #F7F7F7;
@@ -793,7 +793,7 @@ export const CommonContainer = styled.div`
 
 export const CommonContentContainer = styled.div`
   max-width: 1280px;
-  min-height: calc(100vh - 327px);
+  min-height: calc(100vh - 320px);
   margin-right: auto;
   margin-left: auto;
   /* @media screen and (max-width: 480px) {

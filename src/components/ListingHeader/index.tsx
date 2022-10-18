@@ -20,7 +20,7 @@ function ListingHeader() {
   const categoriesArray:any = {
     All: {
       title: "Categories",
-      imageUrl: "https://res.cloudinary.com/dba8ifej6/image/upload/v1661492906/header-category-all_teuus9.jpg",
+      imageUrl: "https://res.cloudinary.com/dba8ifej6/image/upload/v1666067516/header-category-main_qigsog.png",
     },
     Food: {
       title: "FOOD",
