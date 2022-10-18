@@ -106,7 +106,6 @@ function NavBar() {
       navigate('/listing')
     }
 
-
     return (
         <Nav>
             <NavbarContainer>
@@ -180,8 +179,8 @@ function NavBar() {
                         </NavLinks>
                       </NavItem>
                       <ProfileName onClick={() => navigate("/dashboard")} style={{ cursor: 'pointer' }}>
-                          {!userFirstName && !userLastName ? userEmail : null}
-                          {userFirstName ? userFirstName : null} {userLastName ? userLastName : null}
+                          {userFirstName === "undefined" && userLastName === "undefined" ? userEmail : null}
+                          {userFirstName !== "undefined" ? userFirstName : null} {userLastName !== "undefined" ? userLastName : null}
                       </ProfileName>
                     </>
                     }
