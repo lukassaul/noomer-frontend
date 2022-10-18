@@ -460,7 +460,7 @@ function EditPriceRecordForm() {
         {step === 1 ?
           <>
             <DarkHeader>
-              <DarkHeaderText>Select Commodity</DarkHeaderText>
+              <DarkHeaderText>Select Product</DarkHeaderText>
             </DarkHeader>
             <LeftLinkContainer style={{padding: '2em'}}>
               <BsFillArrowLeftCircleFill size="1.5em" style={{marginRight: "1em", color: '#E8505B', cursor: 'pointer'}} onClick={() => navigate('/')}/>
@@ -475,7 +475,7 @@ function EditPriceRecordForm() {
                   options={slicedOptionsProd}
                   onInputChange={(value) => setInputValueProd(value)}
                   filterOption={() => true}
-                  placeholder='Category'
+                  placeholder='Product'
                   components={{ DropdownIndicator: () => null, IndicatorSeparator: () => null }}
                   onChange={(v) => {
                     if (isSelectOptionProd(v)) {

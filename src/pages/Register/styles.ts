@@ -10,8 +10,8 @@ export const Container = styled.div`
 `;
 
 export const RegisterSection = styled.div`
-  color: #000;
-  background: #fff;
+  //color: #000;
+  //background: #fff;
 `;
 
 export const RegisterContainer = styled.div`

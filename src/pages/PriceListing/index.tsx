@@ -18,6 +18,8 @@ import ListingHeader from '../../components/ListingHeader'
 import { RootState, AppDispatch } from '../../app/store'
 import { setCategory } from '../../features/categorySlice'
 import { setTicker } from '../../features/tickerSlice'
+import { clearSearchProduct } from '../../features/searchSlice'
+import { clearTicker } from '../../features/tickerSlice'
 import getBufferDate from '../../utils/getBufferDate'
 import getStatistics from '../../utils/getStatistics'
 import {
@@ -171,7 +173,7 @@ function PriceListing() {
 
     useEffect(() => {
       setSelectedProduct("");
-      setSelectedTicker("");
+      if(!selectedTickerState) setSelectedTicker("");
     }, [])
 
     useEffect(() => {
@@ -180,8 +182,13 @@ function PriceListing() {
     }, [searchProduct])
 
     useEffect(() => {
+      if(selectedTickerState) setSelectedTicker(selectedTickerState)
+    }, [selectedTickerState])
+
+    useEffect(() => {
       console.log("perform stat computation")
       console.log("selected ticker: ", selectedTicker)
+      console.log("selected product: ", selectedProduct)
       if (selectedProduct != "" && selectedLocation !== "WORLDWIDE") showStatistics()
       else if (selectedTicker != "") showStatistics()
     }, [fileData])
@@ -207,7 +214,8 @@ function PriceListing() {
 
         let pricesArray:number[] = []
 
-        if (selectedTicker && selectedLocation === "WORLDWIDE") {
+        //if (selectedTicker && selectedLocation === "WORLDWIDE") {
+        if (selectedTicker) {
           let product = fileData[0].product.product_name
           let city = fileData[0].location_city
           let state = fileData[0].location_state
@@ -247,7 +255,7 @@ function PriceListing() {
             <CommonContainer>
               <ListingHeader />
 
-                <div style={{ padding: "1em 0" }}>
+                <div style={{ padding: "1em" }}>
                     {fileData?.length > 0 &&
                       <CSVLink
                         headers={fileHeaders}
@@ -275,6 +283,7 @@ function PriceListing() {
                         return { ...elasticsearchResponse }
 
                     }}
+                    style={{padding: '1em'}}
                 >
                     <ListWrapper>
                         <FilterWrapperMobile click={click}>
@@ -348,6 +357,7 @@ function PriceListing() {
                                 }}
                                 onValueChange={(value) => {
                                     setProductTicker(value)
+                                    //if(selectedTickerState) dispatch(clearTicker())
                                   }
                                 }
 
@@ -396,6 +406,8 @@ function PriceListing() {
                                         setSelectedProduct("");
                                         setSelectedLocation("WORLDWIDE");
                                         dispatch(setCategory(""))
+                                        dispatch(clearSearchProduct())
+                                        dispatch(clearTicker())
                                       }}
                                       style={{
                                        padding: '5px',
@@ -478,11 +490,13 @@ function PriceListing() {
                             onValueChange={(value) => {
                                 setProductTicker(value)
                                 dispatch(setTicker(value))
+                                //if(selectedTickerState) dispatch(clearTicker())
                               }
                             }
                             onChange={(value) => {
                                 setProductTicker(value)
                                 dispatch(setTicker(value))
+                                //if(selectedTickerState) dispatch(clearTicker())
                               }
                             }
                             value={selectedTickerState}
@@ -531,6 +545,8 @@ function PriceListing() {
                                     setSelectedProduct("");
                                     setSelectedLocation("WORLDWIDE");
                                     dispatch(setCategory(""))
+                                    dispatch(clearSearchProduct())
+                                    dispatch(clearTicker())
                                   }}
                                   style={{
                                    padding: '5px',

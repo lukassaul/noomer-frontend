@@ -36,6 +36,9 @@ export const searchSlice = createSlice({
         setSearchProduct: (state, {payload}) => {
             state.searchProduct = payload
           },
+        clearSearchProduct: (state) => {
+            state.searchProduct = ''
+          },
     },
     extraReducers: (builder) => {
         builder.addCase(getProductAutosuggest.fulfilled, (state, {payload}) => {
@@ -57,6 +60,6 @@ export const searchSlice = createSlice({
     },
 })
 
-export const { setSearchProduct } = searchSlice.actions;
+export const { setSearchProduct, clearSearchProduct } = searchSlice.actions;
 
 export default searchSlice.reducer

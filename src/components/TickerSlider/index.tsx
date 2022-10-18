@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { RootState, AppDispatch } from '../../app/store'
 import { getTickers } from '../../features/configSlice'
 import { setTicker } from '../../features/tickerSlice'
+import { clearSearchProduct } from '../../features/searchSlice'
 
 import Marquee from "react-fast-marquee";
 import { TickerContainer } from '../../globalStyles'
@@ -47,6 +48,7 @@ function TickerSlider() {
     }
   ]
 
+  console.log("tickers: ", tickers)
   const tickerColorArray = ["#F8FD01", "#00E0FF", "#F127E9", "#FF0000", "#5DD662", "#FFFFFF"]
   const getRandomColor = () => {
     return Math.floor(Math.random() * 5)
@@ -55,6 +57,7 @@ function TickerSlider() {
   const handleTickerClick = (ticker:string) => {
     console.log("must navigate to price listing with filter ticker")
     dispatch(setTicker(ticker))
+    dispatch(clearSearchProduct())
     navigate('/listing')
   }
 
