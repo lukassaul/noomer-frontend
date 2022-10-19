@@ -463,8 +463,8 @@ function EditPriceRecordForm() {
               <DarkHeaderText>Select Product</DarkHeaderText>
             </DarkHeader>
             <LeftLinkContainer style={{padding: '2em'}}>
-              <BsFillArrowLeftCircleFill size="1.5em" style={{marginRight: "1em", color: '#E8505B', cursor: 'pointer'}} onClick={() => navigate('/')}/>
-              <LinkParagraph onClick={() => navigate('/')}>Back</LinkParagraph>
+              <BsFillArrowLeftCircleFill size="1.5em" style={{marginRight: "1em", color: '#E8505B', cursor: 'pointer'}} onClick={() => navigate(-1)}/>
+              <LinkParagraph onClick={() => navigate(-1)}>Back</LinkParagraph>
             </LeftLinkContainer>
             <FlexCenterColContainer style={{padding: '2em', alignItems: 'center'}}>
               <div style={{width: '60%'}}>
