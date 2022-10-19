@@ -39,13 +39,15 @@ function useEditPriceRecordForm(){
     yup.object().shape({
       type: yup.string().required('Type is required. Select between RETAIL or SERVICE.'),
       product: yup.string().required('Product category is required.'),
+      classification: yup.string().required('This field is required.').max(150, 'This field should not be more than 150 characters'),
       description: yup.string().max(1500, 'Price record description should not be more than 1500 characters'),
-      price: yup.number().required('Product price is required.').min(0, 'Please enter a valid price.'),
+      price: yup.number().required('Product price is required.').min(0.01, 'Please enter a valid price.'),
       currency: yup.string().required('Currency is required.'),
       location_city: yup.string().required('Location is required.'),
       location_country: yup.string().required('Location is required.'),
-      //unit: yup.string().required('Unit is required.'),
-      quantity: yup.number().required('Quantity is required.').moreThan(0, 'Please product quantity.'),
+      quantity: yup.number().required('Quantity is required.').moreThan(0, 'Please enter product quantity.'),
+      unit: yup.string().max(150, 'This field should not be more than 150 characters'),
+      store: yup.string().max(150, 'This field should not be more than 150 characters'),
     })
   ), [])
   const { register, handleSubmit, control, setValue, setError, clearErrors, watch, formState: { errors, isValid } } = useForm<PriceRecordFormData>({

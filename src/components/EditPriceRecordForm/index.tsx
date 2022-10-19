@@ -647,7 +647,15 @@ function EditPriceRecordForm() {
                             name="quantity"
                             type="number"
                             placeholder='Enter quantity'
-                            aria-label='quantity' />
+                            aria-label='quantity'
+                            onChange={(text) => {
+                              if(text.target.value) {
+                                let as = parseInt(text.target.value);
+                                setValue('quantity', as)
+                              } else {
+                                setValue('quantity', 0)
+                              }
+                            }} />
                         <FormError>{errors.quantity?.message}</FormError>
                     </FormInput50Width>
                     : null

@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom'
 import {
   FooterContainer,
   LinksContainer,
@@ -14,7 +15,7 @@ import {
  } from '../../globalStyles';
 
 function Footer(){
-    
+    const navigate = useNavigate()
 
     return <>
       <FooterContainer>
@@ -29,9 +30,9 @@ function Footer(){
               <LinksWrapper>
                 <LeftColumnFlexNPChildren>
                   <LinkCategory>Product</LinkCategory>
-                  <FooterLink onClick={() => console.log("Terms of Service")}>Terms of Service</FooterLink>
-                  <FooterLink onClick={() => console.log("Privacy Policy")}>Privacy Policy</FooterLink>
-                  <FooterLink onClick={() => console.log("FAQ")}>FAQ</FooterLink>
+                  <FooterLink onClick={() => navigate('/terms')}>Terms of Service</FooterLink>
+                  <FooterLink onClick={() => navigate('/policy')}>Privacy Policy</FooterLink>
+                  <FooterLink onClick={() => navigate('/faqs')}>FAQ</FooterLink>
                 </LeftColumnFlexNPChildren>
                 <RightColumnFlexNPChildren>
                 <LinkCategory>Resources</LinkCategory>
@@ -39,7 +40,7 @@ function Footer(){
                 </RightColumnFlexNPChildren>
                 <RightColumnFlexNPChildren>
                 <LinkCategory>Company</LinkCategory>
-                  <FooterLink onClick={() => console.log("About Us")}>About Us</FooterLink>
+                  <FooterLink onClick={() => navigate('/about')}>About Us</FooterLink>
                   <FooterLink onClick={() => console.log("Contact Us")}>Contact Us</FooterLink>
                 </RightColumnFlexNPChildren>
               </LinksWrapper>
