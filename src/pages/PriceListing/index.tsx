@@ -100,7 +100,7 @@ function PriceListing() {
     const { selectedTickerState } = useSelector((state: RootState) => state.ticker)
     const { searchProduct } = useSelector((state: RootState) => state.search)
 
-    console.log("selectedTickerState: ", selectedTickerState)
+    //console.log("selectedTickerState: ", selectedTickerState)
 
     // Should set the reactivesearch single dropdown value
     const [selectedOption, setSelectedOption] = useState("")
@@ -159,6 +159,7 @@ function PriceListing() {
     ]
 
     const setProduct = async(value:any) => {
+      console.log("set product value: ", value)
       setSelectedProduct(value)
     }
 
@@ -177,7 +178,7 @@ function PriceListing() {
     }, [])
 
     useEffect(() => {
-      console.log("searchProduct: ", searchProduct)
+      //console.log("searchProduct: ", searchProduct)
       setSelectedProduct(searchProduct)
     }, [searchProduct])
 
@@ -186,9 +187,14 @@ function PriceListing() {
     }, [selectedTickerState])
 
     useEffect(() => {
-      console.log("perform stat computation")
-      console.log("selected ticker: ", selectedTicker)
-      console.log("selected product: ", selectedProduct)
+      //console.log("perform stat computation")
+      //console.log("selected ticker: ", selectedTicker)
+      //console.log("selected product: ", selectedProduct)
+      if (selectedProduct) {
+        console.log("filedata: ", fileData[0].product.category.category)
+        dispatch(setCategory(fileData[0].product.category.category))
+      }
+      if (selectedTicker) dispatch(setCategory(fileData[0].product.category.category))
       if (selectedProduct != "" && selectedLocation !== "WORLDWIDE") showStatistics()
       else if (selectedTicker != "") showStatistics()
     }, [fileData])
@@ -249,13 +255,13 @@ function PriceListing() {
       }
     }
 
-    console.log("selectedLocation: ", selectedLocation)
+    //console.log("selectedLocation: ", selectedLocation)
     return (
         <>
             <CommonContainer>
               <ListingHeader />
 
-                <div style={{ padding: "1em" }}>
+                <div style={{ padding: "0 1em" }}>
                     {fileData?.length > 0 &&
                       <CSVLink
                         headers={fileHeaders}

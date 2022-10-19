@@ -39,7 +39,7 @@ function Categories() {
       label: "Currency",
     },{
       link: "https://res.cloudinary.com/dba8ifej6/image/upload/v1661036995/category-services_wgiz3r.png",
-      label: "Services",
+      label: "Gasoline",
     },{
       link: "https://res.cloudinary.com/dba8ifej6/image/upload/v1661036995/category-metals_npidyj.png",
       label: "Metals",
@@ -67,7 +67,7 @@ function Categories() {
       label: "Currency",
     },{
       link: "https://res.cloudinary.com/dba8ifej6/image/upload/v1661036995/category-services_wgiz3r.png",
-      label: "Services",
+      label: "Gasoline",
     },{
       link: "https://res.cloudinary.com/dba8ifej6/image/upload/v1661036995/category-metals_npidyj.png",
       label: "Metals",
