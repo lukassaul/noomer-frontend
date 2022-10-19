@@ -12,6 +12,7 @@ import { postProductComparison } from '../../features/comparisonSlice'
 import { PostProductComparison } from '../../api/comparison'
 import Button from "../Button";
 import {
+  FormError,
   FlexContainer,
   JustifyText,
   TitleTwo,
@@ -52,6 +53,11 @@ function ProductComparison() {
   const [inputValueLocA, setInputValueLocA] = useState<string>('')
   const [inputValueProdB, setInputValueProdB] = useState<string>('')
   const [inputValueLocB, setInputValueLocB] = useState<string>('')
+
+  const [productAError, setProductAError] = useState<boolean>(false)
+  const [productBError, setProductBError] = useState<boolean>(false)
+  const [locationAError, setLocationAError] = useState<boolean>(false)
+  const [locationBError, setLocationBError] = useState<boolean>(false)
 
   const customStyles = {
     option: () => ({
@@ -244,6 +250,21 @@ function ProductComparison() {
 
   //console.log("noomer: ", noomer)
 
+  useEffect(() => {
+    if(productA && productAError) setProductAError(false)
+  }, [productA])
+
+  useEffect(() => {
+    if(productB && productBError) setProductBError(false)
+  }, [productB])
+
+  useEffect(() => {
+    if(locationA && locationAError) setLocationAError(false)
+  }, [locationA])
+
+  useEffect(() => {
+    if(locationB && locationBError) setLocationBError(false)
+  }, [locationB])
 
   const handleComparisonSubmit = async(e: any) => {
     e.preventDefault()
@@ -251,6 +272,15 @@ function ProductComparison() {
     console.log("location a: ", locationA.split(','))
     console.log("product b: ", productB)
     console.log("location b: ", locationB)
+
+    if(!productA || !productB || !locationA || !locationB) {
+      if(!productA) setProductAError(true); else setProductAError(false);
+      if(!productB) setProductBError(true); else setProductBError(false);
+      if(!locationA) setLocationAError(true); else setLocationAError(false);
+      if(!locationB) setLocationBError(true); else setLocationBError(false);
+
+      return
+    }
 
     // Prepare data for postProductComparison api call
     let product_a = productA
@@ -327,6 +357,7 @@ function ProductComparison() {
                 }
               }}
             />
+            <FormError>{productAError ? "Product A is required" : null}</FormError>
 
             <Select
               name="locationA"
@@ -342,6 +373,7 @@ function ProductComparison() {
                 }
               }}
             />
+            <FormError>{locationAError ? "Location A is required" : null}</FormError>
           </MainFlexContainerColumn>
 
           <MainFlexContainerColumn>
@@ -359,6 +391,7 @@ function ProductComparison() {
                 }
               }}
             />
+            <FormError>{productBError ? "Product B is required" : null}</FormError>
 
             <Select
               name="locationB"
@@ -374,6 +407,7 @@ function ProductComparison() {
                 }
               }}
             />
+            <FormError>{locationBError ? "Location B is required" : null}</FormError>
           </MainFlexContainerColumn>
 
 

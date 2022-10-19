@@ -987,7 +987,8 @@ export const DeleteButton = styled.p`
 export const FooterLink = styled.p`
   cursor: pointer;
   &:hover {
-    color: #302D2D;
+    color: #CDCACA;
+    font-weight: bold;
   }
 `;
 

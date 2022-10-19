@@ -77,10 +77,11 @@ function NoomerResult() {
     <>
       <CommonContainer>
         <CenteredContainer>
-          <Container>
+          <Container style={{padding: '1em 2em'}}>
 
               <LeftLinkContainer onClick={() => navigate(-1)}>
-                <BsFillArrowLeftCircleFill size="1.5em" style={{cursor: "pointer", marginRight: "1em"}}/> <LinkParagraph >Back to list</LinkParagraph>
+                <BsFillArrowLeftCircleFill size="1.5em" style={{cursor: "pointer", marginRight: "1em", color: '#E8505B'}}/>
+                <LinkParagraph >Back to homepage</LinkParagraph>
               </LeftLinkContainer>
 
               {noomer && noomer.noomer ? Noomer() : null}

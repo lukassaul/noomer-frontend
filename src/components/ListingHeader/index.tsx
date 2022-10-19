@@ -3,6 +3,7 @@ import Marquee from "react-fast-marquee";
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../app/store'
 import { HeaderContainer } from './styles'
+import { CenteredTitle32 } from '../../globalStyles'
 
 function ListingHeader() {
 
@@ -114,9 +115,12 @@ function ListingHeader() {
   let backgroundImage = bgImage.imageUrl
   let headerTitle = bgImage.title
   return (
-    <HeaderContainer backgroundImage={backgroundImage}>
-      <p>{headerTitle}</p>
-    </HeaderContainer>
+    <>
+      <HeaderContainer backgroundImage={backgroundImage}>
+
+      </HeaderContainer>
+      <CenteredTitle32>{headerTitle}</CenteredTitle32>
+    </>
   )
 }
 
