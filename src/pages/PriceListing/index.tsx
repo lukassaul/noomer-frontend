@@ -190,11 +190,14 @@ function PriceListing() {
       //console.log("perform stat computation")
       //console.log("selected ticker: ", selectedTicker)
       //console.log("selected product: ", selectedProduct)
-      if (selectedProduct) {
+      if (selectedProduct && fileData.length > 0) {
         console.log("filedata: ", fileData[0].product.category.category)
-        dispatch(setCategory(fileData[0].product.category.category))
+        if(fileData[0].product) dispatch(setCategory(fileData[0].product.category.category))
       }
-      if (selectedTicker) dispatch(setCategory(fileData[0].product.category.category))
+      if (selectedTicker && fileData.length > 0) {
+        console.log(fileData[0])
+        if(fileData[0].product) dispatch(setCategory(fileData[0].product.category.category))
+      }
       if (selectedProduct != "" && selectedLocation !== "WORLDWIDE") showStatistics()
       else if (selectedTicker != "") showStatistics()
     }, [fileData])
