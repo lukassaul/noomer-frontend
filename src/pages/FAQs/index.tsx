@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from '../../app/store'
+import { RootState, AppDispatch } from '../../app/store'
 import Categories from '../../components/Categories'
 import Footer from '../../components/Footer';
+import { getFaqs } from '../../features/configSlice'
 import {
   CenteredTitle32,
   CenteredContainer,
@@ -73,7 +74,16 @@ const FAQS = [
 ]
 
 function FAQs() {
+  const dispatch = useDispatch<AppDispatch>()
+  const { faqs } = useSelector((state:RootState) => state.config)
 
+  useEffect(() => {
+    if (faqs[0].question === '') {
+      dispatch(getFaqs('faqs'))
+    }
+  }, [])
+
+  console.log("faqs: ", faqs)
   return (
     <>
       <CommonContainer>
@@ -81,7 +91,7 @@ function FAQs() {
           <MainFlexContainer className="bg-beige mb3em">
             <CenteredTitle32>Frequently Asked Questions</CenteredTitle32>
             <MainFlexContainerRow className="features-container">
-                {FAQS.map((item) => (
+                {faqs.length > 0 && faqs.map((item) => (
                   <MainFlexContainerColumn50 key={item.question}>
                     <MainFlexChildrenContainer>
                       <TitleThree>{item.question}</TitleThree>
