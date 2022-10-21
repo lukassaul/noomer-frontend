@@ -21,7 +21,7 @@ function useRatingForm(){
       priceID: yup.string(),
       reviewerId: yup.string(),
       type: yup.string(),
-      reason: yup.string(),
+      reason: yup.string().max(1500, 'Rating description should not be more than 1500 characters'),
       rating: yup.string().required('Vote is required'),
     })
   ), [])

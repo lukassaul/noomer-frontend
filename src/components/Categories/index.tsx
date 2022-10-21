@@ -127,12 +127,13 @@ function Categories() {
 
   const handleCategoryClick = (cat:any) => {
     console.log("category clock cat: ", cat)
-    if (cat==="Real Estate") dispatch(setCategory('Real_Estate'))
-    else if (cat==="Wearable Technology") dispatch(setCategory('Wearable_Technology'))
-    else if (cat==="Electronic Devices") dispatch(setCategory('Electronic_Devices'))
-    else if (cat==="Agricultural Goods") dispatch(setCategory('Agricultural_Goods'))
-    else if (cat==="Medicine and Health") dispatch(setCategory('Medicine'))
-    else dispatch(setCategory(cat))
+    // if (cat==="Real Estate") dispatch(setCategory('Real_Estate'))
+    // else if (cat==="Wearable Technology") dispatch(setCategory('Wearable_Technology'))
+    // else if (cat==="Electronic Devices") dispatch(setCategory('Electronic_Devices'))
+    // else if (cat==="Agricultural Goods") dispatch(setCategory('Agricultural_Goods'))
+    // else if (cat==="Medicine and Health") dispatch(setCategory('Medicine'))
+    // else dispatch(setCategory(cat))
+    dispatch(setCategory(cat))
     navigate('/listing')
   }
 
