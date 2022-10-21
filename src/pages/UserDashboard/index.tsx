@@ -127,7 +127,7 @@ function UserDashboard() {
                 <br />
                 <ProfileButtonContainer>
                   <p style={{cursor: 'pointer'}} onClick={() => handleEditProfile()}>Edit Profile</p>
-                  <Button onClick={() => navigate('/priceRecord/create')}>{t("Submit Price Record", language)}</Button>
+                  <Button onClick={() => navigate('/priceRecord/create')} color="noomerRed">{t("Submit Price Record", language)}</Button>
                 </ProfileButtonContainer>
 
             </CenteredContainer>
