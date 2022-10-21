@@ -17,103 +17,109 @@ function ListingHeader() {
 // Livestock
 // Rentals
 // Food
-
+  const defaultTitle = "Categories"
+  const defaultImageUrl = "https://res.cloudinary.com/dba8ifej6/image/upload/v1666067516/header-category-main_qigsog.png"
   const categoriesArray:any = {
-    All: {
+    "All": {
       title: "Categories",
       imageUrl: "https://res.cloudinary.com/dba8ifej6/image/upload/v1666067516/header-category-main_qigsog.png",
     },
-    Food: {
+    "Food": {
       title: "FOOD",
       imageUrl: "https://res.cloudinary.com/dba8ifej6/image/upload/v1661492906/header-category-food_hzid87.png",
     },
-    Beverages: {
+    "Beverages": {
       title: "BEVERAGES",
       imageUrl: "https://res.cloudinary.com/dba8ifej6/image/upload/v1665465678/header-category-beverage_b7kr4v.png",
     },
-    Livestock: {
+    "Livestock": {
       title: "LIVESTOCK",
       imageUrl: "https://res.cloudinary.com/dba8ifej6/image/upload/v1665465679/header-category-livestock1_fbsqyv.png",
     },
-    Tobacco: {
+    "Tobacco": {
       title: "TOBACCO",
       imageUrl: "https://res.cloudinary.com/dba8ifej6/image/upload/v1664348910/header-category-tobacco_m4ctgn.jpg",
     },
-    Metals: {
+    "Metals": {
       title: "METALS",
       imageUrl: "https://res.cloudinary.com/dba8ifej6/image/upload/v1665467478/header-category-metals_rfvbb5.png",
     },
-    Currency: {
+    "Currency": {
       title: "CURRENCY",
       imageUrl: "https://res.cloudinary.com/dba8ifej6/image/upload/v1665465678/header-category-currency_gtt91r.png",
     },
-    Services: {
+    "Services": {
       title: "SERVICES",
       imageUrl: "https://res.cloudinary.com/dba8ifej6/image/upload/v1665465680/header-category-service_oqainv.png",
     },
-    Transportation: {
+    "Transportation": {
       title: "TRANSPORTATION",
       imageUrl: "https://res.cloudinary.com/dba8ifej6/image/upload/v1665465680/header-category-transportation_o8acpz.png",
     },
-    Real_Estate: {
+    "Real Estate": {
       title: "REAL ESTATE",
       imageUrl: "https://res.cloudinary.com/dba8ifej6/image/upload/v1665465680/header-category-real-estate_oeoslw.png",
     },
-    Water: {
+    "Water": {
       title: "WATER",
       imageUrl: "https://res.cloudinary.com/dba8ifej6/image/upload/v1665465680/header-category-water_ttkuie.png",
     },
-    Wearable_Technology: {
+    "Wearable Technology": {
       title: "WEARABLE TECHNOLOGY",
       imageUrl: "https://res.cloudinary.com/dba8ifej6/image/upload/v1665465680/header-category-wearable-tech_vsyjdy.png",
     },
-    Medicine: {
+    "Medicine": {
       title: "Medicine and Health Supplements",
       imageUrl: "https://res.cloudinary.com/dba8ifej6/image/upload/v1665465680/header-category-medicine_a57l7o.png",
     },
-    Energy: {
+    "Energy": {
       title: "ENERGY",
       imageUrl: "https://res.cloudinary.com/dba8ifej6/image/upload/v1665465679/header-category-energy_id6i84.png",
     },
-    Grains: {
+    "Grains": {
       title: "GRAINS",
       imageUrl: "https://res.cloudinary.com/dba8ifej6/image/upload/v1665465679/header-category-grains_bf1zp1.png",
     },
-    Electronic_Devices: {
+    "Electronic Devices": {
       title: "ELECTRONIC DEVICES",
       imageUrl: "https://res.cloudinary.com/dba8ifej6/image/upload/v1665465679/header-category-electronic-device_oavjde.png",
     },
-    Furnitures: {
+    "Furnitures": {
       title: "FURNITURES",
       imageUrl: "https://res.cloudinary.com/dba8ifej6/image/upload/v1665465679/header-category-furniture_y36twi.png",
     },
-    Gasoline: {
+    "Gasoline": {
       title: "GASOLINE",
       imageUrl: "https://res.cloudinary.com/dba8ifej6/image/upload/v1665465679/header-category-gasoline_crzvoc.png",
     },
-    Coffee: {
+    "Coffee": {
       title: "COFFEE",
       imageUrl: "https://res.cloudinary.com/dba8ifej6/image/upload/v1665465678/header-category-coffee_tnqybz.png",
     },
-    Clothing: {
+    "Clothing": {
       title: "CLOTHING",
       imageUrl: "https://res.cloudinary.com/dba8ifej6/image/upload/v1665465678/header-category-clothing_tsposs.png",
     },
-    Appliances: {
+    "Appliances": {
       title: "APPLIANCES",
       imageUrl: "https://res.cloudinary.com/dba8ifej6/image/upload/v1665465678/header-category-appliances_bxrohu.png",
     },
-    Agricultural_Goods: {
+    "Agricultural Goods": {
       title: "AGRICULTURAL GOODS",
       imageUrl: "https://res.cloudinary.com/dba8ifej6/image/upload/v1665465678/header-category-agricultural_vib9ib.png",
     }
   }
   console.log("selectedCategory: ", selectedCategory)
 
-  if (selectedCategory === "") selectedCategory = "All"
+  if (selectedCategory === "") selectedCategory = "All";
   let bgImage = categoriesArray[selectedCategory]
-  let backgroundImage = bgImage.imageUrl
-  let headerTitle = bgImage.title
+  let backgroundImage = defaultImageUrl
+  let headerTitle = defaultTitle
+
+  if (bgImage) {
+    backgroundImage = bgImage.imageUrl
+    headerTitle = bgImage.title
+  }
   return (
     <>
       <HeaderContainer backgroundImage={backgroundImage}>

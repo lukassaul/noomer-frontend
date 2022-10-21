@@ -119,10 +119,10 @@ const RatingForm: React.FC<Props> = ({
                     disabled={hasVoted || isOwner ? true : false}
                     />
               </FlexContainer>
-              <FormError>{errors.rating?.message}</FormError>
-              <FormError>{errors.reason?.message}</FormError>
+              <FormError style={{textAlign: 'center'}}>{errors.rating?.message}</FormError>
+              <FormError style={{textAlign: 'center'}}>{errors.reason?.message}</FormError>
               <LoginButtonWrapper>
-                  <Button type="submit" color='gray' disabled={isOwner || hasVoted || isSubmitRatingFetching ? true : false}>{t("Submit", language)}</Button>
+                  <Button type="submit" color='secondaryRed' disabled={isOwner || hasVoted || isSubmitRatingFetching ? true : false}>{t("Submit", language)}</Button>
               </LoginButtonWrapper>
 
 
