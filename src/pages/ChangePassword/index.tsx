@@ -4,12 +4,14 @@ import { useNavigate } from "react-router-dom";
 import { RootState } from '../../app/store';
 import { t } from '../../i18n';
 import ChangePasswordForm from '../../components/ChangePasswordForm';
+import { BsFillArrowLeftCircleFill } from "react-icons/bs";
 import Button from '../../components/Button';
 import Footer from '../../components/Footer'
 import Alert from '../../components/AlertMessage'
 import { clearLogState } from '../../features/loginSlice'
 import { clearAddState } from '../../features/addPasswordSlice'
 import { clearRegState } from '../../features/registrationSlice'
+import { clearCPState } from '../../features/changePasswordSlice'
 import {
     PasswordResetSection,
     PasswordTitle,
@@ -19,7 +21,9 @@ import {
   Container,
   CommonContainer,
   CenteredContainer,
-  CenteredTitle32
+  CenteredTitle32,
+  LeftLinkContainer,
+  LinkParagraph
 } from '../../globalStyles'
 
 function ChangePassword() {
@@ -34,7 +38,7 @@ function ChangePassword() {
             dispatch(clearRegState())
             dispatch(clearLogState())
             dispatch(clearAddState())
-            localStorage.clear()
+            dispatch(clearCPState())
             navigate('/login');
         }
     }, [isChangeSuccess, navigate, dispatch])
@@ -42,9 +46,10 @@ function ChangePassword() {
     return (
       <>
         <CommonContainer style={{padding: '2em'}}>
-          <div style={{display: 'flex', justifyContent: 'flex-start', width: '100%'}}>
-            <Button onClick={() => navigate(-1)}>Back</Button>
-          </div>
+          <LeftLinkContainer style={{padding: '2em'}}>
+            <BsFillArrowLeftCircleFill size="1.5em" style={{marginRight: "1em", color: '#E8505B', cursor: 'pointer'}} onClick={() => navigate(-1)}/>
+            <LinkParagraph onClick={() => navigate(-1)}>Back</LinkParagraph>
+          </LeftLinkContainer>
           <CenteredContainer style={{ flexDirection: 'column' }}>
             {errorChangeMessage ?
                 <Alert
