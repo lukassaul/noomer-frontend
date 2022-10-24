@@ -45,6 +45,7 @@ function NavBar() {
 
     const { isLogSuccess } = useSelector((state: RootState) => state.login)
     const { isAddSuccess, errorAddMessage} = useSelector((state: RootState) => state.addPassword)
+    const { isChangeSuccess } = useSelector((state: RootState) => state.changePassword)
 
     const handleClick = () => setClick(!click);
     const closeMobileMenu = () => setClick(false);
@@ -82,6 +83,12 @@ function NavBar() {
       setUserFirstName(first_name)
       setUserLastName(last_name)
     }, [isLogSuccess, isAddSuccess]);
+
+    useEffect(() => {
+      if(isChangeSuccess) {
+        handleLogout()
+      }
+    }, [isChangeSuccess])
 
     window.addEventListener('resize', showButton);
 

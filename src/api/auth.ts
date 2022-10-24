@@ -299,7 +299,7 @@ export const ResetPasswordRequestAPI = async ({ email }: ForgetPasswordData) => 
 
 
 export const DeactivateAccountAPI = async ( userId: string) => {
-
+  //console.log("deactivate account api: ", userId)
   const token = localStorage.getItem('token')
   const data = { userid: userId }
   const url = `${process.env.REACT_APP_BASE_URL}/auth/deactivate`

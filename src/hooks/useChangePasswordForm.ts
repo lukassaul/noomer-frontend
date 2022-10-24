@@ -16,9 +16,10 @@ function useChangePasswordForm(){
   const dispatch = useDispatch<AppDispatch>()
   const validationSchema = useMemo(() => (
     yup.object().shape({
-      password: yup.string().required('Password is required').min(8, 'Password must be at least 8 characters'),
+      password: yup.string().required('New password is required').min(8, 'Password must be atleast 8 characters'),
       confirmPassword: yup.string()
             .required('Confirm Password is required')
+            .min(8, 'Password must be atleast 8 characters')
             .oneOf([yup.ref('password')], 'Passwords must match')
     })
   ), [])

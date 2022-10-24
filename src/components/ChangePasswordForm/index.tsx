@@ -31,7 +31,7 @@ function ChangePasswordForm() {
             {...register("password")}
             name="password"
             type="password"
-            placeholder='Password'
+            placeholder='New password'
             aria-label='Password' />
             <FormError>{errors.password?.message}</FormError>
 

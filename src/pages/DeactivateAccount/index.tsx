@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { t } from '../../i18n'
 import { useNavigate } from "react-router-dom";
+import { BsFillArrowLeftCircleFill } from "react-icons/bs";
 import { RootState, AppDispatch } from "../../app/store"
+import Alert from '../../components/AlertMessage';
 import Button from '../../components/Button';
 import Footer from '../../components/Footer';
 import { getDashboard } from '../../features/dashboardSlice';
@@ -19,7 +21,9 @@ import { useModal } from '../../components/ReusableModal/useModal';
 import { DeactivateTitle, DeactivateWrapper} from './styles'
 import {
   CommonContainer,
-  CenteredContainer
+  CenteredContainer,
+  LeftLinkContainer,
+  LinkParagraph
 } from '../../globalStyles'
 
 
@@ -30,6 +34,8 @@ function DeactivateAccount() {
     let profileUserId = localStorage.getItem('user')
 
     const [profile, setProfile] = useState<any>()
+    const [deactivateError, setDeactivateError] = useState(false)
+    const [deactivateErrorMessage, setDeactivateErrorMessage] = useState<string>('')
 
     const {dashboard} = useSelector((state: RootState) => state.dashboard)
 
@@ -59,7 +65,7 @@ function DeactivateAccount() {
       // if success, logout user
       // if error, display error
       if(profile) {
-        const result: any = await DeactivateAccountAPI(profile.user)
+        const result: any = await DeactivateAccountAPI(profile._id)
 
         if (result && result.status === 200) {
             localStorage.clear()
@@ -71,6 +77,8 @@ function DeactivateAccount() {
             navigate('/login')
         } else {
           console.log("error deactivating the account")
+          setDeactivateError(true)
+          setDeactivateErrorMessage("Error deactivating the account. Please try again.")
         }
       }
     };
@@ -79,14 +87,32 @@ function DeactivateAccount() {
     return (
       <>
         <CommonContainer>
+          <LeftLinkContainer style={{padding: '2em'}}>
+            <BsFillArrowLeftCircleFill size="1.5em" style={{marginRight: "1em", color: '#E8505B', cursor: 'pointer'}} onClick={() => navigate(-1)}/>
+            <LinkParagraph onClick={() => navigate(-1)}>Back</LinkParagraph>
+          </LeftLinkContainer>
           <CenteredContainer>
             <DeactivateWrapper>
-              <div style={{display: 'flex', justifyContent: 'flex-start', margin: '1em 0', width: '100%'}}>
-                <Button onClick={() => navigate(-1)}>Back</Button>
-              </div>
+              {deactivateError ?
+                  <Alert
+                      text={deactivateErrorMessage}
+                      bgColor="#f8d7da"
+                      txtColor="#721c24"
+                  /> : null
+              }
+
               <div style={{display: 'flex', flexDirection: 'column'}}>
                 <DeactivateTitle>{t('Deactivate Account', language)}</DeactivateTitle>
-                <Button onClick={() => toggle()} color='secondaryRed'>{t('Proceed', language)}</Button>
+                <Button
+                  onClick={() => {
+                    setDeactivateError(false)
+                    setDeactivateErrorMessage("")
+                    toggle()
+                  }}
+                  color='secondaryRed'
+                  >
+                  {t('Proceed', language)}
+                </Button>
               </div>
 
               <Modal
