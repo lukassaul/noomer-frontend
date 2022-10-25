@@ -79,7 +79,7 @@ export const HeaderContainer = styled.div`
 export const BodyContainer = styled.div`
   z-index: 1;
   width: 100%;
-  padding: 0 3rem;
+  //padding: 0 3rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -109,6 +109,9 @@ export const TitleThree = styled.p`
   font-size: 20px;
   font-weight: 600;
   padding: 2rem 0;
+  @media screen and (max-width: 600px) {
+    padding: 1em 0;
+  }
 `;
 
 export const TitleThreeTopPad = styled.p`
@@ -138,9 +141,6 @@ export const HomeFLowImage = styled.img`
   height: auto;
   margin-bottom: 2em;
   @media screen and (max-width: 1020px) {
-      align-self:flex-end;
-  }
-  @media screen and (max-width: 480px) {
       align-self:center;
   }
 `;
@@ -167,18 +167,18 @@ export const FlexBetweenRowContainer = styled.div`
   flex-direction: row;
 `;
 
-export const MainFlexContainer = styled.div`
+export const MainFlexContainerComparison = styled.div`
   width: 100%;
 `;
 
-export const MainFlexContainerRow = styled.div`
+export const MainFlexContainerRowComparison = styled.div`
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
   padding: 0 4px;
 `;
 
-export const MainFlexContainerColumn = styled.div`
+export const MainFlexContainerColumnComparison = styled.div`
   flex: 30%;
   max-width: 30%;
   padding: 0 4px;
@@ -192,6 +192,35 @@ export const MainFlexContainerColumn = styled.div`
   }
 `;
 
+export const MainFlexContainer = styled.div`
+  width: 100%;
+  background-color: #263238;
+  @media screen and (max-width: 720px) {
+    background-color: transparent;
+  }
+`;
+
+export const MainFlexContainerRow = styled.div`
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 0 4px;
+`;
+
+export const MainFlexContainerColumn = styled.div`
+  flex: 30%;
+  max-width: 30%;
+  padding: 0 4px;
+  margin-bottom: 0;
+  background-color: transparent;
+  @media screen and (max-width: 720px) {
+    background-color: #263238;
+    flex: 100%;
+    max-width: 100%;
+    margin-bottom: 12px;
+  }
+`;
+
 export const MainFlexContainerColumn50 = styled.div`
   flex: 50%;
   max-width: 50%;
@@ -199,10 +228,12 @@ export const MainFlexContainerColumn50 = styled.div`
   @media screen and (max-width: 800px) {
     flex: 50%;
     max-width: 50%;
+    padding: 0 1em;
   }
   @media screen and (max-width: 600px) {
     flex: 100%;
     max-width: 100%;
+    padding: 0 1em;
   }
 `;
 
@@ -239,6 +270,9 @@ export const MainFlexChildrenContainer = styled.div`
   //justify-content: center;
   //align-items: center;
   padding: 2em;
+  @media screen and (max-width: 600px) {
+    padding: 1em;
+  }
 `;
 
 export const JustifyText = styled.p`

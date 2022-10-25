@@ -30,7 +30,7 @@ function Features() {
   ]
 
   return (
-    <MainFlexContainer className="bg-darkblue white-font mb3em">
+    <MainFlexContainer className="white-font mb3em">
       <MainFlexContainerRow className="features-container">
           {faeturesArray.map((feature) => (
             <MainFlexContainerColumn key={feature.title}>

@@ -17,9 +17,9 @@ import {
   JustifyText,
   TitleTwo,
   TitleThree,
-  MainFlexContainer,
-  MainFlexContainerRow,
-  MainFlexContainerColumn,
+  MainFlexContainerComparison,
+  MainFlexContainerRowComparison,
+  MainFlexContainerColumnComparison,
   MainFlexChildrenContainer,
 } from '../../globalStyles'
 
@@ -335,14 +335,14 @@ function ProductComparison() {
 
   return (
 
-    <MainFlexContainer className="bg-midgray padding2em">
+    <MainFlexContainerComparison className="bg-midgray padding2em">
       <form onSubmit={handleComparisonSubmit} aria-label="form">
         <div style={{textAlign: "center"}}>
           <TitleTwo>{t('Title_Product_Comparison', language)}</TitleTwo>
           <p>{t('Subtitle_Product_Comparison', language)}</p>
         </div>
-        <MainFlexContainerRow>
-          <MainFlexContainerColumn>
+        <MainFlexContainerRowComparison>
+          <MainFlexContainerColumnComparison>
             <Select
               name="product"
               options={slicedOptions}
@@ -374,9 +374,9 @@ function ProductComparison() {
               }}
             />
             <FormError>{locationAError ? "Location A is required" : null}</FormError>
-          </MainFlexContainerColumn>
+          </MainFlexContainerColumnComparison>
 
-          <MainFlexContainerColumn>
+          <MainFlexContainerColumnComparison>
             <Select
               name="productB"
               options={slicedOptionsB}
@@ -408,15 +408,15 @@ function ProductComparison() {
               }}
             />
             <FormError>{locationBError ? "Location B is required" : null}</FormError>
-          </MainFlexContainerColumn>
+          </MainFlexContainerColumnComparison>
 
 
-        </MainFlexContainerRow>
+        </MainFlexContainerRowComparison>
         <FlexContainer style={{justifyContent: 'center'}}>
           <Button color="noomerRed">{t('Button_Proceed', language)}</Button>
         </FlexContainer>
       </form>
-    </MainFlexContainer>
+    </MainFlexContainerComparison>
   )
 }
 

@@ -10,8 +10,8 @@ import {
   Container,
   TitleThree,
   JustifyText,
-  MainFlexContainer,
-  MainFlexContainerRow,
+  MainFlexContainerComparison,
+  MainFlexContainerRowComparison,
   MainFlexChildrenContainer,
   MainFlexContainerColumn50,
   MainFlexContainerColumn75,
@@ -24,9 +24,9 @@ function AboutUs() {
     <>
       <CommonContainer>
         <CenteredContainer>
-          <MainFlexContainer className="bg-beige mb3em">
+          <MainFlexContainerComparison className="bg-beige mb3em">
             <CenteredTitle32>About Us</CenteredTitle32>
-            <MainFlexContainerRow className="features-container">
+            <MainFlexContainerRowComparison className="features-container">
 
                 <MainFlexContainerColumn75>
                   <MainFlexChildrenContainer>
@@ -57,8 +57,8 @@ function AboutUs() {
                 </MainFlexContainerColumn75>
 
 
-            </MainFlexContainerRow>
-          </MainFlexContainer>
+            </MainFlexContainerRowComparison>
+          </MainFlexContainerComparison>
         </CenteredContainer>
       </CommonContainer>
 

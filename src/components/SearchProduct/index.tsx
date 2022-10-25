@@ -10,9 +10,9 @@ import {
   FormInput,
   JustifyText,
   CenteredTitle32,
-  MainFlexContainer,
-  MainFlexContainerRow,
-  MainFlexContainerColumn,
+  MainFlexContainerComparison,
+  MainFlexContainerRowComparison,
+  MainFlexContainerColumnComparison,
   MainFlexChildrenContainer,
 } from '../../globalStyles'
 
@@ -41,9 +41,9 @@ function SearchProduct() {
   }
 
   return (
-    <MainFlexContainer className="mb3em">
+    <MainFlexContainerComparison className="mb3em">
       <CenteredTitle32>{t('Title_Search_Product', language)}</CenteredTitle32>
-      <MainFlexContainerRow>
+      <MainFlexContainerRowComparison>
         <div style={{width: "100%"}}>
           <div className="search_wrapper">
             <div className="search_icon"><BsSearch /></div>
@@ -62,8 +62,8 @@ function SearchProduct() {
             />
           </div>
         </div>
-      </MainFlexContainerRow>
-    </MainFlexContainer>
+      </MainFlexContainerRowComparison>
+    </MainFlexContainerComparison>
   )
 }
 
