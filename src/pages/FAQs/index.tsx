@@ -11,8 +11,8 @@ import {
   Container,
   TitleThree,
   JustifyText,
-  MainFlexContainer,
-  MainFlexContainerRow,
+  MainFlexContainerComparison,
+  MainFlexContainerRowComparison,
   MainFlexChildrenContainer,
   MainFlexContainerColumn50
 } from '../../globalStyles'
@@ -88,9 +88,9 @@ function FAQs() {
     <>
       <CommonContainer>
         <CenteredContainer>
-          <MainFlexContainer className="bg-beige mb3em">
+          <MainFlexContainerComparison className="bg-beige mb3em">
             <CenteredTitle32>Frequently Asked Questions</CenteredTitle32>
-            <MainFlexContainerRow className="features-container">
+            <MainFlexContainerRowComparison className="features-container">
                 {faqs.length > 0 && faqs.map((item) => (
                   <MainFlexContainerColumn50 key={item.question}>
                     <MainFlexChildrenContainer>
@@ -99,8 +99,8 @@ function FAQs() {
                     </MainFlexChildrenContainer>
                   </MainFlexContainerColumn50>
                 ))}
-            </MainFlexContainerRow>
-          </MainFlexContainer>
+            </MainFlexContainerRowComparison>
+          </MainFlexContainerComparison>
         </CenteredContainer>
       </CommonContainer>
 

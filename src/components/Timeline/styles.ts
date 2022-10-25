@@ -2,6 +2,12 @@ import styled from 'styled-components';
 
 export const MainTimelineContainer = styled.div`
   width: 100%;
+  padding: 0 4em;
+  @media screen and (max-width: 800px) {
+    width: 100%;
+    padding: 0 2em;
+  }
+
 `;
 
 export const TimelineRow = styled.div`
@@ -15,11 +21,11 @@ export const TimelineColumn = styled.div`
   flex: 30%;
   max-width: 30%;
   padding: 0 4px;
-  @media screen and (max-width: 800px) {
-    flex: 50%;
-    max-width: 50%;
-  }
-  @media screen and (max-width: 600px) {
+  // @media screen and (max-width: 800px) {
+  //   flex: 50%;
+  //   max-width: 50%;
+  // }
+  @media screen and (max-width: 720px) {
     flex: 100%;
     max-width: 100%;
   }
@@ -31,6 +37,9 @@ export const TimelineContainer = styled.div`
   //justify-content: center;
   //align-items: center;
   padding: 2em;
+  @media screen and (max-width: 800px) {
+    padding: 1em;
+  }
 `;
 
 export const TimelineImage = styled.img`

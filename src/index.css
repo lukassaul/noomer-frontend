@@ -85,6 +85,10 @@ code {
   color: #110ED4;
 }
 
+.pointer {
+  cursor: pointer;
+}
+
 .centerText {
   text-align: center;
 }

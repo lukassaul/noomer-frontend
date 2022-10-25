@@ -15,14 +15,14 @@ export const CategoriesColumn = styled.div`
   max-width: 25%;
   padding: 1em;
   cursor: pointer;
-  @media screen and (max-width: 800px) {
-    flex: 50%;
-    max-width: 50%;
-  }
-  @media screen and (max-width: 600px) {
-    flex: 100%;
-    max-width: 100%;
-  }
+  // @media screen and (max-width: 800px) {
+  //   flex: 50%;
+  //   max-width: 50%;
+  // }
+  // @media screen and (max-width: 600px) {
+  //   flex: 100%;
+  //   max-width: 100%;
+  // }
 `;
 
 export const CategoryContainer = styled.div`
@@ -34,18 +34,30 @@ export const CategoryContainer = styled.div`
   background-color: #E8E8E8;
   border-radius: 16px;
   box-shadow: 0px 4px 4px #cdcaca;
+  @media screen and (max-width: 600px) {
+    padding: 0;
+    border-radius: 0;
+    background-color: transparent;
+    box-shadow: 0px 0px 0px #cdcaca;
+  }
 `;
 
 export const CategoryImage = styled.img`
   margin-top: 8px;
   vertical-align: middle;
   width: 90%;
+  @media screen and (max-width: 600px) {
+    width: 64px;
+  }
 `;
 
 export const CategoryLabel = styled.p`
   margin-top: 8px;
   font-weight: 700;
   font-size: 15px;
+  @media screen and (max-width: 600px) {
+    font-size: 12px;
+  }
 `;
 
 
