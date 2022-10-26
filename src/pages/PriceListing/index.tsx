@@ -9,7 +9,7 @@ import {
     SelectedFilters
 } from '@appbaseio/reactivesearch'
 import moment from 'moment'
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import Button from '../../components/Button'
@@ -258,7 +258,14 @@ function PriceListing() {
       }
     }
 
-    //console.log("selectedLocation: ", selectedLocation)
+
+    useEffect(() => {
+      console.log("PAGE ONLOAD")
+      
+      return () => {dispatch(clearSearchProduct())}
+
+    }, [])
+
     return (
         <>
             <CommonContainer>

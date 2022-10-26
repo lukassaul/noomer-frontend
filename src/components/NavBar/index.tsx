@@ -37,7 +37,7 @@ function NavBar() {
     const [click, setClick] = useState(false);
     const [button, setButton] = useState(true);
 
-    const [searchQuery, setSearchQuery] = useState<string | null>('')
+    const [searchQuery, setSearchQuery] = useState('')
     const [isToken, setIsToken] = useState<string | null>('')
     const [userEmail, setUserEmail] = useState<string | null>('')
     const [userFirstName, setUserFirstName] = useState<string | null>('')
@@ -46,6 +46,7 @@ function NavBar() {
     const { isLogSuccess } = useSelector((state: RootState) => state.login)
     const { isAddSuccess, errorAddMessage} = useSelector((state: RootState) => state.addPassword)
     const { isChangeSuccess } = useSelector((state: RootState) => state.changePassword)
+    const { searchProduct } = useSelector((state: RootState) => state.search)
 
     const handleClick = () => setClick(!click);
     const closeMobileMenu = () => setClick(false);
@@ -110,6 +111,7 @@ function NavBar() {
       console.log("search product")
       e.preventDefault()
       dispatch(setSearchProduct(searchQuery))
+      setSearchQuery("")
       navigate('/listing')
     }
 
@@ -131,6 +133,7 @@ function NavBar() {
                         handleSearchProduct(e);
                       }
                     }}
+                    value={searchQuery}
                   />
                 </CenteredContainerNav>
                 <MobileIcon onClick={handleClick}>
