@@ -26,7 +26,7 @@ function ListingHeader() {
     },
     "Food": {
       title: "FOOD",
-      imageUrl: "https://res.cloudinary.com/dba8ifej6/image/upload/v1661492906/header-category-food_hzid87.png",
+      imageUrl: "https://res.cloudinary.com/dba8ifej6/image/upload/v1666769551/header-category-food_r2poj5.png",
     },
     "Beverages": {
       title: "BEVERAGES",
