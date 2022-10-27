@@ -48,6 +48,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "build:staging": "env-cmd -f .env.staging craco build",
+    "build:production": "env-cmd -f .env.production craco build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
