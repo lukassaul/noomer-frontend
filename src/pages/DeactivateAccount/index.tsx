@@ -87,20 +87,19 @@ function DeactivateAccount() {
     return (
       <>
         <CommonContainer>
+          {deactivateError ?
+              <Alert
+                  text={deactivateErrorMessage}
+                  bgColor="#f8d7da"
+                  txtColor="#721c24"
+              /> : null
+          }
           <LeftLinkContainer style={{padding: '2em'}}>
             <BsFillArrowLeftCircleFill size="1.5em" style={{marginRight: "1em", color: '#E8505B', cursor: 'pointer'}} onClick={() => navigate(-1)}/>
             <LinkParagraph onClick={() => navigate(-1)}>Back</LinkParagraph>
           </LeftLinkContainer>
           <CenteredContainer>
             <DeactivateWrapper>
-              {deactivateError ?
-                  <Alert
-                      text={deactivateErrorMessage}
-                      bgColor="#f8d7da"
-                      txtColor="#721c24"
-                  /> : null
-              }
-
               <div style={{display: 'flex', flexDirection: 'column'}}>
                 <DeactivateTitle>{t('Deactivate Account', language)}</DeactivateTitle>
                 <Button
