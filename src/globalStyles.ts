@@ -99,6 +99,13 @@ export const CenteredTitle32 = styled.p`
   padding: 2rem 0;
 `;
 
+export const CenteredTitle24 = styled.p`
+  text-align: center;
+  font-size: 24px;
+  font-weight: 600;
+  padding: 2rem 0;
+`;
+
 export const TitleTwo = styled.p`
   font-size: 24px;
   font-weight: 600;
@@ -147,6 +154,11 @@ export const HomeFLowImage = styled.img`
 
 export const FlexContainer = styled.div`
   display: flex;
+`;
+
+export const FlexCenterContainer = styled.div`
+  display: flex;
+  justify-content: center;
 `;
 
 export const FlexCenterColContainer = styled.div`

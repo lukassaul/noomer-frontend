@@ -23,7 +23,6 @@ function ForgotPassword() {
         <CommonContainer>
 
           <CenteredContainer style={{flexDirection: 'column'}}>
-            <CommonContentContainer style={{display: 'flex', alignItems: 'center'}}>
             {errorRequestMessage ?
               <Alert
                 text={errorRequestMessage}
@@ -31,7 +30,7 @@ function ForgotPassword() {
                 txtColor="#721c24"
                 /> : null
             }
-
+            <CommonContentContainer style={{display: 'flex', alignItems: 'center'}}>
               {isRequestSuccess ?
                 <p>{t('An email has been sent to reset your password.', language)}</p>
                 :

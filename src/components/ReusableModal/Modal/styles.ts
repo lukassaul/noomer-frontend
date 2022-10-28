@@ -8,9 +8,6 @@ export const Wrapper = styled.div`
 	z-index: 700;
 	width: inherit;
 	outline: 0;
-	@media(max-width: 480px) {
-		width: 100%;
-	}
 `;
 
 export const Backdrop = styled.div`
