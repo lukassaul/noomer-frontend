@@ -9,14 +9,6 @@ function ListingHeader() {
 
   let { selectedCategory } = useSelector((state: RootState) => state.category)
 
-//   Currencies
-// Services
-// Metals
-// Transportation
-// Tobacco
-// Livestock
-// Rentals
-// Food
   const defaultTitle = "Categories"
   const defaultImageUrl = "https://res.cloudinary.com/dba8ifej6/image/upload/v1666067516/header-category-main_qigsog.png"
   const categoriesArray:any = {
@@ -109,7 +101,7 @@ function ListingHeader() {
       imageUrl: "https://res.cloudinary.com/dba8ifej6/image/upload/v1665465678/header-category-agricultural_vib9ib.png",
     }
   }
-  console.log("selectedCategory: ", selectedCategory)
+  //console.log("selectedCategory: ", selectedCategory)
 
   if (selectedCategory === "") selectedCategory = "All";
   let bgImage = categoriesArray[selectedCategory]
@@ -122,7 +114,7 @@ function ListingHeader() {
   }
   return (
     <>
-      <HeaderContainer backgroundImage={backgroundImage}>
+      <HeaderContainer src={backgroundImage}>
 
       </HeaderContainer>
       <CenteredTitle32>{headerTitle}</CenteredTitle32>

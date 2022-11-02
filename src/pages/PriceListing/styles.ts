@@ -152,16 +152,22 @@ export const FilterWrapperMobile = styled.div<{click: boolean}>`
         transition: all 0.5s ease;
         background: #fff;
         padding: 30px;
+        z-index: 1;
     }
 `;
 
-export const ArrowSmall = styled.img`
+export const FilterButtonWrapper = styled.div`
   display: none;
   @media screen and (max-width: 540px) {
     display: flex;
-    margin: 20px;
+    margin: 0 8px;
     cursor: pointer;
   }
+`
+
+export const ArrowSmall = styled.img`
+  margin: 0 8px;
+  cursor: pointer;
 `;
 
 export const MobileIconProfile = styled.div`
@@ -174,5 +180,20 @@ export const MobileIconProfile = styled.div`
         right: 0;
         transform: translate(-100%, 60%); */
         font-size: 1rem;
+    }
+`;
+
+export const DesktopResultWrapper = styled.div`
+    display: contents;
+    @media screen and (max-width: 540px) {
+        display: none;
+    }
+`;
+
+export const MobileResultWrapper = styled.div`
+    display: none;
+
+    @media screen and (max-width: 540px) {
+        display: block;
     }
 `;
