@@ -97,6 +97,9 @@ export const CenteredTitle32 = styled.p`
   font-size: 32px;
   font-weight: 600;
   padding: 2rem 0;
+  @media screen and (max-width: 540px) {
+    padding: 1rem 0;
+  }
 `;
 
 export const CenteredTitle24 = styled.p`

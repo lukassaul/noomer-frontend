@@ -37,8 +37,11 @@ import {
     ItemContentWrapper,
     ItemContent,
     FilterWrapperMobile,
+    FilterButtonWrapper,
     ArrowSmall,
     MobileIconProfile,
+    DesktopResultWrapper,
+    MobileResultWrapper
 } from './styles'
 import {
   CommonContainer,
@@ -261,7 +264,7 @@ function PriceListing() {
 
     useEffect(() => {
       console.log("PAGE ONLOAD")
-      
+
       return () => {dispatch(clearSearchProduct())}
 
     }, [])
@@ -271,18 +274,13 @@ function PriceListing() {
             <CommonContainer>
               <ListingHeader />
 
-                <div style={{ padding: "0 1em" }}>
-                    {fileData?.length > 0 &&
-                      <CSVLink
-                        headers={fileHeaders}
-                        data={fileData}
-                        filename="results.csv"
-                        target="_blank"
-                      >
-                        Dowload csv file
-                      </CSVLink>
-                    }
-                </div>
+                <FilterButtonWrapper>
+                  <span>Show Filters</span>
+                  <ArrowSmall
+                      src="https://res.cloudinary.com/dba8ifej6/image/upload/v1644293162/arrow_right_y4gllj.png"
+                      onClick={handleClick}
+                  />
+                </FilterButtonWrapper>
                 <ReactiveBase
                     app="prices"
                     url={process.env.REACT_APP_ELASTIC_URL}
@@ -299,7 +297,7 @@ function PriceListing() {
                         return { ...elasticsearchResponse }
 
                     }}
-                    style={{padding: '1em'}}
+                    className="elasticWrapper"
                 >
                     <ListWrapper>
                         <FilterWrapperMobile click={click}>
@@ -579,7 +577,7 @@ function PriceListing() {
                             <DataSearch
                                 title="Search Price Listing"
                                 componentId="mainSearch"
-                                style={{"paddingBottom": "2.5em", "width": "50%", "borderRadius": "5px"}}
+                                style={{"paddingBottom": "2.5em", "width": "80%", "borderRadius": "5px", "paddingLeft": "8px"}}
                                 autosuggest={false}
                                 defaultValue={searchProduct}
                                 dataField={[
@@ -598,6 +596,19 @@ function PriceListing() {
                                   'type',
                                 ]}
                             />
+
+                            <div style={{ padding: "0 1em" }}>
+                                {fileData?.length > 0 &&
+                                  <CSVLink
+                                    headers={fileHeaders}
+                                    data={fileData}
+                                    filename="results.csv"
+                                    target="_blank"
+                                  >
+                                    Dowload csv file
+                                  </CSVLink>
+                                }
+                            </div>
 
                             {(selectedProduct && selectedLocation !== "WORLDWIDE") || (selectedTicker) ?
                               <FlexCenterColContainer>
@@ -655,37 +666,65 @@ function PriceListing() {
                                 ]}
                                 render={({ data }) => (
                                     <ReactiveList.ResultListWrapper>
-                                      <table className="table table-bordered table-hover" style={{fontSize: '10px'}}>
-                                        <thead>
-                                          <tr>
-                                            <th>TICKER</th>
-                                            <th>PRODUCT NAME</th>
-                                            <th>LOCATION</th>
-                                            <th>TYPE</th>
-                                            <th>PRICE</th>
-                                            <th>DATE</th>
-                                          </tr>
-                                        </thead>
-                                        <tbody>
-                                          {data.map((item: any) => {
-                                            if (item.product && item.product.product_name) {
-                                              let productName = item.product.product_name
-                                              return <tr
-                                                      key={item._id}
-                                                      onClick={() => navigate(`/priceRecord/${item._id}`)}
-                                                      style={{cursor: 'pointer'}}
-                                                    >
-                                                    <td>{item.ticker}</td>
-                                                    <td>{item.classification}</td>
-                                                    <td>{item.location_state !== "undefined" && item.location_state != null ? `${item.location_city}, ${item.location_state}, ${item.location_country}` : `${item.location_city}, ${item.location_country}`}</td>
-                                                    <td>{item.type}</td>
-                                                    <td>{item.price} {item.currency}</td>
-                                                    <td>{moment(item.createdAt).format('LL')}</td>
+                                      <DesktopResultWrapper>
+                                        <table className="table table-bordered table-hover" style={{fontSize: '10px'}}>
+                                          <thead>
+                                            <tr>
+                                              <th>TICKER</th>
+                                              <th>PRODUCT NAME</th>
+                                              <th>LOCATION</th>
+                                              <th>TYPE</th>
+                                              <th>PRICE</th>
+                                              <th>DATE</th>
+                                            </tr>
+                                          </thead>
+                                          <tbody>
+                                            {data.map((item: any) => {
+                                              if (item.product && item.product.product_name) {
+                                                let productName = item.product.product_name
+                                                return <tr
+                                                        key={item._id}
+                                                        onClick={() => navigate(`/priceRecord/${item._id}`)}
+                                                        style={{cursor: 'pointer'}}
+                                                      >
+                                                      <td>{item.ticker}</td>
+                                                      <td>{item.classification}</td>
+                                                      <td>{item.location_state !== "undefined" && item.location_state != null ? `${item.location_city}, ${item.location_state}, ${item.location_country}` : `${item.location_city}, ${item.location_country}`}</td>
+                                                      <td>{item.type}</td>
+                                                      <td>{item.price} {item.currency}</td>
+                                                      <td>{moment(item.createdAt).format('LL')}</td>
+                                                    </tr>
+                                              }
+                                            })}
+                                          </tbody>
+                                        </table>
+                                      </DesktopResultWrapper>
+
+                                      <MobileResultWrapper>
+                                        <table className="table" style={{fontSize: '10px'}}>
+                                          <tbody>
+                                            {data.map((item: any) => {
+                                              if (item.product && item.product.product_name) {
+                                                let productName = item.product.product_name
+                                                return <tr
+                                                    key={item._id}
+                                                    onClick={() => navigate(`/priceRecord/${item._id}`)}
+                                                    style={{cursor: 'pointer'}}
+                                                  >
+                                                    <td>
+                                                      <p><span style={{fontWeight: 'bold'}}>Ticker: </span> <span>{item.ticker}</span></p>
+                                                      <p><span style={{fontWeight: 'bold'}}>Classification: </span> <span>{item.classification}</span></p>
+                                                      <p><span style={{fontWeight: 'bold'}}>Location: </span> <span>{item.location_state !== "undefined" && item.location_state != null ? `${item.location_city}, ${item.location_state}, ${item.location_country}` : `${item.location_city}, ${item.location_country}`}</span></p>
+                                                      <p><span style={{fontWeight: 'bold'}}>Type: </span> <span>{item.type}</span></p>
+                                                      <p><span style={{fontWeight: 'bold'}}>Price: </span> <span>{item.price} {item.currency}</span></p>
+                                                      <p><span style={{fontWeight: 'bold'}}>Date: </span> <span>{moment(item.createdAt).format('LL')}</span></p>
+                                                    </td>
                                                   </tr>
-                                            }
-                                          })}
-                                        </tbody>
-                                      </table>
+                                              }
+                                            })}
+                                          </tbody>
+                                        </table>
+                                      </MobileResultWrapper>
                                     </ReactiveList.ResultListWrapper>
                                 )}
                             />
