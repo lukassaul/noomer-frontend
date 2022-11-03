@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../app/store'
+import { t } from '../../i18n'
 import Categories from '../../components/Categories'
 import Footer from '../../components/Footer';
 import {
@@ -11,10 +12,11 @@ import {
   Container,
   TitleThree,
   JustifyText,
+  LightHeader,
+  LightHeaderText,
   FlexCenterContainer,
   MainFlexContainerComparison,
   MainFlexContainerRowComparison,
-  MainFlexContainerColumn50,
 } from '../../globalStyles'
 import {
   AboutContentContainer,
@@ -29,13 +31,16 @@ import {
 } from './styles'
 
 function AboutUs() {
+  const { language } = useSelector((state: RootState) => state.language)
 
   return (
     <>
       <CommonContainer>
         <CenteredContainer>
           <MainFlexContainerComparison className="bg-midgray mb3em">
-
+            <LightHeader>
+                <LightHeaderText>{t('About us', language)}</LightHeaderText>
+            </LightHeader>
             <MainFlexContainerRowComparison className="features-container">
                 <MainFlexContainerColumn75Right>
                   <MainFlexChildrenContainer>
