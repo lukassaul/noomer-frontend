@@ -164,6 +164,19 @@ export const FlexCenterContainer = styled.div`
   justify-content: center;
 `;
 
+export const FlexCenterHoriVertContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const FlexCenterHoriVertContainerCol = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`;
+
 export const FlexCenterColContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -344,9 +357,13 @@ export const VoteIconSmall = styled.img`
 export const ProductImageLarge = styled.img`
     width: 275px;
     height: 275px;
+    @media screen and (max-width: 480px) {
+      width: 100%;
+      height: auto;
+    }
 `;
 
-export const ProductImageSmal = styled.img`
+export const ProductImageSmall = styled.img`
     width: 120px;
     height: 120px;
 `;
@@ -840,6 +857,22 @@ export const CommonContainer = styled.div`
   }
 `;
 
+export const CommonContainerGray = styled.div`
+  max-width: 1280px;
+  min-height: calc(100vh - 320px);
+  margin-right: auto;
+  margin-left: auto;
+  background-color: #E5E5E5;
+  @media screen and (max-width: 1276px) {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  @media screen and (max-width: 480px) {
+    padding-left: 0;
+    padding-right: 0;
+  }
+`;
+
 export const CommonContentContainer = styled.div`
   max-width: 1280px;
   min-height: calc(100vh - 320px);
@@ -874,6 +907,32 @@ export const BlackHeaderText = styled.p`
     font-family: Arial;
     font-weight: 900;
     font-size: 28px;
+`;
+
+export const LightHeader = styled.div`
+  z-index: 1;
+  width: 100%;
+  height: 112px;
+  padding-right: 50px;
+  padding-left: 50px;
+  margin-right: auto;
+  margin-left: auto;
+  background-color: #F7F7F7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @media screen and (max-width: 991px) {
+    padding-right: 30px;
+    padding-left: 30px;
+    text-align: center;
+  }
+`;
+
+export const LightHeaderText = styled.p`
+    //color: #ffffff;
+    font-family: Arial;
+    font-weight: 900;
+    font-size: 32px;
 `;
 
 export const DarkHeader = styled.div`
@@ -931,8 +990,9 @@ export const FlexRowDiv = styled.div`
   align-contents: center;
   margin: 3em 0;
 
-  @media screen and (max-width: 991px) {
+  @media screen and (max-width: 480px) {
     width: 100%;
+    margin: 1em 0;
   }
 
 `;

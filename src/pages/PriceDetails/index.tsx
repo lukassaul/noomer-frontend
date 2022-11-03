@@ -17,7 +17,6 @@ import {
   DetailsValue,
   CenteredContainer,
   CommonContainer,
-  Container,
   FormWraper,
   HeaderContainer,
   BodyContainer,
@@ -28,16 +27,24 @@ import {
   FormSeparatorGray,
   FlexColumnDiv,
   FlexRowDiv,
-  FlexContainer,
   FlexCenterColContainer,
   FlexCenterRowContainer,
-  FlexBetweenRowContainer,
   VoteIconSmall,
   TitleThree,
   TitleThreeNoPad,
   TitleFour,
-  ProductImageLarge
+  ProductImageLarge,
+  JustifyText
 } from '../../globalStyles'
+import {
+  Container,
+  FlexContainer,
+  FlexBetweenRowContainer,
+  FlexContainerResponsive,
+  ImageDescriptionWrapper,
+  ImageContainer,
+  RatingText
+} from './styles'
 
 const UPVOTEURL = "https://res.cloudinary.com/dba8ifej6/image/upload/v1662087399/icon-upvote_eckbb5.png"
 const DOWNVOTEURL = "https://res.cloudinary.com/dba8ifej6/image/upload/v1662087399/icon-downvote_jggvi1.png"
@@ -47,7 +54,7 @@ const sampleRatingsArray = [
   {
     id: 1,
     vote: "UPVOTE",
-    reason: "",
+    reason: "The quick brown fox jumps over the lazy dog",
     reviewerId: "",
     postOwnerId: "",
     priceId: "6306d38b2cb20171acb0c260",
@@ -190,21 +197,21 @@ function PriceDetails() {
     </FlexContainer>
 
   const ImageAndDescriptionDisplay = () =>
-    <FlexContainer style={{width: '80%'}}>
+    <ImageDescriptionWrapper>
 
-        <div style={{paddingRight: '2em'}}>
+        <ImageContainer>
           {priceRecord && priceRecord.price.product_image && priceRecord.price.product_image !== "No image" ? <ProductImageLarge src={priceRecord.price.product_image} /> : <ProductImageLarge src="https://res.cloudinary.com/dba8ifej6/image/upload/v1665974414/no_image_1_xap5lo.png" /> }
-        </div>
+        </ImageContainer>
         <div>
-          <p>{priceRecord && priceRecord.price.description ? priceRecord.price.description : "No description"}</p>
+          <JustifyText>{priceRecord && priceRecord.price.description ? priceRecord.price.description : "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before final copy is available."}</JustifyText>
         </div>
 
-    </FlexContainer>
+    </ImageDescriptionWrapper>
 
   const Details = () =>
     <FlexContainer style={{width: '100%'}}>
 
-      <table className="table table-striped table-bordered">
+      <table className="table table-striped">
         <tbody>
           <tr><td width="40%"><DetailsLabel>Category: </DetailsLabel></td><td width="60%"><DetailsValue>{priceRecord.product.category.category}</DetailsValue></td></tr>
           <tr><td style={{marginRight:"1em"}}><DetailsLabel>Product: </DetailsLabel></td><td><DetailsValue>{priceRecord.product.product_name}</DetailsValue></td></tr>
@@ -257,14 +264,14 @@ function PriceDetails() {
   const DisplayRatings = () =>
     <FlexColumnDiv>
       {priceRecord.ratings.map((rating:any) => {
-        return <FlexRowDiv key={rating.id} style={{alignItems: 'center'}}>
+        return <FlexRowDiv className="ratingContentWrapper" key={rating.id} style={{alignItems: 'center'}}>
           <FlexCenterColContainer style={{justifyContent: 'center', alignItems: 'center' , width:'15%'}}>
               <VoteIconSmall src={rating.vote === "UPVOTE" ? UPVOTEURL : DOWNVOTEURL} />
-              <p className={rating.vote === "UPVOTE" ? "flat-green-font centerText" : "flat-red-font centerText"}>{rating.vote}</p>
+              <RatingText className={rating.vote === "UPVOTE" ? "flat-green-font centerText" : "flat-red-font centerText"}>{rating.vote}</RatingText>
           </FlexCenterColContainer>
           <FlexCenterColContainer  style={{width:'85%'}}>
             <TitleThreeNoPad>{rating.reviewerId.first_name}</TitleThreeNoPad>
-            <TitleFour>Reputation: {rating.reviewerId.reputation}</TitleFour>
+            <TitleFour className="flat-red-font">Reputation: {rating.reviewerId.reputation}</TitleFour>
             <p>{rating.reason}</p>
           </FlexCenterColContainer>
         </FlexRowDiv>
@@ -303,7 +310,7 @@ function PriceDetails() {
     <>
       <CommonContainer>
         <CenteredContainer>
-          <Container style={{padding: '0 2em'}}>
+          <Container>
               {isSubmitPriceRecordSuccess ?
                   <Alert
                       text={"Price record successfully created."}
@@ -319,10 +326,10 @@ function PriceDetails() {
 
 
 
-              <FlexContainer style={{marginBottom: '1em'}}>
+              <FlexContainerResponsive style={{marginBottom: '1em'}}>
                 {VotesDisplay()}
                 {priceRecord ? ImageAndDescriptionDisplay() : null}
-              </FlexContainer>
+              </FlexContainerResponsive>
               {priceRecord ? Details() : null}
               {priceRecord ? ProductStats() : null}
               <FormSeparatorGray/>

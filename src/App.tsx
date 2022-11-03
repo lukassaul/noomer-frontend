@@ -36,6 +36,8 @@ const EditPriceRecord  = lazyWithRetry(() => import("./pages/EditPriceRecord"))
 const Categories  = lazyWithRetry(() => import("./pages/Categories"))
 const FAQs  = lazyWithRetry(() => import("./pages/FAQs"))
 const AboutUs  = lazyWithRetry(() => import("./pages/AboutUs"))
+const ContactUs  = lazyWithRetry(() => import("./pages/ContactUs"))
+const Help  = lazyWithRetry(() => import("./pages/Help"))
 const TermsOfUse  = lazyWithRetry(() => import("./pages/TermsOfUse"))
 const PrivacyPolicy  = lazyWithRetry(() => import("./pages/PrivacyPolicy"))
 
@@ -83,6 +85,8 @@ function App() {
             <Route path="/categories" element={<Categories />} />
             <Route path="/faqs" element={<FAQs />} />
             <Route path="/about" element={<AboutUs />} />
+            <Route path="/contact" element={<ContactUs />} />
+            <Route path="/help" element={<Help />} />
             <Route path="/terms" element={<TermsOfUse />} />
             <Route path="/policy" element={<PrivacyPolicy />} />
           </Routes>

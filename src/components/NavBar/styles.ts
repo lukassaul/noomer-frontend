@@ -19,7 +19,11 @@ export const NavbarContainer = styled(Container)`
   display: flex;
   justify-content: space-between;
   height: 36px;
+  padding: 0;
   ${Container}
+  @media screen and (max-width: 960px) {
+    padding: 0 0.5em;
+  }
 `;
 
 export const NavLogo = styled(Link)`
