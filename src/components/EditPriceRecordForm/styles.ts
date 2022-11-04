@@ -97,3 +97,10 @@ export const TextTermWrapper = styled.div`
     display: inline-block;
     padding-left: 10px;
 `;
+
+export const ProductSelectWrapper = styled.div`
+  width: 60%;
+  @media screen and (max-width: 480px) {
+    width: 100%;
+  }
+`

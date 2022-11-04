@@ -18,7 +18,7 @@ import {
   EditButton,
   DeleteButton,
 } from '../../globalStyles';
-
+import Spinner from '../Spinner';
 // Import modal components
 import { Modal } from '../ReusableModal/Modal';
 import { ConfirmationModal } from '../ReusableModal/ConfirmationModal';
@@ -112,7 +112,7 @@ const SubmittedRecordsTab: FC<{}> = () => {
       <div style={{margin: '25px 0'}}>
         {isFetching ?
           <CenteredContainer>
-            <p>Loading ....</p>
+            <Spinner />
           </CenteredContainer>
           :
           <div>

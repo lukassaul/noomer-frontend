@@ -10,6 +10,7 @@ import { t } from '../../i18n'
 import { getAllCities, getAllCurrencies, getAllProducts } from '../../features/selectOptionsSlice'
 import {
   LoginButtonWrapper,
+  ProductSelectWrapper,
   WholeWrapper,
 } from './styles'
 import {
@@ -467,7 +468,7 @@ function EditPriceRecordForm() {
               <LinkParagraph onClick={() => navigate(-1)}>Back</LinkParagraph>
             </LeftLinkContainer>
             <FlexCenterColContainer style={{padding: '2em', alignItems: 'center'}}>
-              <div style={{width: '60%'}}>
+              <ProductSelectWrapper>
 
                 <Select
                   {...register("product")}
@@ -491,7 +492,7 @@ function EditPriceRecordForm() {
                     }
                   }}
                 />
-              </div>
+              </ProductSelectWrapper>
             </FlexCenterColContainer>
 
             <RightLinkContainer style={{padding: '2em'}}>

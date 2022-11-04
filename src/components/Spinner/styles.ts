@@ -12,13 +12,13 @@ export const StyledSpinner = styled.svg`
   margin: -25px 0 0 -25px;
   width: 50px;
   height: 50px;
-  
+
   & .path {
-    stroke: #C0C0C0;
+    stroke: #638E67;
     stroke-linecap: round;
     animation: dash 1.5s ease-in-out infinite;
   }
-  
+
   @keyframes rotate {
     100% {
       transform: rotate(360deg);

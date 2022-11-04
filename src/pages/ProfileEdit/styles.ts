@@ -23,6 +23,7 @@ export const ProfileContainer = styled.div`
   @media screen and (max-width: 540px) {
     padding-left: 10px;
     padding-right: 10px;
+    margin-top: 0;
   }
 `;
 
