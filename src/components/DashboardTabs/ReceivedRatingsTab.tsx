@@ -8,6 +8,7 @@ import {
   SeventyThreeThumbnail,
   PaginatorRatingContainer,
 } from '../../globalStyles';
+import Spinner from '../Spinner';
 
 const ReceivedRatingsTab: FC<{}> = () => {
 
@@ -54,7 +55,7 @@ const ReceivedRatingsTab: FC<{}> = () => {
     <Fragment>
       {isFetching ?
         <CenteredContainer>
-          <p>Loading ....</p>
+          <Spinner />
         </CenteredContainer>
         :
         <CenteredContainer style={{margin: '25px 0', flexDirection: 'column'}}>

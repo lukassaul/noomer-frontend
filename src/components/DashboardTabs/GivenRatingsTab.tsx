@@ -15,7 +15,7 @@ import {
   EditButton,
   DeleteButton
 } from '../../globalStyles';
-
+import Spinner from '../Spinner';
 // Import modal components
 import { Modal } from '../ReusableModal/Modal';
 import { ConfirmationModal } from '../ReusableModal/ConfirmationModal';
@@ -101,7 +101,7 @@ const GivenRatingsTab: FC<{}> = () => {
     <Fragment>
       {isFetching ?
         <CenteredContainer>
-          <p>Loading ....</p>
+          <Spinner/>
         </CenteredContainer>
         :
         <CenteredContainer style={{margin: '25px 0', flexDirection: 'column'}}>

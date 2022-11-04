@@ -55,6 +55,5 @@ export const ProfileButtonContainer = styled.div`
           margin-right: 12px;
         }
       }
-
   }
 `;

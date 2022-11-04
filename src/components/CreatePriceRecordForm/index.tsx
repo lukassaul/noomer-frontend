@@ -10,6 +10,7 @@ import { t } from '../../i18n'
 import { getAllCities, getAllCurrencies, getAllProducts } from '../../features/selectOptionsSlice'
 import {
   LoginButtonWrapper,
+  ProductSelectWrapper,
   WholeWrapper,
 } from './styles'
 import {
@@ -231,7 +232,7 @@ function CreatePriceRecordForm() {
     control: () => ({
       // none of react-select's styles are passed to <Control />
       backgroundColor: '#FFF',
-      width: '80%',
+      //width: '80%',
       border: '1px solid #c4c4c4',
       borderRadius: '5px',
       fontSize: '14px',
@@ -353,7 +354,7 @@ function CreatePriceRecordForm() {
               <LinkParagraph onClick={() => navigate(-1)}>Back</LinkParagraph>
             </LeftLinkContainer>
             <FlexCenterColContainer style={{padding: '2em', alignItems: 'center'}}>
-              <div style={{width: '60%'}}>
+              <ProductSelectWrapper>
 
                 <Select
                   {...register("product")}
@@ -416,7 +417,7 @@ function CreatePriceRecordForm() {
                     }
                   }}
                 />
-              </div>
+              </ProductSelectWrapper>
             </FlexCenterColContainer>
 
             <RightLinkContainer style={{padding: '2em'}}>
@@ -473,6 +474,7 @@ function CreatePriceRecordForm() {
                         onInputChange={(value) => setInputValue(value)}
                         filterOption={() => true}
                         styles={customStyles}
+                        className="width80"
                         placeholder='* Location'
                         components={{ DropdownIndicator: () => null, IndicatorSeparator: () => null }}
                         onChange={(v) => {
@@ -533,6 +535,7 @@ function CreatePriceRecordForm() {
                         onInputChange={(value:string) => setInputValueCur(value)}
                         filterOption={() => true}
                         styles={customStyles}
+                        className="width80"
                         placeholder='Select currency'
                         components={{ DropdownIndicator: () => null, IndicatorSeparator: () => null }}
                         onChange={(v:any) => {

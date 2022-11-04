@@ -11,6 +11,7 @@ import Alert from '../../components/AlertMessage'
 
 import {GetPriceDetailsAPI} from '../../api/priceRecord';
 
+import Spinner from '../../components/Spinner';
 import Footer from '../../components/Footer';
 import {
   DetailsLabel,
@@ -126,6 +127,7 @@ function PriceDetails() {
 
   const { errorSubmitRatingMessage, isSubmitRatingSuccess } = useSelector((state: RootState) => state.rating)
   const { isSubmitPriceRecordSuccess } = useSelector((state: RootState) => state.priceRecord)
+  const [showSpinner, setShowSpinner] = useState(true)
 
   let isToken = localStorage.getItem('token')
   let userEmail = localStorage.getItem('userEmail')
@@ -143,6 +145,7 @@ function PriceDetails() {
 
     if (result && result.status === 200) {
       setPriceRecord(result.data)
+      setShowSpinner(false)
       console.log("price details: ", result.data)
 
       /**
@@ -335,7 +338,9 @@ function PriceDetails() {
               <FormSeparatorGray/>
               {isToken ? DisplayForm() : "Please login to vote"}
               <FormSeparatorGray/>
-              {priceRecord ? DisplayRatings() : "why"}
+              {priceRecord ? DisplayRatings() : null}
+
+              {showSpinner ? <Spinner /> : null}
 
           </Container>
         </CenteredContainer>

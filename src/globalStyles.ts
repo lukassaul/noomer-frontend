@@ -382,12 +382,19 @@ export const TwoColumnContainer = styled.div`
   clear: both;
   width: 100%;
   justify-content: space-between;
+  flex-direction: row;
+  @media screen and (max-width: 480px) {
+    flex-direction: column;
+  }
 `;
 
 export const TwoColumnChildren = styled.div`
   float: left;
   width: 40%;
   /* height: 100% */
+  @media screen and (max-width: 480px) {
+    width: 100%;
+  }
 `;
 
 export const TwoColumn70Container = styled.div`
@@ -395,13 +402,17 @@ export const TwoColumn70Container = styled.div`
   flex-wrap: wrap;
   width: 70%;
   justify-content: space-between;
+  @media screen and (max-width: 480px){
+    width: 100%;
+  }
 `;
 
 export const TwoColumnFlexContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
+  padding: 0;
   @media screen and (max-width: 480px) {
-    padding: 0 1em;
+    padding: 0 0.5em;
   }
 `;
 
@@ -459,6 +470,29 @@ export const LeftColumnFlexChildren = styled.div`
   }
   @media screen and (max-width: 540px) {
     display: none;
+  }
+`;
+
+export const LeftColumnFlexChildrenDashboard = styled.div`
+  display: inline-block;
+  width: 25%;
+  padding: 3em;
+  border-right: 1px solid #E5E5E5;
+  @media screen and (max-width: 1024px) {
+    height: calc(100vh - 320px);
+  }
+  @media screen and (max-width: 820px) {
+    padding-left: 1em;
+    padding-right: 1em;
+  }
+  @media screen and (max-width: 768px) {
+    height: calc(100vh - 220px)
+  }
+  @media screen and (max-width: 540px) {
+    width: 100%;
+    border-right: 0;
+    padding: 0.5em 0;
+    height: auto;
   }
 `;
 
@@ -610,6 +644,9 @@ export const FormInput = styled.input`
     font-size: 14px;
     margin: 10px 0;
     height: 32px;
+    @media screen and (max-width: 480px) {
+      width: 100%;
+    }
 `;
 
 export const FormInput30 = styled.input`
@@ -779,7 +816,7 @@ export const ImagePreview = styled.img`
     width: 200px;
     height: auto;
     @media screen and (max-width: 480px) {
-      width: 420px;
+      width: 100%;
       height: auto;
     }
 `;

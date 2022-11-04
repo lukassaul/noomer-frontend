@@ -18,7 +18,7 @@ import {
   CommonContentContainer,
   CenteredContainer,
   TwoColumnFlexContainer,
-  LeftColumnFlexChildren,
+  LeftColumnFlexChildrenDashboard,
   RightColumnFlexDashNPChildren
 } from '../../globalStyles'
 
@@ -109,7 +109,7 @@ function UserDashboard() {
     <CommonContainer>
       <CommonContentContainer>
       <TwoColumnFlexContainer>
-        <LeftColumnFlexChildren>
+        <LeftColumnFlexChildrenDashboard>
           {profile ?
             <CenteredContainer style={{flexDirection: 'column'}}>
 
@@ -137,7 +137,7 @@ function UserDashboard() {
               <p>....fetching user dashboard </p>
             </div>
           }
-        </LeftColumnFlexChildren>
+        </LeftColumnFlexChildrenDashboard>
         <RightColumnFlexDashNPChildren>
           <Tabs selectedTab={selectedTab} onClick={setSelectedTab} tabs={tabs} />
         </RightColumnFlexDashNPChildren>
