@@ -7,6 +7,7 @@ import { t } from '../../i18n'
 import {
   LoginButtonWrapper,
   WholeWrapper,
+  RatingText
 } from './styles'
 import {
   FormInput,
@@ -97,7 +98,7 @@ const RatingForm: React.FC<Props> = ({
                     style={{justifyContent: 'center', alignItems: 'center' , cursor: 'pointer'}}
                     onClick={() => handleVoteSelection("UPVOTE")}
                     >
-                      <p className={hasVoted || isOwner ? "disabled-font" : "flat-green-font centerText"}>{t("Upvote_camelcase", language)}</p>
+                      <RatingText className={hasVoted || isOwner ? "disabled-font" : "flat-green-font centerText"}>{t("Upvote_camelcase", language)}</RatingText>
                       <VoteIconSmall src={isOwner || hasVoted ? DISABLEDUPVOTEURL : UPVOTEURL} />
                   </FlexCenterColContainer>
                   <FlexCenterColContainer
@@ -105,7 +106,7 @@ const RatingForm: React.FC<Props> = ({
                     onClick={() => handleVoteSelection("DOWNVOTE")}
                     >
                       <VoteIconSmall src={isOwner || hasVoted ? DISABLEDDOWNVOTEURL : DOWNVOTEURL} />
-                      <p className={isOwner || hasVoted ? "disabled-font" : "flat-red-font centerText"}>{t("Downvote_camelcase", language)}</p>
+                      <RatingText className={isOwner || hasVoted ? "disabled-font" : "flat-red-font centerText"}>{t("Downvote_camelcase", language)}</RatingText>
                   </FlexCenterColContainer>
 
                 </FlexCenterColContainer>

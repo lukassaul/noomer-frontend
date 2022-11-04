@@ -98,3 +98,10 @@ export const TextTermWrapper = styled.div`
     display: inline-block;
     padding-left: 10px;
 `;
+
+export const RatingText = styled.p`
+  display: contents;
+  @media screen and (max-width: 480px) {
+    display: none;
+  }
+`
