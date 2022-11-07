@@ -13,7 +13,7 @@ export const FilterWrapper = styled.div`
     display: flex;
     flex-direction: column;
     padding-right: 20px;
-    width: 100%;
+    //width: 100%;
     max-width: 500px;
     @media screen and (max-width: 540px) {
         display:none;
