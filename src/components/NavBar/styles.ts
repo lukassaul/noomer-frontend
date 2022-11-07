@@ -20,9 +20,10 @@ export const NavbarContainer = styled(Container)`
   justify-content: space-between;
   height: 36px;
   padding: 0;
-  ${Container}
+  ${Container};
   @media screen and (max-width: 960px) {
     padding: 0 0.5em;
+    justify-content: flex-start;
   }
 `;
 

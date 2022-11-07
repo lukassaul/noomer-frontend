@@ -884,10 +884,10 @@ export const CommonContainer = styled.div`
   margin-right: auto;
   margin-left: auto;
   background-color: #F7F7F7;
-  @media screen and (max-width: 1276px) {
-    padding-left: 10px;
-    padding-right: 10px;
-  }
+  // @media screen and (max-width: 1276px) {
+  //   padding-left: 10px;
+  //   padding-right: 10px;
+  // }
   @media screen and (max-width: 480px) {
     padding-left: 0;
     padding-right: 0;
