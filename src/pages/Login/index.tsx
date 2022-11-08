@@ -63,13 +63,6 @@ function Login() {
           /> : null}
           <CommonContentContainer>
 
-            {errorLogMessage ?
-                <Alert
-                    text={errorLogMessage}
-                    bgColor="#f8d7da"
-                    txtColor="#721c24"
-                /> : null
-            }
             {showChangePasswordMessage || showForgotPasswordMessage ?
                 <Alert
                   text={"Password successfully updated. Login using your new password."}
@@ -91,3 +84,12 @@ function Login() {
 }
 
 export default Login;
+
+
+// {errorLogMessage ?
+//     <Alert
+//         text={errorLogMessage}
+//         bgColor="#f8d7da"
+//         txtColor="#721c24"
+//     /> : null
+// }

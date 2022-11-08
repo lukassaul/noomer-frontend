@@ -10,6 +10,10 @@ import {
 } from "react-router-dom";
 import { useSelector } from "react-redux";
 import lazyWithRetry from "./lazyWithRetry";
+
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import { RootState } from "./app/store";
 import Spinner from './components/Spinner'
 
@@ -64,6 +68,7 @@ function App() {
           <GlobalFonts />
           <GlobalStyle />
           <NavBar />
+          <ToastContainer />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/signup" element={<Register />} />

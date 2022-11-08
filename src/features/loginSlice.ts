@@ -1,5 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { toast } from 'react-toastify'
 import { LoginAPI } from './../api/auth'
+import ToastNotification from './../components/Toast'
 
 interface loginState {
     isLogSuccess: boolean,
@@ -29,8 +31,13 @@ export const loginUser = createAsyncThunk<
       console.log("login user called")
         const response = await LoginAPI(formData)
         if (response.status !== 200) {
-          if (response.data.hasOwnProperty('message')) return thunkAPI.rejectWithValue(await response.data.message)
-          else return thunkAPI.rejectWithValue(await response.data)
+          if (response.data.hasOwnProperty('message')) {
+            ToastNotification({message: response.data.message, type: "ERROR"})
+            return thunkAPI.rejectWithValue(await response.data.message)
+          } else {
+            ToastNotification({message: response.data, type: "ERROR"})
+            return thunkAPI.rejectWithValue(await response.data)
+          }
         }
         localStorage.setItem('token', response.data.token)
         localStorage.setItem('userEmail', response.data.email)
