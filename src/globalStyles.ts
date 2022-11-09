@@ -627,7 +627,18 @@ export const FormSeparatorGray = styled.hr`
 export const FormInputWhole = styled.input`
     display: flex;
     padding: 12px;
-    border-radius: 5px;
+    border-radius: 8px;
+    width: 100%;
+    border: 1px solid #c4c4c4;
+    font-size: 14px;
+    margin: 10px 0;
+    height: 32px;
+`;
+
+export const FormInputWholeAccount = styled.input`
+    display: flex;
+    padding: 18px;
+    border-radius: 8px;
     width: 100%;
     border: 1px solid #c4c4c4;
     font-size: 14px;

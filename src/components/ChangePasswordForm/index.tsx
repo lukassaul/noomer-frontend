@@ -5,7 +5,7 @@ import { t } from '../../i18n';
 import useChangePasswordForm from '../../hooks/useChangePasswordForm';
 import Button from '../Button'
 import { FormWrapper, PasswordInput } from './styles'
-import { FormError, FormInputWhole, RightLinkContainer } from '../../globalStyles';
+import { FormError, FormInputWholeAccount, RightLinkContainer } from '../../globalStyles';
 // interface Resetpassword {
 //     vtoken: string | number | readonly string[] | undefined
 //     userid: string | number | readonly string[] | undefined
@@ -27,15 +27,16 @@ function ChangePasswordForm() {
     return (
       <FormWrapper>
         <form onSubmit={onSubmit} aria-label="form">
-            <FormInputWhole
+            <FormInputWholeAccount
             {...register("password")}
             name="password"
             type="password"
             placeholder='New password'
-            aria-label='Password' />
+            aria-label='Password'
+            className="mb1halfem" />
             <FormError>{errors.password?.message}</FormError>
 
-            <FormInputWhole
+            <FormInputWholeAccount
             {...register("confirmPassword")}
             name="confirmPassword"
             type="password"

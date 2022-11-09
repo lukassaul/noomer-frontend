@@ -196,6 +196,18 @@ code {
   border: 1px solid #E8E8E8;
 }
 
+.mb1em {
+  margin-bottom: 1em;
+}
+
+.mb1halfem {
+  margin-bottom: 1.5em !important;
+}
+
+.mb2em {
+  margin-bottom: 2em;
+}
+
 .mb3em {
   margin-bottom: 3em;
 }

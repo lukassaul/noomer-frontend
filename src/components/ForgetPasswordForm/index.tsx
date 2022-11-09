@@ -4,8 +4,8 @@ import { RootState } from '../../app/store'
 import { t } from '../../i18n'
 import useForgetPasswordForm from '../../hooks/useForgetPasswordForm';
 import Button from '../Button'
-import { ForgetPasswordInput, ForgetPasswordTitle, FormWrapper } from './styles';
-import { FormError, TitleTwo } from '../../globalStyles'
+import { ForgetPasswordTitle, FormWrapper } from './styles';
+import { FormInputWholeAccount, FormError, TitleTwo } from '../../globalStyles'
 
 
 function ForgetPasswordForm() {
@@ -16,7 +16,7 @@ function ForgetPasswordForm() {
         <form onSubmit={onSubmit} aria-label="form">
             <TitleTwo style={{textAlign: 'center'}}>{t("Forget Password", language)}</TitleTwo>
             <p style={{margin: '1em 0'}}>{t("Email address", language)}</p>
-            <ForgetPasswordInput
+            <FormInputWholeAccount
                 {...register("email")}
                 name="email"
                 type="email"

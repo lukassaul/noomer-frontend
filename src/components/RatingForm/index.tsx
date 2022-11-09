@@ -49,7 +49,7 @@ const RatingForm: React.FC<Props> = ({
   console.log("recordId: ", recordId)
 
   const { language } = useSelector((state: RootState) => state.language)
-  const { isSubmitRatingFetching } = useSelector((state: RootState) => state.rating)
+  const { isSubmitRatingFetching, isSubmitRatingSuccess } = useSelector((state: RootState) => state.rating)
 
   const { register, control, setValue, onSubmit, errors } = useRatingForm();
 
@@ -68,6 +68,13 @@ const RatingForm: React.FC<Props> = ({
     if (recordType && recordType === "tradeRecord") setValue('type', "TRADE")
     if (recordId) setValue('priceID', recordId)
   }, [profileId, recordType, recordId]);
+
+  useEffect(() => {
+    if (isSubmitRatingSuccess) {
+      setVote('')
+      setValue('reason', '')
+    }
+  }, [isSubmitRatingSuccess])
 
   const handleVoteSelection = (vote: string) => {
     console.log("vote: ", vote)

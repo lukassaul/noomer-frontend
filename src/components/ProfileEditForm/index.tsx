@@ -233,13 +233,6 @@ function ProfileEditForm() {
   return (
     <form onSubmit={onSubmit} aria-label="form">
 
-      {apimessage ?
-        <Alert
-          text={apimessage}
-          bgColor={apistatus === "SUCCESS" ? "#d4edda" : "#f8d7da"}
-          txtColor={apistatus === "SUCCESS" ? "#155724" : "#721c24"}
-        /> : null
-      }
       <ProfileImageContainer>
         {previewProfileImage ?
           <ProfileImg background={previewProfileImage} />
@@ -445,3 +438,12 @@ function ProfileEditForm() {
 }
 
 export default ProfileEditForm;
+
+
+// {apimessage ?
+//   <Alert
+//     text={apimessage}
+//     bgColor={apistatus === "SUCCESS" ? "#d4edda" : "#f8d7da"}
+//     txtColor={apistatus === "SUCCESS" ? "#155724" : "#721c24"}
+//   /> : null
+// }
