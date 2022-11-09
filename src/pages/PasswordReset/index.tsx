@@ -29,7 +29,7 @@ function PasswordReset() {
         <PasswordResetSection>
             <Container>
                 <ResetWrapper>
-                {errorResetMessage ? <p>{errorResetMessage}</p> : null}
+
                     <FormWraper>
                     <p>{t('Please enter your new password', language)}</p>
                         <ResetPasswordForm vtoken={token} userid={userId}/>
@@ -41,3 +41,5 @@ function PasswordReset() {
 }
 
 export default PasswordReset
+
+//{errorResetMessage ? <p>{errorResetMessage}</p> : null}

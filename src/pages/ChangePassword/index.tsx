@@ -47,14 +47,6 @@ function ChangePassword() {
       <>
         <CommonContainer style={{padding: '2em'}}>
 
-          {errorChangeMessage ?
-              <Alert
-                  text={errorChangeMessage}
-                  bgColor="#f8d7da"
-                  txtColor="#721c24"
-              /> : null
-          }
-
           <LeftLinkContainer style={{padding: '2em'}}>
             <BsFillArrowLeftCircleFill size="1.5em" style={{marginRight: "1em", color: '#E8505B', cursor: 'pointer'}} onClick={() => navigate(-1)}/>
             <LinkParagraph onClick={() => navigate(-1)}>Back</LinkParagraph>
@@ -75,3 +67,12 @@ function ChangePassword() {
 }
 
 export default ChangePassword
+
+
+// {errorChangeMessage ?
+//     <Alert
+//         text={errorChangeMessage}
+//         bgColor="#f8d7da"
+//         txtColor="#721c24"
+//     /> : null
+// }

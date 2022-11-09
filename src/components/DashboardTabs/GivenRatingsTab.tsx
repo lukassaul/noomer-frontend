@@ -16,6 +16,8 @@ import {
   DeleteButton
 } from '../../globalStyles';
 import Spinner from '../Spinner';
+import ToastNotification from '../Toast';
+
 // Import modal components
 import { Modal } from '../ReusableModal/Modal';
 import { ConfirmationModal } from '../ReusableModal/ConfirmationModal';
@@ -90,7 +92,10 @@ const GivenRatingsTab: FC<{}> = () => {
 
       console.log('delete rating result: ', result.data)
       if (result && result.status === 200) {
+        ToastNotification({message: "Rating successfully deleted.", type: "SUCCESS"})
         fetchData();
+      } else {
+        ToastNotification({message: "Error in deleting rating. Please try again.", type: "ERROR"})
       }
     }
   };

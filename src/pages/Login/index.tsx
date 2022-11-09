@@ -62,14 +62,6 @@ function Login() {
               onLoaderFinished={() => setProgress(0)}
           /> : null}
           <CommonContentContainer>
-
-            {showChangePasswordMessage || showForgotPasswordMessage ?
-                <Alert
-                  text={"Password successfully updated. Login using your new password."}
-                  bgColor={"#d4edda"}
-                  txtColor={"#155724"}
-                /> : null
-            }
             <FormWraper>
               <LoginForm />
             </FormWraper>
@@ -91,5 +83,12 @@ export default Login;
 //         text={errorLogMessage}
 //         bgColor="#f8d7da"
 //         txtColor="#721c24"
+//     /> : null
+// }
+// {showChangePasswordMessage || showForgotPasswordMessage ?
+//     <Alert
+//       text={"Password successfully updated. Login using your new password."}
+//       bgColor={"#d4edda"}
+//       txtColor={"#155724"}
 //     /> : null
 // }

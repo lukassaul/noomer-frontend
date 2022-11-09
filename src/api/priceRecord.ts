@@ -201,16 +201,15 @@ export const DeletePriceRecordAPI = async (id: string) => {
       },
     })
       .then(res => res)
-      .catch(err =>
-        {if (err.response) {
-            return err.response
-          } else if (err.request) {
-            console.log("delete price record axios request", err.request)
-          } else {
-            console.log("delete price record axios error something else", err.request)
-          }
+      .catch(err => {
+        if (err.response) {
+          return err.response
+        } else if (err.request) {
+          console.log("delete price record axios request", err.request)
+        } else {
+          console.log("delete price record axios error something else", err.request)
         }
-      )
+      })
   } catch (error: any) {
     if (error.response) {
       console.log("delete price record response error catch: ", error.response)

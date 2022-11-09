@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { CreatePriceRecordAPI, EditPriceRecordAPI } from '../api/priceRecord';
-
+import ToastNotification from './../components/Toast'
 
 interface PriceRecordState {
     isSubmitPriceRecordSuccess: boolean,
@@ -113,10 +113,17 @@ export const submitNewPriceRecord = createAsyncThunk<
       const response = await CreatePriceRecordAPI(formData)
       console.log("Response", response.data)
       if (response.status !== 200) {
-        if (response.data.hasOwnProperty('message')) return thunkAPI.rejectWithValue(await response.data.message)
-        else return thunkAPI.rejectWithValue(await response.data)
+        if (response.data.hasOwnProperty('message')) {
+          ToastNotification({message: response.data.message, type: "ERROR"})
+          return thunkAPI.rejectWithValue(await response.data.message)
+        } else {
+          ToastNotification({message: response.data, type: "ERROR"})
+          return thunkAPI.rejectWithValue(await response.data)
+        }
+      } else {
+        ToastNotification({message: "Price record successfully created.", type: "SUCCESS"})
+        return response.data
       }
-      return response.data
     }
 )
 
@@ -151,10 +158,17 @@ export const editPriceRecord = createAsyncThunk<
       const response = await EditPriceRecordAPI(formData)
       console.log("edit Response", response.data)
       if (response.status !== 200) {
-        if (response.data.hasOwnProperty('message')) return thunkAPI.rejectWithValue(await response.data.message)
-        else return thunkAPI.rejectWithValue(await response.data)
+        if (response.data.hasOwnProperty('message')) {
+          ToastNotification({message: response.data.message, type: "ERROR"})
+          return thunkAPI.rejectWithValue(await response.data.message)
+        }else {
+          ToastNotification({message: response.data, type: "ERROR"})
+          return thunkAPI.rejectWithValue(await response.data)
+        }
+      } else {
+        ToastNotification({message: "Price record successfully updated.", type: "SUCCESS"})
+        return response.data
       }
-      return response.data
     }
 )
 

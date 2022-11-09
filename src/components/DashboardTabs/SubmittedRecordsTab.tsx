@@ -19,6 +19,8 @@ import {
   DeleteButton,
 } from '../../globalStyles';
 import Spinner from '../Spinner';
+import ToastNotification from '../Toast';
+
 // Import modal components
 import { Modal } from '../ReusableModal/Modal';
 import { ConfirmationModal } from '../ReusableModal/ConfirmationModal';
@@ -98,8 +100,10 @@ const SubmittedRecordsTab: FC<{}> = () => {
       console.log("onConfirm function")
       const result: any = await DeletePriceRecordAPI(selectedPost)
       if (result && result.status === 200) {
+        ToastNotification({message: "Price record successfully deleted.", type: "SUCCESS"})
         fetchData();
       } else {
+        ToastNotification({message: "Error in deleting price record. Please try again.", type: "ERROR"})
         console.log("result error: ", result)
       }
     }

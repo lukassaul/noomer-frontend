@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { ResetPasswordAPI } from '../api/auth';
+import ToastNotification from './../components/Toast'
 
 
 interface ResetPasswordState {
@@ -28,10 +29,17 @@ export const resetPasswordUser = createAsyncThunk<
         const response = await ResetPasswordAPI(formData)
         console.log("Response", response.data)
         if (response.status !== 200) {
-          if (response.data.hasOwnProperty('message')) return thunkAPI.rejectWithValue(await response.data.message)
-          else return thunkAPI.rejectWithValue(await response.data)
+          if (response.data.hasOwnProperty('message')) {
+            ToastNotification({message: response.data.message, type: "ERROR"})
+            return thunkAPI.rejectWithValue(await response.data.message)
+          } else {
+            ToastNotification({message: response.data, type: "ERROR"})
+            return thunkAPI.rejectWithValue(await response.data)
+          }
+        } else {
+          ToastNotification({message: "Password successfully updated. Login using your new password.", type: "SUCCESS"})
+          return await response.data
         }
-        return await response.data
     }
 )
 

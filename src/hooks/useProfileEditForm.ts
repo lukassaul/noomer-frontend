@@ -6,6 +6,7 @@ import * as yup from 'yup';
 import {SetUserProfileAPI} from './../api/user';
 import { getDashboard } from '../features/dashboardSlice';
 import { AppDispatch } from '../app/store';
+import ToastNotification from '../components/Toast';
 
 
 interface ProfileEditFormData {
@@ -54,11 +55,12 @@ function useProfileEditForm(){
       if (res.status === 200) {
         setApiStatus("SUCCESS")
         setApiMessage("Profile successfully updated")
-
+        ToastNotification({message: "Profile successfully updated.", type: "SUCCESS"})
         if(profileUserId) dispatch(getDashboard(profileUserId))
       } else {
         setApiStatus("ERROR")
         setApiMessage(res.data.message)
+        ToastNotification({message: res.data.message, type: "ERROR"})
       }
     } catch(e) {
       console.log('error in edit profile api: ');

@@ -47,13 +47,7 @@ function CreatePriceRecord() {
                 onLoaderFinished={() => setProgress(0)}
             /> : null}
 
-            {errorSubmitPriceRecordMessage ?
-                <Alert
-                    text={errorSubmitPriceRecordMessage}
-                    bgColor="#f8d7da"
-                    txtColor="#721c24"
-                /> : null
-            }
+
             <FormWraper>
               <CreatePriceRecordForm />
             </FormWraper>
@@ -68,3 +62,11 @@ function CreatePriceRecord() {
 }
 
 export default CreatePriceRecord;
+
+// {errorSubmitPriceRecordMessage ?
+//     <Alert
+//         text={errorSubmitPriceRecordMessage}
+//         bgColor="#f8d7da"
+//         txtColor="#721c24"
+//     /> : null
+// }

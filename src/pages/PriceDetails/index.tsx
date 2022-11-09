@@ -288,21 +288,6 @@ function PriceDetails() {
   const DisplayForm = () =>
     <Container>
       <FormWraper>
-        {errorSubmitRatingMessage ?
-            <Alert
-                text={errorSubmitRatingMessage}
-                bgColor="#f8d7da"
-                txtColor="#721c24"
-            /> : null
-        }
-
-        {isSubmitRatingSuccess ?
-            <Alert
-                text={"Rating successfully submitted."}
-                bgColor={"#d4edda"}
-                txtColor={"#155724"}
-            /> : null
-        }
         {priceRecord ? <RatingForm isOwner={isOwner} hasVoted={hasVoted}/> : null}
       </FormWraper>
     </Container>
@@ -314,13 +299,7 @@ function PriceDetails() {
       <CommonContainer>
         <CenteredContainer>
           <Container>
-              {isSubmitPriceRecordSuccess ?
-                  <Alert
-                      text={"Price record successfully created."}
-                      bgColor={"#d4edda"}
-                      txtColor={"#155724"}
-                  /> : null
-              }
+
 
               <LeftLinkContainer onClick={() => navigate('/listing')}>
                 <BsFillArrowLeftCircleFill size="1.5em" style={{cursor: "pointer", marginRight: "1em", color: '#E8505B',}}/>
@@ -353,3 +332,26 @@ function PriceDetails() {
 }
 
 export default PriceDetails;
+
+// {errorSubmitRatingMessage ?
+//     <Alert
+//         text={errorSubmitRatingMessage}
+//         bgColor="#f8d7da"
+//         txtColor="#721c24"
+//     /> : null
+// }
+//
+// {isSubmitRatingSuccess ?
+//     <Alert
+//         text={"Rating successfully submitted."}
+//         bgColor={"#d4edda"}
+//         txtColor={"#155724"}
+//     /> : null
+// }
+// {isSubmitPriceRecordSuccess ?
+//     <Alert
+//         text={"Price record successfully created."}
+//         bgColor={"#d4edda"}
+//         txtColor={"#155724"}
+//     /> : null
+// }

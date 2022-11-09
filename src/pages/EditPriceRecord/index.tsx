@@ -47,13 +47,7 @@ function EditPriceRecord() {
                 onLoaderFinished={() => setProgress(0)}
             /> : null}
 
-            {errorEditPriceRecordMessage ?
-                <Alert
-                    text={errorEditPriceRecordMessage}
-                    bgColor="#f8d7da"
-                    txtColor="#721c24"
-                /> : null
-            }
+
             <FormWraper>
               <EditPriceRecordForm />
             </FormWraper>
@@ -68,3 +62,11 @@ function EditPriceRecord() {
 }
 
 export default EditPriceRecord;
+
+// {errorEditPriceRecordMessage ?
+//     <Alert
+//         text={errorEditPriceRecordMessage}
+//         bgColor="#f8d7da"
+//         txtColor="#721c24"
+//     /> : null
+// }
