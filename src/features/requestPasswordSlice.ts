@@ -50,6 +50,7 @@ export const RequestPasswordSlice = createSlice({
             state.isRequestSuccess = true
         })
         builder.addCase(requestPasswordUser.rejected, (state, action) => {
+            state.isRequestFetching = false
             if (action.payload) {
                 state.errorRequestMessage = action.payload as unknown as string
               } else {

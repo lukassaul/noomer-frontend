@@ -54,7 +54,7 @@ const RatingFormEdit = () => {
       setValue('reason', editRating.reason)
       setValue('rating', editRating.vote)
       setValue('reviewerId', editRating.reviewerId)
-      setValue('priceID', editRating.priceId)
+      setValue('priceID', editRating.priceId._id)
       setValue('ratingID', editRating._id)
     }
   }, [editRating]);
@@ -64,7 +64,7 @@ const RatingFormEdit = () => {
     setValue('rating', vote)
     setVote(vote)
   }
-
+  console.log("errors: ", errors)
   return (
       <form onSubmit={onSubmit} aria-label="form">
 

@@ -165,6 +165,7 @@ export const dashboardSlice = createSlice({
         })
         builder.addCase(getDashboard.rejected, (state, action) => {
             //console.log("action: ", action)
+            state.isGetFetching = false
             if (action.payload) {
                 //console.log("error message payload: ", action.payload)
                 state.errorLogMessage = action.payload as unknown as string

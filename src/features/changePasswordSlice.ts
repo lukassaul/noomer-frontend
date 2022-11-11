@@ -60,6 +60,7 @@ export const ChangePasswordSlice = createSlice({
         })
         builder.addCase(changePasswordUser.rejected, (state, action) => {
             console.log("change password action: ", action.payload)
+            state.isChangeFetching = false
             if (action.payload) {
                 state.errorChangeMessage = action.payload as unknown as string
               } else {
