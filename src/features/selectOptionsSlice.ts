@@ -151,7 +151,7 @@ export const selectOptionsSlice = createSlice({
             state.locationSelectOption = payload
         })
         builder.addCase(getAllCities.rejected, (state, action) => {
-
+            state.isGetLocationsFetching = false
             if (action.payload) {
                 state.errorLocationsLogMessage = action.payload as unknown as string
               } else {
@@ -167,7 +167,7 @@ export const selectOptionsSlice = createSlice({
             state.currencySelectOption = payload
         })
         builder.addCase(getAllCurrencies.rejected, (state, action) => {
-
+            state.isGetCurrenciesFetching = false
             if (action.payload) {
                 state.errorCurrenciesLogMessage = action.payload as unknown as string
               } else {
@@ -183,7 +183,7 @@ export const selectOptionsSlice = createSlice({
             state.productSelectOption = payload
         })
         builder.addCase(getAllProducts.rejected, (state, action) => {
-
+            state.isGetProductsFetching = false
             if (action.payload) {
                 state.errorProductsLogMessage = action.payload as unknown as string
               } else {
@@ -200,7 +200,7 @@ export const selectOptionsSlice = createSlice({
             state.comparisonLocationSelectOption = payload.locationSuggestions
         })
         builder.addCase(getComparisonOptions.rejected, (state, action) => {
-
+            state.isGetComparisonFetching = false
             if (action.payload) {
                 state.errorComparisonLogMessage = action.payload as unknown as string
               } else {

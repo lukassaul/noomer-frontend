@@ -61,6 +61,7 @@ export const ResetPasswordSlice = createSlice({
         })
         builder.addCase(resetPasswordUser.rejected, (state, action) => {
             console.log("action: ", action)
+            state.isResetFetching = false
             if (action.payload) {
                 console.log("error message payload: ", action.payload)
                 state.errorResetMessage = action.payload as unknown as string

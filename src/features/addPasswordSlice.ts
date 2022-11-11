@@ -57,6 +57,7 @@ export const AddPasswordSlice = createSlice({
         })
         builder.addCase(addPasswordUser.rejected, (state, action) => {
             console.log("action: ", action)
+            state.isAddFetching = false
             if (action.payload) {
                 //console.log("error message payload: ", action.payload)
                 state.errorAddMessage = action.payload as unknown as string

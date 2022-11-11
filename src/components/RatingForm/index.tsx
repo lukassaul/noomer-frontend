@@ -83,7 +83,7 @@ const RatingForm: React.FC<Props> = ({
       setVote(vote)
     }
   }
-
+  console.log("isSubmitRatingFetching: ", isSubmitRatingFetching)
   return (
       <form onSubmit={onSubmit} aria-label="form">
 

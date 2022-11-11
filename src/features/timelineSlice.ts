@@ -39,7 +39,7 @@ export const timelineSlice = createSlice({
             state.timeline = payload.records
         })
         builder.addCase(getTimelineRecords.rejected, (state, action) => {
-
+            state.isFetchingTimeline = false
             if (action.payload) {
                 state.errorFetchingTimelineMessage = action.payload as unknown as string
               } else {

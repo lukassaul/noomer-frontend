@@ -82,6 +82,7 @@ export const editPriceRecordRating = createAsyncThunk<
 >(
     'rating/edit',
     async (formData, thunkAPI) => {
+        console.log("edit price record rating")
         const response = await EditRatingAPI(formData)
         console.log("Response", response.data)
         if (response.status !== 200) {
@@ -124,6 +125,7 @@ export const RatingSlice = createSlice({
         })
         builder.addCase(submitPriceRecordRating.rejected, (state, action) => {
             console.log("action: ", action)
+            state.isSubmitRatingFetching = false
             if (action.payload) {
                 console.log("error message payload: ", action.payload)
                 state.errorSubmitRatingMessage = action.payload as unknown as string
@@ -143,6 +145,7 @@ export const RatingSlice = createSlice({
         })
         builder.addCase(editPriceRecordRating.rejected, (state, action) => {
             console.log("action: ", action)
+            state.isEditRatingFetching = false
             if (action.payload) {
                 console.log("error message payload: ", action.payload)
                 state.errorEditRatingMessage = action.payload as unknown as string

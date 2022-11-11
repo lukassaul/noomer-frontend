@@ -232,6 +232,7 @@ export const priceRecordSlice = createSlice({
         })
         builder.addCase(submitNewPriceRecord.rejected, (state, action) => {
             console.log("action: ", action)
+            state.isSubmitPriceRecordFetching = false
             if (action.payload) {
                 console.log("error message payload: ", action.payload)
                 state.errorSubmitPriceRecordMessage = action.payload as unknown as string
@@ -258,6 +259,7 @@ export const priceRecordSlice = createSlice({
         })
         builder.addCase(editPriceRecord.rejected, (state, action) => {
             console.log("action: ", action)
+            state.isEditPriceRecordFetching = false
             if (action.payload) {
                 console.log("error message payload: ", action.payload)
                 state.errorEditPriceRecordMessage = action.payload as unknown as string
