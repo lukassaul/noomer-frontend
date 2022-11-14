@@ -285,6 +285,16 @@ background-color: #313D3F;
 color: #FFF;
 }
 
+.table-striped-blue tbody tr:nth-of-type(odd) {
+background-color: #C7E7FC;
+//color: #FFF;
+}
+
+.table-striped-red tbody tr:nth-of-type(odd) {
+background-color: #E5C0C2;
+//color: #FFF;
+}
+
 .table-hover tbody tr:hover {
 color: #212529;
 background-color: rgba(0, 0, 0, 0.075);

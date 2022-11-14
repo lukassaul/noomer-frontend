@@ -38,7 +38,7 @@ function ListingHeader() {
     },
     "Currency": {
       title: "CURRENCY",
-      imageUrl: "https://res.cloudinary.com/dba8ifej6/image/upload/v1665465678/header-category-currency_gtt91r.png",
+      imageUrl: "https://res.cloudinary.com/dba8ifej6/image/upload/v1668394963/header-category-currency2_o0c00w.jpg",
     },
     "Services": {
       title: "SERVICES",
@@ -98,7 +98,7 @@ function ListingHeader() {
     },
     "Agricultural Goods": {
       title: "AGRICULTURAL GOODS",
-      imageUrl: "https://res.cloudinary.com/dba8ifej6/image/upload/v1665465678/header-category-agricultural_vib9ib.png",
+      imageUrl: "https://res.cloudinary.com/dba8ifej6/image/upload/v1668394963/header-category-agri2_s2pm0b.jpg",
     }
   }
   //console.log("selectedCategory: ", selectedCategory)
