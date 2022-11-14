@@ -19,10 +19,14 @@ import {
   LeftLinkContainer,
   LinkParagraph,
   FormSeparatorGray,
-  FlexContainer,
   TitleThree,
   TitleThreeNoPad,
 } from '../../globalStyles'
+
+import {
+  FlexContainer,
+  StatsTable,
+} from './styles'
 
 function NoomerResult() {
 
@@ -36,9 +40,9 @@ function NoomerResult() {
 
   const Stats = () =>
     <FlexContainer style={{width: '100%', justifyContent: 'space-around'}}>
-      <div style={{ padding: '1em', width: '40%' }}>
+      <StatsTable>
         <TitleThree>Product A</TitleThree>
-        <table className="table table-striped" width="100%">
+        <table className="table table-striped-blue" width="100%">
           <tbody>
             <tr><td width="25%"><DetailsLabel>Classification: </DetailsLabel></td><td width="75%"><DetailsValue>{noomer.productA}</DetailsValue></td></tr>
             <tr><td style={{marginRight:"1em"}}><DetailsLabel>Location: </DetailsLabel></td><td><DetailsValue>{noomer.locationA}</DetailsValue></td></tr>
@@ -47,11 +51,11 @@ function NoomerResult() {
             <tr><td style={{marginRight:"1em"}}><DetailsLabel>Average: </DetailsLabel></td><td><DetailsValue>{noomer.statsA && noomer.statsA.mean ? noomer.statsA.mean : "No record"}</DetailsValue></td></tr>
           </tbody>
         </table>
-      </div>
+      </StatsTable>
 
-      <div style={{ padding: '1em', width: '40%' }}>
+      <StatsTable>
         <TitleThree>Product B</TitleThree>
-        <table className="table table-striped" width="100%">
+        <table className="table table-striped-red" width="100%">
           <tbody>
             <tr><td width="25%"><DetailsLabel>Classification: </DetailsLabel></td><td width="75%"><DetailsValue>{noomer.productB}</DetailsValue></td></tr>
             <tr><td style={{marginRight:"1em"}}><DetailsLabel>Location: </DetailsLabel></td><td><DetailsValue>{noomer.locationB}</DetailsValue></td></tr>
@@ -60,16 +64,16 @@ function NoomerResult() {
             <tr><td style={{marginRight:"1em"}}><DetailsLabel>Average: </DetailsLabel></td><td><DetailsValue>{noomer.statsB && noomer.statsB.mean ? noomer.statsB.mean : "No record"}</DetailsValue></td></tr>
           </tbody>
         </table>
-      </div>
+      </StatsTable>
     </FlexContainer>
 
 
   const Noomer = () =>
     <Container>
       <CenteredContainerColBordered>
-        <TitleThreeNoPad>{noomer.noomer.productA}</TitleThreeNoPad>
-        <NoomerEqualityLogo src="https://res.cloudinary.com/dba8ifej6/image/upload/v1664316799/noomer-equality-icon_fprazy.png" />
-        <TitleThreeNoPad>{noomer.noomer.productB}</TitleThreeNoPad>
+        <TitleThreeNoPad style={{textAlign: 'center'}}>{noomer.noomer.productA}</TitleThreeNoPad>
+        <NoomerEqualityLogo src="https://res.cloudinary.com/dba8ifej6/image/upload/v1668387691/red_logo_noomer_j9pvop.png" />
+        <TitleThreeNoPad style={{textAlign: 'center'}}>{noomer.noomer.productB}</TitleThreeNoPad>
       </CenteredContainerColBordered>
     </Container>
 
@@ -77,10 +81,10 @@ function NoomerResult() {
     <>
       <CommonContainer>
         <CenteredContainer>
-          <Container style={{padding: '1em 2em'}}>
+          <Container>
 
               <LeftLinkContainer onClick={() => navigate(-1)}>
-                <BsFillArrowLeftCircleFill size="1.5em" style={{cursor: "pointer", marginRight: "1em", color: '#E8505B'}}/>
+                <BsFillArrowLeftCircleFill size="1.5em" style={{cursor: "pointer", margin: "0 1em 0 0.5em", color: '#E8505B'}}/>
                 <LinkParagraph >Back to homepage</LinkParagraph>
               </LeftLinkContainer>
 

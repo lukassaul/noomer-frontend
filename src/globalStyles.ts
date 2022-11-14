@@ -566,6 +566,9 @@ export const CenteredContainerColBordered = styled.div`
   border: 1px solid #B0B0B0;
   border-radius: 5px;
   padding: 1em 0;
+  @media screen and (max-width: 480px) {
+    padding: 0.5em;
+  }
 `;
 
 export const CenteredContainerDash = styled.div`
