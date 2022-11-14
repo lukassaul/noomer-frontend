@@ -47,7 +47,7 @@ export const ProfileButtonContainer = styled.div`
     }
 
   @media screen and (max-width: 768px) {
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     > * {
         &:first-child {

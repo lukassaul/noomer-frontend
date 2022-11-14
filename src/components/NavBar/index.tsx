@@ -185,7 +185,7 @@ function NavBar() {
                       </NavItem>
                       <NavItem>
                         <NavLinks to='/login' onClick={() => handleLogout()}>
-                            logout
+                            Logout
                         </NavLinks>
                       </NavItem>
                       <ProfileName onClick={() => navigate("/dashboard")} style={{ cursor: 'pointer' }}>

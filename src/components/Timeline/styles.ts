@@ -21,6 +21,7 @@ export const TimelineColumn = styled.div`
   flex: 30%;
   max-width: 30%;
   padding: 0 4px;
+  border-radius: 8px;
   // @media screen and (max-width: 800px) {
   //   flex: 50%;
   //   max-width: 50%;
@@ -28,6 +29,7 @@ export const TimelineColumn = styled.div`
   @media screen and (max-width: 720px) {
     flex: 100%;
     max-width: 100%;
+    border-radius: 0;
   }
 `;
 

@@ -480,13 +480,14 @@ export const LeftColumnFlexChildrenDashboard = styled.div`
   border-right: 1px solid #E5E5E5;
   @media screen and (max-width: 1024px) {
     height: calc(100vh - 320px);
+    padding: 1em;
   }
   @media screen and (max-width: 820px) {
-    padding-left: 1em;
-    padding-right: 1em;
+    padding: 1em;
   }
   @media screen and (max-width: 768px) {
-    height: calc(100vh - 220px)
+    height: calc(100vh - 220px);
+    padding: 1em;
   }
   @media screen and (max-width: 540px) {
     width: 100%;
