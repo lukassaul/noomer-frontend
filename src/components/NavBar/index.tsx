@@ -121,7 +121,7 @@ function NavBar() {
                 <NavLogo to='/'>
                     <SuspenseImg src="https://res.cloudinary.com/dba8ifej6/image/upload/v1664179407/noomer-icon_vpr30i.png"  alt="Noomer logo" className="noomerLogo"/>
                 </NavLogo>
-                <CenteredContainerNav style={{width: '30%'}}>
+                <CenteredContainerNav>
                   <FormInput
                     type="text"
                     placeholder="Search for commodity"

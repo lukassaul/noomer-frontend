@@ -538,6 +538,10 @@ export const CenteredContainerNav = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 30%;
+  @media screen and (max-width: 1088px) {
+    width: 50%;
+  }
   @media screen and (max-width: 480px) {
     display: none;
   }
