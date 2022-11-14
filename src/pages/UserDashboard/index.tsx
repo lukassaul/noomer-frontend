@@ -118,7 +118,7 @@ function UserDashboard() {
                   <ProfileImg background={"https://res.cloudinary.com/dba8ifej6/image/upload/v1644472150/default_user_bw3qde.png"} />
                 }
 
-                <p style={{fontSize: '20px', fontWeight: 'bold'}}>{profile.first_name} {profile.last_name}</p>
+                <p style={{fontSize: '20px', fontWeight: 'bold', textAlign: 'center'}}>{profile.first_name} {profile.last_name}</p>
 
                 {profile.reputation ? <p style={{marginLeft: '12px'}}>Reputation: {profile.reputation}</p> : null}
 
@@ -126,7 +126,7 @@ function UserDashboard() {
 
                 <br />
                 <ProfileButtonContainer>
-                  <p style={{cursor: 'pointer'}} onClick={() => handleEditProfile()}>Edit Profile</p>
+                  <p style={{cursor: 'pointer', textAlign: 'center'}} onClick={() => handleEditProfile()}>Edit Profile</p>
                   <Button onClick={() => navigate('/priceRecord/create')} color="noomerRed">{t("Submit Price Record", language)}</Button>
                 </ProfileButtonContainer>
 

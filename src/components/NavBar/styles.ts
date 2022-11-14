@@ -21,7 +21,7 @@ export const NavbarContainer = styled(Container)`
   height: 36px;
   padding: 0;
   ${Container};
-  @media screen and (max-width: 960px) {
+  @media screen and (max-width: 1088px) {
     padding: 0 0.5em;
     justify-content: flex-start;
   }
@@ -54,7 +54,7 @@ export const NavLocation = styled.p`
 export const MobileIcon = styled.div`
     display: none;
 
-    @media screen and (max-width: 960px) {
+    @media screen and (max-width: 1088px) {
         display: block;
         position: absolute;
         top: 0;
@@ -69,7 +69,7 @@ export const NavMenu = styled.ul<{click: boolean}>`
   align-items: center;
   list-style: none;
   text-align: center;
-  @media screen and (max-width: 960px) {
+  @media screen and (max-width: 1088px) {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -90,7 +90,7 @@ export const NavItem = styled.li`
   &:hover {
     border-bottom: 2px solid #ccc;
   }
-  /* @media screen and (max-width: 960px) {
+  /* @media screen and (max-width: 1088px) {
     width: 100%;
     &:hover {
       border: none;
@@ -101,7 +101,7 @@ export const NavItem = styled.li`
 export const NavItemIput = styled.li`
     margin-left: 0.5em;
     margin-right: 0.5em;
-  /* @media screen and (max-width: 960px) {
+  /* @media screen and (max-width: 1088px) {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -112,7 +112,7 @@ export const NavItemIput = styled.li`
 
 export const NavItemBtn = styled.li`
     margin-left: 5px;
-  /* @media screen and (max-width: 960px) {
+  /* @media screen and (max-width: 1088px) {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -128,7 +128,7 @@ export const NavLinks = styled(Link)`
   text-decoration: none;
   padding: 1rem 1.5rem;
   height: 100%;
-  @media screen and (max-width: 960px) {
+  @media screen and (max-width: 1088px) {
     text-align: center;
     /* padding: 2rem; */
     width: 100%;
