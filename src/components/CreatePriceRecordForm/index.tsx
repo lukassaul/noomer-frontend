@@ -12,6 +12,7 @@ import {
   LoginButtonWrapper,
   ProductSelectWrapper,
   WholeWrapper,
+  TwoColumnContainer,
 } from './styles'
 import {
   IconComp,
@@ -38,7 +39,6 @@ import {
   RightLinkContainer,
   LeftLinkContainer,
   LinkParagraph,
-  TwoColumnContainer,
   TwoColumn70Container
 } from '../../globalStyles'
 import Button from '../Button'
@@ -438,12 +438,12 @@ function CreatePriceRecordForm() {
               <DarkHeader>
                 <DarkHeaderText>Price Record for {selectOptionProductCategory} : {selectOptionProductName}</DarkHeaderText>
               </DarkHeader>
-              <LeftLinkContainer style={{padding: '2em'}} onClick={(e) => gotoStepOne(e)}>
+              <LeftLinkContainer onClick={(e) => gotoStepOne(e)}>
                 <BsFillArrowLeftCircleFill size="1.5em" style={{marginRight: "1em", color: '#E8505B', cursor: 'pointer'}} />
                 <LinkParagraph onClick={(e) => gotoStepOne(e)}>Back</LinkParagraph>
               </LeftLinkContainer>
 
-              <TwoColumnContainer style={{padding: '2em'}}>
+              <TwoColumnContainer>
 
                 <div style={{display: 'flex', flexDirection: 'column'}}>
                   <FormLabelContainer>

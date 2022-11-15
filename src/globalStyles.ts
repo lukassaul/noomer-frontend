@@ -19,10 +19,6 @@ export const Container = styled.div`
     padding-right: 30px;
     padding-left: 30px;
   }
-  @media screen and (max-width: 991px) {
-    padding-right: 30px;
-    padding-left: 30px;
-  }
   @media screen and (max-width: 480px) {
     padding-right: 0;
     padding-left: 0;
@@ -322,7 +318,10 @@ export const LeftLinkContainer = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  padding: 2em 0;
+  padding: 2em;
+  @media screen and (max-width: 480px) {
+    padding: 1em;
+  }
 `;
 
 export const LinkParagraph = styled.p`
@@ -402,6 +401,9 @@ export const TwoColumn70Container = styled.div`
   flex-wrap: wrap;
   width: 70%;
   justify-content: space-between;
+  @media screen and (max-width: 768px){
+    width: 80%;
+  }
   @media screen and (max-width: 480px){
     width: 100%;
   }
@@ -737,10 +739,10 @@ export const FormThreeInputContainer = styled.div `
 export const FormInput50Width = styled.div `
   width: 50%;
   @media screen and (max-width: 991px) {
-    width: 30%;
+    width: 50%;
   }
   @media screen and (max-width: 768px) {
-    width: 50%;
+    width: 100%;
   }
   @media screen and (max-width: 480px) {
     width: 100%;
