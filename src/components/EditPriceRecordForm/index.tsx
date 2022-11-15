@@ -12,6 +12,7 @@ import {
   LoginButtonWrapper,
   ProductSelectWrapper,
   WholeWrapper,
+  TwoColumnContainer,
 } from './styles'
 import {
   IconComp,
@@ -39,7 +40,6 @@ import {
   RightLinkContainer,
   LeftLinkContainer,
   LinkParagraph,
-  TwoColumnContainer,
   TwoColumn70Container
 } from '../../globalStyles'
 import Button from '../Button'
@@ -518,7 +518,7 @@ function EditPriceRecordForm() {
                 <LinkParagraph onClick={(e) => gotoStepOne(e)}>Back</LinkParagraph>
               </LeftLinkContainer>
 
-              <TwoColumnContainer style={{padding: '2em'}}>
+              <TwoColumnContainer>
                 <div style={{display: 'flex', flexDirection: 'column'}}>
                   <FormLabelContainer>
                     <FormLabel>{t('Upload product image', language)}</FormLabel>

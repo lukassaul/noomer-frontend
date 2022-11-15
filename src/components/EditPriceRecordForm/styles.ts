@@ -104,3 +104,17 @@ export const ProductSelectWrapper = styled.div`
     width: 100%;
   }
 `
+
+export const TwoColumnContainer = styled.div`
+  content: "";
+  display: flex;
+  clear: both;
+  width: 100%;
+  justify-content: space-between;
+  flex-direction: row;
+  padding: 2em;
+  @media screen and (max-width: 620px) {
+    flex-direction: column;
+    padding: 1em;
+  }
+`;

@@ -9,12 +9,12 @@ import { clearSubmitState } from "../../features/priceRecordSlice";
 
 import Footer from '../../components/Footer';
 import {
-  Container,
   CenteredContainer,
   CommonContainer,
   CommonContentContainer,
   FormWraper
-} from '../../globalStyles'
+} from '../../globalStyles';
+import { Container } from './styles';
 
 
 function EditPriceRecord() {
