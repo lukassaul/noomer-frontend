@@ -44,6 +44,8 @@ const ContactUs  = lazyWithRetry(() => import("./pages/ContactUs"))
 const Help  = lazyWithRetry(() => import("./pages/Help"))
 const TermsOfUse  = lazyWithRetry(() => import("./pages/TermsOfUse"))
 const PrivacyPolicy  = lazyWithRetry(() => import("./pages/PrivacyPolicy"))
+const Tickers = lazyWithRetry(() => import("./pages/Tickers"))
+const PromoMechanics = lazyWithRetry(() => import("./pages/PromoMechanics"))
 
 
 /*
@@ -94,6 +96,8 @@ function App() {
             <Route path="/help" element={<Help />} />
             <Route path="/terms" element={<TermsOfUse />} />
             <Route path="/policy" element={<PrivacyPolicy />} />
+            <Route path="/tickers" element={<Tickers />} />
+            <Route path="/promo" element={<PromoMechanics />} />
           </Routes>
         </ScrollToTop>
       </Router>
