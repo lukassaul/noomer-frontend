@@ -1,6 +1,11 @@
-import React, {useCallback, useEffect, useState} from 'react'
+import React, {useCallback, useEffect, useState, useRef} from 'react'
 import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
+
+import { Bar } from "react-chartjs-2";
+import { Chart as ChartJS, registerables } from "chart.js/auto";
+
+
 import { RootState, AppDispatch } from '../../app/store'
 
 import moment from 'moment'
@@ -124,7 +129,7 @@ function PriceDetails() {
   const params = useParams()
   const navigate = useNavigate()
 
-
+  const chartRef = useRef();
   const { errorSubmitRatingMessage, isSubmitRatingSuccess } = useSelector((state: RootState) => state.rating)
   const { isSubmitPriceRecordSuccess } = useSelector((state: RootState) => state.priceRecord)
   const [showSpinner, setShowSpinner] = useState(true)
@@ -138,6 +143,10 @@ function PriceDetails() {
   const [downvoteCount, setDownvoteCount] = useState(0)
   const [isOwner, setIsOwner] = useState(true)
   const [hasVoted, setHasVoted] = useState(false)
+
+  const [priceData, setPriceData] = useState<any>();
+  const [dailyAverageData, setDailyAverageData] = useState<any>();
+  ChartJS.register(...registerables);
 
 
   const getPriceDetails = useCallback(async(id: string) => {
@@ -176,6 +185,50 @@ function PriceDetails() {
       **/
       result.data.ratings.map((rating:any) => {
         if(user === rating.reviewerId._id) setHasVoted(true)
+      })
+
+      /**
+        Set price data
+      **/
+      const avgPerLocation = result.data.avgPerLocation
+      setPriceData({
+        labels: avgPerLocation.map((data:any) => data._id.city),
+        datasets: [
+          {
+            label: "Average Price per Location",
+            data: avgPerLocation.map((data:any) => data.average),
+            backgroundColor: [
+              "#344D67",
+              "#6ECCAF",
+              "#ADE792",
+              "#F3ECB0",
+            ],
+            borderColor: "black",
+            borderWidth: 2,
+          },
+        ],
+      })
+
+      /**
+        Set daily average data for line chart
+      **/
+      const avgPerDay = result.data.avgDaily
+      setDailyAverageData({
+        labels: avgPerDay.map((data:any) => data._id.day),
+        datasets: [
+          {
+            label: "Average Price per day",
+            data: avgPerDay.map((data:any) => data.average),
+            backgroundColor: [
+              "#344D67",
+              "#6ECCAF",
+              "#ADE792",
+              "#F3ECB0",
+            ],
+            borderColor: "black",
+            borderWidth: 2,
+          },
+        ],
       })
 
     }
@@ -314,6 +367,7 @@ function PriceDetails() {
               </FlexContainerResponsive>
               {priceRecord ? Details() : null}
               {priceRecord ? ProductStats() : null}
+
               <FormSeparatorGray/>
               {isToken ? DisplayForm() : "Please login to vote"}
               <FormSeparatorGray/>
@@ -333,6 +387,7 @@ function PriceDetails() {
 
 export default PriceDetails;
 
+/**{priceData ? <div style={{ width: 700 }}><Bar ref={chartRef} data={priceData} /></div> : null}**/
 // {errorSubmitRatingMessage ?
 //     <Alert
 //         text={errorSubmitRatingMessage}
@@ -355,3 +410,4 @@ export default PriceDetails;
 //         txtColor={"#155724"}
 //     /> : null
 // }
+// {priceRecord ? <Line data={chartData} /> : null}

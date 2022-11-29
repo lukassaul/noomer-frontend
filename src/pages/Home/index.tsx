@@ -1,5 +1,6 @@
 import React, {useState, useEffect, useRef} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from "react-router-dom";
 import { RootState, AppDispatch } from '../../app/store'
 import { getDisplay } from '../../features/configSlice'
 
@@ -19,6 +20,7 @@ import { getAllCities, getAllCurrencies, getAllProducts } from '../../features/s
 function Home() {
 
   const dispatch = useDispatch<AppDispatch>()
+  const navigate = useNavigate()
   const { display } = useSelector((state: RootState) => state.config)
   const [featuresCarousel, setFeaturesCarousel] = useState('HIDE')
   const [whatIsNoomer, setWhatIsNoomer] = useState('HIDE')
@@ -84,6 +86,16 @@ function Home() {
           }
 
           <BodyContainer>
+
+            <div style={{marginBottom: "2em"}}>
+              <img
+                src="https://res.cloudinary.com/dba8ifej6/image/upload/v1669704105/promo-landing2_hwhnvo.png"
+                onClick={()=> navigate('/promo') }
+                 className="responsiveImg"
+                style={{cursor: 'pointer'}}
+              />
+            </div>
+
             {whatIsNoomer === "SHOW" ?
               <div className="bg-darkblue">
                 <WhatIsContainerTitle>

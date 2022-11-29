@@ -933,7 +933,8 @@ export const CommonContainerGray = styled.div`
 
 export const CommonContentContainer = styled.div`
   max-width: 1280px;
-  min-height: calc(100vh - 320px);
+  //min-height: calc(100vh - 320px);
+  flex: 0 1;
   margin-right: auto;
   margin-left: auto;
   /* @media screen and (max-width: 480px) {

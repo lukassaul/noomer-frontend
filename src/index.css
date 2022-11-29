@@ -17,6 +17,10 @@ code {
   padding: 2em;
 }
 
+.p2emreponsive {
+  padding: 2em;
+}
+
 .bg-beige {
   background-color: #F7F7F7;
 }
@@ -59,6 +63,11 @@ code {
   height: auto;
 }
 
+.responsiveImg {
+  width: 100%;
+  height: auto;
+}
+
 .white-font {
   color: #FFF;
 }
@@ -97,12 +106,28 @@ code {
   text-align: center;
 }
 
+.justifyText {
+  text-align: justify;
+}
+
 .fontSize10 {
   font-size: 10px;
 }
 
 .fontSize12 {
   font-size: 12px;
+}
+
+.fontSize32 {
+  font-size: 32px;
+}
+
+.fontSize40 {
+  font-size: 40px;
+}
+
+.bf {
+  font-weight: bold;
 }
 
 .width25 {
@@ -135,6 +160,12 @@ code {
   }
   .width80 {
     width: 100% !important;
+  }
+  .p2emreponsive {
+    padding: 0.5em;
+  }
+  .fontSize32 {
+    font-size: 18px;
   }
 }
 
@@ -278,6 +309,11 @@ border-bottom-width: 2px;
 .table-borderless thead th,
 .table-borderless tbody + tbody {
 border: 0;
+}
+
+.table-whitebg {
+  background-color: #FFF;
+  color: #666666;
 }
 
 .table-striped tbody tr:nth-of-type(odd) {
@@ -605,6 +641,12 @@ border: 0;
   margin: 8px;
 }
 
+@media screen and (max-width: 884px) {
+  .search-form-control {
+    width: 75%;
+  }
+}
+
 /**
   END OF BOOTSTRAP TABLE STYLING
 **/
@@ -725,6 +767,14 @@ border: 0;
 .pagination-page-info {
   margin: 0 .5em;
 }
+
+/**REACT-TABLE PAGINATOR**/
+.rt-pagination {
+  display: flex;
+  justify-content: end;
+  padding-bottom: 2em;
+}
+
 
 
 

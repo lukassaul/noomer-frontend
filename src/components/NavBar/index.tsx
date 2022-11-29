@@ -142,6 +142,11 @@ function NavBar() {
 
                 <NavMenu onClick={handleClick} click={click}>
                     <NavItem>
+                        <NavLinks to='/tickers' onClick={closeMobileMenu}>
+                            Tickers
+                        </NavLinks>
+                    </NavItem>
+                    <NavItem>
                         <NavLinks to='/faqs' onClick={closeMobileMenu}>
                             FAQs
                         </NavLinks>

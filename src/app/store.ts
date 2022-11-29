@@ -16,6 +16,7 @@ import selectOptionsReducer from './../features/selectOptionsSlice'
 import comparisonReducer from './../features/comparisonSlice'
 import dashboardReducer from './../features/dashboardSlice'
 import timelineReducer from './../features/timelineSlice'
+import pageTickersReducer from './../features/pageTickerSlice'
 
 export const store = configureStore({
     reducer: {
@@ -35,7 +36,8 @@ export const store = configureStore({
         priceRecord: priceRecordReducer,
         comparison: comparisonReducer,
         dashboard: dashboardReducer,
-        timeline: timelineReducer
+        timeline: timelineReducer,
+        pageTickers: pageTickersReducer
     }
 })
 
