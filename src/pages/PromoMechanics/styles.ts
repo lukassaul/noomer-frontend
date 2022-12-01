@@ -21,3 +21,21 @@ export const SocialShareContainer = styled.div`
     padding: 0 6px;
   }
 `
+
+export const StepContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  @media screen and (max-width: 480px) {
+    flex-direction: column;
+  }
+`;
+
+export const StepImageContainer = styled.div`
+  width: 25%;
+  margin-bottom: 0;
+  @media screen and (max-width: 480px) {
+    width: 100%;
+    margin-bottom: 1em;
+  }
+`;
