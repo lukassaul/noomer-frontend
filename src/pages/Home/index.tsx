@@ -89,7 +89,7 @@ function Home() {
 
             <div style={{marginBottom: "2em"}}>
               <img
-                src="https://res.cloudinary.com/dba8ifej6/image/upload/v1669704105/promo-landing2_hwhnvo.png"
+                src="https://res.cloudinary.com/dba8ifej6/image/upload/v1669908057/promo-landing-new_vgykdt.png"
                 onClick={()=> navigate('/promo') }
                  className="responsiveImg"
                 style={{cursor: 'pointer'}}
