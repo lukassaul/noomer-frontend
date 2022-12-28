@@ -259,7 +259,7 @@ function PriceDetails() {
           {priceRecord && priceRecord.price.product_image && priceRecord.price.product_image !== "No image" ? <ProductImageLarge src={priceRecord.price.product_image} /> : <ProductImageLarge src="https://res.cloudinary.com/dba8ifej6/image/upload/v1665974414/no_image_1_xap5lo.png" /> }
         </ImageContainer>
         <div>
-          <JustifyText>{priceRecord && priceRecord.price.description ? priceRecord.price.description : "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before final copy is available."}</JustifyText>
+          <JustifyText>{priceRecord && priceRecord.price.description ? priceRecord.price.description : null}</JustifyText>
         </div>
 
     </ImageDescriptionWrapper>
