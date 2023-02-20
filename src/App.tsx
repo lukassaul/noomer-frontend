@@ -1,5 +1,5 @@
 import { Suspense } from 'react'
-//import ReactGA from 'react-ga4';
+import ReactGA from 'react-ga4';
 import GlobalStyle from './globalStyles';
 import GlobalFonts from './fonts/fonts';
 import {
@@ -52,11 +52,11 @@ const PromoMechanics = lazyWithRetry(() => import("./pages/PromoMechanics"))
   Initialize React-GA
   TRACKING_ID is the tracking id from google analytics
 */
-// const TRACKING_ID = process.env.REACT_APP_GA_KEY;
-// if (TRACKING_ID) {
-//   ReactGA.initialize(TRACKING_ID);
-//   ReactGA.send("pageview");
-// }
+const TRACKING_ID = process.env.REACT_APP_GA_KEY;
+if (TRACKING_ID) {
+  ReactGA.initialize(TRACKING_ID);
+  ReactGA.send("pageview");
+}
 
 function App() {
   const token = localStorage.getItem('token')
