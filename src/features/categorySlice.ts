@@ -13,12 +13,15 @@ export const categorySlice = createSlice({
     initialState,
     reducers: {
         setCategory: (state, {payload}) => {
-            console.log("payload: ", payload)
+            //console.log("payload: ", payload)
             state.selectedCategory = payload
+          },
+        clearCategory: (state) => {
+            state.selectedCategory = ''
           },
     },
 })
 
-export const { setCategory } = categorySlice.actions;
+export const { setCategory, clearCategory } = categorySlice.actions;
 
 export default categorySlice.reducer
