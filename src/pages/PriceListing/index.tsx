@@ -162,7 +162,7 @@ function PriceListing() {
     ]
 
     const setProduct = async(value:any) => {
-      console.log("set product value: ", value)
+      //console.log("set product value: ", value)
       setSelectedProduct(value)
     }
 
@@ -194,11 +194,11 @@ function PriceListing() {
       //console.log("selected ticker: ", selectedTicker)
       //console.log("selected product: ", selectedProduct)
       if (selectedProduct && fileData.length > 0) {
-        console.log("filedata: ", fileData[0].product.category.category)
+        //console.log("filedata: ", fileData[0].product.category.category)
         if(fileData[0].product) dispatch(setCategory(fileData[0].product.category.category))
       }
       if (selectedTicker && fileData.length > 0) {
-        console.log(fileData[0])
+        //console.log("selectedTicker and filedata: ", fileData[0])
         if(fileData[0].product) dispatch(setCategory(fileData[0].product.category.category))
       }
       if (selectedProduct != "" && selectedLocation !== "WORLDWIDE") showStatistics()
@@ -263,7 +263,7 @@ function PriceListing() {
 
 
     useEffect(() => {
-      console.log("PAGE ONLOAD")
+      //console.log("PAGE ONLOAD")
 
       return () => {dispatch(clearSearchProduct())}
 

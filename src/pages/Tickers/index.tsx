@@ -9,6 +9,7 @@ import Footer from '../../components/Footer';
 import { getTickers } from '../../features/pageTickerSlice'
 import { setTicker } from '../../features/tickerSlice'
 import { clearSearchProduct } from '../../features/searchSlice'
+import { clearCategory } from '../../features/categorySlice'
 import { formatCurrency } from '../../utils/formatCurrency'
 
 import { useTable, useGlobalFilter, usePagination } from 'react-table'
@@ -48,7 +49,7 @@ function Table({ columns, data }: any) {
     setPageSize,
     state: { pageIndex, pageSize, globalFilter }
   } = props;
-  console.log(props);
+  //console.log(props);
   React.useEffect(() => {
     // props.dispatch({ type: actions.resetPage })
     console.log(globalFilter);
@@ -260,9 +261,10 @@ function Tickers() {
               <div>
                 <Button
                   onClick={() => {
-                    console.log("open ticker page")
+                    //console.log("open ticker page")
                     dispatch(setTicker(instance.row.original._id.ticker))
                     dispatch(clearSearchProduct())
+                    dispatch(clearCategory())
                     navigate('/listing')
                   }}
                   color="noomerRed"
