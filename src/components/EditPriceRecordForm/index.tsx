@@ -664,17 +664,19 @@ function EditPriceRecordForm() {
 
                   <FormInput50Width>
 
-                      <FormLabelContainer>
-                        <FormLabel>{t('Unit', language)}</FormLabel>
-                      </FormLabelContainer>
-
-                      {selectOptionProductCategory !== "Services" ?
+                    {selectOptionProductCategory !== "Services" && selectOptionProductCategory !== "Real Estate" ?
+                      <>
+                        <FormLabelContainer>
+                          <FormLabel>{t('Unit', language)}</FormLabel>
+                        </FormLabelContainer>
                         <FormInput
                             {...register("unit")}
                             name="unit"
                             type="text"
                             placeholder='Enter unit'
-                            aria-label='unit' />
+                            aria-label='unit'
+                        />
+                      </>
                         : null
                       }
 
@@ -690,16 +692,17 @@ function EditPriceRecordForm() {
                             setValue('unit', v.value)
                           }}
                         /> :
-                        <Select
-                          name="unit"
-                          options={servicesUnitOption}
-                          styles={customStyles}
-                          placeholder='Select unit'
-                          components={{ DropdownIndicator: () => null, IndicatorSeparator: () => null }}
-                          onChange={(v:any) => {
-                            setValue('unit', v.value)
-                          }}
-                        />
+                        null
+                        // <Select
+                        //   name="unit"
+                        //   options={servicesUnitOption}
+                        //   styles={customStyles}
+                        //   placeholder='Select unit'
+                        //   components={{ DropdownIndicator: () => null, IndicatorSeparator: () => null }}
+                        //   onChange={(v:any) => {
+                        //     setValue('unit', v.value)
+                        //   }}
+                        // />
                       }
                       <FormError>{errors.unit?.message}</FormError>
 
@@ -723,7 +726,7 @@ function EditPriceRecordForm() {
 
                       <FormLabelContainer>
                         <FormRequired>*</FormRequired>
-                        <FormLabel>{t('Price', language)}</FormLabel>
+                        <FormLabel>{selectOptionProductName === "Apartment" ? t('Monthly rent', language): t('Price', language)}</FormLabel>
                       </FormLabelContainer>
                       <FormInput
                           {...register("price")}
