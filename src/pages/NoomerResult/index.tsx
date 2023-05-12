@@ -46,9 +46,9 @@ function NoomerResult() {
           <tbody>
             <tr><td width="25%"><DetailsLabel>Classification: </DetailsLabel></td><td width="75%"><DetailsValue>{noomer.productA}</DetailsValue></td></tr>
             <tr><td style={{marginRight:"1em"}}><DetailsLabel>Location: </DetailsLabel></td><td><DetailsValue>{noomer.locationA}</DetailsValue></td></tr>
-            <tr><td style={{marginRight:"1em"}}><DetailsLabel>Highest: </DetailsLabel></td><td><DetailsValue>{noomer.statsA && noomer.statsA.highest ? noomer.statsA.highest : "No record"}</DetailsValue></td></tr>
-            <tr><td style={{marginRight:"1em"}}><DetailsLabel>Lowest: </DetailsLabel></td><td><DetailsValue>{noomer.statsA && noomer.statsA.lowest ? noomer.statsA.lowest : "No record"}</DetailsValue></td></tr>
-            <tr><td style={{marginRight:"1em"}}><DetailsLabel>Average: </DetailsLabel></td><td><DetailsValue>{noomer.statsA && noomer.statsA.mean ? noomer.statsA.mean : "No record"}</DetailsValue></td></tr>
+            <tr><td style={{marginRight:"1em"}}><DetailsLabel>Highest: </DetailsLabel></td><td><DetailsValue>{noomer.statsA && noomer.statsA.highest ? `${noomer.statsA.highest.toLocaleString()} usd` : "No record"}</DetailsValue></td></tr>
+            <tr><td style={{marginRight:"1em"}}><DetailsLabel>Lowest: </DetailsLabel></td><td><DetailsValue>{noomer.statsA && noomer.statsA.lowest ? `${noomer.statsA.lowest.toLocaleString()} usd` : "No record"}</DetailsValue></td></tr>
+            <tr><td style={{marginRight:"1em"}}><DetailsLabel>Average: </DetailsLabel></td><td><DetailsValue>{noomer.statsA && noomer.statsA.mean ? `${noomer.statsA.mean.toLocaleString()} usd` : "No record"}</DetailsValue></td></tr>
           </tbody>
         </table>
       </StatsTable>
@@ -59,9 +59,9 @@ function NoomerResult() {
           <tbody>
             <tr><td width="25%"><DetailsLabel>Classification: </DetailsLabel></td><td width="75%"><DetailsValue>{noomer.productB}</DetailsValue></td></tr>
             <tr><td style={{marginRight:"1em"}}><DetailsLabel>Location: </DetailsLabel></td><td><DetailsValue>{noomer.locationB}</DetailsValue></td></tr>
-            <tr><td style={{marginRight:"1em"}}><DetailsLabel>Highest: </DetailsLabel></td><td><DetailsValue>{noomer.statsB && noomer.statsB.highest ? noomer.statsB.highest : "No record"}</DetailsValue></td></tr>
-            <tr><td style={{marginRight:"1em"}}><DetailsLabel>Lowest: </DetailsLabel></td><td><DetailsValue>{noomer.statsB && noomer.statsB.lowest ? noomer.statsB.lowest : "No record"}</DetailsValue></td></tr>
-            <tr><td style={{marginRight:"1em"}}><DetailsLabel>Average: </DetailsLabel></td><td><DetailsValue>{noomer.statsB && noomer.statsB.mean ? noomer.statsB.mean : "No record"}</DetailsValue></td></tr>
+            <tr><td style={{marginRight:"1em"}}><DetailsLabel>Highest: </DetailsLabel></td><td><DetailsValue>{noomer.statsB && noomer.statsB.highest ? `${noomer.statsB.highest.toLocaleString()} usd` : "No record"}</DetailsValue></td></tr>
+            <tr><td style={{marginRight:"1em"}}><DetailsLabel>Lowest: </DetailsLabel></td><td><DetailsValue>{noomer.statsB && noomer.statsB.lowest ? `${noomer.statsB.lowest.toLocaleString()} usd` : "No record"}</DetailsValue></td></tr>
+            <tr><td style={{marginRight:"1em"}}><DetailsLabel>Average: </DetailsLabel></td><td><DetailsValue>{noomer.statsB && noomer.statsB.mean ? `${noomer.statsB.mean.toLocaleString()} usd` : "No record"}</DetailsValue></td></tr>
           </tbody>
         </table>
       </StatsTable>

@@ -596,7 +596,7 @@ function CreatePriceRecordForm() {
                           <FormLabel>{t('Unit', language)}</FormLabel>
                         </FormLabelContainer>
 
-                        {selectOptionProductCategory !== "Services" ?
+                        {selectOptionProductCategory !== "Services" && selectOptionProductCategory !== "Real Estate" ?
                           <FormInput
                               {...register("unit")}
                               name="unit"
@@ -642,7 +642,7 @@ function CreatePriceRecordForm() {
 
                       <FormLabelContainer>
                         <FormRequired>*</FormRequired>
-                        <FormLabel>{t('Price', language)}</FormLabel>
+                        <FormLabel>{selectOptionProductName === "Apartment" ? t('Monthly rent', language): t('Price', language)}</FormLabel>
                       </FormLabelContainer>
                       <FormInput
                           {...register("price")}

@@ -276,7 +276,11 @@ function PriceDetails() {
           <tr><td style={{marginRight:"1em"}}><DetailsLabel>Date: </DetailsLabel></td><td><DetailsValue>{moment(priceRecord.price.createdAt).format('LL')}</DetailsValue></td></tr>
           <tr><td style={{marginRight:"1em"}}><DetailsLabel>Location: </DetailsLabel></td><td><DetailsValue>{priceRecord.price.location_city}, {priceRecord.price.location_state && priceRecord.price.location_state !== 'undefined' ? `${priceRecord.price.location_state}, `: null}{priceRecord.price.location_country}</DetailsValue></td></tr>
           <tr><td style={{marginRight:"1em"}}><DetailsLabel>Store Name: </DetailsLabel></td><td><DetailsValue>{priceRecord.price.store}</DetailsValue></td></tr>
-          <tr><td style={{marginRight:"1em"}}><DetailsLabel>Price: </DetailsLabel></td><td><DetailsValue>{priceRecord.price.price} {priceRecord.price.currency} {priceRecord.price.unit ? `/ ${priceRecord.price.unit}` : null}</DetailsValue></td></tr>
+          {priceRecord.product.category.category === "Real Estate" ?
+            <tr><td style={{marginRight:"1em"}}><DetailsLabel>Price: </DetailsLabel></td><td><DetailsValue>{priceRecord.price.price} {priceRecord.price.currency} </DetailsValue></td></tr>
+            :
+            <tr><td style={{marginRight:"1em"}}><DetailsLabel>Price: </DetailsLabel></td><td><DetailsValue>{priceRecord.price.price} {priceRecord.price.currency} {priceRecord.price.unit && priceRecord.price.unit !== "undefined" ? `/ ${priceRecord.price.unit}` : null}</DetailsValue></td></tr>
+          }
         </tbody>
       </table>
 
