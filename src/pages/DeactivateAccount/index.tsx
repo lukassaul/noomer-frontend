@@ -76,7 +76,6 @@ function DeactivateAccount() {
 
             navigate('/login')
         } else {
-          console.log("error deactivating the account")
           setDeactivateError(true)
           setDeactivateErrorMessage("Error deactivating the account. Please try again.")
         }

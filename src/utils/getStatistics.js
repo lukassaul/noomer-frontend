@@ -9,8 +9,7 @@ function count_range(array, min, max) {
       newArray.push(item)
     }
   })
-  console.log("array: ", array)
-  console.log("new array: ", newArray)
+
   return newArray.length
 }
 
@@ -46,8 +45,6 @@ export default function getStatistics(pricesArray:any){
       members: count_range(pricesArray, lowest+(priceStep*4)+1, lowest+(priceStep*5))
     }
   ]
-
-  console.log("priceGroup: ", priceGroup)
 
   // Creating the mean with Array.reduce
   let mean = pricesArray.reduce((acc, curr)=>{

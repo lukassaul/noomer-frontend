@@ -101,7 +101,6 @@ function ListingHeader() {
       imageUrl: "https://res.cloudinary.com/dba8ifej6/image/upload/v1668394963/header-category-agri2_s2pm0b.jpg",
     }
   }
-  //console.log("selectedCategory: ", selectedCategory)
 
   if (selectedCategory === "") selectedCategory = "All";
   let bgImage = categoriesArray[selectedCategory]

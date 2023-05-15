@@ -305,6 +305,7 @@ export const JustifyText = styled.p`
   word-spacing: -0.05em;
   hyphens: auto;
   webkit-hyphens: auto;
+  white-space: pre-line;
 `;
 
 export const RightLinkContainer = styled.div`

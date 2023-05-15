@@ -20,7 +20,7 @@ export const getTickers = createAsyncThunk(
     'pageTickers/get',
     async (ticker:string, thunkAPI) => {
         const response = await GetTickersAPI()
-        console.log("getTickers response: ", response)
+        
         if (response.status !== 200) {
           if (response.data.hasOwnProperty('message')) return thunkAPI.rejectWithValue(await response.data.message)
           else return thunkAPI.rejectWithValue(await response.data)

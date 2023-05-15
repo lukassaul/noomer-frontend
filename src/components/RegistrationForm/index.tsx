@@ -43,7 +43,6 @@ function RegistrationForm() {
 
     const onConfirm = async() => {
       toggle();
-      console.log("terms and condition")
       setValue("acceptTerms", true)
       //setAgree(true)
     };

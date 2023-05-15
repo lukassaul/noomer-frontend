@@ -53,16 +53,13 @@ export const registrationSlice = createSlice({
         builder.addCase(signupUser.fulfilled, (state, {payload}) => {
             state.isRegFetching = false
             state.isRegSuccess = true
-            //console.log("fulfiled: ", payload)
         })
         builder.addCase(signupUser.rejected, (state, action) => {
-            console.log("action: ", action)
+
             state.isRegFetching = false
             if (action.payload) {
-                //console.log("error message payload: ", action.payload)
                 state.errorRegMessage = action.payload as unknown as string
               } else {
-                //console.log("error message error: ", action.error.message)
                 state.errorRegMessage = action.error.message!
               }
         })

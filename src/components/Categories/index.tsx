@@ -27,7 +27,6 @@ function Categories() {
 
   useEffect(() => {
     let pathname = location.pathname
-    console.log("pathname: ", pathname)
     if (pathname === "/") setCategoriesToShow("LANDING")
     if (pathname === "/categories") setCategoriesToShow("HOME")
   }, [])
@@ -126,7 +125,6 @@ function Categories() {
   ]
 
   const handleCategoryClick = (cat:any) => {
-    console.log("category clock cat: ", cat)
     // if (cat==="Real Estate") dispatch(setCategory('Real_Estate'))
     // else if (cat==="Wearable Technology") dispatch(setCategory('Wearable_Technology'))
     // else if (cat==="Electronic Devices") dispatch(setCategory('Electronic_Devices'))

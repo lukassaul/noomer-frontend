@@ -155,7 +155,6 @@ function PriceDetails() {
     if (result && result.status === 200) {
       setPriceRecord(result.data)
       setShowSpinner(false)
-      console.log("price details: ", result.data)
 
       /**
         Loop thru the ratings array and get the total count
@@ -176,9 +175,7 @@ function PriceDetails() {
         Check if the user viewing the price record is the owner
       **/
       if(user != result.data.price.uploader._id) setIsOwner(false)
-      console.log("is owner: ", user != result.data.price.uploader._id)
-      console.log("user: ", user)
-      console.log("result.data.uploader: ", result.data.price.uploader._id)
+      
 
       /**
         Check if the user viewing if already submitted a rating

@@ -64,7 +64,7 @@ const SubmittedRecordsTab: FC<{}> = () => {
   const fetchData = useCallback(async() => {
     if(profileUserId && currentPage) {
       const postCreated = await GetDashboardSubmittedRecordsAPI(profileUserId, 5, currentPage)
-      console.log("post created: ", postCreated)
+
       if (postCreated) setIsFetching(false)
       if(postCreated.status === 200) {
         if(postCreated.hasOwnProperty('data')) {
@@ -85,7 +85,7 @@ const SubmittedRecordsTab: FC<{}> = () => {
   }, [currentPage, fetchData]);
 
   const editPriceRecord = async(item: object) => {
-    console.log("edit price record")
+
     dispatch(priceEdit(item))
     navigate('/priceRecord/edit')
   }
@@ -97,14 +97,13 @@ const SubmittedRecordsTab: FC<{}> = () => {
   const onConfirm = async() => {
     toggle();
     if(selectedPost) {
-      console.log("onConfirm function")
+
       const result: any = await DeletePriceRecordAPI(selectedPost)
       if (result && result.status === 200) {
         ToastNotification({message: "Price record successfully deleted.", type: "SUCCESS"})
         fetchData();
       } else {
         ToastNotification({message: "Error in deleting price record. Please try again.", type: "ERROR"})
-        console.log("result error: ", result)
       }
     }
   };

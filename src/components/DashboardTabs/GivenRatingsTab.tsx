@@ -51,7 +51,7 @@ const GivenRatingsTab: FC<{}> = () => {
     if(profileUserId && currentPage) {
 
       const ratingGiven = await GetDashboardGivenRatingsAPI(profileUserId, 5, currentPage)
-      console.log("ratingGiven: ", ratingGiven)
+
       if (ratingGiven) setIsFetching(false)
       if(ratingGiven.status === 200) {
         if(ratingGiven.hasOwnProperty('data')) {
@@ -74,7 +74,7 @@ const GivenRatingsTab: FC<{}> = () => {
 
 
   const handleEdit = async (rating: object) => {
-    console.log("edit rating")
+
     await dispatch(ratingEdit(rating))
     navigate('/rating/edit')
   }
@@ -86,11 +86,10 @@ const GivenRatingsTab: FC<{}> = () => {
 
   const onConfirm = async() => {
     toggle();
-    console.log("proceed to delete user rating: ", selectedRating)
+
     if(selectedRating) {
       const result: any = await DeleteRatingAPI(selectedRating)
 
-      console.log('delete rating result: ', result.data)
       if (result && result.status === 200) {
         ToastNotification({message: "Rating successfully deleted.", type: "SUCCESS"})
         fetchData();
@@ -112,6 +111,7 @@ const GivenRatingsTab: FC<{}> = () => {
         <CenteredContainer style={{margin: '25px 0', flexDirection: 'column'}}>
           {givenRatings && givenRatings.length > 0 ?
             givenRatings.map((rating: any) => {
+              console.log("rating: ", rating)
                  return (
                    <CenteredContainerDash key={rating._id}>
                       <div style={{width: '25%'}}>

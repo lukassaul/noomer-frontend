@@ -82,7 +82,6 @@ function UserDashboard() {
 
   const setUserDashboard = useCallback(async() => {
     if (dashboard) {
-        console.log("dashboard: ", dashboard)
         if (dashboard.profile) setProfile(dashboard.profile)
       }
   }, [dashboard]);

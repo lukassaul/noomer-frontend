@@ -29,7 +29,6 @@ function CreatePriceRecord() {
 
   useEffect(() => {
     if (priceRecordID) {
-      console.log("priceRecordID: ", priceRecordID)
       navigate(`/priceRecord/${priceRecordID}`, { replace: true })
       dispatch(clearSubmitState())
     }

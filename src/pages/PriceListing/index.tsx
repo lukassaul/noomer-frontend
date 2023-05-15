@@ -103,7 +103,6 @@ function PriceListing() {
     const { selectedTickerState } = useSelector((state: RootState) => state.ticker)
     const { searchProduct } = useSelector((state: RootState) => state.search)
 
-    //console.log("selectedTickerState: ", selectedTickerState)
 
     // Should set the reactivesearch single dropdown value
     const [selectedOption, setSelectedOption] = useState("")
@@ -162,7 +161,6 @@ function PriceListing() {
     ]
 
     const setProduct = async(value:any) => {
-      //console.log("set product value: ", value)
       setSelectedProduct(value)
     }
 
@@ -181,7 +179,6 @@ function PriceListing() {
     }, [])
 
     useEffect(() => {
-      //console.log("searchProduct: ", searchProduct)
       setSelectedProduct(searchProduct)
     }, [searchProduct])
 
@@ -190,15 +187,10 @@ function PriceListing() {
     }, [selectedTickerState])
 
     useEffect(() => {
-      //console.log("perform stat computation")
-      //console.log("selected ticker: ", selectedTicker)
-      //console.log("selected product: ", selectedProduct)
       if (selectedProduct && fileData.length > 0) {
-        //console.log("filedata: ", fileData[0].product.category.category)
         if(fileData[0].product) dispatch(setCategory(fileData[0].product.category.category))
       }
       if (selectedTicker && fileData.length > 0) {
-        //console.log("selectedTicker and filedata: ", fileData[0])
         if(fileData[0].product) dispatch(setCategory(fileData[0].product.category.category))
       }
       if (selectedProduct != "" && selectedLocation !== "WORLDWIDE") showStatistics()
@@ -263,7 +255,6 @@ function PriceListing() {
 
 
     useEffect(() => {
-      //console.log("PAGE ONLOAD")
 
       return () => {dispatch(clearSearchProduct())}
 

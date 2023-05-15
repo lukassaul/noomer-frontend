@@ -79,7 +79,7 @@ function EditPriceRecordForm() {
   const { recordToEdit } = useSelector((state: RootState) => state.priceRecord)
   const { isEditPriceRecordFetching } = useSelector((state: RootState) => state.priceRecord)
 
-  console.log("recordToEdit: ", recordToEdit)
+
   const {
     productSelectOption,
     locationSelectOption,
@@ -88,7 +88,6 @@ function EditPriceRecordForm() {
     isGetCurrenciesFetching,
     isGetProductsFetching
   } = useSelector((state: RootState) => state.selectOptions)
-  //console.log("locationSelectOption: ", locationSelectOption)
 
   const { register, control, setValue, onSubmit, errors } = useEditPriceRecordForm();
 
@@ -353,12 +352,11 @@ function EditPriceRecordForm() {
   const saveImage = async (e: any) => {
     e.preventDefault()
     const imagePriceRecord = await imageProcessor(e.target.files[0])
-    console.log("imagePriceRecord: ", imagePriceRecord)
+
     setPriceRecordImage(imagePriceRecord)
 
     urlToFile(imagePriceRecord, 'product.png')
      .then((file)=>{
-       console.log("urlToFile file: ", file)
        setValue('product_image', file)
      });
   }
@@ -393,19 +391,13 @@ function EditPriceRecordForm() {
     }
   }
 
-  // console.log("form errors: ", errors)
-  console.log("savedCurrencyOptionValue: ", savedCurrencyOptionValue)
-  console.log("savedLocationOptionValue: ", savedLocationOptionValue)
-
 
   const gotoStepOne = (e: any) => {
-    console.log("should go back to step 1")
     e.preventDefault();
     setStep(1)
   }
 
   const gotoStepTwo = (e: any) => {
-    console.log("product category: ", productCategory)
     e.preventDefault();
     setStep(2)
   }
@@ -455,7 +447,6 @@ function EditPriceRecordForm() {
     }
   }
 
-  console.log("recordToEdit unit: ", savedUnitOptionValue)
   return (
       <form onSubmit={onSubmit} aria-label="form">
         {step === 1 ?

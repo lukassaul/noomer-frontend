@@ -31,8 +31,6 @@ function SearchProduct() {
     dispatch(getProductAutosuggest("product"))
   },[dispatch])
 
-  //console.log("product autosuggest: ", productAutosuggest)
-
 
   const handleSearchProduct = (e: any) => {
     e.preventDefault()

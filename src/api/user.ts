@@ -21,7 +21,6 @@ export interface ProfileProps {
 export const SetUserProfileAPI = async ( data: ProfileProps ) => {
   const url = `${process.env.REACT_APP_BASE_URL}/auth/update_profile`
   const token = localStorage.getItem('token')
-  //console.log("data: ", data)
   const formData = new FormData();
   formData.append("profileId", data.profileId)
   formData.append("userId", data.userId)
@@ -83,13 +82,10 @@ export const GetUserProfileAPI = async ( profileId: string) => {
       .then(res => res)
   } catch (error: any) {
     if (error.response) {
-      console.log("response error catch: ", error.response)
       return error.response
     } else if (error.request) {
-      console.log("request error catch: ", error.request)
       return error.request
     } else {
-      console.log("request error catch: ", error.message)
       return error.message
     }
   }
@@ -117,13 +113,10 @@ export const GetUserDashboardAPI = async ( profileId: string) => {
       .then(res => res)
   } catch (error: any) {
     if (error.response) {
-      console.log("response error catch: ", error.response)
       return error.response
     } else if (error.request) {
-      console.log("request error catch: ", error.request)
       return error.request
     } else {
-      console.log("request error catch: ", error.message)
       return error.message
     }
   }
@@ -144,13 +137,10 @@ export const GetDashboardCreatedPostsAPI = async ( profileId: string, limit: num
       .then(res => res)
   } catch (error: any) {
     if (error.response) {
-      console.log("response error catch: ", error.response)
       return {status: 500, error: error.response, data: {}}
     } else if (error.request) {
-      console.log("request error catch: ", error.request)
       return {status: 500, error: error.request, data: {}}
     } else {
-      console.log("request error else: ", error.message)
       return {status: 500, error: error.message, data: {}}
     }
   }
@@ -170,13 +160,10 @@ export const GetDashboardGivenRatingsAPI = async ( profileId: string, limit: num
       .then(res => res)
   } catch (error: any) {
     if (error.response) {
-      console.log("response error catch: ", error.response)
       return {status: 500, error: error.response, data: {}}
     } else if (error.request) {
-      console.log("request error catch: ", error.request)
       return {status: 500, error: error.request, data: {}}
     } else {
-      console.log("request error else: ", error.message)
       return {status: 500, error: error.message, data: {}}
     }
   }
@@ -196,13 +183,10 @@ export const GetDashboardReceivedRatingsAPI = async ( profileId: string, limit: 
       .then(res => res)
   } catch (error: any) {
     if (error.response) {
-      console.log("response error catch: ", error.response)
       return {status: 500, error: error.response, data: {}}
     } else if (error.request) {
-      console.log("request error catch: ", error.request)
       return {status: 500, error: error.request, data: {}}
     } else {
-      console.log("request error else: ", error.message)
       return {status: 500, error: error.message, data: {}}
     }
   }
@@ -225,13 +209,10 @@ export const GetUserIPAPI = async () => {
       .then(res =>res)
   } catch (error: any) {
     if (error.response) {
-      console.log("response error catch: ", error.response)
       return error.response
     } else if (error.request) {
-      console.log("request error catch: ", error.request)
       return error.request
     } else {
-      console.log("request error catch: ", error.message)
       return error.message
     }
   }

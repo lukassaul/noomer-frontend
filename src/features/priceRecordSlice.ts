@@ -111,7 +111,7 @@ export const submitNewPriceRecord = createAsyncThunk<
     'priceRecord/submit',
     async (formData, thunkAPI) => {
       const response = await CreatePriceRecordAPI(formData)
-      console.log("Response", response.data)
+
       if (response.status !== 200) {
         if (response.data.hasOwnProperty('message')) {
           ToastNotification({message: response.data.message, type: "ERROR"})
@@ -156,7 +156,7 @@ export const editPriceRecord = createAsyncThunk<
     'priceRecord/edit',
     async (formData, thunkAPI) => {
       const response = await EditPriceRecordAPI(formData)
-      console.log("edit Response", response.data)
+
       if (response.status !== 200) {
         if (response.data.hasOwnProperty('message')) {
           ToastNotification({message: response.data.message, type: "ERROR"})
@@ -220,24 +220,21 @@ export const priceRecordSlice = createSlice({
     extraReducers: (builder) => {
         builder.addCase(submitNewPriceRecord.fulfilled, (state, action) => {
           let res = action.payload as unknown as any
-          console.log("reducer action: ", action.payload)
-          console.log("reducer res: ", res)
+
 
           state.isSubmitPriceRecordFetching = false
           state.isSubmitPriceRecordSuccess = true
           state.priceRecordID = res.price._id
-          console.log("state.priceRecordID ", state.priceRecordID)
-          console.log("state.isSubmitPriceRecordFetching ", state.isSubmitPriceRecordFetching)
-          console.log("state.isSubmitPriceRecordSuccess ", state.isSubmitPriceRecordSuccess)
+
         })
         builder.addCase(submitNewPriceRecord.rejected, (state, action) => {
-            console.log("action: ", action)
+
             state.isSubmitPriceRecordFetching = false
             if (action.payload) {
-                console.log("error message payload: ", action.payload)
+
                 state.errorSubmitPriceRecordMessage = action.payload as unknown as string
               } else {
-                console.log("error message error: ", action.error.message)
+
                 state.errorSubmitPriceRecordMessage = action.error.message!
               }
         })
@@ -247,24 +244,20 @@ export const priceRecordSlice = createSlice({
 
         builder.addCase(editPriceRecord.fulfilled, (state, action) => {
           let res = action.payload as unknown as any
-          console.log("reducer action: ", action.payload)
-          console.log("reducer res: ", res)
 
           state.isEditPriceRecordFetching = false
           state.isEditPriceRecordSuccess = true
           state.priceRecordID = res.price._id
-          console.log("state.priceRecordID ", state.priceRecordID)
-          console.log("state.isEditPriceRecordFetching ", state.isEditPriceRecordFetching)
-          console.log("state.isEditPriceRecordSuccess ", state.isEditPriceRecordSuccess)
+
         })
         builder.addCase(editPriceRecord.rejected, (state, action) => {
-            console.log("action: ", action)
+
             state.isEditPriceRecordFetching = false
             if (action.payload) {
-                console.log("error message payload: ", action.payload)
+
                 state.errorEditPriceRecordMessage = action.payload as unknown as string
               } else {
-                console.log("error message error: ", action.error.message)
+              
                 state.errorEditPriceRecordMessage = action.error.message!
               }
         })
