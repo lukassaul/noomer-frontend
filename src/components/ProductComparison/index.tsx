@@ -172,7 +172,6 @@ function ProductComparison() {
   );
 
   const isSelectOptionB = (v: any): v is SelectOption => {
-    console.log("is select option b: ", v)
     if ((v as SelectOption).value !== undefined) return v.value
     return false
   }
@@ -248,7 +247,6 @@ function ProductComparison() {
     return false
   }
 
-  //console.log("noomer: ", noomer)
 
   useEffect(() => {
     if(productA && productAError) setProductAError(false)
@@ -268,10 +266,6 @@ function ProductComparison() {
 
   const handleComparisonSubmit = async(e: any) => {
     e.preventDefault()
-    console.log("product a: ", productA)
-    console.log("location a: ", locationA.split(','))
-    console.log("product b: ", productB)
-    console.log("location b: ", locationB)
 
     if(!productA || !productB || !locationA || !locationB) {
       if(!productA) setProductAError(true); else setProductAError(false);
@@ -323,10 +317,8 @@ function ProductComparison() {
       country_b
     }
 
-    console.log("data: ", data)
 
     let response = await dispatch(postProductComparison(data))
-    console.log("RESPONSE: ", response)
 
     if (response.meta.requestStatus === "fulfilled") {
       navigate('/noomer')

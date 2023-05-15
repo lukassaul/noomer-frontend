@@ -36,7 +36,7 @@ export const postProductComparison = createAsyncThunk<
       'comparison/noomer',
       async (formData, thunkAPI) => {
         const response = await PostProductComparison(formData)
-        console.log("Response", response.data)
+      
         if (response.status !== 200) {
           if (response.data.hasOwnProperty('message')) return thunkAPI.rejectWithValue(await response.data.message)
           else return thunkAPI.rejectWithValue(await response.data)

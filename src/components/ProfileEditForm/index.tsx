@@ -138,13 +138,12 @@ function ProfileEditForm() {
 
         if (dashboard.profile.city) {
           let savedLocation = dashboard.profile.state !== "undefined" ? `${dashboard.profile.city}, ${dashboard.profile.state}, ${dashboard.profile.country}` : `${dashboard.profile.city}, ${dashboard.profile.country}`
-          console.log("savedLocation: ", savedLocation)
+
           let locationValue = ""
           if (locationSelectOption) {
             for(let i=0; i < locationSelectOption.length; i++) {
               if (locationSelectOption[i].label === savedLocation) {
                 locationValue = locationSelectOption[i].value;
-                console.log("locationValue: ", locationValue)
                 setSavedLocationOptionValue({label: savedLocation, value: locationValue})
                 break
               }

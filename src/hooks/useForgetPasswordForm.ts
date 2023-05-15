@@ -25,14 +25,6 @@ function useForgetPasswordForm(){
     resolver: yupResolver(validationSchema)
   });
   const onSubmit = useCallback(async(formValues: ForgetPasswordFormData) => {
-    // const res: any = await RegistrationAPI(formValues)
-    // console.log("Testing response: ", res)
-    // if (res.status === 201) {
-    //   setWorked(true)
-    //   navigate('/emailsent')
-    // } else {
-    //   setMessage(res.data)
-    // }
     dispatch(requestPasswordUser(formValues))
   }, [dispatch]);
 

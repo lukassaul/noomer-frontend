@@ -49,7 +49,6 @@ function Table({ columns, data }: any) {
     setPageSize,
     state: { pageIndex, pageSize, globalFilter }
   } = props;
-  //console.log(props);
   React.useEffect(() => {
     // props.dispatch({ type: actions.resetPage })
     console.log(globalFilter);
@@ -206,7 +205,6 @@ function Tickers() {
     dispatch(getTickers("tickers"));
   }, [dispatch]);
 
-  //console.log("pageTickers: ", pageTickers)
 
   const tickerColorArray = ["#EE1D52", "#F7931A", "#0D5EBA", "#B23B3B", "#22A39F"]
   const getRandomColor = () => {
@@ -261,7 +259,6 @@ function Tickers() {
               <div>
                 <Button
                   onClick={() => {
-                    //console.log("open ticker page")
                     dispatch(setTicker(instance.row.original._id.ticker))
                     dispatch(clearSearchProduct())
                     dispatch(clearCategory())

@@ -13,7 +13,6 @@ export const tickerSlice = createSlice({
     initialState,
     reducers: {
         setTicker: (state, {payload}) => {
-          //console.log("payload: ", payload)
           state.selectedTickerState = payload
         },
         clearTicker: (state) => {

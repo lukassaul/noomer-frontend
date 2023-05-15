@@ -28,14 +28,7 @@ function useRegistrationForm(){
     resolver: yupResolver(validationSchema)
   });
   const onSubmit = useCallback(async(formValues: RegistrationFormData) => {
-    // const res: any = await RegistrationAPI(formValues)
-    console.log("Testing response: ", formValues)
-    // if (res.status === 201) {
-    //   setWorked(true)
-    //   navigate('/emailsent')
-    // } else {
-    //   setMessage(res.data)
-    // }
+    
     dispatch(signupUser(formValues))
     localStorage.setItem('email', formValues.email)
   }, [dispatch]);

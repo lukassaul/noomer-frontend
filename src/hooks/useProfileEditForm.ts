@@ -47,7 +47,7 @@ function useProfileEditForm(){
     resolver: yupResolver(validationSchema)
   });
   const onSubmit = useCallback(async(formValues: ProfileEditFormData) => {
-    //console.log("form values: ", formValues)
+    
     try {
       const res: any = await SetUserProfileAPI(formValues)
       let profileUserId = localStorage.getItem('user')

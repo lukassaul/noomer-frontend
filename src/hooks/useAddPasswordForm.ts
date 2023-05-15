@@ -27,20 +27,6 @@ function usePasswordForm(){
     resolver: yupResolver(validationSchema)
   });
   const onSubmit = useCallback(async(formValues: AddPasswordFormData) => {
-    // const res: any = await AddPasswordAPI(formValues)
-    // console.log("Testing response: ", res)
-    // if (res.status === 200) {
-    //   console.log("success ", res.data)
-    //   // let details = {
-    //   //   token: res.data.token,
-    //   //   user: res.data.user._id,
-    //   //   userEmail: res.data.user.email
-    //   // }
-    //   navigate('/userdashboard')
-    //   window.location.reload();
-    // } else {
-    //   console.log("not ",res.data)
-    // }
     dispatch(addPasswordUser(formValues))
   }, [dispatch]);
 

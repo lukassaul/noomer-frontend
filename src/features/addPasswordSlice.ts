@@ -25,7 +25,6 @@ export const addPasswordUser = createAsyncThunk<
     'user/signup',
     async (formData, thunkAPI) => {
         const response = await AddPasswordAPI(formData)
-        //console.log("Response", response.data)
         if (response.status !== 200) {
           if (response.data.hasOwnProperty('message')) return thunkAPI.rejectWithValue(await response.data.message)
           else return thunkAPI.rejectWithValue(await response.data)
@@ -53,16 +52,13 @@ export const AddPasswordSlice = createSlice({
         builder.addCase(addPasswordUser.fulfilled, (state, {payload}) => {
             state.isAddFetching = false
             state.isAddSuccess = true
-            //console.log("fulfiled: ", payload)
         })
         builder.addCase(addPasswordUser.rejected, (state, action) => {
-            console.log("action: ", action)
+
             state.isAddFetching = false
             if (action.payload) {
-                //console.log("error message payload: ", action.payload)
                 state.errorAddMessage = action.payload as unknown as string
               } else {
-                //console.log("error message error: ", action.error.message)
                 state.errorAddMessage = action.error.message!
               }
         })

@@ -7,7 +7,7 @@ export interface RegistrationProps {
 }
 
 export const RegistrationAPI = async ({ email }: RegistrationProps) => {
-  //console.log(email)
+
   const data = { email: email }
   const url = `${process.env.REACT_APP_BASE_URL}/auth/signup`
   try {
@@ -22,13 +22,10 @@ export const RegistrationAPI = async ({ email }: RegistrationProps) => {
       .then(res => res)
   } catch (error: any) {
     if (error.response) {
-      //console.log("response error catch: ", error.response)
       return error.response
     } else if (error.request) {
-      //console.log("request error catch: ", error.request)
       return error.request
     } else {
-      //console.log("request error catch: ", error.message)
       return error.message
     }
   }
@@ -65,13 +62,10 @@ export const LoginAPI = async ({ email, password }: LoginProps) => {
       )
   } catch (error: any) {
     if (error.response) {
-      //console.log("response error catch: ", error.response)
       return error.response
     } else if (error.request) {
-      //console.log("request error catch: ", error.request)
       return error.request
     } else {
-      //console.log("request error catch: ", error.message)
       return error.message
     }
   }
@@ -84,7 +78,6 @@ export interface AddPasswordProps {
 }
 
 export const AddPasswordAPI = async ({ userid, password, vtoken }: AddPasswordProps) => {
-  //console.log(userid, password, vtoken);
   const data = {
     userid: userid,
     password: password,
@@ -109,13 +102,10 @@ export const AddPasswordAPI = async ({ userid, password, vtoken }: AddPasswordPr
       )
   } catch (error: any) {
     if (error.response) {
-      //console.log("response error catch: ", error.response)
       return error.response
     } else if (error.request) {
-      //console.log("request error catch: ", error.request)
       return error.request
     } else {
-      //console.log("request error catch: ", error.message)
       return error.message
     }
   }
@@ -139,13 +129,10 @@ export const emailResendAPI = async () => {
       .then(res => res)
   } catch (error: any) {
     if (error.response) {
-      //console.log("response error catch: ", error.response)
       return error.response
     } else if (error.request) {
-      //console.log("request error catch: ", error.request)
       return error.request
     } else {
-      //console.log("request error catch: ", error.message)
       return error.message
     }
   }
@@ -167,13 +154,10 @@ export const logoutAPI = async () => {
       .then(res => res)
   } catch (error: any) {
     if (error.response) {
-      //console.log("response error catch: ", error.response)
       return error.response
     } else if (error.request) {
-      //console.log("request error catch: ", error.request)
       return error.request
     } else {
-      //console.log("request error catch: ", error.message)
       return error.message
     }
   }
@@ -208,13 +192,10 @@ export const ChangePasswordAPI = async ({ password, userid }: ChangePasswordProp
       )
   } catch (error: any) {
     if (error.response) {
-      //console.log("response error catch: ", error.response)
       return error.response
     } else if (error.request) {
-      //console.log("request error catch: ", error.request)
       return error.request
     } else {
-      //console.log("request error catch: ", error.message)
       return error.message
     }
   }
@@ -248,13 +229,10 @@ export const ResetPasswordAPI = async ({ userid, password, vtoken }: RequestPass
       )
   } catch (error: any) {
     if (error.response) {
-      //console.log("response error catch: ", error.response)
       return error.response
     } else if (error.request) {
-      //console.log("request error catch: ", error.request)
       return error.request
     } else {
-      //console.log("request error catch: ", error.message)
       return error.message
     }
   }
@@ -285,13 +263,10 @@ export const ResetPasswordRequestAPI = async ({ email }: ForgetPasswordData) => 
       )
   } catch (error: any) {
     if (error.response) {
-      //console.log("response error catch: ", error.response)
       return error.response
     } else if (error.request) {
-      //console.log("request error catch: ", error.request)
       return error.request
     } else {
-      //console.log("request error catch: ", error.message)
       return error.message
     }
   }
@@ -299,7 +274,6 @@ export const ResetPasswordRequestAPI = async ({ email }: ForgetPasswordData) => 
 
 
 export const DeactivateAccountAPI = async ( userId: string) => {
-  //console.log("deactivate account api: ", userId)
   const token = localStorage.getItem('token')
   const data = { userid: userId }
   const url = `${process.env.REACT_APP_BASE_URL}/auth/deactivate`
@@ -317,13 +291,10 @@ export const DeactivateAccountAPI = async ( userId: string) => {
       .then(res => res)
   } catch (error: any) {
     if (error.response) {
-      //console.log("response error catch: ", error.response)
       return error.response
     } else if (error.request) {
-      //console.log("request error catch: ", error.request)
       return error.request
     } else {
-      //console.log("request error catch: ", error.message)
       return error.message
     }
   }

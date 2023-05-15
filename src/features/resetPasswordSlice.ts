@@ -27,7 +27,6 @@ export const resetPasswordUser = createAsyncThunk<
     'user/reset',
     async (formData, thunkAPI) => {
         const response = await ResetPasswordAPI(formData)
-        console.log("Response", response.data)
         if (response.status !== 200) {
           if (response.data.hasOwnProperty('message')) {
             ToastNotification({message: response.data.message, type: "ERROR"})
@@ -57,16 +56,13 @@ export const ResetPasswordSlice = createSlice({
         builder.addCase(resetPasswordUser.fulfilled, (state, {payload}) => {
             state.isResetFetching = false
             state.isResetSuccess = true
-            console.log("fulfiled: ", payload)
         })
         builder.addCase(resetPasswordUser.rejected, (state, action) => {
-            console.log("action: ", action)
+
             state.isResetFetching = false
             if (action.payload) {
-                console.log("error message payload: ", action.payload)
                 state.errorResetMessage = action.payload as unknown as string
               } else {
-                console.log("error message error: ", action.error.message)
                 state.errorResetMessage = action.error.message!
               }
         })

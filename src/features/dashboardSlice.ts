@@ -114,7 +114,7 @@ export const getDashboard = createAsyncThunk(
     'dashboard/getter',
     async (profileId: string, thunkAPI) => {
         const response = await GetDashboardProfileAPI(profileId)
-        //console.log("Response", response.data)
+
         if (response.status !== 200) {
           if (response.data.hasOwnProperty('message')) return thunkAPI.rejectWithValue(await response.data.message)
           else return thunkAPI.rejectWithValue(await response.data)
@@ -161,16 +161,16 @@ export const dashboardSlice = createSlice({
             state.isGetFetching = false
             state.isGetSuccess = true
             state.dashboard = payload
-            //console.log("fulfiled: ", payload)
+
         })
         builder.addCase(getDashboard.rejected, (state, action) => {
-            //console.log("action: ", action)
+
             state.isGetFetching = false
             if (action.payload) {
-                //console.log("error message payload: ", action.payload)
+
                 state.errorLogMessage = action.payload as unknown as string
               } else {
-                //console.log("error message error: ", action.error.message)
+                
                 state.errorLogMessage = action.error.message!
               }
         })

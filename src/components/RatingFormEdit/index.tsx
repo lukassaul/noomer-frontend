@@ -30,7 +30,6 @@ const DISABLEDDOWNVOTEURL = "https://res.cloudinary.com/dba8ifej6/image/upload/v
 const RatingFormEdit = () => {
   const location = useLocation()
 
-  //console.log("rating details: ", rating)
 
   const { language } = useSelector((state: RootState) => state.language)
   const { editRating, isEditRatingFetching } = useSelector((state: RootState) => state.rating)
@@ -47,7 +46,6 @@ const RatingFormEdit = () => {
   }
 
   useEffect(() => {
-    console.log("edit rating: ", editRating)
     if(editRating) {
       setReason(editRating.reason)
       setVote(editRating.vote)
@@ -60,11 +58,10 @@ const RatingFormEdit = () => {
   }, [editRating]);
 
   const handleVoteSelection = (vote: string) => {
-    console.log("vote: ", vote)
     setValue('rating', vote)
     setVote(vote)
   }
-  console.log("errors: ", errors)
+
   return (
       <form onSubmit={onSubmit} aria-label="form">
 

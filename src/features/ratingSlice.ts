@@ -59,7 +59,7 @@ export const submitPriceRecordRating = createAsyncThunk<
     'rating/submit',
     async (formData, thunkAPI) => {
         const response = await SubmitRatingAPI(formData)
-        console.log("Response", response.data)
+
         if (response.status !== 200) {
           if (response.data.hasOwnProperty('message')) {
             ToastNotification({message: response.data.message, type: "ERROR"})
@@ -82,9 +82,9 @@ export const editPriceRecordRating = createAsyncThunk<
 >(
     'rating/edit',
     async (formData, thunkAPI) => {
-        console.log("edit price record rating")
+
         const response = await EditRatingAPI(formData)
-        console.log("Response", response.data)
+
         if (response.status !== 200) {
           if (response.data.hasOwnProperty('message')) return thunkAPI.rejectWithValue(await response.data.message)
           else return thunkAPI.rejectWithValue(await response.data)
@@ -121,16 +121,16 @@ export const RatingSlice = createSlice({
         builder.addCase(submitPriceRecordRating.fulfilled, (state, {payload}) => {
             state.isSubmitRatingFetching = false
             state.isSubmitRatingSuccess = true
-            console.log("fulfiled: ", payload)
+
         })
         builder.addCase(submitPriceRecordRating.rejected, (state, action) => {
-            console.log("action: ", action)
+
             state.isSubmitRatingFetching = false
             if (action.payload) {
-                console.log("error message payload: ", action.payload)
+
                 state.errorSubmitRatingMessage = action.payload as unknown as string
               } else {
-                console.log("error message error: ", action.error.message)
+
                 state.errorSubmitRatingMessage = action.error.message!
               }
         })
@@ -141,16 +141,16 @@ export const RatingSlice = createSlice({
         builder.addCase(editPriceRecordRating.fulfilled, (state, {payload}) => {
             state.isEditRatingFetching = false
             state.isEditRatingSuccess = true
-            console.log("fulfiled: ", payload)
+
         })
         builder.addCase(editPriceRecordRating.rejected, (state, action) => {
-            console.log("action: ", action)
+
             state.isEditRatingFetching = false
             if (action.payload) {
-                console.log("error message payload: ", action.payload)
+
                 state.errorEditRatingMessage = action.payload as unknown as string
               } else {
-                console.log("error message error: ", action.error.message)
+                
                 state.errorEditRatingMessage = action.error.message!
               }
         })

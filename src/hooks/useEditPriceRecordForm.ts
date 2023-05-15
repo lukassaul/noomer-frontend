@@ -34,7 +34,6 @@ function useEditPriceRecordForm(){
   //const [apistatus, setApiStatus] = useState<string | null>(null)
   const dispatch = useDispatch<AppDispatch>()
   const navigate = useNavigate()
-  console.log("EDIT PRICE RECORD FORM")
   const validationSchema = useMemo(() => (
     yup.object().shape({
       type: yup.string().required('Type is required. Select between RETAIL or SERVICE.'),
@@ -57,7 +56,6 @@ function useEditPriceRecordForm(){
     shouldFocusError: true,
   });
   const onSubmit = useCallback(async(formValues: PriceRecordFormData) => {
-    console.log("edit price record form data: ", formValues)
 
     /**
       This function submits an update for a price record.

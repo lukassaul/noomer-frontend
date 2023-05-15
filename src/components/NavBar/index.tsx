@@ -94,7 +94,6 @@ function NavBar() {
     window.addEventListener('resize', showButton);
 
     const handleLogout = () => {
-      console.log("logging out")
       localStorage.clear()
       dispatch(clearRegState())
       dispatch(clearLogState())
@@ -108,7 +107,6 @@ function NavBar() {
     }
 
     const handleSearchProduct = (e: any) => {
-      console.log("search product")
       e.preventDefault()
       dispatch(setSearchProduct(searchQuery))
       setSearchQuery("")

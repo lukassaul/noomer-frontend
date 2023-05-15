@@ -33,7 +33,7 @@ function NoomerResult() {
   const navigate = useNavigate()
 
   const { noomer } = useSelector((state: RootState) => state.comparison)
-  console.log("noomer: ", noomer)
+  
   let isToken = localStorage.getItem('token')
   let userEmail = localStorage.getItem('userEmail')
   let user = localStorage.getItem('user')

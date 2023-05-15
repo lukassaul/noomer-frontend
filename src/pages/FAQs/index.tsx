@@ -83,7 +83,6 @@ function FAQs() {
     }
   }, [])
 
-  console.log("faqs: ", faqs)
   return (
     <>
       <CommonContainer>

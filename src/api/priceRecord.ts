@@ -23,7 +23,7 @@ export interface CreatePriceRecordProps {
 
 
 export const CreatePriceRecordAPI = async ( data: CreatePriceRecordProps) => {
-    console.log("data imge: ", typeof(data))
+
     const url = `${process.env.REACT_APP_BASE_URL}/product/create_price`
     const token = localStorage.getItem('token')
     const formData = new FormData();
@@ -45,7 +45,7 @@ export const CreatePriceRecordAPI = async ( data: CreatePriceRecordProps) => {
     formData.append("product_image", data.product_image)
     formData.append("receipt_image", data.receipt_image)
     formData.append("description", data.description ? data.description : "")
-    console.log("formdata CreatePriceRecordAPI: ", formData)
+
     if (!token) return { status: 'Failed', message: 'Token not found'}
     try {
       return axios({
@@ -101,7 +101,7 @@ export interface EditPriceRecordProps {
 
 
 export const EditPriceRecordAPI = async ( data: EditPriceRecordProps) => {
-    console.log("edit data: ", data)
+
     const url = `${process.env.REACT_APP_BASE_URL}/product/edit_price`
     const token = localStorage.getItem('token')
     const formData = new FormData();
@@ -124,7 +124,7 @@ export const EditPriceRecordAPI = async ( data: EditPriceRecordProps) => {
     formData.append("product_image", data.product_image)
     formData.append("receipt_image", data.receipt_image)
     formData.append("description", data.description ? data.description : "")
-    console.log("formdata EditPriceRecordAPI: ", formData)
+
     if (!token) return { status: 'Failed', message: 'Token not found'}
     try {
       return axios({

@@ -43,10 +43,6 @@ const RatingForm: React.FC<Props> = ({
   const recordType = path[1]
   const recordId = path[2]
 
-  console.log("Rating form isOwner: ", isOwner)
-  console.log("path: ", path)
-  console.log("recordType: ", recordType)
-  console.log("recordId: ", recordId)
 
   const { language } = useSelector((state: RootState) => state.language)
   const { isSubmitRatingFetching, isSubmitRatingSuccess } = useSelector((state: RootState) => state.rating)
@@ -77,13 +73,13 @@ const RatingForm: React.FC<Props> = ({
   }, [isSubmitRatingSuccess])
 
   const handleVoteSelection = (vote: string) => {
-    console.log("vote: ", vote)
+
     if (!hasVoted) {
       setValue('rating', vote)
       setVote(vote)
     }
   }
-  console.log("isSubmitRatingFetching: ", isSubmitRatingFetching)
+
   return (
       <form onSubmit={onSubmit} aria-label="form">
 

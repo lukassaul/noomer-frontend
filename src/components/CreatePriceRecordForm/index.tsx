@@ -287,12 +287,10 @@ function CreatePriceRecordForm() {
   const saveImage = async (e: any) => {
     e.preventDefault()
     const imagePriceRecord = await imageProcessor(e.target.files[0])
-    console.log("imagePriceRecord: ", imagePriceRecord)
     setPriceRecordImage(imagePriceRecord)
 
     urlToFile(imagePriceRecord, 'product.png')
      .then((file)=>{
-       console.log("urlToFile file: ", file)
        setValue('product_image', file)
      });
   }
@@ -327,17 +325,14 @@ function CreatePriceRecordForm() {
     }
   }
 
-  //console.log("form errors: ", errors)
 
 
   const gotoStepOne = (e: any) => {
-    console.log("should go back to step 1")
     e.preventDefault();
     setStep(1)
   }
 
   const gotoStepTwo = (e: any) => {
-    console.log("product category: ", productCategory)
     e.preventDefault();
     setStep(2)
   }

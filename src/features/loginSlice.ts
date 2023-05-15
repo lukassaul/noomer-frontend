@@ -28,7 +28,6 @@ export const loginUser = createAsyncThunk<
 >(
     'user/login',
     async (formData, thunkAPI) => {
-      console.log("login user called")
         const response = await LoginAPI(formData)
         if (response.status !== 200) {
           if (response.data.hasOwnProperty('message')) {
@@ -60,12 +59,11 @@ export const loginSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder.addCase(loginUser.fulfilled, (state, {payload}) => {
-            //console.log("login payload: ", payload)
-            //console.log("login user role: ", payload.user.user_role)
+
             state.isLogFetching = false
             state.isLogSuccess = true
             if(payload.hasOwnProperty('user')) state.userRole = payload.user.user_role
-            //console.log("state user role: ", state.userRole)
+            
         })
         builder.addCase(loginUser.rejected, (state, action) => {
             state.isLogFetching = false

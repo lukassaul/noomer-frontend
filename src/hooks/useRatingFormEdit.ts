@@ -32,7 +32,7 @@ function useRatingFormEdit(){
     /**
       This function submits a rating for a price record.
     **/
-    console.log("rating form edit formvalues: ", formValues)
+    
     dispatch(editPriceRecordRating(formValues))
   }, [dispatch]);
 

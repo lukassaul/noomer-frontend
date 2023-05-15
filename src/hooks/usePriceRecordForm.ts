@@ -60,7 +60,6 @@ function usePriceRecordForm(){
     }
   });
   const onSubmit = useCallback(async(formValues: PriceRecordFormData) => {
-    console.log("price record form data: ", formValues)
 
     /**
       This function submits a new price record.
