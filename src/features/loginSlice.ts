@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { toast } from 'react-toastify'
 import { LoginAPI } from './../api/auth'
 import ToastNotification from './../components/Toast'
 
@@ -63,7 +62,7 @@ export const loginSlice = createSlice({
             state.isLogFetching = false
             state.isLogSuccess = true
             if(payload.hasOwnProperty('user')) state.userRole = payload.user.user_role
-            
+
         })
         builder.addCase(loginUser.rejected, (state, action) => {
             state.isLogFetching = false

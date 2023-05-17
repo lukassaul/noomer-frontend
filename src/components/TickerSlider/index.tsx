@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { RootState, AppDispatch } from '../../app/store'
@@ -25,29 +25,6 @@ function TickerSlider() {
   }, [dispatch]);
   /***/
 
-  const tickerArray = [
-    {
-      product: "US-NYC BEER",
-      type: "RETAIL",
-      price: "$ 8.00"
-    },{
-      product: "US-SFO CIGAR",
-      type: "RETAIL",
-      price: "$ 2.49"
-    },{
-      product: "US-LAX VAPE",
-      type: "RETAIL",
-      price: "$ 24.99"
-    },{
-      product: "US-DZI BEER",
-      type: "SERVICE",
-      price: "$ 8.25"
-    },{
-      product: "US-PHX CIGAR",
-      type: "RETAIL",
-      price: "$ 3.99"
-    }
-  ]
 
   const tickerColorArray = ["#F8FD01", "#00E0FF", "#F127E9", "#FF0000", "#5DD662", "#FFFFFF"]
   const getRandomColor = () => {

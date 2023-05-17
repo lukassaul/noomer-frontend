@@ -24,12 +24,6 @@ interface SubmitValidationErrors {
     errorSubmitRatingMessage: string | null
 }
 
-interface EditRatingState {
-    isEditRatingSuccess: boolean,
-    isEditRatingFetching: boolean,
-    errorEditRatingMessage: string | null
-}
-
 interface EditValidationErrors {
     errorEditRatingMessage: string | null
 }
@@ -150,7 +144,7 @@ export const RatingSlice = createSlice({
 
                 state.errorEditRatingMessage = action.payload as unknown as string
               } else {
-                
+
                 state.errorEditRatingMessage = action.error.message!
               }
         })

@@ -1,26 +1,20 @@
 import React, { useMemo, useState, useEffect } from 'react'
 import Select from "react-select";
-import { BsFillArrowRightCircleFill } from "react-icons/bs";
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import escapeRegExp from "lodash/escapeRegExp";
 import { t } from '../../i18n';
 import { RootState, AppDispatch } from "../../app/store";
-import { getProductAutosuggest } from "../../features/searchSlice";
 import { getComparisonOptions } from '../../features/selectOptionsSlice'
 import { postProductComparison } from '../../features/comparisonSlice'
-import { PostProductComparison } from '../../api/comparison'
 import Button from "../Button";
 import {
   FormError,
   FlexContainer,
-  JustifyText,
   TitleTwo,
-  TitleThree,
   MainFlexContainerComparison,
   MainFlexContainerRowComparison,
   MainFlexContainerColumnComparison,
-  MainFlexChildrenContainer,
 } from '../../globalStyles'
 
 const MAX_DISPLAYED_OPTIONS = 50;
@@ -33,7 +27,6 @@ type SelectOption = {
 function ProductComparison() {
 
   const { language } = useSelector((state: RootState) => state.language)
-  const { productAutosuggest } = useSelector((state: RootState) => state.search)
 
   const { comparisonLocationSelectOption, comparisonProductSelectOption } = useSelector((state: RootState) => state.selectOptions)
   const { noomer } = useSelector((state: RootState) => state.comparison)

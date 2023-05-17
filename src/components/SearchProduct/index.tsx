@@ -5,15 +5,10 @@ import { useNavigate } from "react-router-dom";
 import { t } from '../../i18n';
 import { RootState, AppDispatch } from "../../app/store";
 import { setSearchProduct, getProductAutosuggest } from "../../features/searchSlice";
-import { SuspenseImg } from "../../SuspenseImage";
 import {
-  FormInput,
-  JustifyText,
   CenteredTitle32,
   MainFlexContainerComparison,
   MainFlexContainerRowComparison,
-  MainFlexContainerColumnComparison,
-  MainFlexChildrenContainer,
 } from '../../globalStyles'
 
 function SearchProduct() {
@@ -22,7 +17,6 @@ function SearchProduct() {
   const navigate = useNavigate()
 
   const { language } = useSelector((state: RootState) => state.language)
-  const { productAutosuggest } = useSelector((state: RootState) => state.search)
 
   const [searchQuery, setSearchQuery] = useState<string | null>('')
 

@@ -5,12 +5,9 @@ import { t } from '../../i18n';
 import { RootState, AppDispatch } from "../../app/store";
 import { getDashboard } from '../../features/dashboardSlice';
 import { clearRatingState } from '../../features/ratingSlice';
-import { getAllCities, getAllCurrencies } from '../../features/selectOptionsSlice';
 import Button from '../../components/Button'
 import {
   ProfileImg,
-  DashContainer,
-  DashHeader,
   ProfileButtonContainer
 } from './styles'
 import {
@@ -64,20 +61,6 @@ function UserDashboard() {
   const {dashboard } = useSelector((state: RootState) => state.dashboard)
 
   const [selectedTab, setSelectedTab] = useState<number>(tabs[0].index);
-
-
-  /**
-    Fetch the citySelectOption and currencySelectOption in the redux state
-  **/
-  // useEffect(() => {
-  //   console.log("FETCH cities: ", citySelectOption.length)
-  //   console.log("FETCH currencies: ", currencySelectOption.length)
-  //   if(citySelectOption.length === 0) dispatch(getAllCities('cities'))
-  //   if(currencySelectOption.length === 0) dispatch(getAllCurrencies('currencies'))
-  // }, [dispatch])
-  /**
-    End of cities and currencies fetch
-  **/
 
 
   const setUserDashboard = useCallback(async() => {

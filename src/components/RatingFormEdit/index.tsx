@@ -1,41 +1,31 @@
-import React, { useMemo, useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import useRatingFormEdit from '../../hooks/useRatingFormEdit';
 import { useSelector } from 'react-redux'
-import { useLocation } from 'react-router-dom'
 import { RootState } from '../../app/store'
 import { t } from '../../i18n'
 import {
   LoginButtonWrapper,
-  WholeWrapper,
 } from './styles'
 import {
-  FormInput,
   FormTextArea80,
   FormError,
   TitleThreeTopPad,
   FlexContainer,
   FlexCenterColContainer,
-  MainFlexContainerColumn,
-  MainFlexContainerRow,
   VoteIconSmall
 } from '../../globalStyles'
 import Button from '../Button'
 
 const UPVOTEURL = "https://res.cloudinary.com/dba8ifej6/image/upload/v1662087399/icon-upvote_eckbb5.png"
 const DOWNVOTEURL = "https://res.cloudinary.com/dba8ifej6/image/upload/v1662087399/icon-downvote_jggvi1.png"
-const DISABLEDUPVOTEURL = "https://res.cloudinary.com/dba8ifej6/image/upload/v1663743530/upvote-disabled_uphnea.png"
-const DISABLEDDOWNVOTEURL = "https://res.cloudinary.com/dba8ifej6/image/upload/v1663743530/downvote-disabled_wrf0nv.png"
-
 
 const RatingFormEdit = () => {
-  const location = useLocation()
-
 
   const { language } = useSelector((state: RootState) => state.language)
   const { editRating, isEditRatingFetching } = useSelector((state: RootState) => state.rating)
 
 
-  const { register, control, setValue, onSubmit, errors } = useRatingFormEdit();
+  const { register, setValue, onSubmit, errors } = useRatingFormEdit();
 
   const [reason, setReason] = useState<string>('');
   const [vote, setVote] = useState<string>('');

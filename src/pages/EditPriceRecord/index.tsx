@@ -1,8 +1,7 @@
-import React, {useCallback, useEffect, useState} from 'react'
-import { useParams, useNavigate } from "react-router-dom";
+import React, {useEffect, useState} from 'react'
+import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import LoadingBar from 'react-top-loading-bar'
-import Alert from '../../components/AlertMessage';
 import { RootState } from "../../app/store";
 import EditPriceRecordForm from "../../components/EditPriceRecordForm";
 import { clearSubmitState } from "../../features/priceRecordSlice";
@@ -11,7 +10,6 @@ import Footer from '../../components/Footer';
 import {
   CenteredContainer,
   CommonContainer,
-  CommonContentContainer,
   FormWraper
 } from '../../globalStyles';
 import { Container } from './styles';
@@ -19,12 +17,10 @@ import { Container } from './styles';
 
 function EditPriceRecord() {
 
-  const params = useParams()
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const token = localStorage.getItem('token')
 
-  const { isEditPriceRecordFetching, priceRecordID, errorEditPriceRecordMessage } = useSelector((state: RootState) => state.priceRecord)
+  const { isEditPriceRecordFetching, priceRecordID } = useSelector((state: RootState) => state.priceRecord)
   const [progress, setProgress] = useState<number>(0)
 
   useEffect(() => {

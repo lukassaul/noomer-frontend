@@ -11,30 +11,19 @@ import { getAllCities, getAllCurrencies, getAllProducts } from '../../features/s
 import {
   LoginButtonWrapper,
   ProductSelectWrapper,
-  WholeWrapper,
   TwoColumnContainer,
 } from './styles'
 import {
-  IconComp,
   ImagePreview,
   CenteredContainer,
   FormInput,
   FormTextArea,
   FormError,
-  TitleTwo,
-  FlexContainer,
   FlexCenterColContainer,
-  MainFlexContainerColumn,
-  MainFlexContainerRow,
   FormLabelContainer,
   FormLabel,
   FormRequired,
-  FormThreeInputContainer,
   FormInput50Width,
-  FormInput40Width,
-  FormInput30Width,
-  FormInput20Width,
-  SelectContainer,
   DarkHeader,
   DarkHeaderText,
   RightLinkContainer,
@@ -71,7 +60,6 @@ const servicesUnitOption = [
 ]
 
 function EditPriceRecordForm() {
-  const location = useLocation()
   const dispatch = useDispatch<AppDispatch>()
   const navigate = useNavigate()
 
@@ -89,15 +77,11 @@ function EditPriceRecordForm() {
     isGetProductsFetching
   } = useSelector((state: RootState) => state.selectOptions)
 
-  const { register, control, setValue, onSubmit, errors } = useEditPriceRecordForm();
+  const { register, setValue, onSubmit, errors } = useEditPriceRecordForm();
 
   const [step, setStep] = useState<number>(2);
 
   const [productCategory, setProductCategory] = useState<string>('');
-  const createRecordStepOne = (category: string) => {
-    setProductCategory(category)
-    setStep(2)
-  };
 
   const [inputValue, setInputValue] = useState<string>('')
   const [inputValueCur, setInputValueCur] = useState<string>('')
