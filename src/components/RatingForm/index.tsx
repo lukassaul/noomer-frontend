@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import useRatingForm from '../../hooks/useRatingForm';
 import { useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
@@ -6,18 +6,14 @@ import { RootState } from '../../app/store'
 import { t } from '../../i18n'
 import {
   LoginButtonWrapper,
-  WholeWrapper,
   RatingText
 } from './styles'
 import {
-  FormInput,
   FormTextArea80,
   FormError,
   TitleTwo,
   FlexContainer,
   FlexCenterColContainer,
-  MainFlexContainerColumn,
-  MainFlexContainerRow,
   VoteIconSmall
 } from '../../globalStyles'
 import Button from '../Button'
@@ -47,7 +43,7 @@ const RatingForm: React.FC<Props> = ({
   const { language } = useSelector((state: RootState) => state.language)
   const { isSubmitRatingFetching, isSubmitRatingSuccess } = useSelector((state: RootState) => state.rating)
 
-  const { register, control, setValue, onSubmit, errors } = useRatingForm();
+  const { register, setValue, onSubmit, errors } = useRatingForm();
 
   const profileId = localStorage.getItem('user')
   const [reason, setReason] = useState<string>('');

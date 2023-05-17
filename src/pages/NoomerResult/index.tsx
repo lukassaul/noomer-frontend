@@ -1,11 +1,9 @@
-import React, {useCallback, useEffect, useState} from 'react'
-import { useParams, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from 'react-redux'
+import React from 'react'
+import { useNavigate } from "react-router-dom";
+import { useSelector } from 'react-redux'
 import { RootState, AppDispatch } from '../../app/store'
 
-import moment from 'moment'
 import { BsFillArrowLeftCircleFill } from "react-icons/bs";
-import Alert from '../../components/AlertMessage'
 
 import Footer from '../../components/Footer';
 import {
@@ -33,10 +31,6 @@ function NoomerResult() {
   const navigate = useNavigate()
 
   const { noomer } = useSelector((state: RootState) => state.comparison)
-  
-  let isToken = localStorage.getItem('token')
-  let userEmail = localStorage.getItem('userEmail')
-  let user = localStorage.getItem('user')
 
   const Stats = () =>
     <FlexContainer style={{width: '100%', justifyContent: 'space-around'}}>

@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import moment from 'moment';
 import { useNavigate } from "react-router-dom";
 import { RootState, AppDispatch } from "../../app/store"
 import Button from '../../components/Button'
-import Alert from '../../components/AlertMessage'
 import Footer from '../../components/Footer';
 import { getTickers } from '../../features/pageTickerSlice'
 import { setTicker } from '../../features/tickerSlice'
@@ -14,7 +12,6 @@ import { formatCurrency } from '../../utils/formatCurrency'
 
 import { useTable, useGlobalFilter, usePagination } from 'react-table'
 
-import styled from 'styled-components';
 import { CommonContainer, CommonContentContainer } from '../../globalStyles'
 import { DesktopResultWrapper, MobileResultWrapper } from './styles'
 
@@ -197,8 +194,6 @@ function Tickers() {
   const {
     pageTickers,
     isGetTickerSuccess,
-    isFetchingTicker,
-    errorFetchingTickerMessage
   } = useSelector((state: RootState) => state.pageTickers)
 
   useEffect(() => {

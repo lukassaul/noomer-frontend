@@ -11,7 +11,6 @@ import { getAllCities, getAllCurrencies, getAllProducts } from '../../features/s
 import {
   LoginButtonWrapper,
   ProductSelectWrapper,
-  WholeWrapper,
   TwoColumnContainer,
 } from './styles'
 import {
@@ -21,19 +20,11 @@ import {
   FormInput,
   FormTextArea,
   FormError,
-  TitleTwo,
-  FlexContainer,
   FlexCenterColContainer,
-  MainFlexContainerColumn,
-  MainFlexContainerRow,
   FormLabelContainer,
   FormLabel,
   FormRequired,
-  FormThreeInputContainer,
-  FormInput40Width,
   FormInput50Width,
-  FormInput20Width,
-  SelectContainer,
   DarkHeader,
   DarkHeaderText,
   RightLinkContainer,
@@ -70,7 +61,6 @@ const servicesUnitOption = [
 ]
 
 function CreatePriceRecordForm() {
-  const location = useLocation()
   const dispatch = useDispatch<AppDispatch>()
   const navigate = useNavigate()
 
@@ -86,15 +76,11 @@ function CreatePriceRecordForm() {
   } = useSelector((state: RootState) => state.selectOptions)
 
 
-  const { register, control, setValue, onSubmit, errors } = usePriceRecordForm();
+  const { register, setValue, onSubmit, errors } = usePriceRecordForm();
 
   const [step, setStep] = useState<number>(1);
 
   const [productCategory, setProductCategory] = useState<string>('');
-  const createRecordStepOne = (category: string) => {
-    setProductCategory(category)
-    setStep(2)
-  };
 
   const [inputValue, setInputValue] = useState<string>('')
   const [inputValueCur, setInputValueCur] = useState<string>('')
@@ -108,7 +94,6 @@ function CreatePriceRecordForm() {
   const [shopNamePlaceholder, setShopNamePlaceholder] = useState<string>('Enter shop name')
   const [showQuantity, setShowQuantity] = useState<boolean>(true)
   const [showUnit, setShowUnit] = useState<boolean>(true)
-  const [showType, setShowType] = useState<boolean>(true)
 
 
   const [productType, setProductType] = useState<string>('');

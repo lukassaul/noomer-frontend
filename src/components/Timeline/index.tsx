@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { BsFillArrowRightCircleFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
@@ -9,8 +9,6 @@ import { MainTimelineContainer,
   TimelineRow,
   TimelineColumn,
   TimelineContainer,
-  TimelineImage,
-  TimelineLabel
 } from './styles';
 import { TitleTwo, RightLinkContainer, LinkParagraph } from '../../globalStyles'
 

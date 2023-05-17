@@ -2,17 +2,14 @@ import {
     ReactiveBase,
     DataSearch,
     ReactiveList,
-    ResultList,
     SingleDropdownList,
     SingleDataList,
-    DateRange,
     SelectedFilters
 } from '@appbaseio/reactivesearch'
 import moment from 'moment'
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import Button from '../../components/Button'
 import Footer from '../../components/Footer'
 import ListingHeader from '../../components/ListingHeader'
 import { RootState, AppDispatch } from '../../app/store'
@@ -26,16 +23,6 @@ import {
     ListWrapper,
     FilterWrapper,
     DataWrapper,
-    ListTitleWrapper,
-    ListTitle,
-    CreateDateWrapper,
-    CreateDateTitle,
-    CreateDate,
-    ExpirationWrapper,
-    ExpirationTitle,
-    Expiration,
-    ItemContentWrapper,
-    ItemContent,
     FilterWrapperMobile,
     FilterButtonWrapper,
     ArrowSmall,
@@ -45,7 +32,6 @@ import {
 } from './styles'
 import {
   CommonContainer,
-  HeaderContainer,
   TitleThree,
   TitleFour,
   FlexBetweenRowContainer,
@@ -53,20 +39,6 @@ import {
 } from "../../globalStyles"
 import { CSVLink } from 'react-csv';
 
-interface PostServiceData {
-    _id: React.Key | null | undefined;
-    uploader: string;
-    classification: string;
-    product: string;
-    type: string;
-    ticker: string;
-    currency: string;
-    location_city: string;
-    location_state: string | null;
-    location_country: string;
-    price: number;
-    rating: number | null;
-}
 
 type Result = {
   product: any;
@@ -193,8 +165,8 @@ function PriceListing() {
       if (selectedTicker && fileData.length > 0) {
         if(fileData[0].product) dispatch(setCategory(fileData[0].product.category.category))
       }
-      if (selectedProduct != "" && selectedLocation !== "WORLDWIDE") showStatistics()
-      else if (selectedTicker != "") showStatistics()
+      if (selectedProduct !== "" && selectedLocation !== "WORLDWIDE") showStatistics()
+      else if (selectedTicker !== "") showStatistics()
     }, [fileData])
 
     const showStatistics = async() => {
@@ -672,7 +644,6 @@ function PriceListing() {
                                           <tbody>
                                             {data.map((item: any) => {
                                               if (item.product && item.product.product_name) {
-                                                let productName = item.product.product_name
                                                 return <tr
                                                         key={item._id}
                                                         onClick={() => navigate(`/priceRecord/${item._id}`)}
@@ -680,7 +651,7 @@ function PriceListing() {
                                                       >
                                                       <td>{item.ticker}</td>
                                                       <td>{item.classification}</td>
-                                                      <td>{item.location_state !== "undefined" && item.location_state != null ? `${item.location_city}, ${item.location_state}, ${item.location_country}` : `${item.location_city}, ${item.location_country}`}</td>
+                                                      <td>{item.location_state !== "undefined" && item.location_state !== null ? `${item.location_city}, ${item.location_state}, ${item.location_country}` : `${item.location_city}, ${item.location_country}`}</td>
                                                       <td>{item.type}</td>
                                                       <td>{item.price} {item.currency}</td>
                                                       <td>{moment(item.createdAt).format('LL')}</td>
@@ -696,7 +667,6 @@ function PriceListing() {
                                           <tbody>
                                             {data.map((item: any) => {
                                               if (item.product && item.product.product_name) {
-                                                let productName = item.product.product_name
                                                 return <tr
                                                     key={item._id}
                                                     onClick={() => navigate(`/priceRecord/${item._id}`)}

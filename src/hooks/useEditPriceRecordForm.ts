@@ -1,6 +1,5 @@
 import { useForm, Controller } from 'react-hook-form';
 import { useCallback, useMemo } from 'react';
-import { useNavigate } from "react-router-dom";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { editPriceRecord } from './../features/priceRecordSlice';
 import * as yup from 'yup';
@@ -30,10 +29,7 @@ interface PriceRecordFormData {
   }
 
 function useEditPriceRecordForm(){
-  //const [apimessage, setApiMessage] = useState<string | null>(null)
-  //const [apistatus, setApiStatus] = useState<string | null>(null)
   const dispatch = useDispatch<AppDispatch>()
-  const navigate = useNavigate()
   const validationSchema = useMemo(() => (
     yup.object().shape({
       type: yup.string().required('Type is required. Select between RETAIL or SERVICE.'),

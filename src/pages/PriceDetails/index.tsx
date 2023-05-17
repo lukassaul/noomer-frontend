@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect, useState, useRef} from 'react'
 import { useParams, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 import { Bar } from "react-chartjs-2";
 import { Chart as ChartJS, registerables } from "chart.js/auto";
@@ -24,8 +24,6 @@ import {
   CenteredContainer,
   CommonContainer,
   FormWraper,
-  HeaderContainer,
-  BodyContainer,
   LeftLinkContainer,
   LinkParagraph,
   Upvote,
@@ -34,7 +32,6 @@ import {
   FlexColumnDiv,
   FlexRowDiv,
   FlexCenterColContainer,
-  FlexCenterRowContainer,
   VoteIconSmall,
   TitleThree,
   TitleThreeNoPad,
@@ -175,7 +172,7 @@ function PriceDetails() {
         Check if the user viewing the price record is the owner
       **/
       if(user != result.data.price.uploader._id) setIsOwner(false)
-      
+
 
       /**
         Check if the user viewing if already submitted a rating

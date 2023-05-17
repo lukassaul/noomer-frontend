@@ -14,12 +14,10 @@ import {
   ButtonContainerProfile,
   ChangeImageContainer,
   PLink,
-  IfUs,
   ProfileImageContainer,
   ProfileImg
 } from './styles'
 import Button from '../Button'
-import Alert from '../AlertMessage'
 import {
   FormError,
   FormInputWhole,
@@ -40,11 +38,6 @@ type SelectOption = {
   value: string
 }
 
-type SelectOptionCur = {
-  label: string
-  value: string
-}
-
 function ProfileEditForm() {
   const dispatch = useDispatch<AppDispatch>()
   const navigate = useNavigate()
@@ -52,11 +45,9 @@ function ProfileEditForm() {
   const {
     locationSelectOption,
     currencySelectOption,
-    isGetLocationsFetching,
-    isGetCurrenciesFetching
   } = useSelector((state: RootState) => state.selectOptions)
 
-  const { register, setValue, onSubmit, errors, apistatus, apimessage } = useProfileEditForm();
+  const { register, setValue, onSubmit, errors } = useProfileEditForm();
 
   const { dashboard } = useSelector((state: RootState) => state.dashboard)
 

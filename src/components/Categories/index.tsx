@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux';
 import { useNavigate, useLocation } from "react-router-dom";
-import Marquee from "react-fast-marquee";
 import { setCategory } from '../../features/categorySlice'
 import { BsFillArrowRightCircleFill, BsFillArrowLeftCircleFill } from "react-icons/bs";
 import { CategoriesContainer,

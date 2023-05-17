@@ -1,7 +1,6 @@
 import React, { FC, Fragment, useState, useEffect, useCallback } from "react";
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
-import { RootState, AppDispatch } from '../../app/store'
 import Paginator from '../Paginator';
 import { GetDashboardGivenRatingsAPI } from '../../api/dashboard'
 import { DeleteRatingAPI } from '../../api/rating';
@@ -29,15 +28,11 @@ const GivenRatingsTab: FC<{}> = () => {
   const navigate = useNavigate()
   let profileUserId = localStorage.getItem('user')
 
-  const { language } = useSelector((state: RootState) => state.language)
-
   const [givenRatings, setGivenRatings] = useState<any>([])
   const [totalPages, setTotalPages] = useState<number>(0)
   const [currentPage, setCurrentPage] = useState<number>(1)
   const [selectedRating, setSelectedRating] = useState<string>()
   const [isFetching, setIsFetching] = useState<boolean>(true)
-
-  const [showEditForm, setShowEditForm] = useState<boolean>(false)
 
   const handlePrevPage = (prevPage: number) => {
     setCurrentPage((prevPage) => prevPage - 1);
@@ -111,7 +106,6 @@ const GivenRatingsTab: FC<{}> = () => {
         <CenteredContainer style={{margin: '25px 0', flexDirection: 'column'}}>
           {givenRatings && givenRatings.length > 0 ?
             givenRatings.map((rating: any) => {
-              console.log("rating: ", rating)
                  return (
                    <CenteredContainerDash key={rating._id}>
                       <div style={{width: '25%'}}>

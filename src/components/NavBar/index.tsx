@@ -1,23 +1,21 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { RootState, AppDispatch } from "../../app/store";
 import Button from '../Button';
 import {
     Nav,
     NavbarContainer,
     NavLogo,
-    NavLocation,
     MobileIcon,
     NavLinks,
     NavItem,
     NavItemBtn,
     NavMenu,
     NavBtnLink,
-    NavItemIput,
     ProfileName
 } from './styles';
-import { FormInput, CenteredContainerNav, CenteredContainerNavMobile } from "../../globalStyles"
+import { FormInput, CenteredContainerNav } from "../../globalStyles"
 
 import { logoutAPI } from '../../api/auth'
 import { clearLogState } from '../../features/loginSlice'
@@ -25,7 +23,7 @@ import { clearAddState } from '../../features/addPasswordSlice'
 import { clearRegState } from '../../features/registrationSlice'
 import { clearDashboard } from '../../features/dashboardSlice'
 
-import { setSearchProduct, getProductAutosuggest } from "../../features/searchSlice";
+import { setSearchProduct } from "../../features/searchSlice";
 import { SuspenseImg } from '../../SuspenseImage'
 
 
@@ -44,9 +42,8 @@ function NavBar() {
     const [userLastName, setUserLastName] = useState<string | null>('')
 
     const { isLogSuccess } = useSelector((state: RootState) => state.login)
-    const { isAddSuccess, errorAddMessage} = useSelector((state: RootState) => state.addPassword)
+    const { isAddSuccess } = useSelector((state: RootState) => state.addPassword)
     const { isChangeSuccess } = useSelector((state: RootState) => state.changePassword)
-    const { searchProduct } = useSelector((state: RootState) => state.search)
 
     const handleClick = () => setClick(!click);
     const closeMobileMenu = () => setClick(false);

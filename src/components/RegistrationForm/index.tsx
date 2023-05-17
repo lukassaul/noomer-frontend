@@ -4,12 +4,7 @@ import { RootState } from '../../app/store';
 import { t } from '../../i18n'
 import useRegistrationForm from '../../hooks/useRegistrationForm';
 import {
-    RegisterInput,
-    RegHeaderWrapper,
     WholeWrapper,
-    RegistrationTitle,
-    RegisterLoginText,
-    RegisterLoginLink,
     RegisterButtonWrapper,
     RegisterTerms,
     RegisterTermWrapper,

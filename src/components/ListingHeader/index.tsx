@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import Marquee from "react-fast-marquee";
-import { useDispatch, useSelector } from 'react-redux'
+import React from 'react'
+import { useSelector } from 'react-redux'
 import { RootState } from '../../app/store'
 import { HeaderContainer } from './styles'
 import { CenteredTitle32 } from '../../globalStyles'
