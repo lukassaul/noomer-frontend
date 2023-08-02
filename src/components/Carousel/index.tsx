@@ -59,6 +59,7 @@ export const HeaderCarousel = () => {
                         autoPlay={this.state.autoPlay}
                         selectedItem={this.state.currentSlide}
                         onChange={this.updateCurrentSlide}
+                        showThumbs={false}
                         {...this.props}
                     >
                         {baseChildren.props.children}

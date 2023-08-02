@@ -1,115 +1,94 @@
 import styled from 'styled-components';
 
 
-export const WhatIsContainerTitle = styled.div`
-    margin-bottom: -10px;
-    display: flex;
-    justify-content: center;
-`;
-
-export const WhatIsTitle = styled.p`
-    font-size: 32px;
-    font-weight: 600;
-`;
-
-export const MainFlexContainerColumn75Right = styled.div`
-  flex: 75%;
-  max-width: 75%;
-  padding: 0 1em 0 4em;
-  @media screen and (max-width: 800px) {
-    flex: 50%;
-    max-width: 50%;
-    padding: 0 1em;
-  }
-  @media screen and (max-width: 600px) {
-    flex: 100%;
-    max-width: 100%;
-    padding: 0 1em;
-  }
-`;
-
-export const MainFlexContainerColumn75Left = styled.div`
-  flex: 75%;
-  max-width: 75%;
-  padding: 0 4em 0 1em;
-  @media screen and (max-width: 800px) {
-    flex: 50%;
-    max-width: 50%;
-    padding: 0 1em;
-  }
-  @media screen and (max-width: 600px) {
-    flex: 100%;
-    max-width: 100%;
-    padding: 0 1em;
-  }
-`;
-
-export const MainFlexContainerColumn25 = styled.div`
-  flex: 25%;
-  max-width: 25%;
-  @media screen and (max-width: 800px) {
-    flex: 50%;
-    max-width: 50%;
-  }
-  @media screen and (max-width: 600px) {
-    flex: 100%;
-    max-width: 100%;
-  }
-`;
-
-export const MainFlexChildrenContainer = styled.div`
+export const CenteredContainer = styled.div`
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
-  //justify-content: center;
-  //align-items: center;
-  padding: 0 2em 2em 2em;
-  @media screen and (max-width: 600px) {
-    padding: 1em;
-  }
 `;
 
-export const MainFlexChildrenContainerRight = styled.div`
+export const FlexCenterRowContainer = styled.div`
   display: flex;
-  flex-direction: column;
-  //justify-content: center;
-  //align-items: center;
-  padding: 2em 2em 2em 1em;
-  @media screen and (max-width: 600px) {
-    padding: 1em;
-  }
-`;
-
-export const MainFlexChildrenContainerLeft = styled.div`
-  display: flex;
-  flex-direction: column;
-  //justify-content: center;
-  //align-items: center;
-  padding: 2em 1em 2em 2em;
-  @media screen and (max-width: 600px) {
-    padding: 1em;
-  }
-`;
-
-export const SecondImageDesktop = styled.div`
-  display: flex;
-  @media screen and (max-width: 600px) {
-    display: none;
-  }
-`;
-
-export const SecondImageMobile = styled.div`
-  display: none;
-  @media screen and (max-width: 600px) {
-    display: contents;
-  }
-`;
-
-export const AboutContentContainer = styled.div`
-  display: flex;
-  width: 75%;
+  justify-content: center;
   flex-direction: row;
-  @media screen and (max-width: 600px) {
-    width: 90%;
+  width: 100%;
+  @media screen and (max-width: 800px) {
     flex-direction: column;
   }
+`;
+
+export const FlexCenterRow = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  width: 100%;
+`;
+
+export const HalfDiv = styled.div`
+  width: 60%;
+  padding: 4rem;
+  @media screen and (max-width: 800px) {
+    width: 100%;
+    padding: 2rem;
+  }
+  @media screen and (max-width: 480px) {
+    width: 100%;
+    padding: 1rem;
+  }
+`;
+
+export const HalfDivLightGray = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 50%;
+  padding: 4rem;
+  background-color: #F3F3F3;
+  border: 1px solid transparent;
+  cursor: pointer;
+  @media screen and (max-width: 800px) {
+    width: 100%;
+    padding: 2rem;
+  }
+  @media screen and (max-width: 480px) {
+    width: 100%;
+    padding: 1rem;
+  }
+  &:hover {
+    border: 1px solid #c1bbbb;
+  }
+`;
+
+export const HalfDivDarkGray = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 50%;
+  padding: 4rem;
+  background-color: #EDEDED;
+  border: 1px solid transparent;
+  cursor: pointer;
+  @media screen and (max-width: 800px) {
+    width: 100%;
+    padding: 2rem;
+  }
+  @media screen and (max-width: 480px) {
+    width: 100%;
+    padding: 1rem;
+  }
+  &:hover {
+    border: 1px solid #c1bbbb;
+  }
+`;
+
+export const JustifyText = styled.p`
+	margin: 1em 0;
+  text-align: justify;
+  line-height: 1.8;
+  hyphens: auto;
+  webkit-hyphens: auto;
+  white-space: pre-line;
 `;

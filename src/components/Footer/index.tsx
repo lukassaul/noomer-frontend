@@ -36,7 +36,7 @@ function Footer(){
                 </LeftColumnFlexNPChildren>
                 <RightColumnFlexNPChildren>
                 <LinkCategory>Resources</LinkCategory>
-                  <FooterLink onClick={() => console.log("Documentation")}>Documentation</FooterLink>
+                  <FooterLink onClick={() => navigate('/help')}>Documentation</FooterLink>
                 </RightColumnFlexNPChildren>
                 <RightColumnFlexNPChildren>
                 <LinkCategory>Company</LinkCategory>

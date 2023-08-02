@@ -12,6 +12,7 @@ import Categories from '../../components/Categories';
 import ProductComparison from '../../components/ProductComparison';
 import SearchProduct from '../../components/SearchProduct';
 import Footer from '../../components/Footer';
+import Numeraire from '../../components/Numeraire'
 import { WhatIsContainerTitle, WhatIsTitle } from './styles';
 import { CommonContainer, CommonContentContainer, CarouselContainer, BodyContainer, HomeFLowImage} from '../../globalStyles'
 
@@ -87,7 +88,9 @@ function Home() {
 
           <BodyContainer>
 
-            <div style={{marginBottom: "2em"}}>
+            {/* <Numeraire /> */}
+
+            <div className="padding2em">
               <img
                 src="https://res.cloudinary.com/dba8ifej6/image/upload/v1669908057/promo-landing-new_vgykdt.png"
                 onClick={()=> navigate('/promo') }
@@ -95,6 +98,7 @@ function Home() {
                 style={{cursor: 'pointer'}}
               />
             </div>
+
 
             {whatIsNoomer === "SHOW" ?
               <div className="bg-darkblue">

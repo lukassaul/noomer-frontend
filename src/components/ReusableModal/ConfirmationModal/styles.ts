@@ -24,9 +24,21 @@ export const Message = styled.div`
 
 export const YesButton = styled.button`
 	width: 6rem;
+  background-color: #007bff;
+  border-color: #007bff;
+  border-style: none;
+  padding: 0.5em;
+  border-radius: 5px;
+  color: white;
 `;
 
 export const NoButton = styled.button`
 	width: 6rem;
   margin-left: 10px;
+  background-color: #dc3545;
+  border-color: #dc3545;
+  border-style: none;
+  padding: 0.5em;
+  border-radius: 5px;
+  color: white;
 `;
