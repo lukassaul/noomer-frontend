@@ -231,6 +231,10 @@ code {
   border: 1px solid #E8E8E8;
 }
 
+.mb05 {
+  margin-bottom: 0.5em;
+}
+
 .mb1em {
   margin-bottom: 1em;
 }
@@ -813,4 +817,21 @@ border: 0;
  @keyframes load {to{transform: rotate(1turn)}}
 /**
   End of Spinner
+**/
+
+
+/**
+  Help page
+**/
+.steps-nested-image{height: auto;}
+
+@media screen and (max-width:480px){
+  .steps-nested-image {
+    width: 100%;
+    height: auto;
+  }
+}
+
+/**
+  End of Help page
 **/

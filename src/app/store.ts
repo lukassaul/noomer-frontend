@@ -17,6 +17,7 @@ import comparisonReducer from './../features/comparisonSlice'
 import dashboardReducer from './../features/dashboardSlice'
 import timelineReducer from './../features/timelineSlice'
 import pageTickersReducer from './../features/pageTickerSlice'
+import numeraireReducer from './../features/noomerSlice'
 
 export const store = configureStore({
     reducer: {
@@ -37,7 +38,8 @@ export const store = configureStore({
         comparison: comparisonReducer,
         dashboard: dashboardReducer,
         timeline: timelineReducer,
-        pageTickers: pageTickersReducer
+        pageTickers: pageTickersReducer,
+        numeraire: numeraireReducer
     }
 })
 

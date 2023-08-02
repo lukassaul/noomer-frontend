@@ -630,6 +630,12 @@ export const DetailsValue = styled.span`
 /**
   Form styled components
 **/
+
+export const FormInputContainer = styled.div`
+  position: relative;
+  box-sizing: border-box;
+`
+
 export const FormSeparatorGray = styled.hr`
   border-top: 1px solid #DADADA;
   margin: 2em 0;
@@ -660,12 +666,27 @@ export const FormInputWholeAccount = styled.input`
 export const FormInput = styled.input`
     display: flex;
     padding: 12px;
-    border-radius: 5px;
     width: 80%;
-    border: 1px solid #c4c4c4;
     font-size: 14px;
-    margin: 10px 0;
     height: 32px;
+    padding: 6px 12px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    appearance: none;
+    border-radius: 4px;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    :focus{
+        color: #212529;
+        background-color: #fff;
+        border-color: #86b7fe;
+        outline: 0;
+        box-shadow: 0 0 0 0.25rem rgb(13 110 253 / 25%);
+    }
     @media screen and (max-width: 480px) {
       width: 100%;
     }
@@ -709,7 +730,8 @@ export const FormLabelContainer = styled.div `
 `;
 
 export const FormLabel = styled.p `
-  font-weight: bold;
+  // font-weight: bold;
+  font-size: 14px;
 `;
 
 export const SelectContainer = styled.div`
@@ -739,6 +761,7 @@ export const FormThreeInputContainer = styled.div `
 
 export const FormInput50Width = styled.div `
   width: 50%;
+  margin-bottom: 1em;
   @media screen and (max-width: 991px) {
     width: 50%;
   }
@@ -752,6 +775,7 @@ export const FormInput50Width = styled.div `
 
 export const FormInput40Width = styled.div `
   width: 40%;
+  margin-bottom: 1em;
   @media screen and (max-width: 991px) {
     width: 30%;
   }
@@ -765,6 +789,7 @@ export const FormInput40Width = styled.div `
 
 export const FormInput30Width = styled.div `
   width: 33%;
+  margin-bottom: 1em;
   @media screen and (max-width: 991px) {
     width: 30%;
   }
@@ -778,6 +803,7 @@ export const FormInput30Width = styled.div `
 
 export const FormInput20Width = styled.div `
   width: 20%;
+  margin-bottom: 1em;
   @media screen and (max-width: 991px) {
     width: 30%;
   }
@@ -791,6 +817,7 @@ export const FormInput20Width = styled.div `
 
 export const FormInput25Width = styled.div `
   width: 25%;
+  margin-bottom: 1em;
   padding: 0 12px;
   @media screen and (max-width: 991px) {
     width: 25%;
@@ -808,6 +835,7 @@ export const FormInput25Width = styled.div `
 
 export const FormInput25WidthMin = styled.div `
   width: 25%;
+  margin-bottom: 1em;
   padding: 0 12px;
   @media screen and (max-width: 991px) {
     width: 25%;
@@ -910,6 +938,22 @@ export const CommonContainer = styled.div`
   //   padding-left: 10px;
   //   padding-right: 10px;
   // }
+  @media screen and (max-width: 480px) {
+    padding-left: 0;
+    padding-right: 0;
+  }
+`;
+
+export const CommonContainerWhite = styled.div`
+  max-width: 1280px;
+  min-height: calc(100vh - 320px);
+  margin-right: auto;
+  margin-left: auto;
+  background-color: #FFF;
+  @media screen and (max-width: 1276px) {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
   @media screen and (max-width: 480px) {
     padding-left: 0;
     padding-right: 0;
@@ -1157,7 +1201,7 @@ export const FooterLink = styled.p`
   cursor: pointer;
   &:hover {
     color: #CDCACA;
-    font-weight: bold;
+    text-decoration: underline;
   }
 `;
 

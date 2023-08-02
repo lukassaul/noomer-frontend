@@ -24,6 +24,7 @@ import {
   FormLabelContainer,
   FormLabel,
   FormRequired,
+  FormInputContainer,
   FormInput50Width,
   DarkHeader,
   DarkHeaderText,
@@ -94,6 +95,7 @@ function CreatePriceRecordForm() {
   const [shopNamePlaceholder, setShopNamePlaceholder] = useState<string>('Enter shop name')
   const [showQuantity, setShowQuantity] = useState<boolean>(true)
   const [showUnit, setShowUnit] = useState<boolean>(true)
+  const [showRetailServiceCheckbox, setShowRetailServiceCheckbox] = useState<boolean>(true)
 
 
   const [productType, setProductType] = useState<string>('');
@@ -215,9 +217,8 @@ function CreatePriceRecordForm() {
       cursor: 'pointer'
     }),
     control: () => ({
-      // none of react-select's styles are passed to <Control />
       backgroundColor: '#FFF',
-      //width: '80%',
+      width: '80%',
       border: '1px solid #c4c4c4',
       borderRadius: '5px',
       fontSize: '14px',
@@ -327,7 +328,7 @@ function CreatePriceRecordForm() {
         {step === 1 ?
           <>
             <DarkHeader>
-              <DarkHeaderText>Select Product</DarkHeaderText>
+              <DarkHeaderText>Select Product or Services</DarkHeaderText>
             </DarkHeader>
             <LeftLinkContainer style={{padding: '2em'}}>
               <BsFillArrowLeftCircleFill size="1.5em" style={{marginRight: "1em", color: '#E8505B', cursor: 'pointer'}} onClick={() => navigate(-1)}/>
@@ -342,7 +343,7 @@ function CreatePriceRecordForm() {
                   options={slicedOptionsProd}
                   onInputChange={(value) => setInputValueProd(value)}
                   filterOption={() => true}
-                  placeholder='Product'
+                  placeholder='Product / Services'
                   components={{ DropdownIndicator: () => null, IndicatorSeparator: () => null }}
                   onChange={(v) => {
                     if (isSelectOptionProd(v)) {
@@ -362,6 +363,7 @@ function CreatePriceRecordForm() {
                         setRetailCheckbox(false)
                         setShowQuantity(false)
                         setShowUnit(true)
+                        setShowRetailServiceCheckbox(false)
                         validateTypeCheckBox("SERVICE")
                       } else if(selectedOption[2] === "Currency") {
                         setProductNameLabel("Currency Pair")
@@ -453,7 +455,7 @@ function CreatePriceRecordForm() {
                         options={slicedOptions}
                         onInputChange={(value) => setInputValue(value)}
                         filterOption={() => true}
-                        styles={customStyles}
+                        // styles={customStyles}
                         className="width80"
                         placeholder='* Location'
                         components={{ DropdownIndicator: () => null, IndicatorSeparator: () => null }}
@@ -514,7 +516,7 @@ function CreatePriceRecordForm() {
                         options={slicedOptionsCur}
                         onInputChange={(value:string) => setInputValueCur(value)}
                         filterOption={() => true}
-                        styles={customStyles}
+                        // styles={customStyles}
                         className="width80"
                         placeholder='Select currency'
                         components={{ DropdownIndicator: () => null, IndicatorSeparator: () => null }}
@@ -535,13 +537,15 @@ function CreatePriceRecordForm() {
                         <FormRequired>*</FormRequired>
                         <FormLabel>{t(productNameLabel, language)}</FormLabel>
                       </FormLabelContainer>
-                      <FormInput
-                          {...register("classification")}
-                          name="classification"
-                          type="text"
-                          placeholder={productNamePlaceholder}
-                          aria-label='classification' />
-                      <FormError>{errors.classification?.message}</FormError>
+                      <FormInputContainer>
+                        <FormInput
+                            {...register("classification")}
+                            name="classification"
+                            type="text"
+                            placeholder={productNamePlaceholder}
+                            aria-label='classification' />
+                        <FormError>{errors.classification?.message}</FormError>
+                      </FormInputContainer>
 
                   </FormInput50Width>
                   {showQuantity ?
@@ -590,7 +594,7 @@ function CreatePriceRecordForm() {
                           <Select
                             name="unit"
                             options={servicesUnitOption}
-                            styles={customStyles}
+                            // styles={customStyles}
                             placeholder='Select unit'
                             components={{ DropdownIndicator: () => null, IndicatorSeparator: () => null }}
                             onChange={(v:any) => {
@@ -643,43 +647,48 @@ function CreatePriceRecordForm() {
                       <FormError>{errors.price?.message}</FormError>
 
                   </FormInput50Width>
+                  
+                  {showRetailServiceCheckbox ? 
+                    <FormInput50Width>
+                        <FormLabelContainer>
+                          <FormRequired>*</FormRequired>
+                          <FormLabel>{t('Type', language)}</FormLabel>
+                        </FormLabelContainer>
 
-                  <FormInput50Width>
-                      <FormLabelContainer>
-                        <FormRequired>*</FormRequired>
-                        <FormLabel>{t('Type', language)}</FormLabel>
-                      </FormLabelContainer>
+                        <div style={{display: "flex"}}>
+                          <div style={{display: "flex", alignItems: "center"}}>
+                            <label htmlFor="retail" style={{marginRight: "1em"}}>
+                              {t('RETAIL', language)}
+                            </label>
+                            <FormInput
+                              //{...register("type")}
+                              name="retail"
+                              value="RETAIL"
+                              checked={retailCheckbox}
+                              onChange={() => validateTypeCheckBox("RETAIL")}
+                              type="checkbox"
+                              aria-label='type' />
+                          </div>
+                          <div style={{display: "flex", alignItems: "center"}}>
+                            <label htmlFor="service" style={{margin: "0 1em"}}>
+                              {t('SERVICE', language)}
+                            </label>
+                            <FormInput
+                              //{...register("type")}
+                              name="service"
+                              value="SERVICE"
+                              checked={serviceCheckbox}
+                              onChange={() => validateTypeCheckBox("SERVICE")}
+                              type="checkbox"
+                              aria-label='type' />
+                          </div>
+                        </div>
+                        <FormError>{errors.type?.message}</FormError>
+                    </FormInput50Width>
+                    :
+                    null 
+                  }
 
-                      <div style={{display: "flex"}}>
-                        <div style={{display: "flex", alignItems: "center"}}>
-                          <label htmlFor="retail" style={{marginRight: "1em"}}>
-                            {t('RETAIL', language)}
-                          </label>
-                          <FormInput
-                            //{...register("type")}
-                            name="retail"
-                            value="RETAIL"
-                            checked={retailCheckbox}
-                            onChange={() => validateTypeCheckBox("RETAIL")}
-                            type="checkbox"
-                            aria-label='type' />
-                        </div>
-                        <div style={{display: "flex", alignItems: "center"}}>
-                          <label htmlFor="service" style={{margin: "0 1em"}}>
-                            {t('SERVICE', language)}
-                          </label>
-                          <FormInput
-                            //{...register("type")}
-                            name="service"
-                            value="SERVICE"
-                            checked={serviceCheckbox}
-                            onChange={() => validateTypeCheckBox("SERVICE")}
-                            type="checkbox"
-                            aria-label='type' />
-                        </div>
-                      </div>
-                      <FormError>{errors.type?.message}</FormError>
-                  </FormInput50Width>
                 </TwoColumn70Container>
               </TwoColumnContainer>
               <div style={{padding: '2em'}}>
