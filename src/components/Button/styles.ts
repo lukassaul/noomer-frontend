@@ -2,6 +2,12 @@ import styled, { css } from "styled-components";
 import { ButtonProps } from ".";
 
 const COLOR = {
+  noomerGreen: css`
+      color: #fff;
+      background: #0FA958;
+      padding: 6px 10px;
+      border-radius: 5px;
+    `,
   noomerRed: css`
       color: #fff;
       background: #EE1D52;

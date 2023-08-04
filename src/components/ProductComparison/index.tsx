@@ -320,9 +320,9 @@ function ProductComparison() {
 
   return (
 
-    <MainFlexContainerComparison className="bg-midgray padding2em">
+    <MainFlexContainerComparison id="Product_Comparison" className="parallax-section white-font padding2em">
       <form onSubmit={handleComparisonSubmit} aria-label="form">
-        <div style={{textAlign: "center"}}>
+        <div style={{textAlign: "center", marginBottom: "2em"}}>
           <TitleTwo>{t('Title_Product_Comparison', language)}</TitleTwo>
           <p>{t('Subtitle_Product_Comparison', language)}</p>
         </div>
@@ -398,7 +398,7 @@ function ProductComparison() {
 
         </MainFlexContainerRowComparison>
         <FlexContainer style={{justifyContent: 'center'}}>
-          <Button color="noomerRed">{t('Button_Proceed', language)}</Button>
+          <Button color="noomerGreen">{t('Button_Proceed', language)}</Button>
         </FlexContainer>
       </form>
     </MainFlexContainerComparison>

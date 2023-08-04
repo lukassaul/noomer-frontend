@@ -13,6 +13,27 @@ code {
     monospace;
 }
 
+/**
+  Parallax section
+*/
+.parallax-section {
+  /* The image used */
+  background-image: url("https://res.cloudinary.com/dba8ifej6/image/upload/v1691130621/product_comparison_background_pvblvz.png");
+
+  /* Set a specific height */
+  min-height: 40vh; 
+
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+/**
+  End of Parallax section
+*/
+
 .padding2em {
   padding: 2em;
 }
@@ -835,3 +856,36 @@ border: 0;
 /**
   End of Help page
 **/
+
+/**
+  Home slider
+**/
+.blur-up {
+  -webkit-filter: blur(5px);
+  filter: blur(5px);
+  transition: filter 400ms, -webkit-filter 400ms;
+}
+.blur-up.lazyloaded {
+  -webkit-filter: blur(0);
+  filter: blur(0);
+}
+.service_slide {
+  position: relative;
+  height: 76vh;
+}
+
+.service_slide .service-home {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  z-index: 100;
+}
+
+.timeline_color_1 {
+  background-color: rgba(255,255,255,0.9);
+}
+
+.timeline_color_2 {
+  background-color: rgba(255,255,255,0.75);
+}
+

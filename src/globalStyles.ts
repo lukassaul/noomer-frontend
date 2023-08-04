@@ -933,7 +933,7 @@ export const CommonContainer = styled.div`
   min-height: calc(100vh - 320px);
   margin-right: auto;
   margin-left: auto;
-  background-color: #F7F7F7;
+  //background-color: #F7F7F7;
   // @media screen and (max-width: 1276px) {
   //   padding-left: 10px;
   //   padding-right: 10px;

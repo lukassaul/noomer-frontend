@@ -46,8 +46,12 @@ export const CategoryImage = styled.img`
   margin-top: 8px;
   vertical-align: middle;
   width: 90%;
+  transition: 0.5s all ease-in-out;
   @media screen and (max-width: 600px) {
     width: 64px;
+  }
+  &:hover {
+    transform: scale(1.1);
   }
 `;
 

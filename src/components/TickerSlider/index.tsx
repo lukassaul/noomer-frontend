@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { RootState, AppDispatch } from '../../app/store'
 import { getTickers } from '../../features/configSlice'
 import { setTicker } from '../../features/tickerSlice'
@@ -15,6 +15,9 @@ function TickerSlider() {
   const dispatch = useDispatch<AppDispatch>()
   const navigate = useNavigate()
   const { tickers } = useSelector((state: RootState) => state.config)
+
+  const location = useLocation()
+  const currpath = location.pathname
 
   /**
     Fetching tickers to display
@@ -40,19 +43,22 @@ function TickerSlider() {
 
   return (
     <>
-      <TickerContainer>
-        <Marquee gradient={false} style={{backgroundColor: 'black'}}>
-          {tickers && tickers.map((product:any) => (
-            <p className="marquee-component" key={product.ticker} style={{cursor: 'pointer'}} onClick={() => handleTickerClick(product.ticker)}>
-              <span style={{color: tickerColorArray[getRandomColor()]}}>{product.ticker}</span>
-              <span className="white-font">{product.price} {product.currency}</span>
-              <span className={product.type === "RETAIL" ? "red-font" : "green-font"} style={{fontSize: "14px"}}>
-                {product.type === "RETAIL" ? "(R)" : "(S)"}
-              </span>
-            </p>
-          ))}
-          </Marquee>
-      </TickerContainer>
+      {currpath === "/" ?
+        <TickerContainer>
+          <Marquee gradient={false} style={{backgroundColor: 'black'}}>
+            {tickers && tickers.map((product:any) => (
+              <p className="marquee-component" key={product.ticker} style={{cursor: 'pointer'}} onClick={() => handleTickerClick(product.ticker)}>
+                <span style={{color: tickerColorArray[getRandomColor()]}}>{product.ticker}</span>
+                <span className="white-font">{product.price} {product.currency}</span>
+                <span className={product.type === "RETAIL" ? "red-font" : "green-font"} style={{fontSize: "14px"}}>
+                  {product.type === "RETAIL" ? "(R)" : "(S)"}
+                </span>
+              </p>
+            ))}
+            </Marquee>
+        </TickerContainer>
+        : null
+      }
     </>
   )
 }

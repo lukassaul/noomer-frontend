@@ -16,6 +16,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import { RootState } from "./app/store";
 import Spinner from './components/Spinner'
+import TickerSlider from './components/TickerSlider';
 
 const ScrollToTop = lazyWithRetry(() => import("./ScrollToTop"))
 
@@ -69,6 +70,7 @@ function App() {
         <ScrollToTop>
           <GlobalFonts />
           <GlobalStyle />
+          <TickerSlider />
           <NavBar />
           <ToastContainer />
           <Routes>

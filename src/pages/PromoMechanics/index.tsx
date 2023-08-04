@@ -55,7 +55,7 @@ function PromoMechanics() {
           </SocialShareContainer>
 
           <p className="fontSize32 mb2em centerText">Get a chance to be part of the top 20 winners who take home part of the <span className="bf flat-red2-font">US $1000 in Bitcoin </span>every month. Help noomer become world leader in price and numeraire information... <span className="bf">How does that sound?</span></p>
-          <p className="mb2em justifyText">To enter. Simply sign up/register and start submitting those price records for various commodities that you know or that you are constantly buying.. You are required to post at least 20 posts and when it comes to the maximum,the sky's the limit. Simple and straight forward right? Share the link with your friends and family too!.. Christmas has come early this year. Let's start posting and grab that prize giveaway. The contest will start from December 1, 2022 to January 1, 2023.</p>
+          <p className="mb2em justifyText">To enter. Simply sign up/register and start submitting those price records for various commodities that you know or that you are constantly buying.. You are required to post at least 20 posts and when it comes to the maximum,the sky's the limit. Simple and straight forward right? Share the link with your friends and family too!.. Christmas has come early this year. Let's start posting and grab that prize giveaway.</p>
           <StepContainer className="mb2em">
             <StepImageContainer>
               <p className="centerText flat-green-font">Step 1</p>
@@ -76,7 +76,7 @@ function PromoMechanics() {
           <p className="bf mb2em justifyText">*NB- No duplication of posts is allowed. If any duplication of posts is detected, it will result in being penalised from the competition.</p>
           <p className="justifyText mb2em"><span className="bf">Eligibility-</span> The Contest is open to all registered and verified users.</p>
 
-          <p className="centerText bf">Winners will be announced three (3) days after on noomer.io</p>
+          {/* <p className="centerText bf">Winners will be announced three (3) days after on noomer.io</p> */}
         </div>
         </CommonContentContainer>
       </CommonContainer>
