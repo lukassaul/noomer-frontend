@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { RootState, AppDispatch } from "../../app/store";
 import Button from '../Button';
 import {
@@ -32,6 +32,8 @@ function NavBar() {
 
     const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
+    const location = useLocation()
+    const currpath = location.pathname
     const [click, setClick] = useState(false);
     const [button, setButton] = useState(true);
 
@@ -110,6 +112,15 @@ function NavBar() {
       navigate('/listing')
     }
 
+    const GotoProductComparison = (e: any) => {
+        closeMobileMenu()
+        e.preventDefault()
+        const element = document.getElementById('Product_Comparison');
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+
     return (
         <Nav>
             <NavbarContainer>
@@ -141,7 +152,12 @@ function NavBar() {
                             Tickers
                         </NavLinks>
                     </NavItem>
-                    <NavItem>
+                    {currpath === "/" ? <NavItem>
+                        <NavLinks to='#' onClick={GotoProductComparison}>
+                            Product Comparison
+                        </NavLinks>
+                    </NavItem> : null}
+                    {/* <NavItem>
                         <NavLinks to='/faqs' onClick={closeMobileMenu}>
                             FAQs
                         </NavLinks>
@@ -155,7 +171,7 @@ function NavBar() {
                         <NavLinks to='/about' onClick={closeMobileMenu}>
                             About us
                         </NavLinks>
-                    </NavItem>
+                    </NavItem> */}
 
                     {!isToken ? <>
                         <NavItemBtn>

@@ -32,11 +32,12 @@ function Footer(){
                   <LinkCategory>Product</LinkCategory>
                   <FooterLink onClick={() => navigate('/terms')}>Terms of Service</FooterLink>
                   <FooterLink onClick={() => navigate('/policy')}>Privacy Policy</FooterLink>
-                  <FooterLink onClick={() => navigate('/faqs')}>FAQ</FooterLink>
+                  <FooterLink onClick={() => navigate('/promo')}>Promo</FooterLink>
                 </LeftColumnFlexNPChildren>
                 <RightColumnFlexNPChildren>
                 <LinkCategory>Resources</LinkCategory>
                   <FooterLink onClick={() => navigate('/help')}>Documentation</FooterLink>
+                  <FooterLink onClick={() => navigate('/faqs')}>FAQ</FooterLink>
                 </RightColumnFlexNPChildren>
                 <RightColumnFlexNPChildren>
                 <LinkCategory>Company</LinkCategory>

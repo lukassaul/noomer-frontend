@@ -5,7 +5,7 @@ import {Carousel} from 'react-responsive-carousel'
 
 const createCarouselItemImage = (index:any = {}) => (
     <div key={index}>
-        <img src={`./carousel-images/${index}.jpg`} />
+        <img src={`./carousel-images/${index}.png`} />
     </div>
 );
 
@@ -60,6 +60,7 @@ export const HeaderCarousel = () => {
                         selectedItem={this.state.currentSlide}
                         onChange={this.updateCurrentSlide}
                         showThumbs={false}
+                        infiniteLoop={true}
                         {...this.props}
                     >
                         {baseChildren.props.children}
